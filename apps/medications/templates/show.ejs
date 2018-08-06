@@ -1,0 +1,38 @@
+<td><%= this.drugName_title %></td>
+<td><%= this.drugName_title %></td>
+<td><%= this.quantity_value %> <%= this.quantity_unit %></td>
+<td><%= this.frequency_value %> <%=this.frequency_unit %></td>
+<td><%= this.instructions %></td>
+<td><%= this.startDate %></td>
+<td><%= this.endDate %></td>
+<td><% this.fulfillments.sort(function(a,b) {
+       return (a.date > b.date) ? -1 : (a.date < b.date) ? 1 : 0;
+       });%><%= this.fulfillments[0].date %></td>
+<div class="delete">
+<!--<td><input type="submit" id="as//<%= this.__documentid__ %>"  value="delete"></td></div>-->
+<td> <a href="delete/<%= this.__documentid__%>" >delete</a></td>
+
+<script>
+ $('#as<%= this.__documentid__ %>').click(function() {
+                 //$("#<%= this.__documentid__ %>").destroy();
+   alert('Destroyed  <%= this.__documentid__ %>');
+
+  App.Models.Med.destroy('<%= this.__documentid__ %>', f1, f2);
+   return false;
+});
+
+function f1()
+{
+Alert('syucees');
+ return true;
+}
+
+function f2()
+{
+ alert( App.Models.Med.destroy.error );
+ return true;
+}
+
+</script>
+
+

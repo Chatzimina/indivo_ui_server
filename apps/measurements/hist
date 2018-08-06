@@ -1,0 +1,1000 @@
+ 1005  vi locale/el_GR/LC_MESSAGES/django.po 
+ 1006  python manage.py makemessages -l el_GR -e .html,.ejs,.py
+ 1007  python manage.py compilemessages
+ 1008  python manage.py makemessages -l el_GR -e .html,.ejs,.py
+ 1009  vi locale/el_GR/LC_MESSAGES/django.po 
+ 1010  python manage.py makemessages -l el_GR -e .html,.ejs,.py,.js
+ 1011  vi locale/el_GR/LC_MESSAGES/django.po 
+ 1012  python manage.py makemessages -l el_GR -e .html,.ejs,.py,.js
+ 1013  vi locale/el_GR/LC_MESSAGES/django.po 
+ 1014  python manage.py makemessages -l el_GR -e .html,.ejs,.py,.js
+ 1015  python manage.py compilemessage
+ 1016  python manage.py compilemessages
+ 1017  python manage.py makemessages -l el_GR -e .html,.ejs,.py,.js
+ 1018  python manage.py compilemessages
+ 1019  cd web/indivo_ui_server/templates/ui/
+ 1020  vi base.html 
+ 1021  cd web/indivo_ui_server/apps/labs/
+ 1022  cd templates/
+ 1023  vi list.html 
+ 1024  cd web/indivo_ui_server/
+ 1025  python manage.py makemessages -l el_GR -e .html,.ejs,.py,.js
+ 1026  vi locale/el_GR/LC_MESSAGES/django.po 
+ 1027  python manage.py makemessages -l el_GR -e .html,.ejs,.py
+ 1028  vi locale/el_GR/LC_MESSAGES/django.po 
+ 1029  python manage.py makemessages -l el_GR -e .html,.ejs,.py
+ 1030  vi locale/el_GR/LC_MESSAGES/django.po 
+ 1031  vi ui/views.py:332
+ 1032  vi ui/views.py
+ 1033  vi locale/el_GR/LC_MESSAGES/django.po 
+ 1034  python manage.py makemessages -l el_GR -e .html,.ejs,.py
+ 1035  python manage.py compilemessages
+ 1036  vi locale/el_GR/LC_MESSAGES/django.po 
+ 1037  vi ui/views.py
+ 1038  python manage.py makemessages -l el_GR -e .html,.ejs,.py
+ 1039  vi locale/el_GR/LC_MESSAGES/django.po 
+ 1040  python manage.py makemessages -l el_GR -e .html,.ejs,.py
+ 1041  vi locale/el_GR/LC_MESSAGES/django.po 
+ 1042  python manage.py compilemessages
+ 1043  cd web/indivo_ui_server/apps/labs/templates/
+ 1044  ls -la
+ 1045  cp _sortable_header.html _sortable_header.html_official_old 
+ 1046  vi _sortable_header.html
+ 1047  cd ../../
+ 1048  cd ../
+ 1049  python manage.py makemessages -l el_GR -e .html,.ejs,.py,.js
+ 1050  vi locale/el_GR/LC_MESSAGES/django.po 
+ 1051  python manage.py compilemessages
+ 1052  cd apps/labs/templates/
+ 1053  vi list.html 
+ 1054  grep -nr "edit" *
+ 1055  vi _lab.html 
+ 1056  vi one_edit.html 
+ 1057  cd ../../../
+ 1058  python manage.py makemessages -l el_GR -e .html,.ejs,.py
+ 1059  vi locale/el_GR/LC_MESSAGES/django.po 
+ 1060  python manage.py compilemessages
+ 1061  cd apps/labs/templates/
+ 1062  grep -nr "showing results" *
+ 1063  grep -nr "Showing Results" *
+ 1064  cd ../
+ 1065  grep -nr "Showing Results" *
+ 1066  vi views.py
+ 1067  cd web/indivo_ui_server/
+ 1068  vi locale/el_GR/LC_MESSAGES/django.po 
+ 1069  cd web/indivo_ui_server/apps/problems/templates/
+ 1070  vi one_edit.html 
+ 1071  cd ../../
+ 1072  cd ../
+ 1073  grep -nr 
+ 1074  grep -nr "Showing messages" *
+ 1075  grep -nr "Displaying messages" *
+ 1076  vi ui/jmvc/ui/views/message/show.ejs
+ 1077  cd apps/allergies/
+ 1078  vi views.py
+ 1079  cd ../problems/
+ 1080  vi views.py
+ 1081  cd ../
+ 1082  vi procedures/views.py
+ 1083  vi medications/
+ 1084  vi medications/views.
+ 1085  vi medications/views.py
+ 1086  vi labs/
+ 1087  vi labs/views.py
+ 1088  cd ../
+ 1089  python manage.py makemessages -l el_GR -e .html,.ejs,.py
+ 1090  vi locale/el_GR/LC_MESSAGES/django.po 
+ 1091  python manage.py compilemessages
+ 1092  cd web/indivo_ui_server/apps/calendar/templates/
+ 1093  vi list.html
+ 1094  cd ../..
+ 1095  cd ../
+ 1096  python manage.py makemessages -l el_GR -e .html,.ejs,.py,.js
+ 1097  vi locale/el_GR/LC_MESSAGES/django.po 
+ 1098  python manage.py compilemessages
+ 1099  cd apps/calendar/templates/
+ 1100  vi list.html
+ 1101  cd ../../
+ 1102  python manage.py makemessages -l el_GR -e .html,.ejs,.py,.js
+ 1103  vi locale/el_GR/LC_MESSAGES/django.po 
+ 1104  python manage.py compilemessages
+ 1105  cd apps/calendar/templates/
+ 1106  grep -nr "dhx_cal_ltitle" *
+ 1107  vi test/codebase/sources/skins/dhtmlxscheduler.css
+ 1108  cd ../static/calendarColor/
+ 1109  ls
+ 1110  grep -nr "dhx_wrap_section" *
+ 1111  cd ../../
+ 1112  vi templates/list.html
+ 1113  cd static/calendarColor/
+ 1114  ls
+ 1115  vi dhtmlxscheduler.css 
+ 1116  vi ../../templates/list.html
+ 1117  cd web/indivo_ui_server/
+ 1118  grep -nr "dhx_wrap_section" *
+ 1119  cd apps/calendar/static/
+ 1120  ls
+ 1121  cd calendarColor/
+ 1122  grep -nr "dhx_wrap_section" *
+ 1123  vi codebase/dhtmlxscheduler.css
+ 1124  vi dhtmlxscheduler.css
+ 1125  vi sources/skins/dhtmlxscheduler.css
+ 1126  vi sources/skins/dhtmlxscheduler_classic.css
+ 1127  grep -nr "dhx_wrap_section" *
+ 1128  grep -nr "dhx_cal_larea" *
+ 1129  vi dhtmlxscheduler.css
+ 1130  grep -nr "height: 130px;" *
+ 1131  grep -nr "height: 130px" *
+ 1132  grep -nr "height:130px" *
+ 1133  grep -nr "130px" *
+ 1134  grep -nr "13px" *
+ 1135  cd ../
+ 1136  cd ../templates/
+ 1137  vi list.html
+ 1138  cd ../static/calendarColor/
+ 1139  ls
+ 1140  vi dhtmlxscheduler.css 
+ 1141  cd ../../
+ 1142  cd ../
+ 1143  ls
+ 1144  cd ui
+ 1145  ls
+ 1146  cd jmvc/ui/
+ 1147  lks
+ 1148  ls
+ 1149  cd resources/css/
+ 1150  vi ui.css 
+ 1151  vi /etc/tomcat7/server.xml
+ 1152  vi /etc/
+ 1153  cd /etc/apache2/
+ 1154  ls
+ 1155  vi httpd.conf 
+ 1156  vi apache2.conf 
+ 1157  cd web/indivo_ui_server/apps/
+ 1158  ls -la
+ 1159  cd recomlinks/
+ 1160  ls
+ 1161  vi views.py
+ 1162  cd web/indivo_ui_server/
+ 1163  grep -nr "iframe" *
+ 1164  grep -nr "iframe id" *
+ 1165  grep -nr "Healthfeed" *
+ 1166  vi ui/jmvc/ui/views/healthfeed/show.ejs
+ 1167  cd ui/jmvc/ui/views/healthfeed
+ 1168  ls -la
+ 1169  vi show.ejs_maria 
+ 1170  cd /var/lib/tomcat7/webapps/
+ 1171  ls
+ 1172  ls -la
+ 1173  mv SSE SSE_OLD
+ 1174  mv SSE.war SSE_old.war
+ 1175  ls -la
+ 1176  rm -rf SSE
+ 1177  mv EURECA EURECA_OLD
+ 1178  rm -rf EURECA
+ 1179  mkdir EURECA
+ 1180  mkdir SSE_
+ 1181  ls -la
+ 1182  rm -rf SSE_
+ 1183  mkdir SSE
+ 1184  ls -la
+ 1185  mv SSE_OLD SSE_OLD_BEFORERECOMMENDED
+ 1186  ls -la
+ 1187  mv EURECA_OLD/ EURECA_OLDBEFORERECOMMENDED
+ 1188  ls -la
+ 1189  cp -rf /home/hatzimin/Desktop/EURECA_RECOMM/EURECAweb/web/* EURECA
+ 1190  cp -rf /home/hatzimin/Desktop/EURECA_RECOMM/SSE_web/web/* SSE 
+ 1191  ls -la
+ 1192  /etc/init.d/apache2 restart
+ 1193  cd /home/hatzimin/web/indivo_ui_server/
+ 1194  grep -nr "Healthfeed" *
+ 1195  vi ui/jmvc/ui/views/healthfeed/show.ejs
+ 1196  cd /var/lib/tomcat7/webapps/
+ 1197  cd EURECA
+ 1198  ls
+ 1199  vi semanticTop5Search.jsp 
+ 1200  cd css/
+ 1201  vi screen.css 
+ 1202  vi ui/jmvc/ui/views/healthfeed/show.ejs
+ 1203  cd /home/hatzimin/web/indivo_ui_server/
+ 1204  vi ui/jmvc/ui/views/healthfeed/show.ejs
+ 1205  vi /var/lib/tomcat7/webapps/EURECA/semanticTop5Search.jsp 
+ 1206  cd web/indivo_ui_server/
+ 1207  cd apps/
+ 1208  ls -la
+ 1209  cd bluebutton/
+ 1210  vi views.py
+ 1211  cd web
+ 1212  cd indivo_ui_server/apps/
+ 1213  ls
+ 1214  cd web/indivo_ui_server/apps/medications/templates/
+ 1215  vi list.html
+ 1216  cd web/indivo_ui_server/apps/medications/
+ 1217  vi views.py
+ 1218  ipconfig
+ 1219  ifconfig
+ 1220  ping
+ 1221  cd web/indivo_ui_server/apps/medications/
+ 1222  cd templates/
+ 1223  vi list
+ 1224  vi list.html
+ 1225  cd web/indivo_ui_server/apps/calendar/
+ 1226  vi views.py
+ 1227  cd ../../
+ 1228  vi settings.py
+ 1229  cd web/indivo_ui_server/apps/calendar/templates/
+ 1230  vi list.html
+ 1231  /etc/init.d/apache2 restart
+ 1232  cdx ../../
+ 1233  cd ../../
+ 1234  cd ../
+ 1235  ls 
+ 1236  ls -la
+ 1237  cd ../indivo_server/
+ 1238  ls -la
+ 1239  python manage.py sync_apps
+ 1240  /etc/init.d/apache2 restart
+ 1241  python manage.py sync_apps
+ 1242  /etc/init.d/apache2 restart
+ 1243  python manage.py sync_apps
+ 1244  /etc/init.d/apache2 restart
+ 1245  python manage.py sync_apps
+ 1246  /etc/init.d/apache2 restart
+ 1247  python manage.py sync_apps
+ 1248  /etc/init.d/apache2 restart
+ 1249  python manage.py sync_apps
+ 1250  cd web/indivo_ui_server/
+ 1251  vi settings.py
+ 1252  ls 
+ 1253  ls -la
+ 1254  cd templates/
+ 1255  ls
+ 1256  cd ui/
+ 1257  ls
+ 1258  vi login.html 
+ 1259  cd ../../
+ 1260  vi settings.py
+ 1261  cp ../../Desktop/indivo_health_manual.pdf Tutorial.pdf
+ 1262  cp Tutorial.pdf apps/
+ 1263  ls -la
+ 1264  chown www-data:www-data Tutorial.pdf 
+ 1265  ls -la
+ 1266  cd apps/
+ 1267  chown www-data:www-data Tutorial.pdf 
+ 1268  ls -la
+ 1269  cd ../
+ 1270  vi settings.py
+ 1271  grep -nr "css" *
+ 1272  cd templates/ui/
+ 1273  ls
+ 1274  vi login.html 
+ 1275  vi reset_password.html 
+ 1276  cd ../../
+ 1277  cd apps/
+ 1278  cd allergies/
+ 1279  ls
+ 1280  vi templates/list.html 
+ 1281  cd ../
+ 1282  cd procedures/
+ 1283  vi templates/list.html 
+ 1284  cd web/indivo_ui_server/apps/
+ 1285  cd ../
+ 1286  ls
+ 1287  cd ui/
+ 1288  ls
+ 1289  cd jmvc/ui/
+ 1290  ls
+ 1291  cd ../..
+ 1292  cd ../
+ 1293  cd templates/ui/
+ 1294  vi login.html 
+ 1295  ls -la
+ 1296  grep -nr "ebmaster" *
+ 1297  vi base.html 
+ 1298  cd web/indivo_ui_server/templates/ui/
+ 1299  ls -la
+ 1300  vi login.html 
+ 1301  vi base.html 
+ 1302  rm .base.html.swp 
+ 1303  vi base
+ 1304  vi base.html 
+ 1305  cd ../../
+ 1306  cd apps/procedures/templates/
+ 1307  vi list.html 
+ 1308  cp ../../../Tutorial.pdf ../static/
+ 1309  cd web/indivo_ui_server/
+ 1310  vi settings.py
+ 1311  cd templates/ui/
+ 1312  vi base.html 
+ 1313  cd Desktop/
+ 1314  mkdri EURECA_FINAL
+ 1315  mkdir EURECA_FINAL
+ 1316  ls -la
+ 1317  chown hatzimin:hatzimin EURECA_FINAL/
+ 1318  cd /var/lib/tomcat7/webapps/
+ 1319  ls -la
+ 1320  cd EURECA
+ 1321  ls
+ 1322  cd ../
+ 1323  mv EURECA EURECA_19012015
+ 1324  mv SSE SSE_19012015
+ 1325  ls -la
+ 1326  rm EURECA
+ 1327  mv EURECA EURECA_19012015/
+ 1328  ls -la
+ 1329  mkdir EURECA
+ 1330  ls -la
+ 1331  rm -rf EURECA
+ 1332  mkdir EURECA
+ 1333  ls -la
+ 1334  rm -rf EURECA
+ 1335  ls -la
+ 1336  mkdir EURECA
+ 1337  cp /home/hatzimin/Desktop/EURECA_FINAL/EURECA_web/web/*  EURECA
+ 1338  cp -rf /home/hatzimin/Desktop/EURECA_FINAL/EURECA_web/web/*  EURECA
+ 1339  mkdir SSE
+ 1340  cp -rf /home/hatzimin/Desktop/EURECA_FINAL/SSE_web/web/* SSE
+ 1341  ls -la
+ 1342  /etc/init.d/apache2 restart
+ 1343  cd /home/hatzimin/web
+ 1344  grep -nr "Healthfeed" *
+ 1345  vi indivo_ui_server/ui/jmvc/ui/views/healthfeed/show.ejs
+ 1346  cd /var/lib/tomcat7/webapps/
+ 1347  ls -la
+ 1348  cd /home/hatzimin/Desktop/
+ 1349  cd EURECA_FINAL/
+ 1350  mkdir eHealthMonitor
+ 1351  ls -la
+ 1352  chown hatzimin:hatzimin eHealthMonitor/
+ 1353  cd /var/lib/tomcat7/webapps/
+ 1354  ls -la
+ 1355  mv eHealthMonitor eHealthMonitor_19012015
+ 1356  ls -la
+ 1357  mkdir eHealthMonitor 
+ 1358  ls- la
+ 1359  ls -la
+ 1360  mv eHealthMonitor eHealthMonitor_19012015/
+ 1361  ls -la
+ 1362  mkdir eHealthMonitor
+ 1363  rm -rf eHealthMonitor
+ 1364  mkdir eHealthMonitor
+ 1365  cp /home/hatzimin/Desktop/EURECA_FINAL/eHealthMonitor/eHealthMonitor/web/*  eHealthMonitor
+ 1366  cp -rf /home/hatzimin/Desktop/EURECA_FINAL/eHealthMonitor/eHealthMonitor/web/*  eHealthMonitor
+ 1367  /etc/init.d/apache2 restart
+ 1368  ls -la
+ 1369  cd eHealthMonitor
+ 1370  ls -la
+ 1371  /etc/init.d/apache2 restart
+ 1372  cd Desktop/
+ 1373  ls
+ 1374  cd EURECA_FINAL/
+ 1375  lsd
+ 1376  ls
+ 1377  rm -rf *
+ 1378  cd /var/lib/tomcat7/webapps/
+ 1379  ls -la
+ 1380  em -rf eHealthMonitor
+ 1381  rm -rf SSE
+ 1382  mv EURECA EURECA_20012015
+ 1383  rm -rf EURECA
+ 1384  mkdir EURECA
+ 1385  mkdir SSE
+ 1386  cp /home/hatzimin/Desktop/EURECA_FINAL/EURECA_web/web/* EURE
+ 1387  cp -rf /home/hatzimin/Desktop/EURECA_FINAL/EURECA_web/web/* EURECA
+ 1388  cp -rf /home/hatzimin/Desktop/EURECA_FINAL/SSE_web/web/* SSE
+ 1389  ls -la
+ 1390  /etc/init.d/apache2 restart
+ 1391  cd /home/hatzimin/web/indivo_ui_server/
+ 1392  ls -la
+ 1393  cd apps/
+ 1394  grep -nr "eHealthMonitor" *
+ 1395  cd ../
+ 1396  grep -nr "eHealthMonitor" *
+ 1397  ls -la
+ 1398  cd apps/
+ 1399  ls -la
+ 1400  cd /var/lib/tomcat7/webapps/
+ 1401  ls -la
+ 1402  chown tomcat7:tomcat7 EURECA
+ 1403  chown tomcat7:tomcat7 SSE
+ 1404  grep -nr "eHealthMonitor" *
+ 1405  /etc/init.d/apache2 restart
+ 1406  vi EURECA
+ 1407  cd /home/hatzimin/web/indivo_ui_server/
+ 1408  vi settings.py
+ 1409  cd ../indivo_server/registered_apps/user/
+ 1410  ls -la
+ 1411  vi IndivoSemanticSearch/
+ 1412  vi IndivoSemanticSearch/manifest.json 
+ 1413  cd ../../
+ 1414  python manage.py sync_apps
+ 1415  cd /var/lib/
+ 1416  ls
+ 1417  cd tomcat7/
+ 1418  ls
+ 1419  cd logs
+ 1420  ls
+ 1421  ls -la
+ 1422  vi localhost_access_log.2015-01-20.txt
+ 1423  ls 
+ 1424  vi catalina.out
+ 1425  cd ../indivo_server/registered_apps/user/
+ 1426  /etc/init.d/apache2 restart
+ 1427  vi catalina.out
+ 1428  cd /var/lib/tomcat7/webapps/
+ 1429  ls -la
+ 1430  cp EURECA_* /home/hatzimin/Desktop/EURECA_FINAL/
+ 1431  cp -rf EURECA_* /home/hatzimin/Desktop/EURECA_FINAL/
+ 1432  cp -rf SSE_* /home/hatzimin/Desktop/EURECA_FINAL/
+ 1433  ls -la
+ 1434  rm -rf EURECA_*
+ 1435  ls -la
+ 1436  rm -rf SSE_*
+ 1437  ls -la
+ 1438  cp -rf eHealthMonitor* /home/hatzimin/Desktop/EURECA_FINAL/
+ 1439  ls -la
+ 1440  rm -rf eHealthMonitor*
+ 1441  ls -la
+ 1442  /etc/init.d/apache2 restart
+ 1443  vi /var/lib/tomcat7/logs/catalina.out
+ 1444  cd /var/lib/tomcat7/
+ 1445  ls
+ 1446  cd /usr/share/tomcat7/bin/
+ 1447  ls -la
+ 1448  vi catalina.sh 
+ 1449  cd /etc/init.d/tomcat7 
+ 1450  vi /etc/init.d/tomcat7 
+ 1451  vi /var/lib/tomcat7/logs/catalina.out
+ 1452  vi /var/lib/tomcat7/webapps/
+ 1453  cd /var/lib/tomcat7/webapps/
+ 1454  ls -la
+ 1455  mv EURECA.war /home/hatzimin/Desktop/EURECA_FINAL/
+ 1456  ls -la
+ 1457  /etc/init.d/apache2 restart
+ 1458  /etc/init.d/tomcat7 restart
+ 1459  vi /var/lib/tomcat7/logs/catalina.out
+ 1460  cd web/indivo_ui_server/
+ 1461  grep -nr "Healthfeed" *
+ 1462  vi ui/jmvc/ui/views/healthfeed/show.ejs
+ 1463  vi ui/jmvc/ui/views/healthfeed/show.ejs_maria 
+ 1464  grep -nr "show.ejs" *
+ 1465  vi ui/jmvc/ui/controllers/healthfeed_controller.js
+ 1466  grep -nr "/healthfeed/show" *
+ 1467  vi ui/jmvc/ui/controllers/healthfeed_controller.js
+ 1468  grep -nr "healthfeed_controller.js" *
+ 1469  cd ui/jmvc/ui/
+ 1470  ls
+ 1471  cd controllers/
+ 1472  lsw
+ 1473  ls
+ 1474  vi record_controller.js 
+ 1475  vi healthfeed_controller.js 
+ 1476  cd .././
+ 1477  cd ../../
+ 1478  cd ../
+ 1479  grep -nr "Healthfeed" *
+ 1480  vi ui/jmvc/ui/controllers/main_controller.js:
+ 1481  vi ui/jmvc/ui/controllers/main_controller.js
+ 1482  vi ui.js 
+ 1483  grep -nr "record_id" *
+ 1484  grep -nr "record.id" *
+ 1485  cd ../../
+ 1486  grep -nr "record.id" *
+ 1487  grep -nr "record.id" *cd ../../
+ 1488  cd ../
+ 1489  cd apps/
+ 1490  mkdir top5recommended
+ 1491  cp -rf recomlinks/* top5recommended/
+ 1492  cd top5recommended/
+ 1493  vi settings.py
+ 1494  vi urls.py
+ 1495  cd templates/
+ 1496  ls
+ 1497  vi list.html 
+ 1498  vi ../views.py
+ 1499  vi list.html 
+ 1500  vi ../views.py
+ 1501  vi list.html 
+ 1502  cd ../../
+ 1503  cd ../
+ 1504  cd ../indivo_server/
+ 1505  ls
+ 1506  cd registered_apps/user/
+ 1507  ls
+ 1508  cd appsNotUsed/
+ 1509  ls
+ 1510  cd ../
+ 1511  ls
+ 1512  cp -rf contact/ top5recommended/
+ 1513  cd top5recommended/
+ 1514  vi manifest.json 
+ 1515  vi credentials.json 
+ 1516  cd ../../
+ 1517  cd ../
+ 1518  python manage.py sync_apps
+ 1519  cd ../indivo_ui_server/
+ 1520  grep -nr "
+ 1521  grep -nr "Born" *
+ 1522  vi ui/jmvc/ui/views/record/demographics.ejs
+ 1523  grep -nr "demographics.ejs" *
+ 1524  grep -nr "demographics" *
+ 1525  vi ui/jmvc/ui/controllers/record_controller.js
+ 1526  cd web/indivo_ui_server/
+ 1527  grep -nr "Healthfeed"*
+ 1528  grep -nr "Healthfeed" *
+ 1529  vi ui/jmvc/ui/views/healthfeed/show.ejs
+ 1530  rm ui/jmvc/ui/views/healthfeed/.show.ejs.swp 
+ 1531  vi ui/jmvc/ui/views/healthfeed/show.ejs
+ 1532  grep -nr "show.ejs" *
+ 1533  vi ui/jmvc/ui/controllers/healthfeed_controller.js
+ 1534  vi ui/jmvc/ui/views/healthfeed/show.ejs
+ 1535  vi ui/jmvc/ui/views/healthfeed/show.ejs_maria 
+ 1536  vi ui/jmvc/ui/views/healthfeed/show.ejs
+ 1537  cd /var/lib/tomcat7/webapps/EURECA
+ 1538  vi semanticTop5Search.jsp 
+ 1539  vi ui/jmvc/ui/views/healthfeed/show.ejs
+ 1540  cd /home/hatzimin/web/indivo_ui_server/
+ 1541  vi ui/jmvc/ui/views/healthfeed/show.ejs
+ 1542  cd /var/lib/tomcat7/webapps/
+ 1543  ls
+ 1544  ls -la
+ 1545  mv EURECA/ EURECA_bak
+ 1546  mv SSE/ SSE_bak
+ 1547  ls -la
+ 1548  cp /home/hatzimin/Desktop/EURECA_FINAL/EURECA.war .
+ 1549  cp /home/hatzimin/Desktop/EURECA_FINAL/SSE.war .
+ 1550  ls -la
+ 1551  chown tomcat7:tomcat7 SSE.war 
+ 1552  chown tomcat7:tomcat7 EURECA.war 
+ 1553  /etc/init.d/tomcat7 restart
+ 1554  ls -la
+ 1555  rm -rf EURECA 
+ 1556  rm -rf SSE
+ 1557  ls -la
+ 1558  /etc/init.d/tomcat7 restart
+ 1559  /etc/init.d/apache2 restart
+ 1560  ls -la
+ 1561  cd EURECA
+ 1562  ls
+ 1563  ls -la
+ 1564  cd ../
+ 1565  ls -la
+ 1566  chown root:root EURECA.war 
+ 1567  chown root:root SSE.war 
+ 1568  rm -rf EURECA
+ 1569  rm -rf SSE
+ 1570  /etc/init.d/apache2 restart
+ 1571  /etc/init.d/tomcat7 restart
+ 1572  rm SSE.war 
+ 1573  rm EURECA.war 
+ 1574  ls -la
+ 1575  rm -rf EURECA
+ 1576  rm -rf SSE_bak/
+ 1577  ls -la
+ 1578  mkdir SSE
+ 1579  mkdir EURECA
+ 1580  cp -rf /home/hatzimin/Desktop/EURECA_FINAL/EURECA_web\(1\)/web/* EURECA
+ 1581  cp -rf /home/hatzimin/Desktop/EURECA_FINAL/SSE_web\(1\)/web/* SSE
+ 1582  /etc/init.d/tomcat7 restart
+ 1583  /etc/init.d/apache2 restart
+ 1584  cd ../
+ 1585  ls
+ 1586  cd logs
+ 1587  vi catalina.out
+ 1588  cd /var/lib/tomcat7/
+ 1589  ls -la
+ 1590  cd /usr/share/tomcat7
+ 1591  ls
+ 1592  cd lib/
+ 1593  ls
+ 1594  cp /home/hatzimin/Desktop/EURECA_FINAL/postgresql-9.3-1102.jdbc41.jar .
+ 1595  /etc/init.d/apache2 restart
+ 1596  cd /usr/share/tomcat7
+ 1597  /etc/init.d/tomcat7 restart
+ 1598  cd /home/hatzimin/web/indivo_server/
+ 1599  cd registered_apps/
+ 1600  ls
+ 1601  cd user/
+ 1602  ls
+ 1603  cd IndivoSemanticSearch/
+ 1604  vi manifest.json 
+ 1605  cd ../alga_c/
+ 1606  vi manifest.json 
+ 1607  cd ../IndivoSemanticSearch/
+ 1608  vi manifest.json 
+ 1609  cd ../../
+ 1610  cd ../
+ 1611  python manage.py sync_apps
+ 1612  cd registered_apps/
+ 1613  cd user/
+ 1614  ls
+ 1615  cd IndivoSemanticSearch/
+ 1616  vi credentials.json 
+ 1617  vi manifest.json 
+ 1618  cd ../../
+ 1619  cd ../
+ 1620  cd ../indivo_ui_server/
+ 1621  grep -nr "Healthfeed" *
+ 1622  vi ui/jmvc/ui/views/healthfeed/show.ejs
+ 1623  sudo lsof -i -n -P 
+ 1624  cd web/indivo_server/registered_apps/user/
+ 1625  vi alga_c/manifest.json 
+ 1626  vi top5recommended/
+ 1627  vi top5recommended/manifest.json 
+ 1628  vi IndivoSemanticSearch/manifest.json 
+ 1629  sudo netstat -anltp|grep :80
+ 1630  sudo netstat -anltp|grep :8084
+ 1631  cd /etc/tomcat7/catalina.properties 
+ 1632  cd /etc/tomcat7/
+ 1633  ls
+ 1634  cd Catalina/
+ 1635  ls
+ 1636  cd localhost/
+ 1637  ls
+ 1638  cd ../
+ 1639  cd apache2/
+ 1640  ls
+ 1641  cd /var/log/apache2/
+ 1642  ls
+ 1643  ls -lt
+ 1644  vi error.log
+ 1645  cd /home/hatzimin/web/indivo_server/registered_apps/
+ 1646  cd user/
+ 1647  ls
+ 1648  cd alga_c/
+ 1649  vi manifest.json 
+ 1650  mysql -u root mysql
+ 1651  /etc/init.d/mysql restart
+ 1652  mysql -u root mysql
+ 1653  mysql
+ 1654  mysqld --skip-grant-tables
+ 1655  cd web/indivo_ui_server/apps/donnorsTool/templates/
+ 1656  vi list.html 
+ 1657  vi one.html 
+ 1658  cd web/indivo_ui_server/apps/donnorsTool/templates/
+ 1659  vi one.html 
+ 1660  vi list.html 
+ 1661  cd ../
+ 1662  vi views.py
+ 1663  cd web/indivo_ui_server/apps/
+ 1664  cd donnorsTool/templates/
+ 1665  vi list.html 
+ 1666  cd ../
+ 1667  cd ../../
+ 1668  cd ../
+ 1669  cd indivo_server/registered_apps/user/
+ 1670  cd donnorsTool/
+ 1671  vi manifest.json 
+ 1672  cd ../../
+ 1673  cd ../
+ 1674  python manage.py sync_apps
+ 1675  cd registered_apps/user/donnorsTool/
+ 1676  vi manifest.json 
+ 1677  cd ../../
+ 1678  cd ../
+ 1679  vi indivo_server/registered_apps/user/donnorsTool/manifest.json 
+ 1680  cp ../Desktop/donnors.png indivo_ui_server/ui/jmvc/ui/resources/images/app_icons_32/
+ 1681  cd indivo_server/
+ 1682  python manage.py sync_apps
+ 1683  cd Desktop/
+ 1684  cp -rf donnorsTool/ ../web/indivo_ui_server/apps/
+ 1685  cd ../web/indivo_ui_server/apps/donnorsTool/
+ 1686  cd ../../
+ 1687  cd ../
+ 1688  cd indivo_server/registered_apps/user/
+ 1689  ls
+ 1690  mkdir donnorsTool
+ 1691  cp ../../../indivo_ui_server/apps/donnorsTool/manifest.json donnorsTool/
+ 1692  cp ../../../indivo_ui_server/apps/donnorsTool/credentials.json donnorsTool/
+ 1693  cd ../../
+ 1694  python manage.py sync_apps
+ 1695  vi urls.py
+ 1696  cd ../
+ 1697  cd indivo_ui_server/
+ 1698  vi urls.py
+ 1699  vi settings.py
+ 1700  /etc/init.d/apache2 restart
+ 1701  cd apps/donnorsTool/
+ 1702  cd static/
+ 1703  ls
+ 1704  ls -la
+ 1705  cd ../
+ 1706  cd problems/
+ 1707  ls -la
+ 1708  cd ../
+ 1709  chown -R www-data:www-data donnorsTool/
+ 1710  ls -la
+ 1711  cd donnorsTool/
+ 1712  ls
+ 1713  ls -la
+ 1714  cd static/
+ 1715  ls -la
+ 1716  cd ../
+ 1717  vi views.py
+ 1718  cd web/indivo_ui_server/apps/donnorsTool/
+ 1719  vi templates/one.html 
+ 1720  cd web/indivo_ui_server/apps/donnorsTool/
+ 1721  vi views.py
+ 1722  vi templates/one.html 
+ 1723  cd web/indivo_ui_server/apps/donnorsTool/templates/
+ 1724  vi list.html 
+ 1725  vi one.html 
+ 1726  cd web/indivo_ui_server/apps/donnorsTool/
+ 1727  vi views.py
+ 1728  cd web/indivo_ui_server/apps/bluebutton/
+ 1729  vi templates/list.html 
+ 1730  cd web/indivo_ui_server/apps/bluebutton/
+ 1731  vi views.py
+ 1732  vi templates/list.html 
+ 1733  vi views.py
+ 1734  vi templates/list.html 
+ 1735  vi views.py
+ 1736  vi templates/list.html 
+ 1737  vi views.py
+ 1738  cd web/indivo_ui_server/apps/
+ 1739  cd bluebutton/templates/
+ 1740  vi list.html 
+ 1741  cd web/indivo_server/
+ 1742  vi indivo.log 
+ 1743  cd ../indivo_ui_server/apps/problems/
+ 1744  vi views.py
+ 1745  cd ../../
+ 1746  cd ../
+ 1747  cd indivo_server/
+ 1748  cd indivo/views/
+ 1749  cd reports/
+ 1750  ls
+ 1751  vi generic.py
+ 1752  cd ../../
+ 1753  cd ../
+ 1754  cd indivo_ui_server/apps/bluebutton/
+ 1755  vi urls.py
+ 1756  grep -nr "allxml" *
+ 1757  vi urls.py
+ 1758  cd web/indivo_ui_server/apps/bluebutton/
+ 1759  ls
+ 1760  vi views.py
+ 1761  cd web/
+ 1762  grep -nr "smart_generic" *
+ 1763  vi indivo_server/indivo/views/reports/smart.py
+ 1764  grep -nr "LabResult" *
+ 1765  vi indivo_server/indivo/views/reports/smart.py
+ 1766  grep -nr "generic_list" *
+ 1767  vi indivo_server/indivo/views/reports/generic.py
+ 1768  vi indivo_server/indivo/views/reports/smart.py
+ 1769  grep -nr "generic_list" *
+ 1770  grep -nr "def generic_list" *
+ 1771  vi indivo_server/indivo/views/reports/generic.py
+ 1772  cd indivo_ui_server/apps/procedures/
+ 1773  ls
+ 1774  ls -la
+ 1775  cd procedures/
+ 1776  ls
+ 1777  cd ../
+ 1778  cd templates/
+ 1779  ls
+ 1780  cd ../
+ 1781  cd static/
+ 1782  ls
+ 1783  cd ../../
+ 1784  cd indivo_server/
+ 1785  cd indivo/views/
+ 1786  ls
+ 1787  cd reports/
+ 1788  ls
+ 1789  vi procedure.py
+ 1790  cd ../../
+ 1791  cd serializers/
+ 1792  ls
+ 1793  vi base.py
+ 1794  cd ../
+ 1795  cd data_models/
+ 1796  ls
+ 1797  cd co
+ 1798  cd core/
+ 1799  ls
+ 1800  cd lab/
+ 1801  vi extra.py
+ 1802  cd ../
+ 1803  cd medication/
+ 1804  ls
+ 1805  vi extra.py
+ 1806  cd ../../
+ 1807  cd ../
+ 1808  vi indivo.log 
+ 1809  /etc/init.d/apache2 restart
+ 1810  cd ../indivo_ui_server/apps/bluebutton/
+ 1811  vi views.py
+ 1812  cd web
+ 1813  grep -nr "VitalSigns" *
+ 1814  vi indivo_server/indivo/tests/data_models/core/vitals/model.sdml
+ 1815  vi indivo_server/doc/sphinx/autogen/api-skeleton.py
+ 1816  cd indivo_ui_server/apps/bluebutton/
+ 1817  vi views.py
+ 1818  cd ../../
+ 1819  cd ../
+ 1820  vi indivo_server /indivo/urls/record.py
+ 1821  vi indivo_server/indivo/urls/record.py
+ 1822  grep -nr "model_class" *
+ 1823  vi indivo_server/indivo/tests/data_models/core/problem/extra.py
+ 1824  indivo_server/indivo/tests/data_models/core/problem/extra.py
+ 1825  grep -nr "model_class" *
+ 1826  vi indivo_server/doc/sphinx/source/data-models/index.rst
+ 1827  cd indivo_server/indivo/data_models/core/
+ 1828  ls -la
+ 1829  cd procedure/
+ 1830  ls
+ 1831  cd ../problem/
+ 1832  ls
+ 1833  vi extra.py
+ 1834  cp extra.py ../procedure/
+ 1835  cd ../procedure/
+ 1836  ls
+ 1837  vi extra.py 
+ 1838  vi model.py
+ 1839  vi ../problem/model.py
+ 1840  vi extra.py 
+ 1841  cd ../../
+ 1842  cd ../
+ 1843  cd ../../
+ 1844  cd indivo_ui_server/apps/procedures/
+ 1845  vi views.py
+ 1846  cd ../
+ 1847  grep -nr "dhx_cal_data" *
+ 1848  cd calendar/
+ 1849  cd te
+ 1850  cd templates/
+ 1851  ls
+ 1852  grep -nr "hx_cal_container div" *
+ 1853  :q
+ 1854  grep -nr "1463px" *
+ 1855  grep -nr "1463" *
+ 1856  cd ../
+ 1857  grep -nr "1463" *
+ 1858  grep -nr "div class="dhx_cal_data"" *
+ 1859  grep -nr ".dhx_cal_data" *
+ 1860  ls
+ 1861  cd static/
+ 1862  cd calendarColor/
+ 1863  ls
+ 1864  vi dhtmlxscheduler.css 
+ 1865  cd ../../
+ 1866  cd ../
+ 1867  grep -nr "744px" *
+ 1868  grep -nr "element.style" *
+ 1869  vi indivo_ui_server/apps/calendar/static/dist/vis.js
+ 1870  cd indivo_ui_server/apps/calendar/templates/
+ 1871  vi list.html
+ 1872  cd web/
+ 1873  grep -nr "calendar" *
+ 1874  grep -nr "calendar@" *
+ 1875  grep -nr "calendar@apps.smartplatforms.org" *
+ 1876  grep -nr "calendar@apps.indivo.org" *
+ 1877  grep -nr "div id="apps"" *
+ 1878  grep -nr 'div id="apps"' *
+ 1879  vi indivo_ui_server/ui/jmvc/ui/views/pha/show.ejs
+ 1880  grep -nr 'class="app_name"w' *
+ 1881  grep -nr 'class="app_name"' *
+ 1882  vi indivo_ui_server/ui/jmvc/ui/views/pha/apps.ejs
+ 1883  ifconfid
+ 1884  ifconfig
+ 1885  vi indivo_ui_server/ui/jmvc/ui/views/pha/apps.ejs
+ 1886  cd web
+ 1887  vi indivo_ui_server/ui/jmvc/ui/views/pha/apps.ejs
+ 1888  grep -nr 'app.name !== 'Recom Links'" *
+ 1889  grep -nr "app.name !== 'Recom Links'" *
+ 1890  vi indivo_ui_server/ui/jmvc/ui/views/pha/app_tab.ejs
+ 1891  cd indivo_ui_server/apps/calendar/
+ 1892  grep -nr "-webkit-user-select" *
+ 1893  cd ../../
+ 1894  grep -nr "-webkit-user-select" *
+ 1895  cd apps/calendar/templates/
+ 1896  ls
+ 1897  vi list.html
+ 1898  cd ../
+ 1899  cd static/
+ 1900  ls
+ 1901  cd /calendarColor/codebase/
+ 1902  cd calendarColor/
+ 1903  cd codebase/
+ 1904  vi dhtmlxscheduler.js
+ 1905  grep -nr " $menustyle" *
+ 1906  grep -nr "$menustyle" *
+ 1907  grep -nr "menustyle" *
+ 1908  grep -nr "top:" *
+ 1909  grep -nr "top:81" *
+ 1910  cd ../
+ 1911  grep -nr "<li style="display: none;">" &
+ 1912  cd web
+ 1913  cd indivo_ui_server/apps/problems/
+ 1914  cd ../bulkimport/
+ 1915  vi urls.py
+ 1916  ls -la
+ 1917  vi settings.py
+ 1918  cd ../problems/
+ 1919  ls
+ 1920  vi settings.py
+ 1921  ls
+ 1922  cd web/indivo_ui_server/apps/calendar/te
+ 1923  cd web/indivo_ui_server/apps/calendar/templates/
+ 1924  vi list.html
+ 1925  cd ../
+ 1926  grep -nr "dhx_cal_data" *
+ 1927  grep -nr "dhx_cal_data'][0].style.height" *
+ 1928  grep -nr " dhx_cal_data'][0].style.height" *
+ 1929  grep -nr 'dhx_cal_data'][0].style.height' *
+ 1930  grep -nr "'dhx_cal_data'][0].style.height" *
+ 1931  grep -nr "][0].style.height" *
+ 1932  grep -nr "'dhx_cal_data'\]\[0\].style.height" *
+ 1933  vi static/calendarColor/codebase/sources/ext/dhtmlxscheduler_week_agenda.js
+ 1934  ifconfig
+ 1935  cd ../../
+ 1936  vi vi ui/jmvc/ui/views/record/create.ejs
+ 1937  vi ui/jmvc/ui/views/record/create.ejs
+ 1938  cd apps/
+ 1939  cp -rf problems/ bulkimport
+ 1940  cd bulkimport/
+ 1941  ls
+ 1942  vi urls.py
+ 1943  vi settings.py
+ 1944  ls -la
+ 1945  cd ../../
+ 1946  cd ../
+ 1947  cd indivo_server/
+ 1948  cd registered_apps/ud
+ 1949  cd registered_apps/user/
+ 1950  ls
+ 1951  cp problems/ bulkimport
+ 1952  cp -rf problems/ bulkimport
+ 1953  cd bulkimport/
+ 1954  ls
+ 1955  vi credentials.json 
+ 1956  vi manifest.json 
+ 1957  cd ../..
+ 1958  cd ../../
+ 1959  cd indivo_ui_server/
+ 1960  vi settings.py
+ 1961  vi urls.py
+ 1962  /etc/init.d/apache2 restart
+ 1963  cd apps/bulkimport/
+ 1964  vi urls.py
+ 1965  cd ../../
+ 1966  cd ../indivo_server/
+ 1967  python manage.py sync_apps
+ 1968  cd  registered_apps/user/
+ 1969  ls
+ 1970  cd bulkimport/
+ 1971  ls
+ 1972  vi manifest.json 
+ 1973  cd ../../../
+ 1974  python manage.py sync_apps
+ 1975  cd ../indivo_ui_server/apps/bulkimport/templates/
+ 1976  vi list.html 
+ 1977  cd web/indivo_ui_server/apps/calendar/
+ 1978  grep -nr '<li style="display: none;">' *
+ 1979  grep -nr '<style="display: none;">' *
+ 1980  grep -nr 'style="display: none;">' *
+ 1981  grep -nr "dhx_cal_data" *
+ 1982  grep -nr "dhx_cal_data" * > test
+ 1983  vim test
+ 1984  rm test
+ 1985  grep -nr "dhx_cal_data" * 
+ 1986  :q
+ 1987  cd .././.
+ 1988  cd ../
+ 1989  grep -nr "Create new record" *
+ 1990  grep -nr "Create a new record" *
+ 1991  vi ui/jmvc/ui/views/record/create.ejs
+ 1992  grep -nr "new_record_form"" *
+ 1993  grep -nr "new_record_form" *
+ 1994  vi ui/jmvc/ui/controllers/record_controller.js
+ 1995  cd apps/problems/
+ 1996  cd ../bulkimport/
+ 1997  ls
+ 1998  vi views.py
+ 1999  cd web/indivo_ui_server/apps/
+ 2000  cd procedures/
+ 2001  ls
+ 2002  vi templates/newprocedure.html 
+ 2003  history
+ 2004  history > hist

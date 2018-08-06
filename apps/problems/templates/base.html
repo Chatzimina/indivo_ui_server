@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>{% block title %}{% endblock %}</title>
+  <link type="text/css" href="{{ STATIC_HOME }}/css/sunny/jquery-ui-1.7.2.custom.css" rel="stylesheet" />
+<!--  <link type="text/css" href="{{ STATIC_HOME }}/css/jquery.autocomplete.css" rel="stylesheet" />-->
+<!--  <link type="text/css" href="{{ INDIVO_UI_SERVER_BASE }}/lib/widgets.css?{{CB}}" rel="stylesheet" /> -->
+  <link type="text/css" href="/lib/widgets.css" rel="stylesheet" />   <!--  <link type="text/css" href="/lib/widgets.css?{{CB}}" rel="stylesheet" /> -->
+  <script src="{{ STATIC_HOME }}/js/jquery-1.3.2.min.js"></script>
+  <script src="{{ STATIC_HOME }}/js/jquery-ui-1.7.2.custom.min.js"></script>
+<!--  <script src="{{ STATIC_HOME }}/js/speakClient.js"></script>
+  <script src="{{ STATIC_HOME }}/js/speakWorker.js"></script>
+  <script src="{{ STATIC_HOME }}/js/speakGenerator.js"></script>-->
+  <script src="{{ STATIC_HOME }}/js/jquery.autocomplete.js"></script>
+  <script src="{{ INDIVO_UI_SERVER_BASE }}/lib/widgets.js"></script>  <!--<script src="{{ INDIVO_UI_SERVER_BASE }}/lib/widgets.js?{{CB}}"></script>-->
+  
+  
+  
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+  <!--script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script-->
+<!--  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>-->
+  <script type="text/javascript" src="/jmvc/ui/resources/js/javascript.js" ></script>
+
+  <link rel="stylesheet" type="text/css" href="/jmvc/ui/resources/css/imanagecancer.css" media="screen" />
+<script>
+
+  indivo_api_call = function(method, url, callback) {
+
+      url = '/indivoapi' + url;
+      $.ajax({
+      type: method,
+      url: url,
+      dataType: "xml", 
+      success: callback,
+      async: false
+      });
+      }
+</script>
+
+<script>
+var i=0;
+var array=[];
+var carenets=[];
+var uniqueList=[];
+var obj;
+
+function checkSharing(problems,record_id){
+
+var res = problems.replace(/&#39;/g, '"');
+
+
+res = res.replace(/None/g,'"None"');
+res = res.replace(/""None""/g,'"None"');
+res = res.replace(/\(/g,'');
+res = res.replace(/\)/g,'');
+//res = String(res);
+ obj = JSON.parse(res);
+for(j=0; j<obj.length; j++){
+
+if(obj[j]['id']){
+
+var url = '/records/'+record_id+'/documents/'+obj[j]['id']+'/carenets/';
+
+ indivo_api_call("GET", url, function(result) {
+
+
+      var carenets_xml = $(result).find('Carenets').find('Carenet');
+      carenets = [];
+      carenets_xml.each(function(i, carenet) {
+        carenets.push({'id': $(carenet).attr('id'), 'name' : $(carenet).attr('name')});
+        uniqueList.push({'problem_id':obj[j]['id'],'id': $(carenet).attr('id'), 'name' : $(carenet).attr('name')});
+
+      });
+
+
+    });
+
+
+
+}
+}
+}
+
+
+
+function shareNew(record_id){
+var problems_ids=[];
+var problem_to_share=[];
+
+if(uniqueList.length >0){
+console.log('inside');
+        for(m=0; m<uniqueList.length ;m++){
+
+                problems_ids.push(uniqueList[m]['problem_id']);
+
+        }
+
+         for(j=0; j<obj.length; j++){
+
+                if (problems_ids.indexOf(obj[j]['id'])<=-1){
+                        console.log('sdsds')
+                        for (m=0; m<carenets.length; m++){
+
+                                var url =  "/records/"+record_id+"/documents/"+obj[j]['id']+"/carenets/"+carenets[m]['id']
+                                indivo_api_call("PUT",url, function(result){
+                                console.log('ok')
+                                });
+
+
+                        }
+                }
+        }
+
+}
+
+
+var iframe = document.getElementsByClassName('indivo')[0];
+iframe.src=iframe.src;
+
+}
+
+
+</script>
+
+
+
+
+
+  
+  <script>
+  AttachEvent(window, 'load', function(){scroll(0,0);});
+  </script>
+  </head>
+  <body style="background-color:transparent;">
+    <script>
+      Indivo.setup('{{INDIVO_UI_SERVER_BASE}}');
+    </script>
+    {% block content %}{% endblock %}
+  </body>
+</html>

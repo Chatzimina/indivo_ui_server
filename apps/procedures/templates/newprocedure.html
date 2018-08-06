@@ -1,0 +1,346 @@
+{% extends 'problems/templates/base.html' %}
+{% block title %}new procedure{% endblock %}
+{% block content %}
+{% load i18n %}
+<html>
+<head>
+
+<link href="{{ STATIC_HOME }}/css/datepicker.css" rel="stylesheet" type="text/css"/>
+<link type="text/css" href="/apps/allergies/static/css/jquery.autocomplete.css" rel="stylesheet">
+
+<script>
+var nextYear = (new Date().getFullYear() + 1).toString();
+  $(document).ready(function() {
+    $('.date').datepicker({
+     dateFormat:'yy-mm-dd',
+	inline: true,
+      showOtherMonths: true,
+      dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        changeMonth: true,
+        changeYear: true,
+        minDate:'-26y',
+        maxDate:'+2y',
+        yearRange: "1990:"+nextYear,
+        });
+
+
+    $('#problem_fullname').autocomplete({
+      serviceUrl: 'codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#problem_code').val(data.code);
+      }
+    })
+    
+//    $('#comments').autocomplete({
+//      serviceUrl: 'codelookup',
+//      minChars: 2,
+//      onSelect: function(value, data) {
+//        $('#comments_code').val(data.code);
+//      }
+//    })
+
+//alert(urlParam('dt'));
+
+	el('date_performed').value = urlParam('dt');
+
+  });
+
+var complete=false;
+var returned=false;
+function validateForm()
+{
+var problem_fullname=document.forms["myForm"]["problem_fullname"].value;
+var provider_name=document.forms["myForm"]["provider_name"].value;
+var provider_institution=document.forms["myForm"]["provider_institution"].value;
+var locationn=document.forms["myForm"]["location"].value;
+var comments=document.forms["myForm"]["comments"].value;
+var date_performed=document.forms["myForm"]["date_performed"].value;
+
+
+if (problem_fullname==null || problem_fullname=="" )//|| provider_name==null || provider_name=="" || provider_institution==null || provider_institution=="" || locationn==null || locationn=="" ||comments==null ||comments=="" ||date_performed==null ||date_performed=="")
+  {
+  alert({% trans "'Please fill title.'" %});
+  return false;
+  }
+if(date_performed==null ||date_performed==""){
+  alert({%trans "'Please fill date.'" %});
+  return false;
+}
+complete=true;
+return true;
+returned=true;
+window.close();
+}
+function setForm()
+ {
+ 
+	var frmHTML = '<form id="frmAddModel" name="frmAddModel" method="post" action="new_procedure_calendar">';
+	frmHTML += '<input type="text" name="code_fullname" id="problem_fullname" value="'+ el('problem_fullname').value + '" class="form-control" style="width:100%" />';
+	frmHTML += '<input type="text" name="code"  id="code"  value="'+ el('code').value + '"/>';
+	
+	frmHTML += '<input type="text" name="date_performed" id="date_performed"  value="'+ el('date_performed').value + '" />';	
+	frmHTML += '<input type="text" name="provider_name" id="provider_name" value="'+ el('provider_name').value + '" />';
+	frmHTML += '<input type="text" name="provider_institution" id="provider_institution"  value="'+ el('provider_institution').value + '" />';	
+	
+	
+	
+	
+	frmHTML += '<input type="text" name="location" id="location" value="'+ el('location').value + '" />';
+	frmHTML += '<input type="text" name="comments" id="comments"  value="'+ el('comments').value + '" />';
+	frmHTML += '<input type="text" name="comments_code" id="comments_code" value="'+ el('comments_code').value + '" />';
+	
+	
+	frmHTML += '<input type="hidden" name="fromcalendar" id="fromcalendar" value="1" />';
+	
+	frmHTML += '</form>';
+	
+	var iframe1 = window.top.document.getElementById('calendarFrame');
+	var iframe2 = window.top.document.getElementById('app_content_iframe1');
+	
+	if (!iframe2 || iframe2.src.indexOf('calendar') < 0)
+	{
+		var innerDoc = iframe1.contentDocument || iframe1.contentWindow.document;	
+		innerDoc.getElementById('divSubmitForm').innerHTML = frmHTML;
+		innerDoc.getElementById('frmAddModel').submit();
+	}
+	else
+	{
+		var innerDoc = iframe2.contentDocument || iframe2.contentWindow.document;	
+		innerDoc.getElementById('divSubmitForm').innerHTML = frmHTML;
+		innerDoc.getElementById('frmAddModel').submit();
+	}
+ }
+ 
+function dismissModal()
+{
+	var modalfooter = window.parent.document.getElementsByClassName('modal-footer')[0];
+	var button = modalfooter.getElementsByTagName('button')[0];
+	button.click();
+}
+
+
+
+function closeModal()
+{
+var valid = validateForm();
+
+if (!valid) return false;
+//alert('closing modal...');
+try { 
+console.log("inside try")
+
+setForm();
+
+setTimeout('dismissModal();', 500);
+return false;
+
+var modalfooter = window.parent.document.getElementsByClassName('modal-footer')[0];
+var button = modalfooter.getElementsByTagName('button')[0];
+button.click();
+}
+
+catch(e){}
+
+return true;
+}
+
+
+$( document ).ready(function() {
+
+
+        inIframe();
+        function inIframe () {
+                var div = document.getElementById('cancel_div');
+                var framediv = document.getElementById('frApp');
+//                if(self==top){
+ //if(self==top){
+                var hideDiv = (window.parent.document.getElementById('frApp') != null);
+                if (hideDiv) {
+
+                        div.style.visibility = 'hidden';
+                        framediv.style.visibility = 'visible';
+
+
+                }
+                else
+                {
+                        div.style.visibility = 'visible';
+                        framediv.style.visibility = 'hidden';
+                }
+        }
+
+});
+
+</script>
+
+
+    {% if jsonData != " " %}
+         {% if jsonData.5.z_score < -2 or jsonData.5.z_score > 2 %} <!--physical abilities (abnormal it should be over 2 or less -2 )-->
+        <style type="text/css">
+            *
+            {
+                font-size : 12px
+            }
+
+            .class1 *
+            {
+                font-size : 20px;
+            }
+        </style>
+	{% endif %}
+     {% endif %}
+</head>
+<body>
+
+<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:95%;" id="divContainer" >
+	<form name="myForm" onsubmit="return validateForm()" method="post" action="">
+	<input type="hidden" name="fromcalendar" id="fromcalendar" value="0" />
+		<div class="row"  style="margin-left:5px;">
+			<div class="col-xs-12">
+				<h2>{% trans "New Procedure" %}</h2>
+			</div>
+			<div class="col-xs-12">
+                                <h4>{% trans "Insert medical treatments or operations. For example: 'Biopsy', 'Eye surgery', 'Magnetic Resonance Imaging (MRI Scan)'" %}</h4>
+                        </div>
+
+		</div>
+
+		<div class="row" style="height:10px"></div>
+		
+		<div class="row"  style="margin-left:5px;">
+		<div class="form-group">
+			<label>{% trans "Procedure" %}</label>
+			<input type="text" name="code_fullname" id="problem_fullname" style="width: 100%"  class="form-control"/>
+            <input type="hidden" name="code" value="" id="code" />
+		</div>
+		<div class="form-group">
+			<label>{% trans "Date Performed" %}</label>
+			<input type="text" name="date_performed" id="date_performed" class="date form-control" style="width: 100%"  autocomplete="off"/>
+        </div>
+		<div class="form-group">
+			<label>{% trans "Doctor Name" %}</label>
+        <input type="text" name="provider_name" id="provider_name" style="width: 100%" class="form-control"/>
+      </div>
+		  <div class="form-group">
+			<!--label>{% trans "Institution" %}</label-->
+			<label>{% trans "Hospital" %}</label>
+			<input type="text" name="provider_institution" id="provider_institution" style="width: 100%" class="form-control"/>
+		  </div>
+		  <div class="form-group">
+				<label>{% trans "Location" %}</label>
+				<input type="text" name="location" id="location" style="width: 100%" class="form-control"/>
+			</div>
+		  <div class="form-group">
+				<label>{% trans "Comments" %}</label>
+				<input type="text" name="comments" id="comments" style="width: 100%" class="form-control"/>
+			   <input type="hidden" name="comments_code" value="None" id="comments_code" /> 
+		  </div>
+		  
+		   <div class="form-group">
+			<div id="frApp" name="frApp">
+				<div class="row">
+				<div class="col-lg-12" align="center" >
+					 <input type="button" value="{% trans "Add New Procedure" %}"  onclick="return closeModal();" style="width:50%;max-width:300px;" class="btn btn-primary btn-lg"/>
+				</div>
+				</div>
+			</div>
+			<div id="cancel_div" name=cancel_div">
+
+				<div class="row">
+                                <div class="col-lg-12" align="center" >
+                                         <input type="submit" value="{% trans "Add New Procedure" %}"  style="width:50%;max-width:300px;" class="btn btn-primary btn-lg"/>
+                                </div>
+                                </div>
+
+
+				<div class="row" style="height:10px;"></div>
+				<div class="row">
+				<div class="col-lg-12"  align="center">
+					<!--a href="./"><button   type="button" class="btn btn-primary btn-lg" style="width:50%;max-width:300px;">{% trans "   Cancel" %}  </button></a-->
+					<button  onclick="history.back();" type="button" class="btn btn-warning btn-lg" style="width:50%;max-width:300px;">{% trans "   Cancel" %}  </button>
+				</div>
+				</div>
+			</div>
+			</div>
+		  </div>
+	</form>
+</div>
+
+
+{% ifequal 1 0 %}
+
+<div class="class1">
+<h2>{% trans "New Procedure" %} &nbsp;&nbsp;<span style="font-size:0.7em; font-weight: normal; text-transform: uppercase">
+<!--[<a href="./">Cancel</a>]-->
+</span></h2>
+  <form name="myForm" onsubmit="return validateForm()" method="post" action="">
+  <input type="hidden" name="fromcalendar" id="fromcalendar" value="0" />
+    <table class="light form">
+      <col style="width: 20%"></col>
+      <col style="width: 80%"></col>
+      <tr>
+        <td>{% trans "Procedure" %}</td>
+        <td>
+          <input type="text" name="code_fullname" id="problem_fullname" style="width: 100%" />
+          <input type="hidden" name="code" value="" id="problem_code" /> 
+        </td>
+      </tr>
+
+      <tr>
+        <td>{% trans "Date Performed" %}</td>
+        <td><input type="text" name="date_performed" id="date_performed" class="date" style="width: 100%" /></td>
+      </tr>
+
+      <tr>
+        <td>{% trans "Doctor Name" %}</td>
+        <td><input type="text" name="provider_name" id="provider_name" style="width: 100%" /></td>
+      </tr>
+	<tr>
+        <td>{% trans "Hospital" %}</td>
+        <td><input type="text" name="provider_institution" id="provider_institution" style="width: 100%" /></td>
+      </tr>
+	<tr>
+        <td>{% trans "Location" %}</td>
+        <td><input type="text" name="location" id="location" style="width: 100%" /></td>
+      </tr>
+      <tr>
+        <td>{% trans "Comments" %}</td>
+        <td><input type="text" name="comments" id="comments" style="width: 100%" />
+          <input type="hidden" name="comments_code" value="None" id="comments_code" /> 
+	 </td>
+      </tr>
+
+
+
+    </table>
+
+    <br />
+
+
+    
+    <div style="text-align: center">
+      <input type="submit" value="Add New Procedure" style="width: 33%"/><p>
+      <!--<input type="button" style="width: 200px" onclick="history.back();" value="    Cancel    ">-->
+    </div> 
+
+  </form>
+    <div align="center"><a href="./"><button style="width: 200px"> {% trans " Cancel" %}   </button></a></div>
+
+</div>
+
+
+<script>
+var fromcalendar = urlParam('fromcalendar');
+if(fromcalendar === '1')
+{
+	//var iframe1 = window.top.document.getElementById('calendarFrame');
+	//var iframe2 = window.top.document.getElementById('app_content_iframe1');
+	dismissModal();
+}
+</script>
+
+{% endifequal %}
+<body>
+</html>
+{% endblock %}

@@ -1,0 +1,10 @@
+<Models xmlns="http://indivo.org/vocab/xml/documents#">
+  <Model name="Problem">
+    <Field name="startDate">{{startDate}}</Field>
+    <Field name="endDate">{{endDate}}</Field>
+    <Field name="name_title">{{code_fullname|escape}}</Field>
+    <Field name="name_system">{{coding_system}}</Field>
+    <Field name="name_identifier">{{code}}</Field>
+    <Field name="notes">{{comments}}</Field>
+  </Model>
+</Models>

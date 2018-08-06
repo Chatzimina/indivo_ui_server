@@ -1,0 +1,167 @@
+{% extends 'allergies/templates/base.html' %}
+{% block title %}new allergy{% endblock %}
+{% block content %}
+
+<head>
+
+{% if jsonData != " " %}
+        {% if jsonData.5.z_score < -2 or jsonData.5.z_score > 2 %} <!--Rumination (abnormal it should be over 2 or less -2 )-->
+        <style type="text/css">
+            *
+            {
+                font-size : 12px
+            }
+
+            .class1 *
+            {
+                font-size : 20px;
+            }
+        </style>
+        {%endif%}
+     {% endif %}
+
+
+</head>
+
+
+<script>
+  $(document).ready(function() {
+    //$('.date').datepicker({'dateFormat':'yy-mm-dd'});
+  //$('.auto-complete-tbx').each(function() { 
+  //$(this).autocomplete({
+    //  serviceUrl: 'codelookup',
+      //minChars: 2,
+      //onSelect: function (value, data) {
+        //$('.auto-complete-code').val(data.code)}
+    
+    //})
+  //});
+     $('#allergic_reaction_title').autocomplete({
+      serviceUrl: 'codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#allergic_reaction_code').val(data.code);
+      }
+    })
+
+    $('#category_fullname').autocomplete({
+      serviceUrl: 'codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#category_code').val(data.code);
+      }
+    })
+
+    $('#drug_class_allergen_fullname').autocomplete({
+      serviceUrl: 'codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#drug_class_allergen_code').val(data.code);
+      }
+    })
+
+    $('#severity_fullname').autocomplete({
+      serviceUrl: 'codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#severity_code').val(data.code);
+      }
+    })
+
+});
+
+
+function validateForm()
+{
+var allergic_reaction_title=document.forms["myForm"]["allergic_reaction_title"].value;
+var severity_title=document.forms["myForm"]["severity_title"].value;
+var category_fullname=document.forms["myForm"]["category_fullname"].value;
+
+
+if (allergic_reaction_title==null || allergic_reaction_title=="")
+  {
+  alert("Allergic reaction must be filled");
+  return false;
+  }
+
+if (severity_title==null || severity_title=="")
+  {
+  alert("Severity must be filled");
+  return false;
+}
+
+if (category_fullname==null || category_fullname=="")
+  {
+  alert("Allergen must be filled");
+  return false;
+}
+
+}
+
+</script>
+<body>
+<div class="class1">
+
+<h2>New Allergy &nbsp;&nbsp;<span style="font-size:0.7em; font-weight: normal; text-transform: uppercase">
+<!--<a href="./" align=right><b><button>Cancel</button></b></a>-->
+</span></h2>
+
+  <form name="myForm" onsubmit="return validateForm()" method="post" action="">
+    <table class="light form">
+      <col style="width: 20%"></col>
+      <col style="width: 80%"></col>
+      <tr>
+        
+	<td>Allergy</td>
+        <td>
+          <input type="text" name="allergic_reaction_title" class="auto-complete-tbx" id="allergic_reaction_title" style="width: 100%"/>
+          <input type="hidden" name="allergic_reaction_identifier" class="auto-complete-code" value="None" id="allergic_reaction_code"/>
+        </td>
+      </tr>
+       <td>Allergen type</td>
+       <td>
+          <input type="text" name="allergen_type" id="category_fullname" style="width: 100%"/>
+          <input type="hidden" name="allergen_id" id="category_code" value="None" style="width: 100%" />
+       </td>
+      </tr>
+      <tr>
+	<td>Drug class allergen</td>
+	<td><input type="text" name="allergen_name" class="auto-complete-tbx" id="drug_class_allergen_fullname" style="width: 100%" />
+            <input type="hidden" name="allergen_name_id" value="None" id="drug_class_allergen_code"/>
+	</td>
+      </tr>
+      <tr>
+	<td> Severity</td>
+        <td><input type="text" name="severity_title" class="auto-complete-tbx" id="severity_fullname" style="width: 100%" />
+	    <input type="hidden" name="severity_id" value="" id="severity_code"/>
+        </td>
+      </tr>
+      <tr>
+	<!--<td>Severity</td>
+	<td><input type="text" name="code_fullname" class="auto-complete-tbx" id="severity_fullname" style="width: 100%" />
+            <input type="text" name="code" value="" id="severity_code"/>
+        </td>
+      </tr>
+      <tr>
+	 <td>Details</td>
+         <td><input type="textarea" name="comments" cols="50" rows="3" wrap="soft" style="width: 100%"></textarea>
+        </td>
+      </tr>-->
+
+      </tr>
+    </table>
+
+   <br />
+    
+    <div style="text-align: center">
+      <input type="submit" value="Add New Allergy" style="width: 33%"/><p><p>
+      
+ </div>
+</form>
+    <div align="center"><a href="./"><button style="width: 200px">   Cancel  </button></a></div>
+
+    </div>
+
+</div>
+<body>
+{% endblock %}

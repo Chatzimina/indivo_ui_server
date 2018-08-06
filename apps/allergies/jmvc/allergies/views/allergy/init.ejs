@@ -1,0 +1,34 @@
+
+<div style="width: 25%; margin-bottom: 0;">
+  <h2 style="margin-left: -4px;">Allergies</h2>
+</div>
+
+
+<div id="loading" style='float: right; margin-top: -48px; width: 50%; text-align: center; display: block'>
+  <h3>Loading...</h3>
+</div>
+
+<table class="light">
+<tbody>
+<% _(exclusions).each(function(ex) {
+    var name=ex.name_title || "";
+%>
+  <tr>
+    <td colspan="2" class="details" style="padding-left: 2em; font-size: 1.1em; background-color: #fff; color: #464337"><%= name %></td>
+  </tr>
+<% }); %>
+</tbody>
+</table>
+
+<table class="light">
+    <thead>
+    <tr>
+      <th style="width: 200px">category</th>
+      <th>allergen</th>
+    </tr>
+    </thead>
+    <tbody>
+        <%= view('./views/allergy/list',{'reports': reports})%>
+    </tbody>
+</table>
+

@@ -1,0 +1,92 @@
+{% extends 'problems/templates/base.html' %}
+{% block title %}problem list{% endblock %}
+{% block content %}
+{% load i18n %}
+  
+
+<head>
+
+    {% if jsonData != " " %}
+	{% if jsonData.5.z_score < -2 or jsonData.5.z_score > 2 %} <!--physical abilities (abnormal it should be over 2 or less -2 )-->
+	<style type="text/css">
+            *
+            {
+                font-size : 12px
+            }
+
+            .class1 *
+            {
+                font-size : 20px;
+            }
+        </style>
+        {%endif%}
+     {% endif %}
+        <meta charset="utf-8">
+        <title>Speak.js Demo</title>
+        <script src="/apps/procedures/static/speakClient.js"></script>
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+<body>
+      
+<form action="contact" method="POST">
+<script>
+   function setPageSize()
+   {   	
+   	if (el('divList'))el('divList').style.width = (el('divContainer').offsetWidth-0).toString() + 'px';   	
+	if (window.top.document.getElementById('app_container'))
+		el('divContainer').style.width = (window.top.document.getElementById('app_container').offsetWidth-0).toString() + 'px';	
+   }
+   
+   setInterval('setPageSize();', 500);
+</script>
+<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:100%;overflow-x:hidden;" id="divContainer" >
+	<div class="row">
+		<div class="col-lg-12"><h2>{% trans "Contact" %} {% if in_carenet %}(Shared){% endif %}</h2></div>
+	</div>
+	<div class="row" style="height:20px;"></div>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="form-group">
+				<label>{% trans "Subject:" %}</label>
+				<input type="text" name="subject" class="form-control" style="width:100%;"/>
+			</div>
+			<div class="form-group">
+				<label>{% trans "Message:" %}</label>
+				<textarea style=" height: 250px;" name="message" class="form-control"></textarea>
+			</div>
+			<div class="form-group">
+				<input type="submit" value=" {%trans "  Send   " %}" style="width:150px;"  class="btn btn-lg btn-primary"/>
+			</div>
+		</div>
+	</div>
+</div>
+</form>         
+
+
+
+
+
+        
+       
+    
+        
+	
+       
+      
+	        
+
+              
+             
+            
+           	
+        
+
+
+
+
+
+
+</div>
+{% endblock %}

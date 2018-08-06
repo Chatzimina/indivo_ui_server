@@ -1,0 +1,24 @@
+<Models xmlns="http://indivo.org/vocab/xml/documents#">
+  <Model name="Clinicianquestion">
+    <Field name="patientId">{{patientId}}</Field>
+    <Field name="patientName">{{patientName}}</Field>
+    <Field name="gender">{{gender}}</Field>
+    <Field name="diagnosisAge">{{diagnosisAge}}</Field>
+    <Field name="diagnosis">{{diagnosis}}</Field>
+    <Field name="diagnosisExtra">{{diagnosisExtra}}</Field>
+    <Field name="initialDiagnosis">{{initialDiagnosis}}</Field>
+    <Field name="treatmentC">{{treatmentC}}</Field>
+    <Field name="treatmentS">{{treatmentS}}</Field>
+     <Field name="treatmentR">{{treatmentR}}</Field>
+    <Field name="treatmentRI">{{treatmentRI}}</Field>
+   <Field name="treatmentSI">{{treatmentSI}}</Field>
+   <Field name="treatmentCI">{{treatmentCI}}</Field>
+    <Field name="treatmentRD">{{treatmentRD}}</Field>
+    <Field name="treatmentCD">{{treatmentCD}}</Field>
+    <Field name="treatmentSD">{{treatmentSD}}</Field>
+    <Field name="karnovskyIndex">{{karnovskyIndex}}</Field>
+    <Field name="expectedOutcome">{{expectedOutcome}}</Field>
+    <Field name="computerSkills">{{computerSkills}}</Field>
+    <Field name="computerGames">{{computerGames}}</Field>
+  </Model>
+</Models>

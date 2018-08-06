@@ -1,0 +1,420 @@
+{% extends 'medications/templates/base.html' %}
+{% block title %}new medication{% endblock %}
+{% block content %}
+
+<script>
+  $(document).ready(function() {
+    $('.date').datepicker({'dateFormat':'yy-mm-dd'});
+    $('.startDate').datepicker({'dateFormat':'yy-mm-dd'});
+    $('.endDate').datepicker({'dateFormat':'yy-mm-dd'});
+    $('#drugName_title').autocomplete({
+      serviceUrl: 'codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#drugName_identifier').val(data.code);
+      }
+    })
+   $('#provenance_title').autocomplete({
+      serviceUrl: 'codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#provenance_identifier').val(data.code);
+      }
+    })
+   $('#drugName_title').autocomplete({
+      serviceUrl: 'codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#drugName_identifier').val(data.code);
+      }
+    })
+
+  });
+
+
+function validateForm()
+{
+var startDate=document.forms["myForm"]["startDate"].value;
+var drugName_title=document.forms["myForm"]["drugName_title"].value;
+var date1=document.forms["myForm"]["date"].value;
+var date2=document.forms["myForm"]["date"].value;
+var dispenseDaysSupply=document.forms["myForm"]["dispenseDaysSupply"].value;
+
+if (startDate==null || startDate=="")
+  {
+  alert("Start date must be filled");
+  return false;
+  }
+if (drugName_title==null || drugName_title=="")
+ {
+  alert("Drug name title must be filled");
+  return false;
+  }
+
+if (date2==null || date2=="")
+ {
+  alert("Date of second fill must be filled")
+  return false;
+ }
+
+
+if (date1==null || date1=="")
+ {
+  alert("Date of fill must be filled")
+  return false;
+ }
+
+if (dispenseDaysSupply==null || dispenseDaysSupply=="")
+ {
+  alert("Dispense days supply must be filled");
+  return false;
+  }
+
+}
+</script>
+<script type="text/javascript" language="JavaScript">
+function HidePart(d) { document.getElementById(d).style.display = "none";  }
+function ShowPart(d) { document.getElementById(d).style.display = "block"; }
+function CheckboxChecked(b,d)
+{
+   if(b) { ShowPart(d); }
+   else  { HidePart(d); }
+}
+</script>
+
+<h2>New Medication &nbsp;&nbsp;<span style="font-size:0.7em; font-weight: normal; text-transform: uppercase">
+<!--[<a href="./">Cancel</a>]-->
+</span></h2>
+
+  <form name="myForm" onsubmit="return validateForm()" method="post" action="">
+    <table class="light form">
+      <col style="width: 20%"></col>
+      <col style="width: 80%"></col>
+      <tr>
+        <td>Medication</td>
+        <td>
+          <input type="text" name="drugName_title" id="drugName_title" style="width: 100%" />
+          <input type="text" name="drugName_identifier" value="" id="drugName_identifier" />
+        </td>
+      </tr>
+
+      <tr>
+        <td>End date of medication</td>
+        <td><input type="text" name="endDate" class="date" style="width: 100%" /></td>
+      </tr>
+
+      <tr>
+        <td>Frequency value</td>
+        <td><input type="text" name="frequency_value" id="frequency_value" style="width: 100%" /></td>
+      </tr>
+
+      <tr>
+        <td>Frequenct unit</td>
+        <td><input type="text" name="frequency_unit" id="frequency_unit" style="width: 100%"></td>
+      </tr>
+      <tr>
+        <td>Instructions</td>
+        <td><input type="text"  name="instructions" id="instructions" style="width: 100%"></textarea></td>
+      </tr>
+      <tr>
+        <td>Provenance title</td>
+	<td> <select name="provenance_title" id="provenance_title">
+                <option value="prescription">Prescription</option>
+                <option value="fulfillment">Fulfillment</option>
+                <option value="administration">Administration</option>
+		<option value="reconciliation">Reconciliation</option>
+		<option value="patientReport">Patient Report</option>
+          </select></td>
+        <input type="hidden" name="provenance_identifier" value="prescription" id="provenance_identifier" />
+        </td>
+      </tr>
+       <tr>
+        <td>Quantity value</td>
+        <td><input type="text" name="quantity_value" id="quantity_value" style="width: 100%"></td>
+
+      </tr>
+       <tr>
+        <td>Quantity unit</td>
+        <td><input type="text" name="quantity_unit" id="quantity_unit" style="width: 100%"></td>        
+      </tr>
+       <tr>
+        <td>Start date</td>
+        <td><input type="text" name="startDate" id="startDate" class="date"style="width: 100%"></td>
+       
+      </tr>
+      <tr>
+       <td>
+     	<h2>Fill &nbsp;&nbsp;</h2>
+       </td>
+      </tr>
+       <tr>
+        <td>Date</td>
+        <td><input type="text" name="date" id="date1" class="date"style="width: 100%"></td>
+
+      </tr>
+
+       <tr>
+        <td>Dispense Days Supply</td>
+        <td><input type="text" name="dispenseDaysSupply" id="dispenseDaysSupply" style="width: 100%"></td>
+
+      </tr>
+      <tr>
+        <td>Pbm</td>
+        <td><input type="text" name="pbm" id="pbm" style="width: 100%"></td>
+
+      </tr>
+      <tr>
+        <td>Pharmacy id</td>
+        <td><input type="text" name="pharmacy_ncpdpid" id="pharmacy_ncpdpid" style="width: 100%"></td>
+
+      </tr>
+      <tr>
+        <td>Pharmacy organization</td>
+        <td><input type="text" name="pharmacy_org" id="pharmacy_org" style="width: 100%"></td>
+
+      </tr>
+      <tr>
+        <td>Country of pharmacy</td>
+        <td><input type="text" name="pharmacy_adr_country" id="pharmacy_adr_country" style="width: 100%"></td>
+
+      </tr>
+
+       <tr>
+        <td>City of pharmacy</td>
+        <td><input type="text" name="pharmacy_adr_city" id="pharmacy_adr_city" style="width: 100%"></td>
+
+      </tr>
+       <tr>
+        <td>Postalcode of pharmacy</td>
+        <td><input type="text" name="pharmacy_adr_postalcode" id="pharmacy_adr_postalcode" style="width: 100%"></td>
+
+      </tr>
+       <tr>
+        <td>Street of pharmacy</td>
+        <td><input type="text" name="pharmacy_adr_street" id="pharmacy_adr_street" style="width: 100%"></td>
+
+      </tr>
+       <tr>
+        <td>Provider dea number</td>
+        <td><input type="text" name="provider_dea_number" id="provider_dea_number" style="width: 100%"></td>
+
+      </tr>
+       <tr>
+        <td>Provider npi number</td>
+        <td><input type="text" name="provider_npi_number" id="provider_npi_number" style="width: 100%"></td>
+
+      </tr>
+       <tr>
+        <td>Provider email</td>
+        <td><input type="text" name="provider_email" id="provider_email" style="width: 100%"></td>
+
+      </tr>
+       <tr>
+        <td>Provider name</td>
+        <td><input type="text" name="provider_name_given" id="provider_name_given" style="width: 100%"></td>
+
+      </tr>
+       <tr>
+        <td>Provider family name</td>
+        <td><input type="text" name="provider_name_family" id="provider_name_family" style="width: 100%"></td>
+
+      </tr>
+       <tr>
+        <td>Provider telephone type</td>
+        <td><input type="text" name="provider_tel_1_type" value="w" id="provider_tel_1_type" style="width: 100%"></td>
+
+       <tr>
+        <td>Provider telephone</td>
+        <td><input type="text" name="provider_tel_1_number" id="provider_tel_1_number" style="width: 100%"></td>
+
+      </tr>
+       <tr>
+        <td>Preferred number</td>
+        <!--<td><input type="text" name="provider_tel_1_preferred_p" id="provider_tel_1_preferred_p" style="width: 100%"></td>-->
+	<td><select name="provider_tel_1_preferred_p" id="provider_tel_1_preferred_p">
+                <option value="true">True</option>
+                <option value="false">False</option> 
+          </select></td>
+
+      </tr>
+       <tr>
+        <td>Quantity dispensed value</td>
+        <td><input type="text" name="quantityDispensed_value" id="quantityDispensed_value" style="width: 100%"></td>
+
+      </tr>
+       <tr>
+        <td>Quantity dispensed unit</td>
+        <td><input type="text" name="quantityDispensed_unit" id="quantityDispensed_unit" style="width: 100%"></td>
+
+      </tr>
+
+    </table>
+
+    <br />
+
+
+<div>
+
+<form name="myform" method="GET" action="">
+
+<p>
+<input type="checkbox" name="mycheckbox"  value="yes" onclick="CheckboxChecked(this.checked,'checkboxdiv')">
+Add fill
+</p>
+
+<div id="checkboxdiv" style="display:none">
+ <table class="light form">
+      <col style="width: 20%"></col>
+      <col style="width: 80%"></col>
+
+      <tr>
+       <td>
+        <h2>Fill &nbsp;&nbsp;</h2>
+       <td>
+      </tr>
+       <tr>
+        <td>Date</td>
+        <td><input type="text" name="date" id="date" class="date"style="width: 100%"></td>
+
+      </tr>
+
+       <tr>
+        <td>Dispense Days Supply</td>
+        <td><input type="text" name="dispenseDaysSupply" id="dispenseDaysSupply" style="width: 100%"></td>
+
+      </tr>
+      <tr>
+        <td>Pbm</td>
+        <td><input type="text" name="pbm" id="pbm" style="width: 100%"></td>
+
+      </tr>
+      <tr>
+        <td>Pharmacy id</td>
+        <td><input type="text" name="pharmacy_ncpdpid" id="pharmacy_ncpdpid" style="width: 100%"></td>
+
+      </tr>
+      <tr>
+        <td>Pharmacy organization</td>
+        <td><input type="text" name="pharmacy_org" id="pharmacy_org" style="width: 100%"></td>
+
+      </tr>
+      <tr>
+        <td>Country of pharmacy</td>
+        <td><input type="text" name="pharmacy_adr_country" id="pharmacy_adr_country" style="width: 100%"></td>
+
+      </tr>
+
+       <tr>
+        <td>City of pharmacy</td>
+        <td><input type="text" name="pharmacy_adr_city" id="pharmacy_adr_city" style="width: 100%"></td>
+
+      </tr>
+       <tr>
+        <td>Street of pharmacy</td>
+        <td><input type="text" name="pharmacy_adr_street" id="pharmacy_adr_street" style="width: 100%"></td>
+
+      </tr>
+       <tr>
+        <td>Provider dea number</td>
+        <td><input type="text" name="provider_dea_number" id="provider_dea_number" style="width: 100%"></td>
+
+      </tr>
+       <tr>
+        <td>Provider npi number</td>
+        <td><input type="text" name="provider_npi_number" id="provider_npi_number" style="width: 100%"></td>
+
+      </tr>
+       <tr>
+        <td>Provider email</td>
+        <td><input type="text" name="provider_email" id="provider_email" style="width: 100%"></td>
+
+      </tr>
+       <tr>
+        <td>Provider name</td>
+        <td><input type="text" name="provider_name_given" id="provider_name_given" style="width: 100%"></td>
+
+      </tr>
+       <tr>
+        <td>Provider family name</td>
+        <td><input type="text" name="provider_name_family" id="provider_name_family" style="width: 100%"></td>
+
+      </tr>
+       <tr>
+        <td>Provider telephone type</td>
+        <td><input type="text" name="provider_tel_1_type" value="w" id="provider_tel_1_type" style="width: 100%"></td>
+
+       <tr>
+        <td>Provider telephone</td>
+        <td><input type="text" name="provider_tel_1_number" id="provider_tel_1_number" style="width: 100%"></td>
+
+      </tr>
+       <tr>
+        <td>Provider telephone type</td>
+        <td><input type="text" name="provider_tel_1_type" value="w" id="provider_tel_1_type" style="width: 100%"></td>
+
+       <tr>
+        <td>Provider telephone</td>
+        <td><input type="text" name="provider_tel_1_number" id="provider_tel_1_number" style="width: 100%"></td>
+
+      </tr>
+       <tr>
+        <td>Preferred number</td>
+        <!--<td><input type="text" name="provider_tel_1_preferred_p" id="provider_tel_1_preferred_p" style="width: 100%"></td>-->
+        <td><select name="provider_tel_1_preferred_p" id="provider_tel_1_preferred_p">
+                <option value="true">True</option>
+                <option value="false">False</option>
+          </select></td>
+
+      </tr>
+       <tr>
+        <td>Quantity dispensed value</td>
+        <td><input type="text" name="quantityDispensed_value" id="quantityDispensed_value" style="width: 100%"></td>
+
+      </tr>
+       <tr>
+        <td>Quantity dispensed unit</td>
+        <td><input type="text" name="quantityDispensed_unit" id="quantityDispensed_unit" style="width: 100%"></td>
+
+      </tr>
+
+</div>
+
+    
+
+
+
+
+   </div>
+
+<div>
+
+<input name="formButton" type="button" onclick="ShowHideForm();" value="Expand/Collapse form">
+</div>
+
+    
+    <div style="text-align: center">
+      <input type="submit" value="Add New Medication" style="width: 33%"/><p><p>
+<!--      <input type="button" style="width: 200px" onclick="history.go(-1);" value="    Cancel    ">-->
+    </div></form>
+  </form>
+   <p align="center"><a href="http://iapetus.ics.forth.gr/apps/medications/medications/"><button style="width: 200px"> Back </button></a><p>
+{% endblock %}
+
+<script type="text/javascript">
+CheckboxChecked(document.myform.mycheckbox.checked,'checkboxdiv');
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

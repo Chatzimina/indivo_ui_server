@@ -1,0 +1,294 @@
+{% block content %}
+{% load i18n %}
+
+<html>
+    <head>
+        
+        <script type="text/javascript" src="{{ STATIC_HOME }}/includes/js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="{{ STATIC_HOME }}/includes/js/highchart/highcharts.js"></script>
+    </head>
+    
+    <body>
+    <div id="container"></div>
+
+   
+  <script type="text/javascript" src="{{ STATIC_HOME }}/includes/js/highchart/highcharts.js"></script> 
+  <script type="text/javascript" src="{{ STATIC_HOME }}/includes/js/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript">
+//Global Variables
+var arrayDates = [];
+var arrayNames= [];
+var arrayNames2= [];
+var temp_data=[];
+var mySeries = [];
+var myAxes = [];
+var myXaxes=[];
+var series = [];
+var count=1;
+
+ var options = {
+        chart: {
+            renderTo: 'container',
+            //type: 'spline'
+        },
+        title: {
+        text: 'Patient Data Visualization'
+    },
+     tooltip: {
+        shared: true
+    },
+    
+        plotOptions: {
+        series: {
+            connectNulls: false
+        }
+    },
+        series: [{}]
+    }
+
+ $(document).ready(function(){
+ 
+    // handle data before importing in the charts
+    /**
+     * Custom function for dates sorting 
+     * @param {type} data
+     * @returns {undefined}
+     * 
+     */
+    function custom_sort(a, b) {
+        return new Date(a.date).getTime() - new Date(b.date).getTime();
+   }
+
+        
+     /*
+     * Get Measurements and their Dates
+     * @param {type} data
+     * @returns {undefined}
+     */
+    //$.getJSON('{{ STATIC_HOME }}/includes/data/measurements.json', function(data) {
+   
+     var input = '{{measurements}}';
+     var measurements = input.replace(/&#39;/g, '"');
+     measurements = measurements.replace(/(?:\r\n|\r|\n)/g, ''); 
+     measurements = measurements.replace(/&quot;/g,'"');
+
+     var measure = JSON.parse(measurements); 
+     $.each(measure, function (i, fb) { 
+        //fill in array of all dates   
+        if(fb.measurementDate!=0 && fb.measurementDate!=null){
+        arrayDates.push({date:fb.measurementDate});
+        
+         if(arrayNames.indexOf(fb.kind)<0){
+            
+            
+        //get measurements data
+         var obj = {};
+         var objDates=[];
+         var objValues=[];
+         obj['name'] = fb.kind;
+         arrayNames.push(fb.kind);
+         objValues.push(+fb.value);
+         obj['values'] = objValues;
+         obj['unit'] = fb.unit;
+         objDates.push(fb.measurementDate);
+         //REMOVE?
+         obj['type']= 'column';
+         obj['dates']=objDates;
+         temp_data.push(obj);
+          
+                }else{
+                        //update existing object with extra dates
+                        var tempDates = [];
+                        tempDates = temp_data[arrayNames.indexOf(fb.kind)].dates;
+                        tempDates.push(fb.measurementDate);
+                        
+                        //update existing object with extra values
+                        var tempValues = [];
+                        tempValues = temp_data[arrayNames.indexOf(fb.kind)].values;
+                        tempValues.push(+fb.value);
+        
+                }
+            }
+        
+       });
+    
+       
+     /*
+     * Get Problems and their Dates
+     * @param {type} data
+     * @returns {undefined}
+     */ 
+    
+      // $.getJSON('{{ STATIC_HOME }}/includes/data/problems.json', function(data) {
+     var inputP = '{{problems}}';
+
+     var problems = inputP.replace(/&#39;/g, '"');
+     problems = problems.replace(/(?:\r\n|\r|\n)/g, '');
+
+
+     problems = problems.replace(/&quot;/g,'"');
+
+     var problems = JSON.parse(problems);
+
+       $.each(problems, function (i, fb) {
+        //fill in array of all dates
+        //CHRONIC PROBLEMS WITH NO END DATE WILL NOT BE PART OF THE VISUALIZATION
+       if(fb.endDate!=0 && fb.endDate!=null){
+            arrayDates.push({date:fb.endDate});    
+       
+            if(fb.startDate!=0 && fb.startDate!=null){
+            arrayDates.push({date:fb.startDate});
+            }    
+        
+         if(arrayNames2.indexOf(fb.name_title)<0){
+        //get problems data
+         var obj = {};
+         var objDates=[];
+         var objValues=[];
+         obj['name'] = fb.name_title;
+         arrayNames2.push(fb.name_title);
+         obj['value'] = count;
+         objValues.push(count);
+         objValues.push(count);
+         obj['values'] = objValues;
+         obj['unit'] = '';
+         obj['type']= '';
+         count++;
+         objDates.push(fb.startDate);
+         objDates.push(fb.endDate);
+         obj['dates']=objDates;
+         temp_data.push(obj);
+          }else{
+                        //update existing object with extra dates
+                        var tempDates = [];
+                        tempDates = temp_data[arrayNames2.indexOf(fb.name_title)].dates;
+                        tempDates.push(fb.measurementDate);
+                        
+                        //update existing object with extra values
+                        var tempValues = [];
+                        tempValues = temp_data[arrayNames2.indexOf(fb.name_title)].values;
+                        tempValues.push(count);
+                     
+                        
+                      
+                }
+
+        }
+    });
+     
+         //Sort All Dates
+         arrayDates.sort(custom_sort);
+        console.log(temp_data);
+         
+         ///continue
+         // create array with nulls with the same size as all dates for use of all tha values for each attribute
+         var tempDates = Array(arrayDates.length).fill(null);
+         test(arrayDates, temp_data);
+        
+                
+        //end of read problems
+        //});
+  
+   //end of read measurements   
+  //});
+  
+  
+  function test(arrayDates, temp_data){
+    
+        var axesCount=0;    
+        var names=[];
+        var dates = [];
+        
+        $.each(temp_data, function (i, fb) {
+
+               var obj = {};
+               obj['name'] = fb.name;
+               obj['unit'] = fb.unit;
+               //create the dates vector -  x axes in charts
+               
+               var tempDates = Array(arrayDates.length).fill(null);
+                $.each(arrayDates, function (i2, fb2) {
+                    
+                    $.each(fb.dates, function (d, d2) {
+                      if(new Date(fb2.date).getTime() == new Date(d2).getTime())
+                          
+                          tempDates[i2]=fb.values[d];
+                          });
+                    });
+
+               obj['data']=tempDates;
+               obj['type']= fb.type;
+               obj['yAxis']=axesCount;
+               axesCount++; 
+               mySeries.push(obj);
+          
+         });
+      
+        
+        
+        //Fill in y axes
+        var myCount=0;
+        $.each(mySeries, function (ms1, ms2)
+            {
+                          
+            var obj = {};
+            var tempObj={};
+            var tmpObject={};
+            var tempObj2={};
+            
+            
+            /* labels: format, style */
+            tempObj['format'] = '{value}'+ms2.unit;
+            tmpObject['color'] = Highcharts.getOptions().colors[myCount];
+            myCount++;
+            tempObj['style'] = tmpObject;          
+            obj['labels'] =  tempObj;
+            
+            /* title:  text, style */
+            tempObj2['text'] = ms2.name;
+            tempObj2['style'] = tmpObject;
+            obj['title'] =  tempObj2;   
+            obj['min']=0;            
+                     
+            if(myCount>2){
+            obj['opposite']=true; 
+            }
+            
+           myAxes.push(obj); 
+            
+            
+            });
+            
+
+        
+        var tmpDates=[];
+        var catObject={};
+               $.each(arrayDates, function (a, b)
+            {  
+                if(b.date==null){
+                    tmpDates.push(0);       
+                }else{
+                tmpDates.push(b.date);
+            }
+            }) 
+        
+        catObject['categories']=tmpDates;
+        catObject['crosshair']=true;
+        myXaxes.push(catObject);
+        options.xAxis = myXaxes;
+        options.yAxis = myAxes;
+        // Fill in series and create the chart
+        options.series = mySeries;
+        var chart = new Highcharts.Chart(options);
+ 
+     }  
+
+ });
+  
+
+
+
+    </script>
+    </body>
+</html>
+{% endblock content %}

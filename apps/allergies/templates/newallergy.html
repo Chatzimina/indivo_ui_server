@@ -1,0 +1,279 @@
+{% extends 'allergies/templates/base.html' %}
+{% block title %}new allergy{% endblock %}
+{% block content %}
+{% load i18n %}
+<head>
+
+{% if jsonData != " " %}
+        {% if jsonData.5.z_score < -2 or jsonData.5.z_score > 2 %} <!--Rumination (abnormal it should be over 2 or less -2 )-->
+        <style type="text/css">
+            *
+            {
+                font-size : 12px
+            }
+
+            .class1 *
+            {
+                font-size : 20px;
+            }
+        </style>
+        {%endif%}
+     {% endif %}
+
+
+</head>
+
+
+<script>
+  $(document).ready(function() {
+    //$('.date').datepicker({'dateFormat':'yy-mm-dd'});
+  //$('.auto-complete-tbx').each(function() { 
+  //$(this).autocomplete({
+    //  serviceUrl: 'codelookup',
+      //minChars: 2,
+      //onSelect: function (value, data) {
+        //$('.auto-complete-code').val(data.code)}
+    
+    //})
+  //});
+     $('#allergic_reaction_title').autocomplete({
+      serviceUrl: 'codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#allergic_reaction_code').val(data.code);
+      }
+    })
+
+    $('#category_fullname').autocomplete({
+      serviceUrl: 'codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#category_code').val(data.code);
+      }
+    })
+
+    $('#drug_class_allergen_fullname').autocomplete({
+      serviceUrl: 'codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#drug_class_allergen_code').val(data.code);
+       $('#allergen_name').val(data.code);
+      }
+    })
+
+    $('#severity_fullname').autocomplete({
+      serviceUrl: 'codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#severity_code').val(data.code);
+      }
+    })
+
+});
+
+
+function validateForm()
+{
+var allergic_reaction_title=document.forms["myForm"]["allergic_reaction_title"].value;
+var severity_title=document.forms["myForm"]["severity_title"].value;
+var category_fullname=document.forms["myForm"]["category_fullname"].value;
+
+
+if (allergic_reaction_title==null || allergic_reaction_title=="")
+  {
+  alert({% trans "'Allergic reaction must be filled'" %});
+  return false;
+  }
+
+if (severity_title==null || severity_title=="")
+  {
+  alert({% trans "'Severity must be filled'" %});
+  return false;
+}
+
+if (category_fullname==null || category_fullname=="")
+  {
+  alert({% trans "'Type must be filled'" %});
+  return false;
+}
+
+}
+
+</script>
+<body>
+
+
+<script>
+   function setPageSize()
+   {   	
+   	if (el('divList'))el('divList').style.width = (el('divContainer').offsetWidth-0).toString() + 'px';   	
+	if (window.top.document.getElementById('app_container'))
+		el('divContainer').style.width = (window.top.document.getElementById('app_container').offsetWidth-0).toString() + 'px';	
+   }
+   
+   setInterval('setPageSize();', 500);
+</script>
+<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:100%;overflow-x:hidden;" id="divContainer" >
+	<form method="post" id="myForm" name="myForm" onsubmit="return validateForm()" action="">
+	
+	<div class="row" style="height:10px;"></div>
+	
+	
+	<div class="row"  style="margin-left:5px;">
+		<div class="col-xs-12">
+		<h2>{% trans "New Allergy" %} </h2>
+		</div>
+    </div>
+	
+	<div class="row"  style="height:10px;"></div>
+	
+	<div class="row" style="margin-left:5px;width:90%;">
+	
+		<div class="form-group">
+			<label>{% trans "Allergy" %} <span style="color:red;font-weight:bold;font-size:20px;">*</span></label>
+			<input type="text" name="allergic_reaction_title"   id="allergic_reaction_title" style="width: 100%" class="form-control"/>
+            <input type="hidden" name="allergic_reaction_identifier"  value="" id="allergic_reaction_code"/>
+		</div>
+		<div class="form-group">
+			<label>{% trans "Type" %}</label>
+			<select name="category_title" id="category_fullname" value="Food allergy" class="form-control">
+                <option value="Food allergy">{% trans "Food allergy" %}</option>
+                <option value="Environmental allergy">{% trans "Environmental allergy" %}</option>
+                <option value="Drug allergy">{% trans "Drug allergy" %}</option>
+                <option value="Drug intolerance">{% trans "Drug intolerance" %}</option>
+                <option value="Food intolerance">{% trans "Food intolerance" %}</option>
+          </select>
+		</div>
+<!--		<div class="form-group">
+			<label>{% trans "Drug class allergen" %}</label>-->
+			<input type="hidden" class="form-control" name="drug_class_allergen_title"  id="drug_class_allergen_fullname" style="width: 100%" />
+            <input type="hidden" name="drug_class_allergen_identifier"   value="000"  id="drug_class_allergen_code"/>
+             <input type="hidden" name="allergen_name" value="None" id="drug_class_allergen_code"/>
+<!--		</div>-->
+		<div class="form-group">
+			<label>{% trans "Severity" %}</label>
+			<select name="severity_title" id="severity_title" class="form-control">
+                <option value="Mild">{% trans "Mild" %}</option>
+                <option value="Moderate">{% trans "Moderate" %}</option>
+                <option value="Severe">{% trans "Severe" %}</option>
+                <option value="Life Threatening">{% trans "Life Threatening" %}</option>
+                <option value="fatal">{% trans "Fatal" %}</option>
+            </select>
+		 <input type="hidden" name="severity_identifier" value="255604002" id="severity_identifier"/>
+			<input type="hidden" name="allergen_id" id="category_code" value="414285001" style="width: 100%" />
+		</div>
+		<div class="form-group">
+			<span style="color:red;font-weight:bold;font-size:20px;">*</span> <b>{% trans "Mandatory Fields" %}</b>
+		</div>
+
+		 <div class="form-group">
+		<label>{% trans "What is a food allergy?" %}</label>
+
+		{% trans "A food allergy is an immune system response. It is caused when the body mistakes an ingredient in food — usually a protein — as harmful and creates a defense system (antibodies) to fight it. An allergic reaction occurs when the antibodies are battling an 'invading' food protein. The most common food allergies are shellfish, nuts, fish, eggs, peanuts and milk." %}
+		<br><br> 
+	<label>{% trans "What is food intolerance?" %}</label>
+
+		{% trans "Food intolerance is a digestive system response rather than an immune system response. It occurs when something in food irritates a person’s digestive system or when a person is unable to properly digest, or break down, the food. Intolerance to lactose, which is found in milk and other dairy products, is the most common food intolerance." %}
+		</div>
+	</div>
+	<div class="row" style="height:10px;"></div>
+	<div class="row">
+		<div class="row">
+		<div class="col-lg-12" align="center">
+			<input type="submit" value="{% trans "Add New Allergy" %}" style="width:50%;max-width:300px;"  class="btn-lg btn-primary btn"/>
+		</div>
+		</div>
+		<div class="row" style="height:10px;"></div>
+		<div class="row">
+		<div class="col-lg-12" align="center">
+			<a href="./"><button style="width:50%;max-width:300px;" type="button"  class="btn-lg btn-warning btn"> {% trans "Cancel" %} </button></a>
+		</div>
+		</div>
+	</div>
+</div>
+
+{% ifequal 1 0 %}
+
+<div class="class1">
+
+<h2>{% trans "New Allergy" %} &nbsp;&nbsp;<span style="font-size:0.7em; font-weight: normal; text-transform: uppercase">
+<!--<a href="./" align=right><b><button>Cancel</button></b></a>-->
+</span></h2>
+
+  <form name="myForm" onsubmit="return validateForm()" method="post" action="">
+    <table class="light form">
+      <col style="width: 20%"></col>
+      <col style="width: 80%"></col>
+      <tr>
+        
+	<td>{% trans "Allergy" %}</td>
+        <td>
+          <input type="text" name="allergic_reaction_title" class="auto-complete-tbx" id="allergic_reaction_title" style="width: 100%"/>
+          <input type="hidden" name="allergic_reaction_identifier" value="00" class="auto-complete-code" value="" id="allergic_reaction_code"/>
+        </td>
+      </tr>
+       <td>{% trans "Allergen type" %}</td>
+       
+<!--          <input type="text" name="allergen_type" id="category_fullname" style="width: 100%"/>-->
+          <td> <select name="category_title" id="category_fullname" value="Food allergy">
+                <option value="Food allergy">{% trans "Food allergy" %}</option>
+                <option value="Environmental allergy">{% trans "Environmental allergy" %}</option>
+                <option value="Drug allergy">{% trans "Drug allergy" %}</option>
+                <option value="Drug intolerance">{% trans "Drug intolerance" %}</option>
+                <option value="Food intolerance">{% trans "Food intolerance" %}</option>
+          </select>
+</td><td>
+          <input type="hidden" name="allergen_id" id="category_code" value="414285001" style="width: 100%" />
+       </td>
+      </tr>
+      <tr>
+	<td>{% trans "Drug class allergen" %}</td>
+	<td><input type="text" name="drug_class_allergen_title" class="auto-complete-tbx" id="drug_class_allergen_fullname" style="width: 100%" />
+            <input type="hidden" name="drug_class_allergen_identifier" value="0000" id="drug_class_allergen_code"/>
+       <input type="hidden" name="allergen_name" value="None" id="drug_class_allergen_code"/>
+	</td>
+      </tr>
+      <tr>
+	<td>{% trans " Severity" %}</td>
+        <td> <select name="severity_title" id="severity_title">
+                <option value="Mild">{% trans "Mild" %}</option>
+		<option value="Moderate">{% trans "Moderate" %}</option>
+		<option value="Severe">{% trans "Severe" %}</option>
+ 		<option value="Life Threatening">{% trans "Life Threatening" %}</option>
+                <option value="fatal">{% trans "Fatal" %}</option>
+          </select>
+</td><td>
+<!--        <td><input type="text" name="severity_title" class="auto-complete-tbx" id="severity_fullname" style="width: 100%" />-->
+	    <input type="hidden" name="severity_identifier" value="255604002" id="severity_identifier"/>
+        </td>
+      </tr>
+      <tr>
+	<!--<td>Severity</td>
+	<td><input type="text" name="code_fullname" class="auto-complete-tbx" id="severity_fullname" style="width: 100%" />
+            <input type="text" name="code" value="" id="severity_code"/>
+        </td>
+      </tr>
+      <tr>
+	 <td>Details</td>
+         <td><input type="textarea" name="comments" cols="50" rows="3" wrap="soft" style="width: 100%"></textarea>
+        </td>
+      </tr>-->
+
+      </tr>
+    </table>
+
+   <br />
+    
+    <div style="text-align: center">
+      <input type="submit" value="{% trans "Add New Allergy" %}" style="width: 33%"/><p><p>
+      
+ </div>
+</form>
+    <div align="center"><a href="./"><button style="width: 200px">   {% trans "Cancel" %}  </button></a></div>
+
+    </div>
+
+</div>
+{% endifequal  %}
+<body>
+{% endblock %}

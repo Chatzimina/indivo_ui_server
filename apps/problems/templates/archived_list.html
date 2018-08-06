@@ -1,0 +1,168 @@
+{% extends 'problems/templates/base.html' %}
+{% block title %}problem list{% endblock %}
+{% block content %}
+{% load i18n %}
+<head>
+    {% if jsonData %}
+        {% if jsonData.5.z_score < -1 or jsonData.5.z_score > 2 %} <!--Rumination (abnormal it should be over 2 or less -2 )-->
+        <style type="text/css">
+            *
+            {
+                font-size : 12px
+            }
+
+            .class1 *
+            {
+                font-size : 20px;
+            }
+        </style>
+        {%endif%}
+     {% endif %}
+ 
+        <meta charset="utf-8">
+        <title>Speak.js Demo</title>
+<!--        <script src="{{ STATIC_HOME }}/speakClient.js"></script>-->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+		<script>
+		Date.prototype.addHours = function(h) {    
+   this.setTime(this.getTime() + (h*60*60*1000)); 
+   return this;   
+}
+var tzoffset = (new Date()).getTimezoneOffset()/60;
+</script>
+</head>
+<body>
+
+
+    <div id="audio"></div>
+	<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:95%;" id="divContainer" >
+		<div class="row"  style="margin-left:5px;">
+			<div class="col-xs-12">
+			<h2>{% trans "Deleted Problems List" %} {% if in_carenet %}(Shared){% endif %}</h2>
+			</div>
+		</div>
+		<div class="row" style="height:10px"></div>
+		
+		<div class="row" style="margin-left:5px;">
+			  {% ifequal num_problems 0 %}
+			  {% else %}
+			  
+				<div class="row" id="divList" style="margin-left:5px;">
+				  <div class="col-xs-12">
+					 <div class="row" style="border:1px solid silver;">
+						<div class="col-xs-3">
+						   <b>{% trans "Name" %}</b>
+						</div>
+						<div class="col-xs-3">
+						   <b>{% trans "Onset" %}</b>
+						</div>
+						<div class="col-xs-3">
+						   <b>{% trans "Resolution" %}</b>
+						</div>
+						<div class="col-xs-3">
+						   {% if not in_carenet %}
+						   <b>{% trans "Restore" %}</b>
+						   {% endif %}
+						</div>
+					 </div>
+					 {% for p in problems %}
+					 <div class="row" style="border-left:1px solid silver;border-right:1px solid silver;border-bottom:1px solid silver;">
+						<div class="col-xs-3">
+						   <span id="td_id" style="display:none">{{problems}}</span>
+						   <a  href="{{p.id}}"  >{{p.name_title}}</a>
+						</div>
+						<div class="col-xs-3">
+							<script>
+						   //var startDate = '{{p.startDate}}';
+						   //document.write(startDate.split('T')[0]);
+						   
+						   var startDate = new Date('{{p.startDate}}').addHours(tzoffset);
+							document.write( '' + startDate.toLocaleDateString() + ' ' + startDate.toLocaleTimeString());
+						   
+						   </script>
+						</div>
+						<div class="col-xs-3">
+						<script> 
+						   //var startDate = '{{p.endDate}}';
+						   //document.write(startDate.split('T')[0]);
+									   if ('{{p.endDate}}' != 'None')
+						   {
+						   try {
+						   var endDate = new Date('{{p.endDate}}').addHours(tzoffset);
+							document.write( ''+endDate.toLocaleDateString() + ' ' + endDate.toLocaleTimeString());
+							}
+							catch(e){}
+						 }
+						</script>
+						</div>
+						<div class="col-xs-3">
+						   <a href="restore/{{p.id}}"><button class="btn btn-primary btn-small">{% trans "restore" %}</button></a>
+						</div>
+					 </div>
+					 {% endfor %}
+					 <div class="row" style="border-left:1px solid silver;border-right:1px solid silver;border-bottom:1px solid silver;display:;">
+						<div class="col-xs-12" style="text-align: right">
+						   {{num_problems}} problem{% ifequal num_problems 1 %}{% else %}s{% endifequal %}
+						</div>
+					 </div>
+				  </div>
+			   </div>
+			  
+			  {% endifequal %}
+			  <div class="row" style="height:10px"></div>
+			  {% if not in_carenet %}
+					<div class="row" style="text-align:center;">
+						<a href="./"><button style="width: 50%" class="btn btn-warning btn-lg"> {% trans "Back" %} </button></a>
+				    </div>			   
+			  {% endif %}
+			</div>
+	</div>
+
+{% ifequal 1 0 %}
+<div class="class1">
+
+  <h2>{% trans "Deleted Problems List" %} {% if in_carenet %}(Shared){% endif %}</h2>
+
+  {% ifequal num_problems 0 %}
+  {% else %}
+    <table class="light">
+      <thead>
+        <tr>
+          <th scope="col"><b>{% trans "Name" %}</b></th>
+          <th><b>{% trans "Onset" %}</b></th>
+          <th><b>{% trans "Resolution" %}</b></th>
+	  <th><b>{% trans "Modify/Delete" %}</b></th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="3" style="text-align: right">{{num_problems}} problem{% ifequal num_problems 1 %}{% else %}s{% endifequal %}</td>
+        </tr>
+      </tfoot>
+      <tbody>
+        {% for p in problems %}
+          <tr class="{% cycle 'odd' 'even' %}">
+            <td><a href="{{p.id}}">{{p.name_title}}</a></td>
+            <td>{{p.startDate}}</td>
+            <td>{{p.endDate}}</td>
+            <td><a href="restore/{{p.id}}"><button>{% trans "restore" %}</button></a>
+
+	    </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endifequal %}
+
+  {% if not in_carenet %}
+       <p align="center"><a href="./"><button style="width: 200px"> {% trans "Back" %} </button></a><p>
+
+   
+  {% endif %}
+ 
+
+  {% endifequal %}
+</body>
+{% endblock %}

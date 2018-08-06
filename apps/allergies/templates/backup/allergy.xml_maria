@@ -1,0 +1,23 @@
+<Models xmlns="http://indivo.org/vocab/xml/documents#">
+  <Model name="Allergy"> 
+    <Field name="allergic_reaction_title">{{code_fullname|escape}}</Field>
+    <Field name="allergic_reaction_system">{{coding_system}}</Field>
+    <Field name="allergic_reaction_identifier">{{code}}</Field>
+    <Field name="category_title">{{code_fullname|escape}}</Field>
+    <Field name="category_system">{{coding_system}}</Field>
+    <Field name="category_identifier">{{code}}</Field>
+    <Field name="drug_class_allergen_title">{{code_fullname|escape}}</Field>
+    <Field name="drug_class_allergen_system">{{coding_system}}</Field>
+    <Field name="drug_class_allergen_identifier">{{code}}</Field>
+    <Field name="severity_title">{{code_fullname|escape}}</Field>
+    <Field name="severity_system">{{coding_system}}</Field>
+    <Field name="severity_identifier">{{code}}</Field>
+    <Field name="notes">{{comments|escape}}</Field>
+  </Model>
+<!--<Model name="AllergyExclusion">
+    <Field name="name_title">{{code_fullname|escape}}</Field> 
+    <Field name="name_identifier">{{code}}</Field>
+    <Field name="name_system">{{coding_system}}</Field>
+  </Model>-->
+</Models>
+

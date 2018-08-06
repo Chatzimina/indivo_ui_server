@@ -1,0 +1,502 @@
+{% extends 'problems/templates/base.html' %}
+{% block title %}new lab{% endblock %}
+{% block content %}
+{% load i18n %}
+<script>
+var nextYear = (new Date().getFullYear() + 1).toString();
+
+  $(document).ready(function() {
+    $('.date').datepicker({dateFormat:'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        minDate:'-26y',
+        maxDate:'+2y',
+        yearRange: "1990:" + nextYear,
+        });
+
+    $('#abnormal_interpretation_title').autocomplete({
+      serviceUrl: 'codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#abnormal_interpretation_identifier').val(data.code);
+      }
+    })
+    $('#test_name_title').autocomplete({
+      serviceUrl: 'codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#test_name_identifier').val(data.code);
+      }
+    })
+     $('#status_title').autocomplete({
+      serviceUrl: 'codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#status_identifier').val(data.code);
+      }
+    })
+
+    var select = document.getElementById('abnormal_interpretation_title');
+    var input = document.getElementById('abnormal_interpretation_identifier');
+    select.onchange = function() {
+         input.value = select.value;
+   }
+   
+    var select = document.getElementById('status_title');
+    var input = document.getElementById('status_identifier');
+    select.onchange = function() {
+         input.value = select.value;
+   }
+   
+   $('.number').keypress(function(event) {
+  $(this).val($(this).val().replace(/[^0-9\.]/g,''));
+            if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57) && event.which != 8) {
+                event.preventDefault();
+            }
+});
+ 
+});
+
+function validateForm()
+{
+var x=document.forms["myForm"]["quantitative_result_value_value"].value;
+var y=document.forms["myForm"]["collected_at"].value;
+var quantitative_result_normal_range_min_value=document.forms["myForm"]["quantitative_result_normal_range_min_value"].value;
+var quantitative_result_normal_range_max_value=document.forms["myForm"]["quantitative_result_normal_range_max_value"].value;
+var test_name_title=document.forms["myForm"]["test_name_title"].value;
+
+if (x==null || x=="")
+  {
+  alert({% trans "'Quantitive result value must be filled'" %});
+  return false;
+  }
+if (y==null || y=="")
+ {
+  alert({% trans "'Collected at value must be filled'" %});
+  return false;
+  }
+
+/*if (quantitative_result_normal_range_min_value==null || quantitative_result_normal_range_min_value=="")
+ {
+  alert({% trans "'Quantitative result normal range minimum value must be filled'" %});
+  return false;
+  }
+
+if (quantitative_result_normal_range_max_value==null || quantitative_result_normal_range_max_value=="")
+ {
+  alert({% trans "'Quantitative result normal range maximum value must be filled'" %});
+  return false;
+  }
+
+*/
+if (test_name_title==null || test_name_title=="")
+ {
+  alert("{% trans "'Test name title must be filled'" %}");
+  return false;
+  }
+
+}
+
+function setVisibility(id, visibility) {
+document.getElementById(id).style.display = visibility;
+}
+
+
+</script>
+
+
+<head>
+<link type="text/css" href="/apps/allergies/static/css/jquery.autocomplete.css" rel="stylesheet">
+<link href="{{ STATIC_HOME }}/css/datepicker.css" rel="stylesheet" type="text/css"/>
+	<style type="text/css">
+		
+        #sub3 {
+
+                display: none;
+                }
+        </style>
+
+</head>
+
+
+<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:95%;" id="divContainer" >
+	<form name="myForm" onsubmit="return validateForm()" method="post" action="">
+		<div class="row"  style="margin-left:5px;">
+			<div class="col-xs-12">
+				<h2>{% trans "New Lab" %} </h2>
+			</div>
+		</div>
+		
+		<div class="row" style="height:10px"></div>
+		
+		<div class="row" style="margin-left:10px;">
+			<div class="form-group"><label>
+				{% trans "Abnormal interpretation" %}</label>
+				<select name="abnormal_interpretation_title" id="abnormal_interpretation_title" class="form-control">
+					<option value="normal">{% trans "Normal" %}</option>
+					<option value="critical">{% trans "Critical" %}</option>
+					<option value="abnormal">{% trans "Abnormal" %}</option> 
+				  </select>
+				 <input type="hidden" name="abnormal_interpretation_identifier" value="normal" id="abnormal_interpretation_identifier" />
+			</div>
+			
+<!--			<div class="form-group"><label>{% trans "Accession number" %}</label>-->
+				<input type="hidden" name="accession_number" id="accession_number" value="" style="width: 100%"  class="form-control"/>
+<!--			</div>-->
+
+			<div class="form-group"><label>{% trans "Test name" %}</label>  <span style="color:red;font-weight:bold;font-size:20px;">*</span></label>
+			  <input type="text" name="test_name_title" id="test_name_title" style="width: 100%"  class="form-control"/>
+			  <input type="hidden" name="test_name_identifier" value="" id="test_name_identifier" />
+			</div>
+
+<!--			<div class="form-group"><label>{% trans "Status" %}</label>
+			   <select name="status_title" id="status_title" class="form-control">
+						<option value="correction">{% trans "Correction" %}</option>
+						<option value="preliminary">{% trans "Preliminary" %}</option>
+						<option value="final">{% trans "Final" %}</option>
+				  </select>-->
+                                   <input type="hidden" name="status_title" value="final" id="status_title" />
+				  <input type="hidden" name="status_identifier" value="final" id="status_identifier" />
+<!--			  </div>-->
+
+			  <div class="form-group"><label>{% trans "Notes" %}</label>
+				<textarea name="notes" cols="50" rows="3" wrap="soft" style="width: 100%" class="form-control"></textarea>
+				</div>
+			  
+			  <div class="form-group"><label>{% trans "Collected at" %}</label>   <span style="color:red;font-weight:bold;font-size:20px;">*</span></label>
+				 <input type="text" name="collected_at" value="" id="collected_at"  class="date form-control" autocomplete="off" readonly />
+				 </div>
+
+			   <div class="form-group"><label>{% trans "Quantitative result normal range max value" %}</label>
+				 <input type="text" name="quantitative_result_normal_range_max_value" value="" id="quantitative_result_normal_range_max_value"  class="form-control number"/>
+				 </div>
+
+			  <div class="form-group"><label>{% trans "Quantitative result normal range max unit" %}</label>
+				 <input type="text" name="quantitative_result_normal_range_max_unit" value="" id="quantitative_result_normal_range_max_unit"  class="form-control"/>
+				 </div>
+
+			  <div class="form-group"><label>{% trans "Quantitative result normal range min value" %}</label>
+				 <input type="text" name="quantitative_result_normal_range_min_value" value="" id="quantitative_result_normal_range_min_value"  class="form-control number"/>
+				</div>
+			  <div class="form-group"><label>{% trans "Quantitative result normal range min unit" %}</label>
+				 <input type="text" name="quantitative_result_normal_range_min_unit" value="" id="quantitative_result_normal_range_min_unit"  class="form-control"/>
+				 </div>
+
+			  <div class="form-group"><label>{% trans "Quantitative result value" %}</label>   <span style="color:red;font-weight:bold;font-size:20px;">*</span></label>
+				 <input type="text" name="quantitative_result_value_value" value="" id="quantitative_result_value_value"  class="form-control number"/>
+				 </div>
+
+			  <div class="form-group"><label>{% trans "Quantitative result unit" %}</label>   <span style="color:red;font-weight:bold;font-size:20px;">*</span></label>
+				 <input type="text" name="quantitative_result_value_unit" value="" id="quantitative_result_value_unit"  class="form-control"/>
+			</div>
+		</div>
+		 <div class="form-group">
+                        <span style="color:red;font-weight:bold;font-size:20px;">*</span> <b>{% trans "Mandatory Fields" %}</b>
+                </div>
+	
+	
+		<div class="row" style="margin-left:5px;" id="divExtraInfoButtons">
+			<div class="row" style="height:10px"></div>
+<!--			<input type="button" name=type value='{% trans "Toggle Extra information" %}'  class="btn btn-success btn-sm" onclick="return toggle('divExtraInfo');"/>-->
+			<div class="row" style="height:10px"></div>
+		</div>
+		
+		<div class="row" style="margin-left:5px;display:none;" id="divExtraInfo">
+			<div class="form-group">
+				<label>{% trans "Quantitative result non critical range max value" %}</label>
+				<input type="text" name="quantitative_result_non_critical_range_max_value" id="quantitative_result_non_critical_range_max_value" class="form-control"/>
+				</div>
+			  <div class="form-group">
+						<label>{% trans "Quantitative result non critical range max unit" %}</label>
+						<input type="text" name="quantitative_result_non_critical_range_max_unit" value="" id="quantitative_result_non_critical_range_max_unit"  class="form-control"/>
+				  
+				</div>
+
+			  <div class="form-group">
+						<label>{% trans "Quantitative result non critical range min value" %}</label>
+						<input type="text" name="quantitative_result_non_critical_range_min_value" id="quantitative_result_non_critical_range_min_value"  class="form-control"/>
+				</div>
+			  <div class="form-group">
+						<label>{% trans "Quantitative result non critical range min unit" %}</label>
+						<input type="text" name="quantitative_result_non_critical_range_min_unit" value="" id="quantitative_result_non_critical_range_min_unit"  class="form-control"/>
+				 
+				</div>
+
+			 <div class="form-group">
+						<label>{% trans "Collected by organization" %}</label>
+						<input type="text" name="collected_by_org_name" value="" id="collected_by_org_name"  class="form-control"/>
+				 
+				</div>
+
+			  <div class="form-group">
+						<label>{% trans "Country of organization" %}</label>
+						<input type="text" name="collected_by_org_adr_country" value="" id="collected_by_org_adr_country" class="form-control" />
+				 
+				</div>
+
+			  <div class="form-group">
+						<label>{% trans "City of organization" %}</label>
+						<input type="text" name="collected_by_org_adr_city" value="" id="collected_by_org_adr_city"  class="form-control"/>
+				 
+				</div>
+
+			  <div class="form-group">
+						<label>{% trans "Postalcode of organization" %}</label>
+						<input type="text" name="collected_by_org_adr_postalcode" value="" id="collected_by_org_adr_postalcode" class="form-control" />
+				 
+				</div>
+
+			  <div class="form-group">
+						<label>{% trans "Region of organization" %}</label>
+						<input type="text" name="collected_by_org_adr_region" value="" id="collected_by_org_adr_region"  class="form-control"/>
+				 
+				</div>
+
+			  <div class="form-group">
+						<label>{% trans "Street address of organization" %}</label>
+						<input type="text" name="collected_by_org_adr_street" value="" id="collected_by_org_adr_street"  class="form-control"/>
+				 
+				</div>
+
+			  <div class="form-group">
+						<label>{% trans "Collected by (Doctor's family name)" %}</label>
+						<input type="text" name="collected_by_name_family" value="" id="collected_by_name_family"  class="form-control"/>
+				 
+				</div>
+
+			  <div class="form-group">
+						<label>{% trans "Collected by (Doctor's name)" %}</label>
+						<input type="text" name="collected_by_name_given" value="" id="collected_by_name_given"  class="form-control"/>
+				 
+				</div>
+
+			  <div class="form-group">
+						<label>{% trans "Collected by role " %}</label>
+						<input type="text" name="collected_by_role" value="" id="collected_by_role" class="form-control" />
+				 
+				</div>
+		</div>
+		
+		<div class="row" style="height:10px"></div>
+		
+		<div class="row">
+			<div class="col-lg-12" align="center">
+				<input type="submit" value="{% trans "Add New Lab" %}" style="width:50%;max-width:300px;"  class="btn btn-primary btn-lg"/>
+			</div>
+			<div class="col-lg-12" align="center" style="height:10px;">
+			</div>
+			<div class="col-lg-12" align="center">
+				<button style="width:50%;max-width:300px;" onclick="history.go(-1);" type="button" class="btn btn-primary btn-lg">{% trans "Cancel" %}  </button>
+			</div>
+		</div>
+		<div class="row" style="height:20px"></div>
+	</form>
+</div>
+
+
+{% ifequal 1 0 %}
+
+
+<h2>{% trans "New Lab" %} &nbsp;&nbsp;<span style="font-size:0.7em; font-weight: normal; text-transform: uppercase">
+<!--[<a href="./">Cancel</a>]-->
+</span></h2>
+
+  <form name="myForm" onsubmit="return validateForm()" method="post" action="">
+    <table class="light form">
+      <col style="width: 20%"></col>
+      <col style="width: 80%"></col>
+      <tr>
+        <td>{% trans "Abnormal interpretation" %}</td>
+        <td>
+	  <select name="abnormal_interpretation_title" id="abnormal_interpretation_title">
+  		<option value="normal">Normal</option>
+  		<option value="critical">Critical</option>
+  		<option value="abnormal">Abnormal</option> 
+	  </select>
+          <!--<input type="text" name="abnormal_interpretation_title" id="abnormal_interpretation_title" style="width: 100%" />-->
+          <input type="hidden" name="abnormal_interpretation_identifier" value="normal" id="abnormal_interpretation_identifier" />
+
+        </td>
+      </tr>
+
+      <tr>
+        <td>{% trans "Accession number" %}</td>
+        <td><input type="text" name="accession_number" id="accession_number" style="width: 100%" /></td>
+      </tr>
+
+      <!--<tr>
+        <td>Resolution</td>
+        <td><input type="text" name="endDate" style="width: 100%" /></td>
+      </tr>-->
+
+      <tr>
+	<td>{% trans "Test name" %}</td>
+	<td>
+          <input type="text" name="test_name_title" id="test_name_title" style="width: 100%" />
+          <input type="hidden" name="test_name_identifier" value="" id="test_name_identifier" />
+        </td>
+      </tr>
+
+      <tr>
+        <td>{% trans "Status" %}</td>
+	<td>
+	   <select name="status_title" id="status_title">
+                <option value="correction">Correction</option>
+                <option value="preliminary">Preliminary</option>
+                <option value="final">Final</option>
+          </select>
+
+          <!--<input type="text" name="status_title" id="status_title" style="width: 100%" />-->
+          <input type="hidden" name="status_identifier" value="correction" id="status_identifier" />
+        </td>
+      </tr>
+
+      <tr>
+        <td>{% trans "Notes" %}</td>
+        <td><textarea name="notes" cols="50" rows="3" wrap="soft" style="width: 100%"></textarea></td>
+      </tr>
+      <tr>
+         <td>{% trans "Collected at" %}</td>
+         <td><input type="text" name="collected_at" class="date" value="" id="collected_at" />
+         </td>
+      </tr>
+
+       <tr>
+         <td>{% trans "Quantitative result normal range max value" %}</td>
+         <td><input type="text" name="quantitative_result_normal_range_max_value" value="" id="quantitative_result_normal_range_max_value" />
+         </td>
+      </tr>
+
+      <tr>
+         <td>{% trans "Quantitative result normal range max unit" %}</td>
+         <td><input type="text" name="quantitative_result_normal_range_max_unit" value="" id="quantitative_result_normal_range_max_unit" />
+         </td>
+      </tr>
+
+      <tr>
+         <td>{% trans "Quantitative result normal range min value" %}</td>
+         <td><input type="text" name="quantitative_result_normal_range_min_value" value="" id="quantitative_result_normal_range_min_value" />
+         </td>
+      </tr>
+      <tr>
+         <td>{% trans "Quantitative result normal range min unit" %}</td>
+         <td><input type="text" name="quantitative_result_normal_range_min_unit" value="" id="quantitative_result_normal_range_min_unit" />
+         </td>
+      </tr>
+
+      <tr>
+         <td>{% trans "Quantitative result value" %}</td>
+         <td><input type="text" name="quantitative_result_value_value" value="" id="quantitative_result_value_value" />
+         </td>
+      </tr>
+
+      <tr>
+         <td>{% trans "Quantitative result unit" %}</td>
+         <td><input type="text" name="quantitative_result_value_unit" value="" id="quantitative_result_value_unit" />
+         </td>
+      </tr>
+
+ </table>
+</div>
+<div align="right"><br><br>
+<input type=button name=type value='{% trans "Add extra information" %}'  style="background-color:#BDFFBD" onclick="setVisibility('sub3', 'inline');";>
+<input type=button name=type value='{% trans "Hide extra information" %}' style="background-color:#EB9999" onclick="setVisibility('sub3', 'none');";>
+<br><br>
+</div>
+<div id="sub3">
+  <table class="light form">
+      <col style="width: 20%"></col>
+      <col style="width: 80%"></col>
+
+      <tr>
+        <td>{% trans "Quantitative result non critical range max value" %}</td>
+        <td><input type="text" name="quantitative_result_non_critical_range_max_value" id="quantitative_result_non_critical_range_max_value"/></td>
+      </tr>
+      <tr>
+          <td>{% trans "Quantitative result non critical range max unit" %}</td>
+          <td><input type="text" name="quantitative_result_non_critical_range_max_unit" value="" id="quantitative_result_non_critical_range_max_unit" />
+          </td>
+      </tr>
+
+      <tr>
+         <td>{% trans "Quantitative result non critical range min value" %}</td>
+         <td><input type="text" name="quantitative_result_non_critical_range_min_value" id="quantitative_result_non_critical_range_min_value" /></td>
+      </tr>
+      <tr>
+	 <td>{% trans "Quantitative result non critical range min unit" %}</td>
+         <td><input type="text" name="quantitative_result_non_critical_range_min_unit" value="" id="quantitative_result_non_critical_range_min_unit" />
+         </td>
+      </tr>
+
+     <tr>
+         <td>{% trans "Collected by organization" %}</td>
+         <td><input type="text" name="collected_by_org_name" value="" id="collected_by_org_name" />
+         </td>
+      </tr>
+
+      <tr>
+         <td>{% trans "Country of organization" %}</td>
+         <td><input type="text" name="collected_by_org_adr_country" value="" id="collected_by_org_adr_country" />
+         </td>
+      </tr>
+
+      <tr>
+         <td>{% trans "City of organization" %}</td>
+         <td><input type="text" name="collected_by_org_adr_city" value="" id="collected_by_org_adr_city" />
+         </td>
+      </tr>
+
+      <tr>
+         <td>{% trans "Postalcode of organization" %}</td>
+         <td><input type="text" name="collected_by_org_adr_postalcode" value="" id="collected_by_org_adr_postalcode" />
+         </td>
+      </tr>
+
+      <tr>
+         <td>{% trans "Region of organization" %}</td>
+         <td><input type="text" name="collected_by_org_adr_region" value="" id="collected_by_org_adr_region" />
+         </td>
+      </tr>
+
+      <tr>
+         <td>{% trans "Street address of organization" %}</td>
+         <td><input type="text" name="collected_by_org_adr_street" value="" id="collected_by_org_adr_street" />
+         </td>
+      </tr>
+
+      <tr>
+         <td>{% trans "Collected by (Doctor's family name)" %}</td>
+         <td><input type="text" name="collected_by_name_family" value="" id="collected_by_name_family" />
+         </td>
+      </tr>
+
+      <tr>
+         <td>{% trans "Collected by (Doctor's name)" %}</td>
+         <td><input type="text" name="collected_by_name_given" value="" id="collected_by_name_given" />
+         </td>
+      </tr>
+
+      <tr>
+         <td>{% trans "Collected by role " %}</td>
+         <td><input type="text" name="collected_by_role" value="" id="collected_by_role" />
+         </td>
+      </tr>
+
+
+    </table>
+<div align="right">
+<input type=button name=type value='{% trans "Hide extra information" %}' style="background-color:#EB9999" onclick="setVisibility('sub3', 'none');";>
+</div>
+</div>
+    <div id="submit" style="text-align: center">
+      <input type="submit" value="{% trans "Add New Lab" %}" style="width: 33%"/><p><p>
+<!--      <input type="button" style="width: 200px" onclick="history.go(-1);" value="    Cancel    ">-->
+    </div>
+  </form>
+   <div align="center"> <input type="button" style="width: 200px" onclick="history.go(-1);" value="{% trans "    Cancel   "%} "></div>
+<!--    <div align="center"><a href="./"><button style="width: 200px"> Back </button></a></div>-->
+
+{% endifequal %}
+
+{% endblock %}
+

@@ -1,0 +1,240 @@
+{% extends 'medications/templates/base.html' %}
+{% block title %}medication list{% endblock %}
+{% block content %}
+{% load i18n %}
+<head>
+{% if jsonData != " " %}
+        {% if jsonData.5.z_score < -2 or jsonData.5.z_score > 2 %} <!--Rumination (abnormal it should be over 2 or less -2 )-->
+        <style type="text/css">
+            *
+            {
+                font-size : 12px
+            }
+
+            .class1 *
+            {
+                font-size : 20px;
+            }
+        </style>
+        {%endif%}
+     {% endif %}
+	 
+	 <script>
+		function setList()
+		{
+			el('divList1').style.display = '';
+			el('divList2').style.display = 'none';
+			if (window.innerWidth <= 768)
+			{
+				el('divList1').style.display = 'none';
+				el('divList2').style.display = '';
+			}
+			return false;
+		}
+		setInterval('setList();',1000);
+		</script>
+</head>
+<body>
+<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:100%;overflow-x:hidden;" id="divContainer" >
+	<div class="row"  style="margin-left:5px;">
+		<div class="col-xs-12">
+		<h2>{% trans "Deleted Medications List" %} {% if in_carenet %}(Shared){% endif %}</h2>
+		</div>
+    </div>
+	
+	<div class="row"  style="height:10px;"></div>
+	
+	{% ifequal num_problems 0 %}
+	{% else %}
+	<div class="row" id="divList" style="margin-left:5px;">
+      <div class="col-xs-12"  id="divList1">
+         <div class="row" style="border:1px solid silver;">
+            <div class="col-xs-4">
+               <b>{% trans "Name" %}</b>
+            </div>
+            <div class="col-xs-2">
+               <b>{% trans "Quantity" %}</b>
+            </div>
+<!--            <div class="col-xs-1">
+               <b>{% trans "Frequency" %}</b>
+            </div>-->
+			<div class="col-xs-2">
+               <b>{% trans "Instructions" %}</b>
+            </div>
+			<div class="col-xs-1">
+               <b>{% trans "Started on" %}</b>
+            </div>
+			<div class="col-xs-1">
+               <b>{% trans "Stopped on" %}</b>
+            </div>
+<!--			<div class="col-xs-1">
+               <b>{% trans "Last filled" %}</b>
+            </div>-->
+            <div class="col-xs-2">
+               {% if not in_carenet %}
+               <b>{% trans "Options" %}</b>
+               {% endif %}
+            </div>
+         </div>
+		 {% for p in medications %}
+		 <div class="row" style="border:1px solid silver;">
+			<div class="col-xs-4">
+				<a href="{{p.id}}">{{p.drugName_title}}</a>
+			</div>
+            <div class="col-xs-2">
+				{{p.quantity_value}}{{p.quantity_unit}}
+			</div>
+           <!-- <div class="col-xs-1">
+				{{p.frequency_value}}{{p.frequency_unit}}
+			</div>-->
+            <div class="col-xs-2">
+				{{p.instructions}}
+			</div>
+            <div class="col-xs-1">
+				{{p.startDate}}
+			</div>
+            <div class="col-xs-1">
+				{{p.endDate}}
+			</div>
+<!--            <div class="col-xs-1">
+				{% regroup p.fulfillments|dictsortreversed:"date" by date as date_list %}
+                {#{{date_list.0}}#}
+                {% for date in date_list|slice:":1" %}
+                   <script>
+					   var startDate = '{{ date.grouper }}';
+					   document.write(startDate.split('T')[0]);
+					</script>
+                {% endfor %}
+                   
+			</div>-->
+			<div class="col-xs-2">
+                <div class="row">
+				  <div class="col-md-10" >
+					 <a href="restore/{{p.id}}"><button class="btn btn-danger btn-sm">{% trans "restore" %}</button></a>
+				  </div>					
+			   </div>
+            </div>
+		 </div>
+		 {% endfor %}
+    </div>
+		
+	<div class="col-xs-12"  id="divList2" style="display:none;">
+         <div class="row" style="border:1px solid silver;">
+            <div class="col-xs-3">
+               <b>{% trans "Name" %}</b>
+            </div>
+            <div class="col-xs-3">
+               <b>{% trans "Quantity" %}</b>
+            </div>
+            <div class="col-xs-3">
+               <b>{% trans "Frequency" %}</b>
+            </div>
+			<!--div class="col-xs-3">
+               <b>{% trans "Instructions" %}</b>
+            </div-->
+            <div class="col-xs-3">
+               <b>{% trans "Restore" %}</b>
+            </div>
+         </div>
+		 {% for p in medications %}
+		 <div class="row" style="border:1px solid silver;">
+			<div class="col-xs-3">
+				<a href="{{p.id}}">{{p.drugName_title}}</a>
+			</div>
+            <div class="col-xs-3">
+				{{p.quantity_value}}{{p.quantity_unit}}
+			</div>
+            <div class="col-xs-3">
+				{{p.frequency_value}}{{p.frequency_unit}}
+			</div>
+            <!--div class="col-xs-3">
+				{{p.instructions}}
+			</div-->
+			<div class="col-xs-3">
+				 <div class="row">
+				  <div class="col-md-10" >
+					 <a href="restore/{{p.id}}"><button class="btn btn-danger btn-sm">{% trans "restore" %}</button></a>
+				  </div>					
+			   </div>
+            </div>
+		 </div>
+		 {% endfor %}
+    </div>
+	
+	
+	{% endifequal %} 
+</div>
+
+{% if not in_carenet %}
+	<div class="row" style="height:10px;"></div>
+	<div class="row" align="center">
+		<div class="col-xs-12">
+		<a href="./">
+			<button style="width: 50%" class="btn btn-warning btn-lg"> {% trans "Back" %} </button>
+		</a>
+		</div>
+	</div>
+  {% endif %}
+
+{% ifequal 1 0 %}
+<div class="class1">
+  <h2>{% trans "Deleted Medications List" %} {% if in_carenet %}(Shared){% endif %}</h2>
+
+  {% ifequal num_problems 0 %}
+  {% else %}
+    <table class="light">
+      <thead>
+        <tr>
+          <th scope="col"><b>{% trans "Name" %}</b></th>
+          <th><b>{% trans "Quantity" %}</b></th>
+          <th><b>{% trans "Frequency" %}</b></th>
+	  <th><b>{% trans "Instructions" %}</b></th>
+	  <th><b>{% trans "Started on" %}</b></th>
+	  <th><b>{% trans "Stoped on" %}</b></th>
+	  <th><b>{% trans "Last filled" %}</b></th>
+	  <th><b>{% trans "Options" %}</b></th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="3" style="text-align: right">{{num_medications}} medication{% ifequal num_medications 1 %}{% else %}s{% endifequal %}</td>
+        </tr>
+      </tfoot>
+      <tbody>
+        {% for p in medications %}
+          <tr class="{% cycle 'odd' 'even' %}">
+            <td><a href="{{p.id}}">{{p.drugName_title}}</a></td>
+            <td>{{p.quantity_value}}{{p.quantity_unit}}</td>
+            <td>{{p.frequency_value}}{{p.frequency_unit}}</td>
+   	    <td>{{p.instructions}}</td>
+	    <td>{{p.startDate}}</td>
+	    <td>{{p.endDate}}</td>
+             <td>{% regroup p.fulfillments|dictsortreversed:"date" by date as date_list %}
+                {#{{date_list.0}}#}
+                {% for date in date_list|slice:":1" %}
+                   <p>{{ date.grouper }}</p>
+                {% endfor %}</td>
+	    
+<!-- 	    <td><%= p.fulfillments.sort(function(a,b) {
+ 			  return (a.date > b.date) ? -1 : (a.date < b.date) ? 1 : 0;
+       				});%><%=  p.fulfillments[0].date %></td>-->
+	    <td><a href="restore/{{p.id}}"><button>{% trans "restore" %}</button></a>
+           
+	    </td>
+          </tr>
+        {% endfor %}
+      </body>
+    </table>
+  {% endifequal %} 
+
+  {% if not in_carenet %}
+  
+	<div align="center"><a href="./"><button style="width: 200px"> {% trans "Back" %} </button></a></div>
+
+  {% endif %}
+
+</div>
+  {% endifequal %}
+</body>
+</html>
+{% endblock %}

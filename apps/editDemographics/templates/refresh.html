@@ -1,0 +1,40 @@
+{% extends 'problems/templates/base.html' %}
+
+{% load i18n %}
+{% block title %}problem list{% endblock %}
+{% block content %}
+<html>
+<head>
+
+<!--<script src="//cdnjs.cloudflare.com/ajax/libs/annyang/1.1.0/annyang.min.js"></script>-->
+        <meta charset="utf-8">
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+<body>
+<!--<button id="mybutton" style="width:50%;max-width:300px"  class="btn btn-primary btn-lg" onclick="history.go(-2);return false;">{% trans "   Cancel" %}  </button>-->
+</body>
+<script>
+$(document).ready(function() {
+$(function() {
+//document.getElementById("mybutton").click();
+
+//alert('Updated. Your page will be reloaded.')
+window.parent.location.reload();
+return false;
+//window.top.location.reload();
+//history.go(-1)
+});
+
+})
+
+
+
+</script>
+</head>
+
+
+
+</html>
+
+{%endblock %}

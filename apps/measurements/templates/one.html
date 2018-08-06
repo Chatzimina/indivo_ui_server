@@ -1,0 +1,125 @@
+{% extends 'problems/templates/base.html' %}
+{% block title %}Measurement{% endblock %}
+{% block content %}
+{% load i18n %}
+{% if record_id %}
+<html>
+
+<head>
+
+
+<script>
+$( document ).ready(function() {
+
+
+        inIframe();
+        function inIframe () {
+                var div = document.getElementById('cancel_div');
+
+                if(self==top){
+                        div.style.visibility = 'hidden';
+
+
+                }
+                else
+                {
+                        div.style.visibility = 'visible';
+
+                }
+        }
+
+});
+</script>
+
+
+</head>
+<body>
+<script>
+  Indivo.Auth.setToken("{{surl_credentials.token}}","{{surl_credentials.secret}}");
+</script>
+{% endif %}
+
+<script>
+   function setPageSize()
+   {   	
+   	if (el('divList'))el('divList').style.width = (el('divContainer').offsetWidth-0).toString() + 'px';   	
+	if (window.top.document.getElementById('app_container'))
+		el('divContainer').style.width = (window.top.document.getElementById('app_container').offsetWidth-0).toString() + 'px';	
+   }
+   
+   setInterval('setPageSize();', 500);
+   Date.prototype.addHours = function(h) {    
+   this.setTime(this.getTime() + (h*60*60*1000)); 
+   return this;   
+}
+</script>
+<div class="container" style="padding:0px;margin:0px;width:100%;overflow-x:hidden;overflow-y:hidden;" id="divContainer" >
+<div class="row" style="margin-left:5px;">
+<!--	<div id="cancel_div" name="cancel_div">
+	<div class="row" style="height:30px"></div>
+	<div class="row" style="margin-left:5px;text-align:center;">
+			<a href="./"><button style="width: 200px" class="btn btn-lg btn-primary">{% trans " Back" %} </button></a>
+		</div>
+		<div class="row" style="height:10px"></div>
+	 </div>-->
+
+	<div class="row"  style="margin-left:5px;">
+			<div class="col-xs-12">
+				<!--h2>{{measurement.name}} &nbsp;&nbsp;&nbsp;</h2-->
+				<h2>{{measurement.kind}} &nbsp;&nbsp;&nbsp;</h2>
+				<h4>(SNOMEDCT:{{measurement.name_value}})</h4>
+			</div>
+		</div>
+		
+	<div class="row"  style="margin-left:5px;">
+	<div class="col-lg-8">		
+		<div class="row" style="margin-left:5px">
+		  
+			<!--div class="form-group"><label>{% trans "Number" %}&nbsp;</label>{{measurement.number}}</div--> 
+			<div class="form-group"><label>{% trans "Kind" %}&nbsp;</label>{{measurement.kind}}</div>
+			<div class="form-group"><label>{% trans "Value" %}&nbsp;</label>{{measurement.value}}</div>
+			<div class="form-group"><label>{% trans "Unit" %}&nbsp;</label>{{measurement.unit}}</div>
+                        <div class="form-group"><label>{% trans "Date" %}&nbsp;</label>
+						
+						<!--{{measurement.measurementDate}}-->
+						<script>
+						var tzoffset = (new Date()).getTimezoneOffset()/60;
+						var dt = new Date('{{measurement.measurementDate}}').addHours(tzoffset);
+						document.write(dt.toLocaleDateString() + ' ' + dt.toLocaleTimeString());
+						</script>
+						</div>
+			
+		</div>
+<!--		<div class="row" style="height:10px;"></div>
+		<div class="row" style="margin-left:5px">
+			<h3>Additional Information</h3>
+			<div class="details">{% trans "Created at" %} {{meta.created_at}}</div>
+		</div>
+		
+	</div>-->
+	<div class="col-lg-4">
+		<div style="float:left;">
+		{% if record_id %}
+		  <script>
+			//Indivo.Widget.DocumentAccess.add('{{record_id}}', '{{measurement_id}}');
+		  </script>
+		{% endif %}
+		</div>
+	</div>
+	
+		
+		
+	</div>
+	</div>
+	<div class="row" style="height:20px;"></div>
+		<div class="row" style="margin-left:5px;text-align:center;" id="cancel_div" name="cancel_div">
+			<a href="./"><button style="width: 200px" class="btn btn-lg btn-warning">{% trans " Back" %} </button></a>
+		</div>
+	</div>
+
+
+
+
+{% endblock %}
+</body>
+</html>

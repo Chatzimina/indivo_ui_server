@@ -1,0 +1,557 @@
+{% extends 'medications/templates/base.html' %}
+{% block title %}medication list{% endblock %}
+{% block content %}
+{% load i18n %}
+
+
+<head>
+
+<script>
+{% if record_id %}
+
+  Indivo.Auth.setToken("{{surl_credentials.token}}","{{surl_credentials.secret}}");
+</script>
+{% endif %}
+<script>
+
+var i=0;
+var array=[];
+var carenets=[];
+var uniqueList=[];
+function checkSharing2(){
+
+{% for p in medications%}
+
+var url = '/records/{{record_id}}/documents/{{p.id}}/carenets/';
+
+ indivo_api_call("GET", url, function(result) {
+
+
+      var carenets_xml = $(result).find('Carenets').find('Carenet');
+      carenets = [];
+      carenets_xml.each(function(i, carenet) {
+        carenets.push({'id': $(carenet).attr('id'), 'name' : $(carenet).attr('name')});
+        uniqueList.push({'problem_id':'{{p.id}}','id': $(carenet).attr('id'), 'name' : $(carenet).attr('name')});
+
+      });
+
+
+    });
+
+
+{% endfor %}
+
+}
+
+function shareNew2(){
+var problems_ids=[];
+var problem_to_share=[];
+
+if(uniqueList.length >0){
+console.log('inside');
+        for(m=0; m<uniqueList.length ;m++){
+
+                problems_ids.push(uniqueList[m]['problem_id']);
+
+        }
+
+        {%for p in medications %}
+
+                if (problems_ids.indexOf('{{p.id}}')<=-1){
+                        console.log('sdsds')
+                        for (j=0; j<carenets.length; j++){
+
+                                var url =  "/records/{{record_id}}/documents/{{p.id}}/carenets/"+carenets[j]['id']
+                                indivo_api_call("PUT",url, function(result){
+                                console.log('ok')
+                                });
+
+
+                        }
+                }
+        {%endfor%}
+
+}
+
+var iframe = document.getElementsByClassName('indivo')[0];
+iframe.src=iframe.src;
+}
+
+
+
+
+
+window.alert = function(message){
+    $(document.createElement('div'))
+        .attr({title: 'Attention alert','class': 'alert'})
+        .html(message)
+        .dialog({
+            buttons: {OK: function(){$(this).dialog('close');}},
+            close: function(){$(this).remove();},
+            draggable: true,
+            modal: true,
+            resizable: true,
+            width: '80%',
+        });
+};
+</script>
+<script>
+function check()
+{
+return false;
+var strin = document.getElementById("request").innerHTML ;
+var string1 = strin.replace(/',/g, '<br>');
+var string2 = string1.replace(/'/g, ' ');
+var string3 = string2.replace(/\[/g, ' ');
+var str = string3.replace(/\]/g, ' ');
+var splitted = str.split("@");
+//for (i = 0; i < splitted.length; i++) {
+//   content[i] =splitted[i];
+//}
+var content = splitted[1];
+var content2 = splitted[2];
+var content3= content2.split(".");
+
+//for (j = 0; j < content3.length; j++){
+//   content3[j] = content2;
+//} 
+//var content3 = content2.split(".");
+//var content4 = content3[0];
+//var content5 = content3[1];
+var myString = splitted[0]+ '<br>' +content.replace(/\,/g, '<br>');
+for (n = 0; n < content3.length; n++){
+  myString = myString+ '<br>' +content3[n];
+}
+alert(myString);
+//alert(content0+'<br>'+content+'</br>'+content4+'</br>'+content5);
+}
+check();
+
+function check2()
+{
+return false;
+var content = document.getElementById("request2").innerHTML ;
+alert(content);
+}
+//check();
+
+</script>    
+
+<!--<style type="text/css">
+ 
+li {font-size:18px;
+    text-align: left;} 
+</style>-->
+
+
+{% if jsonDataQuest != " " %}
+        {% if jsonDataQuest.5.z_score < -2 or jsonDataQuest.5.z_score > 2 %} <!--Rumination (abnormal it should be over 2 or less -2 )-->
+        <style type="text/css">
+            *
+            {
+                font-size : 12px
+            }
+
+            .class1 *
+            {
+                font-size : 20px;
+            }
+        </style>
+        {%endif%}
+     {% endif %}
+                
+        <meta charset="utf-8">
+        <title>Speak.js Demo</title>
+<!--        <script src="{{ STATIC_HOME }}/speakClient.js"></script>-->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+		<script>
+		function setList()
+		{
+			if (!el('divList1') || !el('divList2'))
+			{
+				return false; 
+			}
+			el('divList1').style.display = '';
+			el('divList2').style.display = 'none';
+			if (window.innerWidth <= 768)
+			{
+				el('divList1').style.display = 'none';
+				el('divList2').style.display = '';
+			}
+			return false;
+		}
+		setInterval('setList();',1000);
+		</script>
+</head>
+<body onload="check();check2();">
+
+
+
+<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:100%;height:2000px;overflow-x:hidden;" id="divContainer" >
+	<div class="row"  style="margin-left:5px;">
+		<div class="col-xs-12">
+		<h2>{% trans "Medications List" %} {% if in_carenet %}(Shared){% endif %}</h2>
+		</div>
+    </div>
+	
+	{% if not in_carenet %}
+   <div class="row"  id="divButtons" style="width:400px;margin-left:0px;">
+      <div class="col-xs-5" style="text-align:left;">
+         <a href="new" class="btn btn-success btn-sm" >{% trans "add a medication" %}</a>
+      </div>
+      <div class="col-xs-5" style="text-align:left;">
+         <a href="archived" class="btn btn-danger btn-sm">{% trans "deleted medications" %}</a>
+      </div>
+	   <div class="col-xs-1" ></div>
+   </div>
+   <div class="row"  style="height:20px;"></div>
+   {% endif %}
+   
+   {% ifequal num_medications 0 %}
+	
+
+    <table class="light">
+      <thead>
+        <tr>
+          <th scope="col"><b>{% trans "Name" %}</b></th>
+          <th><b>{% trans "Quantity" %}</b></th>
+         <!-- <th><b>{% trans "Frequency" %}</b></th>-->
+      <th><b>{% trans "Instructions" %}</b></th>
+      <th><b>{% trans "Started on" %}</b></th>
+      <th><b>{% trans "Stoped on" %}</b></th>
+<!--      <th><b>{% trans "Last filled" %}</b></th>-->
+          {% if not in_carenet %}
+      <th><b>{% trans "Options" %}</b></th>
+          {% endif %}
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+
+	  <td colspan="4" style="text-align: right">{{num_medications}} medication{% ifequal num_medications 1 %}{% else %}s{% endifequal %}</td>
+
+
+
+        </tr>
+      </tfoot>
+      <tbody>
+
+
+
+   {% else %}
+   
+   <div class="row" id="divList" style="margin-left:5px;overflow-x:auto;">
+      <div class="col-xs-12"  id="divList1">
+         <div class="row" style="border:1px solid silver;">
+            <div class="col-xs-4">
+               <b>{% trans "Name" %}</b>
+            </div>
+            <div class="col-xs-2">
+               <b>{% trans "Quantity" %}</b>
+            </div>
+          <!--  <div class="col-xs-1">
+               <b>{% trans "Frequency" %}</b>
+            </div>-->
+			<div class="col-xs-2">
+               <b>{% trans "Instructions" %}</b>
+            </div>
+			<div class="col-xs-1">
+               <b>{% trans "Started on" %}</b>
+            </div>
+			<div class="col-xs-1">
+               <b>{% trans "Stopped on" %}</b>
+            </div>
+	<!--<div class="col-xs-1">
+               <b>{% trans "Last filled" %}</b>
+            </div>-->
+            <div class="col-xs-2">
+               {% if not in_carenet %}
+               <b>{% trans "Options" %}</b>
+               {% endif %}
+            </div>
+         </div>
+		 {% for p in interactMedications %}
+		 <div class="row" style="border:1px solid silver;">
+			<div class="col-xs-4">
+				<a href="{{p.0.id}}">{{p.0.drugName_title}}</a>
+			</div>
+            <div class="col-xs-2">
+				{{p.0.quantity_value}}{{p.0.quantity_unit}}
+			</div>
+           <!-- <div class="col-xs-1">
+				{{p.0.frequency_value}}{{p.0.frequency_unit}}
+			</div>-->
+            <div class="col-xs-2">
+				{{p.0.instructions}}
+			</div>
+            <div class="col-xs-1">
+				{{p.0.startDate}}
+			</div>
+            <div class="col-xs-1">
+				{{p.0.endDate}}
+			</div>
+         <!--   <div class="col-xs-1">
+				{% regroup p.0.fulfillments|dictsortreversed:"date" by date as date_list %}                     
+							{#{{date_list.0}}#}
+				 {% for date in date_list|slice:":1" %}
+						<script>
+					   var startDate = '{{ date.grouper }}';
+					   document.write(startDate.split('T')[0]);
+					</script>
+				 {% endfor %}
+			</div>-->
+			<div class="col-xs-2">
+                {% if not in_carenet %}
+				 <a href="edit/{{p.0.id}}"><button  class="btn btn-primary btn-sm" style="width:90%;max-width:100px;">{% trans "edit" %}</button></a>
+				 <a href="delete/{{p.0.id}}"><button  class="btn btn-danger btn-sm" style="width:90%;max-width:100px;">{% trans "delete" %}</button></a>
+				 {% endif %}
+            </div>
+		 </div>
+		 {% endfor %}
+	<div class="col-xs-12" style="text-align: right">
+	
+	 <td colspan="4" style="text-align: left">{{num_medications}} medication{% ifequal num_medications 1 %}{% else %}s{% endifequal %}</td>
+	</div>
+
+    </div>
+		
+	<div class="col-xs-12"  id="divList2" style="display:none;">
+         <div class="row" style="border:1px solid silver;">
+            <div class="col-xs-4">
+               <b>{% trans "Name" %}</b>
+            </div>
+            <div class="col-xs-4">
+               <b>{% trans "Quantity" %}</b>
+            </div>
+            <!--div class="col-xs-2">
+               <b>{% trans "Frequency" %}</b>
+            </div>
+			<!--div class="col-xs-3">
+               <b>{% trans "Instructions" %}</b>
+            </div-->
+            <div class="col-xs-4">
+               {% if not in_carenet %}
+               <b>{% trans "Options" %}</b>
+               {% endif %}
+            </div>
+         </div>
+		 {% for p in interactMedications %}
+		 <div class="row" style="border:1px solid silver;">
+			<div class="col-xs-4">
+				<a href="{{p.0.id}}">{{p.0.drugName_title}}</a>
+			</div>
+            <!--div class="col-xs-2">
+				{{p.0.quantity_value}}{{p.0.quantity_unit}}
+			</div>
+            <div class="col-xs-2">
+				{{p.0.frequency_value}}{{p.0.frequency_unit}}
+			</div-->
+            <div class="col-xs-4">
+				{{p.0.instructions}}
+			</div>
+			<div class="col-xs-4">
+                {% if not in_carenet %}
+					 <div class="row">
+					  <div class="col-md-5" >
+						 <a href="edit/{{p.0.id}}"><button  class="btn btn-primary btn-sm" style="width:95%;">{% trans "edit" %}</button></a>
+					  </div>
+					
+					  <div class="col-md-5" >
+						 <a href="delete/{{p.0.id}}"><button  class="btn btn-danger btn-sm"  style="width:95%;">{% trans "delete" %}</button></a>
+					  </div>
+					  <div class="col-md-1" ></div>
+				   </div>
+				 {% endif %}
+            </div>
+		 </div>
+		 {% endfor %}
+    </div>
+	{% endifequal %}
+   
+</div>
+
+
+{% ifequal 1 0 %}
+
+
+<div class="class1">
+<br>
+<br>
+  <h2>{% trans "Medications List" %} {% if in_carenet %}(Shared){% endif %}</h2>
+
+  {% ifequal num_medications 0 %}
+  {% else %}
+    <table class="light">
+      <thead>
+        <tr>
+          <th scope="col"><b>{% trans "Name" %}</b></th>
+          <th><b>{% trans "Quantity" %}</b></th>
+          <th><b>{% trans "Frequency" %}</b></th>
+      <th><b>{% trans "Instructions" %}</b></th>
+      <th><b>{% trans "Started on" %}</b></th>
+      <th><b>{% trans "Stoped on" %}</b></th>
+      <th><b>{% trans "Last filled" %}</b></th>
+          {% if not in_carenet %}
+      <th><b>{% trans "Options" %}</b></th>
+          {% endif %}
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="3" style="text-align: right">{{num_medications}} medication{% ifequal num_medications 1 %}{% else %}s{% endifequal %}</td>
+        </tr>
+      </tfoot>
+      <tbody> 
+
+
+{# {% if jsonDataQuest != " " %} #}   <!--- XREIAZETAI GIA ALGA C-->
+{#        {% if jsonDataQuest.6.z_score < -2 or jsonDataQuest.6.z_score > 2 %}#}  <!--- XREIAZETAI GIA ALGA C -->
+
+{%if alertMessages %}
+                 <div id="request" style="display:none;" width="100%">There are interactions between: @<br><b>{{drugNames}}  </b><br><br><br>  Details:@{{alertMessages}}</div>
+{% endif %}
+                 {% for p in interactMedications %}
+                
+                        {% if p.1 == "yes" %}
+                      <tr class="{% cycle 'odd' 'even' %}">         
+
+                           <td bgcolor="#bf0000" ><a href="{{p.0.id}}"><font color="#FFECE9">{{p.0.drugName_title}}</a></td>
+                            <td bgcolor="#bf0000" ><font color="#FFECE9">{{p.0.quantity_value}}{{p.0.quantity_unit}}</td>
+                            <td bgcolor="#bf0000" ><font color="#FFECE9">{{p.0.frequency_value}}{{p.0.frequency_unit}}</td>
+                            <td bgcolor="#bf0000"><font color="#FFECE9">{{p.0.instructions}}</td>
+                            <td bgcolor="#bf0000"><font color="#FFECE9">{{p.0.startDate}}</td>
+                            <td bgcolor="#bf0000"><font color="#FFECE9">{{p.0.endDate}}</td>
+                            <td bgcolor="#bf0000"><font color="#FFECE9">{% regroup p.0.fulfillments|dictsortreversed:"date" by date as date_list %} 
+
+                            {% for date in date_list|slice:":1" %}
+                                    <p>{{ date.grouper }}</p>
+                            {% endfor %}</td></font></td>
+                            <td bgcolor="#bf0000"><a href="edit/{{p.0.id}}"><button style="width:70px">{% trans "edit" %}</button></a>
+                            <a href="delete/{{p.0.id}}"><button style="width:70px">{% trans "delete" %}</button></a>
+                            </td>
+                                </tr>
+              {% else %}
+    
+                <td><a href="{{p.0.id}}">{{p.0.drugName_title}}</a></td>
+                            <td>{{p.0.quantity_value}}{{p.0.quantity_unit}}</td>
+                             <td>{{p.0.frequency_value}}{{p.0.frequency_unit}}</td>
+                             <td>{{p.0.instructions}}</td>
+                             <td>{{p.0.startDate}}</td>
+                            <td>{{p.0.endDate}}</td>
+                             <td>{% regroup p.0.fulfillments|dictsortreversed:"date" by date as date_list %}                     
+                                        {#{{date_list.0}}#}
+                             {% for date in date_list|slice:":1" %}
+                                    <p>{{ date.grouper }}</p>
+                             {% endfor %}</td>
+                {% if not in_carenet %}
+                             <td><a href="edit/{{p.0.id}}"><button style="width:70px">{% trans "edit" %}</button></a>
+                             <a href="delete/{{p.0.id}}"><button style="width:70px">{% trans "delete" %}</button></a>
+
+                             </td>
+                         {% endif %}
+                 </tr>                               
+        
+              {% endif %} 
+               
+             {%endfor%}
+        </td>
+          </tr>
+      
+         
+{#         {%else%} #}<!--- XREIAZETAI GIA ALGA C-->
+ {% comment %}
+             {% for p in interactMedications %}
+                        <td><a href="{{p.0.id}}">{{p.0.drugName_title}}</a></td>
+                         <td>{{p.0.quantity_value}}{{p.0.quantity_unit}}</td>
+                         <td>{{p.0.frequency_value}}{{p.0.frequency_unit}}</td>
+                         <td>{{p.0.instructions}}</td>
+                         <td>{{p.0.startDate}}</td>
+                         <td>{{p.0.endDate}}</td>
+                         <td>{% regroup p.0.fulfillments|dictsortreversed:"date" by date as date_list %}
+                                        {#{{date_list.0}}#}
+                         {% for date in date_list|slice:":1" %}
+                                <p>{{ date.grouper }}</p>
+                         {% endfor %}</td>
+            {% if not in_carenet %}
+                         <td><a href="edit/{{p.0.id}}"><button style="width:70px">{% trans "edit" %}</button></a>
+                         <a href="delete/{{p.0.id}}"><button style="width:70px">{% trans "delete" %}</button></a>
+
+                         </td>
+             {% endif %}
+                  </tr>
+
+                 {%endfor%}
+             </td>
+          </tr>
+ {% endcomment %}
+
+{#         {% endif %}#}  <!--- XREIAZETAI GIA ALGA C-->
+
+ {% comment %}{%else%}
+         {% for p in medications %}
+                        <td><a href="{{p.id}}">{{p.drugName_title}}</a></td>
+                         <td>{{p.quantity_value}}{{p.quantity_unit}}</td>
+                         <td>{{p.frequency_value}}{{p.frequency_unit}}</td>
+                         <td>{{p.instructions}}</td>
+                         <td>{{p.startDate}}</td>
+                         <td>{{p.endDate}}</td>
+                         <td>{% regroup p.fulfillments|dictsortreversed:"date" by date as date_list %}
+                                        {#{{date_list.0}}#}
+                         {% for date in date_list|slice:":1" %}
+                            <p>{{ date.grouper }}</p>
+                         {% endfor %}</td>
+            {% if not in_carenet %}
+                         <td><a href="edit/{{p.id}}"><button style="width:70px">{% trans "edit" %}</button></a>
+                         <a href="delete/{{p.id}}"><button style="width:70px">{% trans "delete" %}</button></a>
+            {% endif %}
+                         </td>
+                  </tr>
+
+          {%endfor%}
+
+ </td>
+          </tr>
+
+         
+
+
+{%endif%}
+ {% endcomment %}
+      </tbody>
+    </table>
+  {% endifequal %}
+ 
+<div style="float:left;">
+
+                          <script>
+                                Indivo.Widget.DocumentAccessMulti.add('{{record_id}}', '{{ids}}');
+                          </script>
+
+                        </div>
+
+  {% if not in_carenet %}
+  <p><a href="new">{% trans "[add a medication]" %}</a></p>
+
+  <p><a href="archived">{% trans "[deleted medications]" %}</a></p>
+
+  {% endif %}
+  
+  
+{% endifequal %}
+ <div style="float:left;">
+
+                          <script>
+                                Indivo.Widget.DocumentAccessMulti.add('{{record_id}}', '{{ids}}');
+                          </script>
+
+                        </div>
+ 
+</body>
+
+<script>
+//        setTimeout('checkSharing2();shareNew2()');//"{{interactMedications}}","{{record_id}}");shareNew("{{record_id}}");',10);
+</script>
+
+{% endblock %}

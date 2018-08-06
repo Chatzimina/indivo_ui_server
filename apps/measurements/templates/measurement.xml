@@ -1,0 +1,12 @@
+<Models xmlns="http://indivo.org/vocab/xml/documents#">
+  <Model name="Measurements">
+    <Field name="name">{{name}}</Field>
+    <Field name="name_value">{{name_value}}</Field>
+    <Field name="name_abbrev">{{name_abbrev}}</Field>
+    <Field name="number">{{number}}</Field>
+    <Field name="kind">{{kind}}</Field>
+    <Field name="value">{{value}}</Field>
+    <Field name="unit">{{unit}}</Field>
+    <Field name="measurementDate">{{measurementDate}}</Field> 
+  </Model>
+</Models>

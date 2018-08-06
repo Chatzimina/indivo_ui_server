@@ -1,0 +1,65 @@
+{% extends 'problems/templates/base.html' %}
+{% block title %}problem list{% endblock %}
+{% block content %}
+
+  <h2>Procedures List {% if in_carenet %}(Shared){% endif %}</h2>
+
+<head>
+   {% if jsonData != " " %}
+
+        {% if jsonData.5.z_score < -2 or jsonData.5.z_score > 2 %} <!--Rumination (abnormal it should be over 2 or less -2 )-->
+        <style type="text/css">
+            *
+            {
+                font-size : 12px
+            }
+
+            .class1 *
+            {
+                font-size : 20px;
+            }
+        </style>
+	{% endif %}
+   {% endif %}
+</head>
+
+<div class="class1">
+
+
+  {% ifequal num_problems 0 %}
+  {% else %}
+    <table class="light">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th>Date performed</th>
+          <th>Institution</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="3" style="text-align: right">{{num_problems}} procedure{% ifequal num_problems 1 %}{% else %}s{% endifequal %}</td>
+        </tr>
+      </tfoot>
+      <tbody>
+        {% for p in problems %}
+          <tr class="{% cycle 'odd' 'even' %}">
+            <td><a href="{{p.id}}">{{p.name}}--{{p.status}}</a></td>
+            <td>{{p.date_performed}}</td>
+            <td>{{p.provider_institution}}</td>
+            <td><a href="edit/{{p.id}}"><button>update</button></a>
+           	<a href="delete/{{p.id}}"><button>delete</button></a></td>
+          </tr>
+
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endifequal %}
+
+  {% if not in_carenet %}
+
+
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:sp="http://smartplatforms.org/terms#"
+  xmlns:spcode="http://smartplatforms.org/terms/codes/"
+  xmlns:dcterms="http://purl.org/dc/terms/">
+   <sp:Medication rdf:about="http://sandbox-api.smartplatforms.org/records/2169591/medications/123">
+      <sp:belongsTo rdf:resource="http://sandbox-api.smartplatforms.org/records/2169591" />
+      <sp:drugName>
+      <sp:CodedValue>
+          <dcterms:title>{{drugName_title}}</dcterms:title>
+          <sp:code>
+            <spcode:RxNorm_Semantic rdf:about="http://purl.bioontology.org/ontology/RXNORM/856845">
+              <rdf:type rdf:resource="http://smartplatforms.org/terms#Code" /> 
+              <sp:system>http://purl.bioontology.org/ontology/RXNORM</sp:system>
+              <dcterms:identifier>{{drugName_identifier}}</dcterms:identifier>
+              <dcterms:title>{{drugName_title}}</dcterms:title>
+            </spcode:RxNorm_Semantic>    
+          </sp:code>
+      </sp:CodedValue>
+      </sp:drugName>
+      <sp:startDate>{{startDate}}</sp:startDate>
+      <sp:endDate>{{endDate}}</sp:endDate>
+      <sp:instructions>{{instructions}}</sp:instructions>
+      <sp:quantity>
+          <sp:ValueAndUnit>
+            <sp:value>{{quantity_value}}</sp:value>
+            <sp:unit>{{quantity_unit}}</sp:unit>
+          </sp:ValueAndUnit>
+      </sp:quantity>
+      <sp:frequency>
+          <sp:ValueAndUnit>
+            <sp:value>{{frequency_value}}</sp:value>
+            <sp:unit>{{frequency_unit}}</sp:unit>
+          </sp:ValueAndUnit>
+      </sp:frequency>
+   </sp:Medication>
+</rdf:RDF>     
+  
+    
+   
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

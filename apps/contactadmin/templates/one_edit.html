@@ -1,0 +1,115 @@
+{% extends 'problems/templates/base.html' %}
+{% block title %}problem list{% endblock %}
+{% block content %}
+
+<script>
+  $(document).ready(function() {
+    $('.date').datepicker({'dateFormat':'yy-mm-dd'});
+
+    $('#problem_fullname').autocomplete({
+      serviceUrl: 'codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#problem_code').val(data.code);
+      }
+    })
+    
+    $('#comments').autocomplete({
+      serviceUrl: 'codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#comments_code').val(data.code);
+      }
+    })
+
+
+  });
+</script>
+
+{% if record_id %}
+<script>
+  Indivo.Auth.setToken("{{surl_credentials.token}}","{{surl_credentials.secret}}");
+</script>
+{% endif %}
+
+<h2>{{problem.name}} &nbsp;&nbsp;<span style="font-size:0.7em;">
+<h4>(SNOMEDCT:{{problem.name_abbrev}})</h4>
+<!--<td><p align="right"><a href="./"><button>BACK</back></a></span></h2></p></td>-->
+
+
+<head>
+     {% if jsonData != " " %}
+
+           {% if jsonData.5.z_score < -2 or jsonData.5.z_score > 2 %} <!--physical abilities (abnormal it should be over 2 or less -2 )-->
+             <style type="text/css">
+               *
+               {
+                 font-size : 12px
+               }
+
+               .class1 *
+               {
+                  font-size : 20px;
+               }
+             </style>
+	  {% endif %}
+        {% endif %}
+</head>
+
+<div class="class1">
+
+<form method="post" action="">
+    <table class="light form">
+      <col style="width: 20%"></col>
+      <col style="width: 80%"></col>
+      <tr>
+        <td>Procedure</td>
+        <td>
+          <input type="text" name="code_fullname" id="problem_fullname" value="{{problem.name}}" style="width: 100%" />
+          <input type="text" name="code" value="{{problem.name_abbrev}}" id="problem_code" /> (SNOMED CT)
+        </td>
+      </tr>
+
+      <tr>
+        <td>Date Performed</td>
+        <td><input type="text" name="date_performed" class="date" style="width: 100%" value="{{problem.date_performed}}" /></td>
+      </tr>
+      <tr>
+        <td>Doctor Name</td>
+        <td><input type="text" name="provider_name" style="width: 100%" value="{{problem.provider_name}}" /></td>
+      </tr>
+	<tr>
+        <td>Institution</td>
+        <td><input type="text" name="provider_institution" style="width: 100%" value="{{problem.provider_institution}}"/></td>
+      </tr>
+	<tr>
+        <td>Location</td>
+        <td><input type="text" name="location" style="width: 100%" value="{{problem.location}}"/></td>
+      </tr>
+      <tr>
+        <td>Comments</td>
+        <td><input type="text" name="comments" id="comments" style="width: 100%" value="{{problem.comments}}"/>
+          <input type="text" name="comments_code" id="comments_code" value="{{problem.name_value}}"/> (SNOMED CT)
+	 </td>
+      </tr>
+
+
+
+    </table>
+
+    <br />
+    
+    <div style="text-align: center">
+      <input type="submit" value="Update Procedure" style="width: 33%"/><p>
+     <!-- <input type="button" style="width: 200px" onclick="history.go(-1);" value="    Cancel    ">-->
+    </div>
+  </form>
+
+	<div align="center"><a href="#" onclick="history.go(-2);"><button style="width: 200px">  Cancel  </button></a></div>
+
+<h3>Additional Information</h3>
+<div class="details">Created at {{meta.created_at}}</div>
+
+
+</div>
+{% endblock %}

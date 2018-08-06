@@ -1,0 +1,174 @@
+{% extends 'problems/templates/base.html' %}
+{% load i18n %}
+{% block title %}Other apps{% endblock %}
+{% block content %}
+
+<!-- Latest compiled and minified CSS -->
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.js"></script>
+
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="//cdn.jsdelivr.net/bootbox/4.3.0/bootbox.js"></script>
+
+<!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>-->
+<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:100%;overflow-x:hidden;" id="divContainer" >
+	<div class="row"  style="margin-left:5px;">
+		<div class="col-xs-12">
+
+		</div>
+    </div>
+<style>
+video {  
+
+   max-width:680px; 
+
+}
+
+
+img {
+  width: 100%;
+  display: block;
+}
+</style>
+ 
+<script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+
+
+<script>
+
+$(document).ready(function() {
+
+});
+
+</script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script type="text/javascript" src="js/dalert.jquery.js"></script>
+
+<body>
+
+<br>
+<div align="center" class="embed-responsive embed-responsive-16by9">
+	<iframe style="width:100%;height:100%;min-height:300px;max-width:800px;max-height:600px;" width="560" height="315" src='{% trans "https://www.youtube.com/embed/UiE3d1trYyU" %}' frameborder="0" allowfullscreen></iframe>
+</div>
+<br>
+<br>
+   <div class="row" id="divList" >
+      <div class="container" >
+         <div class="row" style="border:1px solid silver;">
+            <div class="col-lg-12">
+               <b>{% trans "Application" %}</b>
+            </div>
+         </div>
+         <div class="row" style="border-left:1px solid silver;border-right:1px solid silver;border-bottom:1px solid silver;">
+            <div class="col-lg-6">
+         <h3>	iManageMyHealth </h3>
+            
+		<img style="max-width:280px;" src="{{ STATIC_HOME }}/apps/imanagemyhealth.png">
+	    </div>	
+	    <div class="col-lg-6"><br>
+		<b><h5> {%trans "Works on:"%} </b></h5>
+		Android 5.0, <br>Android 6.0, <br>Android 7.0<br><br>
+
+		<input type="button" class="btn btn-danger" value='{% trans "Description"%}' onclick="window.top.showcustomalert('{% trans "iManageMyHealth is a multipurpose informative app for Android phones (Android 5 and higher) for general health management. It supports you in taking your drugs and provides you information on your drugs and their interactions. Further to this, the app helps you in managing and understanding your paper based health documents, as wells in recording and overviewing specific vital signs and laboratory parameters. Finally, the app also provides specific management services in the context of cancer, as for pain that record the felt level of pain and link to helpful public information resources." %}');">
+		<br>
+		 <input type="button" class="btn btn-success" value='{% trans "Download" %}'  onclick="location.href = 'https://www.iphr.care/mha/app/download/latest?name=immh';target='_blank'">
+
+       
+            </div>
+	</div>
+
+	<div class="row" style="border-left:1px solid silver;border-right:1px solid silver;border-bottom:1px solid silver;">
+            <div class="col-lg-6">
+         <h3>  iSupportMyPatients </h3>
+
+                <img style="max-width:280px;" src="{{ STATIC_HOME }}/apps/iSupportMyPatients.png">
+            </div>
+            <div class="col-lg-6"><br>
+                <b><h5> {%trans "Works on:"%} </b></h5>
+                Android 5.0, <br>Android 6.0, <br>Android 7.0<br><br>
+
+                <input type="button" class="btn btn-danger" value='{% trans "Description"%}' onclick="window.top.showcustomalert('{% trans "iSupportMyPatients is an app for Android phones (Android 5 and higher) for health professionals used to contribute to specific management care flows by physicians for their patients. The app receive also notifications from the Care Flow Engine about tasks assigned to health professionals. The app downloads and process the tasks: the health professional will be prompted to answer questions regarding health conditions of his patients in health enquiries or he will be informed about the health conditions of his patients." %}');">
+                <br>
+                 <input type="button" class="btn btn-success" value='{% trans "Download" %}'  onclick="location.href = 'https://www.iphr.care/mha/app/download/latest?name=ismp';target='_blank'">
+
+
+            </div>
+        </div>
+
+<div class="row" style="border-left:1px solid silver;border-right:1px solid silver;border-bottom:1px solid silver;">
+
+
+	      <div class="col-lg-6">
+                 <h3>  MyHealthAvatar </h3>
+		<img style="max-width:280px" src="{{ STATIC_HOME }}/apps/myhealthavatar.png">
+
+            </div>
+ 	     <div class="col-lg-6">
+		 <b><h5> {%trans "Works on:"%} </b></h5>
+                Android 5.0, <br>Android 6.0, <br>Android 7.0<br><br>
+		<br><br> <h5> Prostate cancer app: </h5>
+		<input type="button" class="btn btn-danger" value='{% trans "Description" %}' onclick="window.top.showcustomalert(' {% trans "The MyHealthAvatar App helps weight control, calorie control and promotes physical exercises. There is strong evidence that weight problems can increase the risks of affecting the treatment of many different types of cancers, for example prostate cancer- a healthy weight means the cancer is less likely to spread after surgery or radiotherapy. Hormone therapy may also be more effective if the patients maintain a healthy weight. Many side effects from the treatment are much easier to cope with after the surgery with a healthy weight. Therefore, the App offers a healthy lifestyle to the user in order to reduce the risk of many health problems. The MyHealthAvatar App offers a range of tools for the self-management of cancer in terms of lifestyle and physical activities. These Suites can be accessed through a mobile application. These Suites are mainly designed to target patients with prostate cancers and help them to: <ul><li>      Know their health status and performance by viewing their self-collected data </li><li> Improve their knowledge about health and diseases by tailored information provision </li><li>   Raise their risk awareness and perceptions about diseases by personalised risk assessment</li> <li>     Engage in health and fitness activities by recommending relevant programmes and courses </li><li>       Help look after weight, fitness, calories, mood and sleep.  </li></ul>" %}')";>
+		<br>
+           	<input type="button" class="btn btn-success" value='{% trans "Download" %}' onclick="location.href = 'https://www.iphr.care/mha/app/download/latest?name=mha_imc_pc';target='_blank'">
+
+
+		 <br><br> <h5> Breast cancer app: </h5>
+                <input type="button" class="btn btn-danger" value='{% trans "Description" %}' onclick="window.top.showcustomalert(' {% trans "The MyHealthAvatar App helps weight control, calorie control and promotes physical exercises. There is strong evidence that weight problems can increase the risks of affecting the treatment of many different types of cancers, for example, breast cancer- a healthy weight means the cancer is less likely to spread after surgery or radiotherapy. Hormone therapy may also be more effective if the patients maintain a healthy weight. Many side effects from the treatment are much easier to cope with after the surgery with a healthy weight. Therefore, the App offers a healthy lifestyle to the user in order to reduce the risk of many health problems. The MyHealthAvatar App offers a range of tools for the self-management of cancer in terms of lifestyle and physical activities. These Suites can be accessed through a mobile application. These Suites are mainly designed to target patients with breast cancers and help them to:<ul><li>Know their health status and performance by viewing their self-collected data</li><li>       Improve their knowledge about health and diseases by tailored information provision</li><li> Raise their risk awareness and perceptions about diseases by personalised risk assessment</li><li>       Engage in health and fitness activities by recommending relevant programmes and courses</li><li>       Help look after weight, fitness, calories, mood and sleep. </li> </ul>" %}')";>
+                <br>
+                <input type="button" class="btn btn-success" value='{% trans "Download" %}' onclick="location.href = 'https://www.iphr.care/mha/app/download/latest?name=mha_imc_bc';target='_blank'">
+
+
+            </div>
+
+</div>
+
+ <div class="row" style="border-left:1px solid silver;border-right:1px solid silver;border-bottom:1px solid silver;">
+
+            <div class="col-lg-6">
+                 <h3>   Serious Game For Kids</h3>
+
+                <img src="{{ STATIC_HOME }}/apps/seriousgames.jpg">
+            </div>
+
+            <div class="col-lg-6">
+		 <b><h5> {%trans "Works on:"%} </b></h5>
+                Android 5.0, <br>Android 6.0, <br>Android 7.0<br><br>
+                <input type="button" class="btn btn-danger" value='{% trans "Description" %}' onclick="window.top.showcustomalert('{% trans "The serious game for kids is a classical shooter game - flying with a vessel from left to the right through several parts of the human body and shooting on obstacles and dangerous cancer cells - with strong social aspects, developed for mobile devices as smartphones and tablets. The serious game for kids can be played in three modes, patient, family and friends. Patient is always a child in need of supported from family and friends. Support is given in form of extra weapons and shields for the child." %}');">
+                <br>
+<!--                <input type="button" class="btn btn-success" value='{% trans "Download" %}' onclick="location.href = '{{ STATIC_HOME }}/apps/imc-mobile-shooter-eva_2017-12-05_02262.apk';target='_blank'">-->
+		 <input type="button" class="btn btn-success" value='{% trans "Download" %}' onclick="location.href = 'https://www.iphr.care/mha/app/download/latest?name=imc-mobile-shooter-eva_2017-12-05_02262.apk';target='_blank'">
+            </div>
+
+</div>
+
+
+<div class="row" style="border-left:1px solid silver;border-right:1px solid silver;border-bottom:1px solid silver;">
+
+
+	   <div class="col-lg-6">
+             <h3> Serious Game For Adults </h3>
+		<img style="" src="{{ STATIC_HOME }}/apps/gameforadults.png">
+            </div>
+            <div class="col-lg-6">
+           
+		 <b><h5> {%trans "Works on:"%} </b></h5>
+                Android 5.0, <br>Android 6.0, <br>Android 7.0<br><br>
+
+                <input type="button" class="btn btn-danger" value="Description" onclick="window.top.showcustomalert('{% trans "The aim of the serious game for adults is to augment the capacity of the iManageCancer platform in promoting self-management through a stylised simulation game, and promote self-efficacy, i.e. the belief of the patients to be able to manage and to face their disease, also to help the patients deal with the psychological dimension of their disease, promote a healthier lifestyle and disease management. The game puts the user in the role of an authority figure who manages a small town where they help residents with their cancer related lifestyle problems. The user is forced to think critically and strategically in order to balance their resources and time, while also viewing the issues surrounding their cancer from a different perspective. The broad targets of the serious game are listed as:<ul><li>	Learn healthier life-styles (balanced diet, appropriate physical exercise) and increase problem solving skills (adjustment-oriented self-management approach)  </li><li>To create a game that educates patients (and individuals) to healthy behaviours while having fun </li><li>Improve self-efficacy in self-management skills through mastery and vicarious experience of the Avatar in the Serious game.</li></ul>" %}')";>
+		<br>
+		<input type="button" class="btn btn-success" value='{% trans "Download" %}' onclick="location.href = 'https://www.iphr.care/mha/app/download/latest?name=iMC_City';target='_blank'">
+            </div>
+
+
+         </div>
+      </div>
+   </div>
+</div>
+
+</body>
+{% endblock %}

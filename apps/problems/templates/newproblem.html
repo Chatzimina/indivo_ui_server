@@ -1,0 +1,634 @@
+{% extends 'problems/templates/base.html' %}
+{% block title %}new problem{% endblock %}
+{% block content %}
+{% load i18n %}
+
+
+<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+-->
+<link rel="stylesheet" type="text/css" href="{{ STATIC_HOME }}/datetimepicker-master/jquery.datetimepicker.css"/ >
+<script src="{{ STATIC_HOME }}/datetimepicker-master/jquery.js"></script>
+<script src="{{ STATIC_HOME }}/datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+
+<script src="{{ STATIC_HOME }}/js/jquery.autocomplete.js"></script>
+
+
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/smoothness/jquery-ui.css" type="text/css" media="all" />
+    <style>
+    .ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
+    .ui-timepicker-div dl { text-align: left; }
+    .ui-timepicker-div dl dt { height: 25px; margin-bottom: -25px; }
+    .ui-timepicker-div dl dd { margin: 0 10px 10px 65px; }
+    .ui-timepicker-div td { font-size: 90%; }
+    .ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
+    .ui-timepicker-rtl{ direction: rtl; }
+    .ui-timepicker-rtl dl { text-align: right; }
+    .ui-timepicker-rtl dl dd { margin: 0 65px 10px 10px; }
+	
+	.autocomplete{
+		background:white;
+		max-height:300px;
+		overflow-x:hidden;
+		overflow-y:scroll;
+		padding:4px;
+		font-size:18px;
+		border:1px solid silver;
+	}
+	
+	.autocomplete .selected{
+		background:#e5e6e6;
+	}
+    </style>
+
+
+		
+		<!--link rel="stylesheet" href="http://loadposts.totalwebsolutions.gr/javascript/pickadate/lib/themes/default.css">
+    <link rel="stylesheet" href="http://loadposts.totalwebsolutions.gr/javascript/pickadate/lib/themes/default.date.css">
+    <link rel="stylesheet" href="http://loadposts.totalwebsolutions.gr/javascript/pickadate/lib/themes/default.time.css">
+    <script src="http://loadposts.totalwebsolutions.gr/javascript/pickadate/lib/picker.js"></script>
+    <script src="http://loadposts.totalwebsolutions.gr/javascript/pickadate/lib/picker.date.js"></script>
+    <script src="http://loadposts.totalwebsolutions.gr/javascript/pickadate/lib/picker.time.js"></script>
+    <script src="http://loadposts.totalwebsolutions.gr/javascript/pickadate/lib/legacy.js"></script>
+	
+	 <script src="{{ STATIC_HOME }}/js/jquery.1.10.js"></script>
+		<link rel="stylesheet" type="text/css" href="{{ STATIC_HOME }}/js/DateTimePicker.css" />
+		<script type="text/javascript" src="{{ STATIC_HOME }}/js/DateTimePicker.js?1"></script-->
+
+<script>
+
+
+
+Date.prototype.addHours = function(h) {    
+   this.setTime(this.getTime() + (h*60*60*1000)); 
+   return this;   
+}
+
+function getReadableDate(ddate)
+{
+	var month = (ddate.getMonth()+1).toString();
+	if (parseInt(month) < 10) month = '0' + month;
+	
+	var day = ddate.getDate().toString();
+	if (parseInt(day) < 10) day = '0' + day;
+	
+	var hours = ddate.getHours().toString();
+	if (parseInt(hours) < 10) hours = '0' + hours;
+	
+	var minutes = ddate.getMinutes().toString();
+	if (parseInt(minutes) < 10) minutes = '0' + minutes;
+	
+	var ddateStr = ddate.getFullYear().toString() + '-' + month + '-' +day + ' ' + hours + ':' +minutes;
+	
+	return ddateStr;
+}
+
+var tzoffset = (new Date()).getTimezoneOffset()/60;
+var nextYear = (new Date().getFullYear() + 1).toString();
+$(document).ready(function() {
+	$('#date_onset_input').datetimepicker({
+		onSelectDate: function(date){            
+			//document.getElementById("date_onset").value = date.addHours(0).toISOString();
+			el('spDate1').innerHTML = '{% trans "Selected Date" %}: ' + document.getElementById("date_onset_input").value+ ' ' + document.getElementById("time_onset_input").value;
+			el('date_onset').value = document.getElementById("date_onset_input").value + 'T' + document.getElementById("time_onset_input").value + ':00.000Z';
+			this.hide();
+		},
+
+		format:'Y-m-d',
+		//startDate: this.time,
+		minDate:'1990/01/01',
+		maxDate:nextYear + '/12/31',
+		timepicker:false,
+	});
+	
+	$('#time_onset_input').datetimepicker({     
+		onSelectTime: function(time){
+			el('spDate1').innerHTML = '{% trans "Selected Date" %}: ' + document.getElementById("date_onset_input").value+ ' ' + document.getElementById("time_onset_input").value;
+			//2017-03-01T13:22:32.663Z
+			el('date_onset').value = document.getElementById("date_onset_input").value + 'T' + document.getElementById("time_onset_input").value + ':00.000Z';
+			this.hide();
+		},
+		step:5,
+		datepicker:false,
+		format:'H:i'
+    });
+	
+	$('#date_resolution_input').datetimepicker({
+		onSelectDate: function(date){            
+			//document.getElementById("date_onset").value = date.addHours(0).toISOString();
+			el('spDate2').innerHTML = '{% trans "Selected Date" %}: ' + document.getElementById("date_resolution_input").value+ ' ' + document.getElementById("time_resolution_input").value;
+			el('date_resolution').value = document.getElementById("date_resolution_input").value + 'T' + document.getElementById("time_resolution_input").value + ':00.000Z';
+			this.hide();
+		},
+
+		format:'Y-m-d',
+		//startDate: this.time,
+		minDate:'1990/01/01',
+		maxDate:nextYear + '/12/31',
+		timepicker:false,
+	});
+	
+	$('#time_resolution_input').datetimepicker({     
+		onSelectTime: function(time){
+			el('spDate2').innerHTML = '{% trans "Selected Date" %}: ' + document.getElementById("date_resolution_input").value+ ' ' + document.getElementById("time_resolution_input").value;
+			//2017-03-01T13:22:32.663Z
+			el('date_resolution').value = document.getElementById("date_resolution_input").value + 'T' + document.getElementById("time_resolution_input").value + ':00.000Z';
+			this.hide();
+		},
+		step:5,
+		datepicker:false,
+		format:'H:i'
+    });
+	
+	
+	/*
+    $('#date_resolution').datetimepicker({
+     onSelectDate: function(date){
+            //    date = date.replace(/ A/g, "T")
+      //date1=date
+      document.getElementById("date_resolution").value = date.addHours(0).toISOString();
+    },
+    onSelectTime: function(time){
+       //date1=time;
+
+      //document.getElementById("date_resolution").value = date1.toISOString();
+	  
+	   var dt = time;
+	  var thedate = dt.getFullYear() + '-' + (dt.getMonth()+1).toString() + '-' + dt.getDate() + ' ' + dt.getHours() + ':' + dt.getMinutes();
+	  //alert(thedate);
+	  document.getElementById("date_resolution").value = thedate;
+	  
+	  document.getElementById("date_resolution").value = time.addHours(-tzoffset).toISOString();
+	   var selDate = time.addHours(tzoffset);
+	  el('spDate2').innerHTML = '{% trans "Selected Date" %}: ' + selDate.toLocaleDateString() + ' ' + selDate.toLocaleTimeString();
+    },
+    //format:'d-m-Y H:m:s',
+	//format:'Y-m-d H:m',
+	//format:'Y-m-dTH:s.sssZ',
+	
+    minDate:'1990/01/01',
+    maxDate:'2018/01/01',
+    mask:'29:59 99',
+    step:15,
+    ampm: true
+    });
+*/
+
+
+    $('#problem_fullname').autocomplete({
+      serviceUrl: 'codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#problem_code').val(data.code);
+      }
+    });
+	
+	//alert(urlParam('dt'));
+	if (urlParam('dt') !== '')
+	{
+		el('date_onset_input').value = urlParam('dt');
+		el('spDate1').innerHTML = '{% trans "Selected Date" %}: ' + document.getElementById("date_onset_input").value+ ' ' + document.getElementById("time_onset_input").value;
+		el('date_onset').value = document.getElementById("date_onset_input").value + 'T' + document.getElementById("time_onset_input").value + ':00.000Z';
+	}
+	
+  });
+
+var complete=false;
+var returned=false;
+function validateForm()
+{
+	var problem_fullname=document.forms["myForm"]["problem_fullname"].value;
+	var date_onset = el('date_onset').value;
+	var date_resolution = el('date_resolution').value;
+
+	if (problem_fullname==null || problem_fullname=="")
+	  {
+	  alert({% trans "'Problem must be filled'" %});
+	  return false;
+	  }
+
+	if (date_onset==null || date_onset == "" || date_onset=="__:__ __")
+	  {
+	  alert('{% trans "Start date must be filled" %}');
+	  return false;
+	}
+	
+	if (el('date_resolution_input').value != '') {
+		var dateStr1 = el('date_onset_input').value.split('-');
+		var timeStr1 = el('time_onset_input').value.split(':');
+		var date1 = new Date( parseInt(dateStr1[0]), parseInt(dateStr1[1]),parseInt(dateStr1[2]), parseInt(timeStr1[0]), parseInt(timeStr1[1]));
+
+		var dateStr2 = el('date_resolution_input').value.split('-');
+		var timeStr2 = el('time_resolution_input').value.split(':');
+		var date2 = new Date( parseInt(dateStr2[0]), parseInt(dateStr2[1]),parseInt(dateStr2[2]), parseInt(timeStr2[0]), parseInt(timeStr2[1]));
+
+		if(!(date2 > date1))
+		{
+			alert('{% trans "End date must be greater than Onset date." %}');
+			return false;
+		}
+	}
+
+	return true;
+
+
+	complete=true;
+	//if (date_resolution==null || date_resolution=="")
+	//  {
+	//  alert("Allergen must be filled");
+	//  return false;
+	//}
+
+	returned=true;
+
+	return true;
+	window.close();
+}
+
+$( document ).ready(function() {
+
+
+        inIframe();
+        function inIframe () {
+                var div = document.getElementById('cancel_div');
+                var framediv = document.getElementById('frApp');
+var hideDiv = (window.parent.document.getElementById('frApp') != null);
+                //if(self==top){
+                if (hideDiv){
+
+//                if(self==top){
+                        div.style.visibility = 'hidden';
+                        framediv.style.visibility = 'visible';
+
+
+                }
+                else
+                {
+                        div.style.visibility = 'visible';
+                        framediv.style.visibility = 'hidden';
+                }
+        }
+
+});
+
+
+
+</script>
+<head>
+{% if jsonData %}
+        {% if jsonData.5.z_score < -1 or jsonData.5.z_score > 2 %} <!--Rumination (abnormal it should be over 2 or less -2 )-->
+        <style type="text/css">
+            *
+            {
+                font-size : 12px
+            }
+
+            .class1 *
+            {
+                font-size : 20px;
+            }
+			
+			.picker--opened .picker__frame {
+			position:absolute !important;
+				top: 10px !important;
+				--bottom: 0 !important;;
+			}
+			
+        </style>
+        {%endif%}
+{% endif %}
+
+        <meta charset="utf-8">
+        <title>Speak.js Demo</title>
+<!--        <script src="{{ STATIC_HOME }}/speakClient.js"></script>-->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+		
+<script>
+function populateHoursSelect(id)
+{
+	el(id).options[0] = new Option('{% trans "Hours" %}', '-1');
+	for (var i=0;i<24;i++)
+	{
+		var hours = i.toString();
+		if (i < 10) hours = '0' + hours;
+		el(id).options[el(id).options.length] = new Option(hours, i.toString());	
+	}
+}
+
+function populateMinutesSelect(id)
+{
+	el(id).options[0] = new Option('{% trans "Minutes" %}', '-1');
+	for (var i=0;i<60;i++)
+	{
+		var minutes = i.toString();
+		if (i < 10) minutes = '0' + minutes;
+		el(id).options[el(id).options.length] = new Option(minutes, i.toString());	
+	}
+}
+function populateDateTimeSelects()
+{
+	populateHoursSelect('selHours1');
+	populateHoursSelect('selHours2');
+	
+	populateMinutesSelect('selMinutes1');
+	populateMinutesSelect('selMinutes2');
+}
+AttachEvent(window, 'load', function(){populateDateTimeSelects();});
+</script>
+</head>
+<body>
+
+
+<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:95%;" id="divContainer" >
+<form name="myForm"  onsubmit="return validateForm()" method="post" action="" accept-charset="UTF-8"/> <!--ISO-8859-7">-->
+	<div class="row"  style="margin-left:5px;">
+		<div class="col-xs-12">
+			<h2>{% trans "New Problem" %}</h2>
+		</div>
+    </div>
+
+	<div class="row" style="height:10px"></div>
+	
+	<div class="row" style="margin-left:5px;" id="divFormElements">
+		<div class="form-group">
+			<label>{% trans "Problem" %} <span style="color:red;font-weight:bold;font-size:20px;">*</span></label>
+			<input type="text" name="code_fullname" id="problem_fullname"  class="form-control" style="width:100%;" />		
+			<input type="hidden" name="code" value="" id="problem_code" />
+		</div>
+		
+		<div class="form-group">
+			<label>{% trans "Onset" %} <span style="color:red;font-weight:bold;font-size:20px;">*</span></label>
+			<br/>
+			<input type="text" name="date_onset_input"  id="date_onset_input" style="width:200px;display:inline;" class="form-control date" autocomplete="off"/>
+			<input type="text" name="time_onset_input"  id="time_onset_input" style="width:100px;display:inline;" value="00:00" class="form-control date" autocomplete="off"/>
+			<input type="hidden" name="date_onset"  id="date_onset" style="width:200px;display:inline;" class="form-control" />
+			<div style="display:none;">
+			<select id="selHours1" style="display:inline;width:100px;" class="form-control"><select>
+			<select id="selMinutes1" style="display:inline;width:100px;" class="form-control"><select>
+			</div>
+			<br/>
+			
+			<span id="spDate1"></span>
+		</div>
+		
+		<div class="form-group">
+			<label>{% trans "End date" %} <span style="color:red;font-weight:bold;font-size:20px;"></span></label> 
+			<br><label>{% trans "(if there is no end date the problem would not me visible in calendar)" %} </label><br/>
+			<input type="text" name="date_resolution_input"  id="date_resolution_input" style="width:200px;display:inline;" class="form-control date" autocomplete="off"/>
+			<input type="text" name="time_resolution_input"  id="time_resolution_input" style="width:100px;display:inline;" value="00:00" class="form-control date" autocomplete="off"/>
+			<input type="hidden" name="date_resolution"  id="date_resolution" style="width:200px;display:inline;" class="form-control" />
+			<div style="display:none;">
+			<select id="selHours2" style="display:inline;width:100px;" class="form-control"><select>
+			<select id="selMinutes2" style="display:inline;width:100px;" class="form-control"><select>
+			</div>
+			<br/>
+			<span id="spDate2"></span>
+		</div>
+		
+		<div class="form-group">
+			<label>{% trans "Category" %}</label>
+			<select name="category" id="category" class="form-control">
+                <option value="Primary disease">{% trans "Primary disease" %}</option>
+                <option value="Co-morbidities">{% trans "Co-morbidities" %}</option>
+          </select>
+		</div>
+		<div class="form-group">
+			<label>{% trans "Details" %}</label>
+			<textarea name="comments" id="comments" cols="50" rows="3" wrap="soft" style="width: 100%" class="form-control"></textarea>
+			<input type="hidden" name="fromcalendar" id="fromcalendar" value="0" />
+		</div>
+		<div class="form-group">
+			<span style="color:red;font-weight:bold;font-size:20px;">*</span> <b>{% trans "Mandatory Fields" %}</b>
+		</div>
+		<div class="form-group">
+			<div id="frApp" name="frApp">
+
+
+<script>
+
+function setForm()
+ {
+ 
+	var frmHTML = '<form id="frmAddModel" name="frmAddModel" method="post" action="new_problem_calendar">';
+	frmHTML += '<input type="text" name="code_fullname" id="problem_fullname" value="'+ el('problem_fullname').value + '" class="form-control" style="width:100%" />';
+	frmHTML += '<input type="hidden" name="code" value="" id="problem_code"  value="'+ el('problem_code').value + '"/>';
+	
+	frmHTML += '<input type="text" name="date_onset" id="date_onset"  value="'+ el('date_onset').value + '" />';	
+	frmHTML += '<input type="text" name="date_resolution" id="date_resolution" value="'+ el('date_resolution').value + '" />';
+	
+	//frmHTML += '<input type="text" name="date_onset" id="date_onset"  value="2016-10-20T00:00:00Z" />';	
+	//frmHTML += '<input type="text" name="date_resolution" id="date_resolution" value="2016-10-21T00:00:00Z" />';
+	
+	
+	
+	
+	frmHTML += '<input type="text" name="category" id="category" value="'+ el('category').value + '"/>';
+	
+	frmHTML += '<input type="text" name="comments" id="comments" value="'+ el('comments').value + '" />';
+	
+	frmHTML += '<input type="hidden" name="fromcalendar" id="fromcalendar" value="1" />';
+	
+	frmHTML += '</form>';
+	
+	var iframe1 = window.top.document.getElementById('calendarFrame');
+	var iframe2 = window.top.document.getElementById('app_content_iframe1');
+	
+	if (!iframe2 || iframe2.src.indexOf('calendar') < 0)
+	{
+		var innerDoc = iframe1.contentDocument || iframe1.contentWindow.document;	
+		innerDoc.getElementById('divSubmitForm').innerHTML = frmHTML;
+		innerDoc.getElementById('frmAddModel').submit();
+	}
+	else
+	{
+		var innerDoc = iframe2.contentDocument || iframe2.contentWindow.document;	
+		innerDoc.getElementById('divSubmitForm').innerHTML = frmHTML;
+		innerDoc.getElementById('frmAddModel').submit();
+	}
+ }
+ 
+function dismissModal()
+{
+	var modalfooter = window.parent.document.getElementsByClassName('modal-footer')[0];
+	var button = modalfooter.getElementsByTagName('button')[0];
+	button.click();
+}
+
+function closeModal()
+{
+
+var valid = validateForm();
+
+if (!valid) return false;
+//alert('closing modal...');
+
+
+try {
+
+console.log("inside try");
+
+setForm();
+
+setTimeout('dismissModal();', 5000);
+return false;
+	
+	return true;
+var newProblemXml = '<Models xmlns="http://indivo.org/vocab/xml/documents#">  <Model name="Problem">    <Field name="startDate">2016-10-18T00:00:00Z</Field>    <Field name="endDate">2016-10-20T00:00:00Z</Field>    <Field name="name_title">Problem example</Field>    <Field name="name_system"></Field>    <Field name="name_identifier">562</Field>    <Field name="notes"></Field>     <Field name="category">Primary disease</Field>  </Model></Models>';
+
+newProblemXml = '<models xmlns="http://indivo.org/vocab/xml/documents#"><model name="Problem"><field name="startDate">2016-10-19T21:00:00.000Z</field><field name="endDate">2016-10-21T21:00:00.000Z</field><field name="name_title">test problem</field><field name="name_system">http://purl.bioontology.org/ontology/SNOMEDCT/</field><field name="name_identifier"></field><field name="notes"></field><field name="category">Primary disease</field></model></models>';
+
+
+newProblemXml = '<Models xmlns="http://indivo.org/vocab/xml/documents#">  <Model name="Medication">    <Field name="drugName_title">TRIBENZOR (Oral Pill)</Field>    <Field name="drugName_system">http://purl.bioontology.org/ontology/RXNORM/</Field>    <Field name="drugName_identifier">999995</Field>    <Field name="endDate">2016-10-25T21:00:00.000Z</Field>    <Field name="frequency_value">1</Field>    <Field name="frequency_unit"></Field>    <Field name="instructions"></Field>    <Field name="provenance_title">prescription</Field>    <Field name="provenance_system">http://smartplatforms.org/terms/codes/MedicationProvenance#</Field>    <Field name="provenance_identifier">prescription</Field>    <Field name="quantity_value"></Field>    <Field name="quantity_unit"></Field>    <Field name="startDate">2016-10-20T21:00:00.000Z</Field>    <Field name="fulfillments">      <Models>        <Model name="Fill">          <Field name="date">2016-10-05T21:00:00.000Z</Field>          <Field name="dispenseDaysSupply">10.0</Field>          <Field name="pbm"></Field>          <Field name="pharmacy_ncpdpid"></Field>          <Field name="pharmacy_org"></Field>          <Field name="pharmacy_adr_country"></Field>          <Field name="pharmacy_adr_city"></Field>          <Field name="pharmacy_adr_postalcode"></Field>          <Field name="pharmacy_adr_street"></Field>          <Field name="provider_dea_number"></Field>          <Field name="provider_npi_number"></Field>          <Field name="provider_email"></Field>          <Field name="provider_name_given"></Field>          <Field name="provider_name_family"></Field>          <Field name="provider_tel_1_type"></Field>          <Field name="provider_tel_1_number"></Field>          <Field name="provider_tel_1_preferred_p">true</Field>          <Field name="quantityDispensed_value"></Field>          <Field name="quantityDispensed_unit"></Field>        </Model>       </Models>    </Field>  </Model></Models>';
+
+//window.top.apicallpost(window.top.apiurl + 'records/{{record_id}}/documents/', newProblemXml, 'xml',  addProblem_success, onerror);
+var theurl = 'https://iphr.ics.forth.gr/indivoapi/records/{{record_id}}/documents/';
+//alert(theurl);
+
+newProblemXml = '<Models xmlns="http://indivo.org/vocab/xml/documents#">  <Model name="Problem">    <Field name="startDate">2016-10-21T00:00:00Z</Field>    <Field name="endDate">2016-10-22T00:00:00Z</Field>    <Field name="name_title">Problem example</Field>    <Field name="name_system"></Field>    <Field name="name_identifier">562</Field>    <Field name="notes"></Field>     <Field name="category">Primary disease</Field>  </Model></Models>';
+//newProblemXml = '{"__modelname__": "Problem","startDate": "2016-10-20T12:00:00Z","endDate": "2016-10-21T16:00:00Z","name_title": "Backache (finding)","name_system": "http://purl.bioontology.org/ontology/SNOMEDCT/","name_identifier": "161891005"}';
+window.top.apicallpost(theurl, newProblemXml, 'xml',  addProblem_success, window.top.onerror);
+
+//https://www.iphr.care/api/records/b56fbfab-71a5-408b-894f-00d07d01d022/documents/
+
+
+
+
+}
+
+catch(e){
+alert(e.message);
+}
+
+return false;
+}
+
+
+function addProblem_success(result){ 	
+		
+	alert('success');		  
+	var modalfooter = window.parent.document.getElementsByClassName('modal-footer')[0];
+	var button = modalfooter.getElementsByTagName('button')[0];
+	button.click();
+
+}
+
+function onerror(result){ 		  
+	alert('getUserAccount Error: ' + result);		  
+}
+
+
+</script>
+
+			 <div class="row">
+                        <div class="col-lg-12" style="text-align:center;">
+
+
+
+				 <!--input type="submit" value="{% trans 'Add New Problem' %}" onclick="closeModal();" style="width:50%;max-width:300px" class="btn btn-primary btn-lg"/-->
+				 <input type="submit" value="{% trans 'Add New Problem' %}" onclick="return closeModal();" style="width:50%;max-width:300px" class="btn btn-primary btn-lg"/
+				 <p><p>
+				 
+           		 </div>
+                        </div>
+
+			</div>
+			<div id="cancel_div" name=cancel_div">
+
+			<div class="row">
+			<div class="col-lg-12" style="text-align:center;">
+				<input type="submit" style="width:50%;max-width:300px" value="{% trans 'Add New Problem' %}" onclick="return validateForm();" class="btn btn-primary btn-lg"/>
+			</div>
+			</div>
+			<div class="row" style="height:10px"></div>
+			<div class="row">
+			<div class="col-lg-12" style="text-align:center;">
+				<button  style="width:50%;max-width:300px"  class="btn btn-warning btn-lg" onclick="location.href='./';return false;">{% trans "   Cancel" %}  </button>
+			</div>
+			</div>
+			</div>
+		</div>
+	</div>
+</form>
+	
+	
+	{% ifequal 1 0 %}
+
+        <div id="audio"></div>
+<div class="class1">
+
+<h2>{% trans "New Problem" %} &nbsp;&nbsp;<span style="font-size:0.7em; font-weight: normal; text-transform: uppercase">
+<!--[<a href="./">Cancel</a>]-->
+</span></h2>
+
+  <form name="myForm" onsubmit="return validateForm()"  method="post" action="">
+  
+    <table class="light form">
+      <col style="width: 20%"></col>
+      <col style="width: 80%"></col>
+      <tr>
+        <td>{% trans "Problem" %}</td>
+        <td>
+          <input type="text" name="code_fullname" id="problem_fullname" style="width: 100%" />
+          <input type="hidden" name="code" value="00000" id="problem_code" />
+        </td>
+      </tr>
+
+      <tr>
+        <td>{% trans "Onset" %}</td>
+        <td>
+		<input type="text" name="date_onset" class="date" id="date_onset" style="width: 100%" />
+		</td>
+      </tr>
+
+      <tr>
+        <td>{% trans "Resolution" %}</td>
+        <td><input type="text" name="date_resolution" class="date" id="date_resolution" style="width: 100%" /></td>
+      </tr>
+      <tr><td>{% trans "Category" %}</td>
+      <td> <select name="category" id="category">
+                <option value="Primary disease">{% trans "Primary disease" %}</option>
+                <option value="Co-morbidities">{% trans "Co-morbidities" %}</option>
+          </select>
+      </td>
+      </tr>
+      <tr>
+        <td>{% trans "Details" %}</td>
+        <td><textarea name="comments" cols="50" rows="3" wrap="soft" style="width: 100%"></textarea>
+		
+		</td>
+      </tr>
+    </table>
+
+    <br />
+   
+    <div style="text-align: center">
+<div id="iframe_div" name="iframe_div">
+
+ <input type="submit" value="{% trans "Add New Problem"%}" onclick="closeSelf();" style="width: 33%"/><p><p>
+
+</div>
+<div id="cancel_div" name=cancel_div">
+      <input type="submit" value="{% trans "Add New Problem"%}" style="width: 33%"/><p><p>
+<!--      <input type="button" style="width: 200px" onclick="history.go(-1);" value="    Cancel    ">-->
+
+    <div align="center"><a href="./"><button style="width: 200px">{% trans "   Cancel" %}  </button></a></div>
+ 
+</div>
+{% endifequal %}
+
+
+</div>
+</body>
+{% endblock %}
+<script>
+var fromcalendar = urlParam('fromcalendar');
+if(fromcalendar === '1')
+{
+	//var iframe1 = window.top.document.getElementById('calendarFrame');
+	//var iframe2 = window.top.document.getElementById('app_content_iframe1');
+	dismissModal();
+}
+</script>

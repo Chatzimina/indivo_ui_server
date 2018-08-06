@@ -1,0 +1,13 @@
+<Models xmlns="http://indivo.org/vocab/xml/documents#">
+  <Model name="Procedure">
+    <Field name="date_performed">{{date_performed}}</Field>
+    <Field name="name">{{name}}</Field>
+    <Field name="name_type">{{name_type}}</Field>
+    <Field name="name_value">{{name_value}}</Field>
+    <Field name="name_abbrev">{{name_abbrev}}</Field>
+    <Field name="provider_name">{{provider_name}}</Field>
+    <Field name="provider_institution">{{provider_institution}}</Field>
+    <Field name="location">{{location}}</Field>
+    <Field name="comments">{{comments}}</Field> 
+  </Model>
+</Models>

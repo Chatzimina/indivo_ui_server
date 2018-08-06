@@ -1,0 +1,59 @@
+{% extends 'problems/templates/base.html' %}
+{% block title %}problem list{% endblock %}
+{% block content %}
+
+{% if record_id %}
+<script>
+  Indivo.Auth.setToken("{{surl_credentials.token}}","{{surl_credentials.secret}}");
+</script>
+{% endif %}
+
+
+
+
+{% if record_id %}
+  <script>
+    Indivo.Widget.DocumentAccess.add('{{record_id}}', '{{problem_id}}');
+  </script>
+{% endif %}
+<head>
+     {% if jsonData != " " %}
+
+         {% if jsonData.5.z_score < -2 or jsonData.5.z_score > 2 %} <!-- Rumination (abnormal it should be over 2 or less -2 )-->
+        <style type="text/css">
+            *
+            {
+                font-size : 12px
+            }
+
+            .class1 *
+            {
+                font-size : 20px;
+            }
+        </style>
+	{% endif %}
+     {% endif %}
+</head>
+
+<div class="class1">
+<h2>{{problem.name}} &nbsp;&nbsp;&nbsp;</h2>
+<h4>(SNOMEDCT:{{problem.name_abbrev}})</h4>
+
+<table class="light" style="width: 66%; margin: 2em 0;">
+  <tbody>
+    <col style="width: 25%"></col>
+    <col style="width: 75%"></col>
+    <tr><th scope="row">Date Performed</th><td>{{problem.date_performed}}</td></tr>
+    <tr><th scope="row">Provider Name</th><td>{{problem.provider_name}}</td></tr>
+    <tr><th scope="row">Provider Institution</th><td>{{problem.provider_institution}}</td></tr>
+    <tr><th scope="row">Location</th><td>{{problem.location}}</td></tr>
+    <tr><th scope="row">Comments</th><td>{{problem.comments}}<br> (SNOMEDCT:{{problem.name_value}})</td></tr>
+  </tbody>
+</table>
+
+<h3>Additional Information</h3>
+<div class="details">Created at {{meta.created_at}}</div>
+</div><br>
+
+<div align="center"><a href="./"><button style="width: 200px"> Back </button></a></div>
+{% endblock %}

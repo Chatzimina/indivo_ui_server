@@ -1,0 +1,179 @@
+{% extends 'medications/templates/base.html' %}
+{% block title %}medication list{% endblock %}
+{% block content %}
+
+<script>
+
+
+window.alert = function(message){
+    $(document.createElement('div'))
+        .attr({title: 'Attention alert','class': 'alert'})
+        .html(message)
+        .dialog({
+            buttons: {OK: function(){$(this).dialog('close');}},
+            close: function(){$(this).remove();},
+            draggable: true,
+            modal: true,
+            resizable: true,
+            width: 'auto'
+        });
+};
+</script>
+<script>
+function check()
+{
+var content = document.getElementById("request").innerHTML ;
+alert(content);
+}
+check();
+</script>	
+
+<!--<style type="text/css">
+ 
+li {font-size:18px;
+    text-align: left;} 
+</style>-->
+
+<head>
+        {% if jsonData.6.z_score < 0%} <!--physical abilities (abnormal it should be over 2 or less -2 )-->
+        <style type="text/css">
+            *
+            {
+                font-size : 12px
+            }
+
+            .class1 *
+            {
+                font-size : 16.5px;
+            }
+        </style>
+        {%endif%}
+        <meta charset="utf-8">
+        <title>Speak.js Demo</title>
+        <script src="{{ STATIC_HOME }}/speakClient.js"></script>
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<div class="class1">
+
+<body onload="check()">
+  <h2>Medications List {% if in_carenet %}(Shared){% endif %}</h2>
+data:{{data.0.drugNameB}} 
+data2:{{data.drugNameB}}
+{{data}}
+{% for f in data%}
+
+new: {{f.drugNameA}}
+new2"{{data.0.drugNameA}}
+new3:{{data.1.drugNameA}}
+{% endfor %}
+  {% ifequal num_problems 0 %}
+  {% else %}
+    <table class="light">
+      <thead>
+        <tr>
+          <th scope="col"><b>Name</b></th>
+          <th><b>Quantity</b></th>
+          <th><b>Frequency</b></th>
+	  <th><b>Instructions</b></th>
+	  <th><b>Started on</b></th>
+	  <th><b>Stoped on</b></th>
+	  <th><b>Last filled</b></th>
+	  <th><b>Options</b></th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="3" style="text-align: right">{{num_medications}} medication{% ifequal num_medications 1 %}{% else %}s{% endifequal %}</td>
+        </tr>
+      </tfoot>
+      <tbody>
+      {% for drugs in data %}
+        {% for p in medications %}
+	 
+          <tr class="{% cycle 'odd' 'even' %}">         
+	         {% if p.drugName_title == drugs.drugNameA or p.drugName_title == drugs.drugNameB %}
+                        <!--{#{% if request.0.requestResult != "Drugs with the specified names are not found in the database!" and request.0.requestResult != "No Interactions are found between the two drugs!" and request.0.requestResult.strip %}   #}
+-->
+                        <span id="request" style="display:none">There are interactions between: <ul><align=right><li>{{drugs.drugNameA}}  <br><br> <li>{{drugs.drugNameB}} <br><br> </ul>  Details: <br><br> {{data}} </span>
+                        <td bgcolor="#bf0000" ><a href="{{p.id}}"><font color="#FFECE9">{{p.drugName_title}}</a></td>
+                        <td bgcolor="#bf0000" ><font color="#FFECE9">{{p.quantity_value}}{{p.quantity_unit}}</td>
+                        <td bgcolor="#bf0000" ><font color="#FFECE9">{{p.frequency_value}}{{p.frequency_unit}}</td>
+                        <td bgcolor="#bf0000"><font color="#FFECE9">{{p.instructions}}</td>
+                        <td bgcolor="#bf0000"><font color="#FFECE9">{{p.startDate}}</td>
+                        <td bgcolor="#bf0000"><font color="#FFECE9">{{p.endDate}}</td>
+                        <td bgcolor="#bf0000"><font color="#FFECE9">{% regroup p.fulfillments|dictsortreversed:"date" by date as date_list %}
+
+                        {% for date in date_list|slice:":1" %}
+                                <p>{{ date.grouper }}</p>
+                        {% endfor %}</td></font>
+                        <td bgcolor="#bf0000"><a href="edit/{{p.id}}"><button style="width:70px">edit</button></a>
+                        <a href="delete/{{p.id}}"><button style="width:70px">delete</button></a>
+                        </td>
+                        </tr>
+                  {% else %}
+                                        <td><a href="{{p.id}}">{{p.drugName_title}}</a></td>
+                                        <td>{{p.quantity_value}}{{p.quantity_unit}}</td>
+                                        <td>{{p.frequency_value}}{{p.frequency_unit}}</td>
+                                        <td>{{p.instructions}}</td>
+                                        <td>{{p.startDate}}</td>
+                                        <td>{{p.endDate}}</td>
+                                        <td>{% regroup p.fulfillments|dictsortreversed:"date" by date as date_list %}
+                                        {#{{date_list.0}}#}
+                                        {% for date in date_list|slice:":1" %}
+                                        <p>{{ date.grouper }}</p>
+                                        {% endfor %}</td>
+
+                                        <td><a href="edit/{{p.id}}"><button style="width:70px">edit</button></a>
+                                        <a href="delete/{{p.id}}"><button style="width:70px">delete</button></a>
+
+                                        </td>
+                                </tr>
+
+                    {% endif %}
+              <!-- {# {% else %}
+            	<td><a href="{{p.id}}">{{p.drugName_title}}</a></td>
+            	<td>{{p.quantity_value}}{{p.quantity_unit}}</td>
+            	<td>{{p.frequency_value}}{{p.frequency_unit}}</td>
+   	    	<td>{{p.instructions}}</td>
+	    	<td>{{p.startDate}}</td>
+	    	<td>{{p.endDate}}</td>
+	        <td>{% regroup p.fulfillments|dictsortreversed:"date" by date as date_list %}
+		{#{{date_list.0}}#}    {#
+		{% for date in date_list|slice:":1" %}
+  		   <p>{{ date.grouper }}</p>
+  		{% endfor %}</td> 
+    		    {#{% for item in date.list|slice:":1" %}#}
+			{#{% if forloop.last %}#}
+			{#{% if forloop.counter lt 1 %}#}
+		{#	{% if forloop.counter == 1 %}#}
+            			{#{{ item.date }}#}
+			{#{% endif %}#}
+			{#{% endif %}#}
+        	    {#{% endfor %}#}
+	        {#{% endfor %}#}
+	    {#{% for i in p.fulfillments %}#}
+		{#{{ p.fulfillments|dictsort:"date" }}#}
+            {#{% endfor %}#}-->
+	        <td><a href="edit/{{p.id}}"><button style="width:70px">edit</button></a>
+                <a href="delete/{{p.id}}"><button style="width:70px">delete</button></a>
+	   <!-- <a href="addFill/{{p.id}}"><button>add fill</button></a>-->
+	    </td>
+          </tr>
+          {% endfor %} 
+         {% endfor %}
+      </tbody>
+    </table>
+  {% endifequal %}
+ 
+
+  {% if not in_carenet %}
+  <p><a href="new">[add a medication]</a></p>
+  <!--<p><a href="test">[test message send]</a></p>-->
+  <p><a href="archived">[deleted medications]</a></p>
+
+  {% endif %}
+</body>
+{% endblock %}

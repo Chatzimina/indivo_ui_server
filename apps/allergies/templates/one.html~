@@ -1,0 +1,139 @@
+{% extends 'allergies/templates/base.html' %}
+{% block title %}allergy list{% endblock %}
+{% block content %}
+{% load i18n %}
+<head> 
+{% if jsonData != " " %}
+        {% if jsonData.5.z_score < -2 or jsonData.5.z_score > 2 %} <!--Rumination (abnormal it should be over 2 or less -2 )-->
+        <style type="text/css">
+            *
+            {
+                font-size : 12px
+            }
+
+            .class1 *
+            {
+                font-size : 20px;
+            }
+        </style>
+        {%endif%}
+     {% endif %}
+
+
+
+</head>
+
+{% if record_id %}
+<script>
+  Indivo.Auth.setToken("{{surl_credentials.token}}","{{surl_credentials.secret}}");
+</script>
+{% endif %}
+<body>
+
+<script>
+   function setPageSize()
+   {   	
+   	if (el('divList'))el('divList').style.width = (el('divContainer').offsetWidth-0).toString() + 'px';   	
+	if (window.top.document.getElementById('app_container'))
+		el('divContainer').style.width = (window.top.document.getElementById('app_container').offsetWidth-50).toString() + 'px';	
+   }
+   
+   setInterval('setPageSize();', 500);
+</script>
+<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:100%;overflow-x:hidden;" id="divContainer" >
+
+	<div class="row" style="height:20px"></div>
+	<div class="row">
+		<div class="form-group" style="text-align:center;">
+			<a href="./"><button type="button" style="width:50%;" class="btn btn-primary btn-lg">{% trans " Back" %}</button></a>
+		</div>	
+	</div>
+	<div class="row" style="height:10px"></div>
+	<div class="row"  style="margin-left:5px;">
+		<div class="col-xs-12">
+		<h2>{{allergy.allergic_reaction_title}} &nbsp;&nbsp; &nbsp; {{allergy.allergic_reaction_identifier}}</h2>
+		</div>
+    </div>
+	
+	<div class="row" style="height:10px"></div>
+	<div class="row" style="margin-left:5px;">		
+		<div class="col-lg-6" style="border:0px solid black;">
+			<div class="form-group">
+				<label>{% trans "Allergen type" %}&nbsp;</label>{{allergy.category_title}}
+			</div>
+			<div class="form-group">
+				<label>{% trans "Drug class allergen" %}&nbsp;</label>{{allergy.drug_class_allergen_title}}
+			</div>
+			<div class="form-group">
+				<label>{% trans "Severity" %}&nbsp;</label>{{allergy.severity_title}}
+			</div>
+			<div class="form-group">
+			<h3>Additional Information</h3>
+			<div class="details">{% trans "Created at " %}{{meta.created_at}}</div>
+			</div>
+		</div>
+		<div class="col-lg-6" style="float:left;border:0px solid black;">
+			<div style="float:right;">
+			{% if record_id %}
+			  <script>
+				Indivo.Widget.DocumentAccess.add('{{record_id}}', '{{allergy_id}}');
+			  </script>
+			{% endif %}
+			</div>
+		</div>
+	</div>
+	
+	<div class="row" style="height:10px"></div>
+	<div class="row">
+		<div class="form-group" style="text-align:center;">
+			<a href="./"><button type="button" style="width:50%;" class="btn btn-primary btn-lg">{% trans " Back" %}</button>
+		</div>	
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+{% ifequal 1 0%}
+
+ 
+<div class="class1">
+
+<h2>{{allergy.allergic_reaction_title}} &nbsp;&nbsp; &nbsp; {{allergy.allergic_reaction_identifier}}<span style="font-size:0.7em;"> </span></h2>
+
+{% if record_id %}
+  <script>
+    Indivo.Widget.DocumentAccess.add('{{record_id}}', '{{allergy_id}}');
+  </script>
+{% endif %}
+
+<table class="light" style="width: 66%; margin: 2em 0;">
+  <tbody>
+    <col style="width: 25%"></col>
+    <col style="width: 75%"></col>
+<!--    <tr><th scope="row">Allergic reaction</th><td>{{allergy.allergic_reaction_title}}</td></tr>-->
+ <!--<tr><th scope="row">Allergic reaction</th><td>{{allergy.allergic_reaction_identifier}}</td></tr>-->
+    <tr><th scope="row">{% trans "Allergen type" %}</th><td>{{allergy.category_title}}</td></tr>
+<!--<tr><th scope="row">Allergen type</th><td>{{allergy.category_identifier}}</td></tr>-->
+    <tr><th scope="row">{% trans "Drug class allergen" %}</th><td>{{allergy.drug_class_allergen_title}}</td></tr>
+    <!--<tr><th scope="row">Drug class allergen</th><td>{{allergy.drug_class_allergen_identifier}}</td></tr>-->
+    <tr><th scope="row">{% trans "Severity" %} </th><td>{{allergy.severity_title}}</td></tr>
+    <!--<tr><th scope="row">Severity </th><td>{{allergy.severity_identifier}}</td></tr>-->
+  </tbody>
+</table>
+
+<h3>Additional Information</h3>
+<div class="details">{% trans "Created at " %}{{meta.created_at}}</div>
+
+<div align="center"><a href="./"><button style="width: 200px">{% trans " Back" %} </button></a></div>
+
+</div>
+{% endifequal %}
+</body>
+{% endblock %}

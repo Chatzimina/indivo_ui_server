@@ -1,0 +1,298 @@
+{% extends 'problems/templates/base.html' %}
+{% block title %}procedure list{% endblock %}
+{% block content %}
+{% load i18n %}
+
+  
+
+<head>
+{% if record_id %}
+<script>
+  Indivo.Auth.setToken("{{surl_credentials.token}}","{{surl_credentials.secret}}");
+</script>
+{% endif %}
+
+
+
+    {% if jsonData != " " %}
+
+	{% if jsonData.5.z_score < -2 or jsonData.5.z_score > 2 %} <!--physical abilities (abnormal it should be over 2 or less -2 )-->
+	<style type="text/css">
+            *
+            {
+                font-size : 12px
+            }
+
+            .class1 *
+            {
+                font-size : 20px;
+            }
+        </style>
+        {%endif%}
+     {% endif %}
+        <meta charset="utf-8">
+        <title>Speak.js Demo</title>
+<!--        <script src="/apps/procedures/static/speakClient.js"></script>-->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+<body>
+
+<script>
+
+var i=0;
+var array=[];
+var carenets=[];
+var uniqueList=[];
+function checkSharing2(){
+
+{% for p in problems %}
+
+var url = '/records/{{record_id}}/documents/{{p.id}}/carenets/';
+
+ indivo_api_call("GET", url, function(result) {
+
+
+      var carenets_xml = $(result).find('Carenets').find('Carenet');
+      carenets = [];
+      carenets_xml.each(function(i, carenet) {
+        carenets.push({'id': $(carenet).attr('id'), 'name' : $(carenet).attr('name')});
+        uniqueList.push({'problem_id':'{{p.id}}','id': $(carenet).attr('id'), 'name' : $(carenet).attr('name')});
+
+      });
+
+
+    });
+
+
+{% endfor %}
+
+}
+
+function shareNew2(){
+var problems_ids=[];
+var problem_to_share=[];
+
+if(uniqueList.length >0){
+console.log('inside');
+        for(m=0; m<uniqueList.length ;m++){
+
+                problems_ids.push(uniqueList[m]['problem_id']);
+
+        }
+
+        {%for p in problems %}
+
+                if (problems_ids.indexOf('{{p.id}}')<=-1){
+                        console.log('sdsds')
+                        for (j=0; j<carenets.length; j++){
+
+                                var url =  "/records/{{record_id}}/documents/{{p.id}}/carenets/"+carenets[j]['id']
+                                indivo_api_call("PUT",url, function(result){
+                                console.log('ok')
+                                });
+
+
+                        }
+                }
+        {%endfor%}
+
+}
+
+var iframe = document.getElementsByClassName('indivo')[0];
+iframe.src=iframe.src;
+}
+
+
+
+   function setPageSize()
+   {   	
+   	if (el('divList'))el('divList').style.width = (el('divContainer').offsetWidth-0).toString() + 'px';   	
+	if (window.top.document.getElementById('app_container'))
+		el('divContainer').style.width = (window.top.document.getElementById('app_container').offsetWidth-0).toString() + 'px';	
+   }
+   
+   setInterval('setPageSize();', 500); 
+</script>
+<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:100%;overflow-x:hidden;" id="divContainer" >
+	<div class="row"  style="margin-left:5px;">
+		<div class="col-xs-12">
+		<h2>{% trans "Procedures List" %} {% if in_carenet %}(Shared){% endif %}</h2>
+		</div>
+    </div>
+	
+	{% if not in_carenet %}
+	<div class="row"  style="height:10px;"></div>
+   <div class="row"  id="divButtons" style="width:400px;margin-left:5px;">
+      <div class="col-xs-5" style="text-align:left;">
+         <a href="new" class="btn btn-success btn-sm" >{% trans "add a procedure" %}</a>
+      </div>
+      <div class="col-xs-5" style="text-align:left;">
+         <a href="archived" class="btn btn-danger btn-sm">{% trans "deleted procedures" %}</a>
+      </div>
+	   <div class="col-xs-1" ></div>
+   </div>
+   <div class="row"  style="height:10px;"></div>
+   {% endif %}
+	
+	<div class="row"  style="height:10px;"></div>
+	
+	{% ifequal num_problems 0 %}
+	 <table class="light">
+      <thead>
+        <tr>
+          <th scope="col"><b>{% trans "Name" %}</b></th>
+          <th><b>{% trans "Date performed" %}</b></th>
+          <th><b>{% trans "Hospital" %}</b></th>
+          {% if not in_carenet %}
+          <th><b>{% trans "Modify/Delete" %}</b></th>
+          {% endif %}
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="3" style="text-align: right">{{num_problems}} procedure{% ifequal num_problems 1 %}{% else %}s{% endifequal %}</td>
+        </tr>
+      </tfoot>
+      <tbody>
+
+	{% else %}
+	<div class="row" id="divList" style="margin-left:5px;">
+      <div class="col-xs-12"  id="divList1">
+         <div class="row" style="border:1px solid silver;">
+            <div class="col-xs-3">
+               <b>{% trans "Name" %}</b>
+            </div>
+            <div class="col-xs-3">
+               <b>{% trans "Date performed" %}</b>
+            </div>
+            <div class="col-xs-3">
+               <b>{% trans "Hospital" %}</b>
+            </div>
+			<div class="col-xs-3">
+				{% if not in_carenet %}
+				  <b>{% trans "Instructions" %}</b>
+				  {% endif %}               
+            </div>
+			
+         </div>
+		 {% for p in problems %}
+		 <div class="row" style="border:1px solid silver;">
+			<div class="col-xs-3">				
+				{% if jsonData != " " %}
+			 
+					{% if jsonData.5.z_score < -2 or jsonData.5.z_score > 2 %}
+						   <a href="{{p.id}}">{{p.name_type}}</a><input type="image" height="5%" width="5%" align="right" src="http://iapetus.ics.forth.gr/apps/procedures/static/sound.png" onclick="speak('{{p.name}}',{ speed: 125})" />
+						{% else %}
+						   <a href="{{p.id}}">{{p.name_type}}></a>
+					{% endif %}
+				{% else %}
+						 <a href="{{p.id}}">{{p.name_type}}</a>						
+				{% endif %}
+			</div>
+            <div class="col-xs-3">
+				<script>
+			   var startDate = '{{p.date_performed}}';
+			   document.write(startDate.split('T')[0]);
+			</script>
+			</div>
+            <div class="col-xs-3">
+				{{p.provider_institution}}
+			</div>
+            <div class="col-xs-3">
+		 {% if not in_carenet %}
+
+				<a href="edit/{{p.id}}"><button class="btn btn-sm btn-primary" style="width:90%;max-width:100px;">{% trans "edit" %}</button></a>
+				<a href="delete/{{p.id}}"><button class="btn btn-sm btn-danger"  style="width:90%;max-width:100px;">{% trans "delete" %}</button></a>
+		{% endif %}
+			</div>
+		 </div>
+		 
+		 {% endfor %}
+		 <div class="row">
+			<div class="col-xs-12" align="right">{{num_problems}} procedure{% ifequal num_problems 1 %}{% else %}s{% endifequal %}</div>
+		 </div>
+    </div>
+</div>
+     {% if ids %}
+	
+   <div style="float:left;">
+
+                          <script>
+                                Indivo.Widget.DocumentAccessMulti.add('{{record_id}}', '{{ids}}');
+                          </script>
+
+                        </div>
+
+
+     {% endif %}
+
+<script>
+//        setTimeout('checkSharing2();shareNew2()');
+
+//'checkSharing("{{problems}}","{{record_id}}");shareNew("{{record_id}}");',10);
+</script>
+
+
+ 
+{% ifequal 1 0 %}
+
+	  <h2>{% trans "Procedures List" %} {% if in_carenet %}(Shared){% endif %}</h2>
+	  
+  <div id="audio"></div>
+<div class="class1">
+  {% ifequal num_problems 0 %}
+  {% else %}
+    <table class="light">
+      <thead>
+        <tr>
+          <th scope="col"><b>{% trans "Name" %}</b></th>
+          <th><b>{% trans "Date performed" %}</b></th>
+          <th><b>{% trans "Hospital" %}</b></th>
+          {% if not in_carenet %}
+          <th><b>{% trans "Modify/Delete" %}</b></th> 
+          {% endif %}
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="3" style="text-align: right">{{num_problems}} procedure{% ifequal num_problems 1 %}{% else %}s{% endifequal %}</td>
+        </tr>
+      </tfoot>
+      <tbody>
+        {% for p in problems %}
+          <tr class="{% cycle 'odd' 'even' %}">
+        {% if jsonData != " " %}
+	 
+        	{% if jsonData.5.z_score < -2 or jsonData.5.z_score > 2 %}
+                   <td><a href="{{p.id}}">{{p.name_type}}</a><input type="image" height="5%" width="5%" align="right" src="http://iapetus.ics.forth.gr/apps/procedures/static/sound.png" onclick="speak('{{p.name}}',{ speed: 125})" /></td>
+                {% else %}
+                   <td><a href="{{p.id}}">{{p.name_type}}</td>
+	        {% endif %}
+        {% else %}
+                 <td><a href="{{p.id}}">{{p.name_type}}</td>
+                
+        {% endif %}
+            <td>{{p.date_performed}}</td>
+            <td>{{p.provider_institution}}</td>
+            {% if not in_carenet %}
+            <td><a href="edit/{{p.id}}"><button>{% trans "edit" %}</button></a>
+           	<a href="delete/{{p.id}}"><button>{% trans "delete" %}</button></a></td>
+             {% endif %}
+          </tr> 
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endifequal %}
+
+  {% if not in_carenet %}
+   <p><a href="new">{% trans "[add a procedure]" %}</a></p>
+   <p><a href="archived">{% trans "[deleted procedures]" %}</a></p>
+  {% endif %}
+</div>
+
+
+{% endifequal %}
+{% endifequal %}  
+{% endblock content %}

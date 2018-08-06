@@ -1,0 +1,619 @@
+{% extends 'problems/templates/base.html' %}
+{% block title %}problem list{% endblock %}
+{% block content %}
+{% load i18n %}
+
+<link rel="stylesheet" type="text/css" href="{{ STATIC_HOME }}/datetimepicker-master/jquery.datetimepicker.css"/ >
+
+
+<script src="{{ STATIC_HOME }}/js/jquery.autocomplete.js"></script>
+<script src="{{ STATIC_HOME }}/datetimepicker-master/jquery.js"></script>
+<script src="{{ STATIC_HOME }}/datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+
+ 
+
+
+<script>
+
+$(document).ready(function() {
+if('{{clinicianquestion.treatmentC}}'=="true"){
+	document.getElementById("treatmentCCheck").checked = true;
+	document.getElementById('treatmentC').value = "true";
+
+}
+else{
+	document.getElementById("treatmentCCheck").checked = false;
+	document.getElementById('treatmentC').value = "false";
+}	
+if('{{clinicianquestion.treatmentR}}'=="true"){
+        document.getElementById("treatmentRCheck").checked = true;
+	document.getElementById('treatmentR').value = "true";
+
+}
+else{
+
+	document.getElementById("treatmentRCheck").checked = false;
+	document.getElementById('treatmentR').value = "false";
+}
+
+if('{{clinicianquestion.treatmentS}}'=="true"){
+        document.getElementById("treatmentSCheck").checked = true;
+	document.getElementById('treatmentS').value = "true";
+
+}
+else{
+
+document.getElementById("treatmentSCheck").checked = false;
+document.getElementById('treatmentS').value = "false";
+
+}
+
+
+if ('{{clinicianquestion.diagnosis}}'=='other'){
+        var diagnosisExtra='{{clinicianquestion.diagnosisExtra}}';
+
+        document.getElementById('diagnosisExtra').value = diagnosisExtra;
+	document.getElementById('other_div').style.display = "block";
+
+
+}
+
+
+
+$("#treatmentCCheck").change(function() {
+    if(this.checked) {
+          document.getElementById('treatmentC').value = "true";
+    } else {
+	   document.getElementById('treatmentC').value = "false";
+    }
+});
+
+
+$("#treatmentRCheck").change(function() {
+    if(this.checked) {
+          document.getElementById('treatmentR').value = "true";
+    } else {
+         document.getElementById('treatmentR').value = "false";
+    }
+});
+
+
+$("#treatmentSCheck").change(function() {
+    if(this.checked) {
+          document.getElementById('treatmentS').value = "true";
+    } else {
+         document.getElementById('treatmentS').value = "false";
+    }
+});
+
+ function showDiv(elem){
+
+          if(elem.value == 'other'){
+
+                document.getElementById('other_div').style.display = "block";
+        }
+}
+
+
+
+
+  });
+ 
+var complete=false;
+var returned=false;
+function validateForm()
+{
+
+var diagnosisAge=document.forms["myForm"]["diagnosisAge"].value;
+var diagnosis=document.forms["myForm"]["diagnosis"].value;
+var treatmentC=document.forms["myForm"]["treatmentC"].value;
+var treatmentR=document.forms["myForm"]["treatmentR"].value;
+var treatmentS=document.forms["myForm"]["treatmentS"].value;
+if(!isNumeric(diagnosisAge)){
+  alert({% trans "'Age of diagnosis must be a number'" %});
+  return false;
+
+}
+if (diagnosisAge==null || diagnosisAge=="")
+  {
+  alert({% trans "'Age of diagnosis must be filled'" %});
+  return false;
+  }
+if (diagnosis=='other'){
+        var diagnosisExtra=document.forms["myForm"]["diagnosisExtra"].value;
+        if (diagnosisExtra==null || diagnosisExtra==""){
+                 alert({% trans "'Age of diagnosis must be filled'" %});
+                 return false;
+        }
+        else{
+                 document.getElementById('treatmentC').value = diagnosisExtra;
+
+        }
+}
+if (treatmentC=='false' && treatmentR=='false' && treatmentS=='false')
+  {
+  alert({% trans "'Please select one treatment'" %});
+  return false;
+}
+complete=true;
+
+returned=true;
+
+return true;
+window.close();
+}
+
+function isNumeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+
+
+</script>
+<head>
+<style>
+.form-group input[type="checkbox"] {
+    display: none;
+}
+
+.form-group input[type="checkbox"] + .btn-group > label span {
+    width: 20px;
+}
+
+.form-group input[type="checkbox"] + .btn-group > label span:first-child {
+    display: none;
+}
+.form-group input[type="checkbox"] + .btn-group > label span:last-child {
+    display: inline-block;
+}
+
+.form-group input[type="checkbox"]:checked + .btn-group > label span:first-child {
+    display: inline-block;
+}
+.form-group input[type="checkbox"]:checked + .btn-group > label span:last-child {
+    display: none;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:95%;" id="divContainer" >
+<form name="myForm"  onsubmit="return validateForm()" method="post" action="" accept-charset="UTF-8"/> <!--ISO-8859-7">-->
+        <div class="row"  style="margin-left:5px;">
+                <div class="col-xs-12">
+                        <h2>{% trans "Edit Cancer Clinical Assessment Questionnaire" %}</h2>
+                </div>
+    </div>
+
+        <div class="row" style="height:10px"></div>
+
+
+
+        <div class="row" style="margin-left:5px;" id="divFormElements">
+
+
+		 <div class="form-group" style="width:93%">
+                        <label>{% trans "Patient name" %}</label>
+
+                        <input type="text" name="patientName" id="patientName"  value="{{clinicianquestion.patientName}}" class="form-control" style="width:100%" readonly />
+                </div>
+	         <input type="hidden" name="patientId" id="patientId"  value="{{clinicianquestion.patientId}}" class="form-control" style="width:93%" />
+
+                <div class="form-group" style="width:93%">
+                        <label>{% trans "Age at diagnosis" %}</label>
+                        <input type="text" name="diagnosisAge" id="diagnosisAge" value="{{clinicianquestion.diagnosisAge}}" class="form-control" style="width:100%" />
+                </div>
+
+                  <div class="form-group" style="width:93%">
+                        <label>{% trans "Gender" %}</label>
+                        <select name="gender" id="gender" value="{{clinicianquestion.gender}}" class="form-control">
+                        <option value="male">{% trans "Male" %}</option>
+                        <option value="female">{% trans "Female" %}</option>
+                        </select>
+                </div>
+
+		<script>
+
+			var element = document.getElementById("gender");
+			element.value = "{{clinicianquestion.gender}}" ;
+		</script>
+
+                 <div class="form-group" style="width:93%">
+                        <label>{% trans "Diagnosis" %}</label>
+                        <select name="diagnosis" id="diagnosis" value="{{clinicianquestion.diagnosis}}" class="form-control" onchange="showDiv(this)">
+                        <option value="all">{% trans "ALL " %}</option>
+                        <option value="aml">{% trans "AML" %}</option>
+                        <option value="cns tumour">{% trans "CNS tumour" %}</option>
+                        <option value="m. hodkin">{% trans "M. Hodgkin" %}</option>
+                        <option value="nhl">{% trans "NHL" %}</option>
+                        <option value="neuroblastoma">{% trans "Neuroblastoma" %}</option>
+                        <option value="nephroblastoma">{% trans "Nephroblastoma" %}</option>
+                         <option value="hepatoblastoma">{% trans "Hepatoblastoma" %}</option>
+                         <option value="retinoblastoma">{% trans "Retinoblastoma" %}</option>
+                         <option value="soft tissue sarcoma">{% trans "Soft tissue sarcoma" %}</option>
+                         <option value="osteosarcoma">{% trans "Osteosarcoma" %}</option>
+                         <option value="ewing sarcoma">{% trans "Ewing Sarcoma" %}</option>
+                         <option value="germ cell tumour">{% trans "Germ cell tumour" %}</option>
+                         <option value="other">{% trans "Other (if other, pleace specify)" %}</option>
+                        </select>
+                </div>
+		 <script>
+
+                        var element = document.getElementById("diagnosis");
+                        element.value = "{{clinicianquestion.diagnosis}}" ;
+                </script>
+
+
+                <div id="other_div" style="display: none;">
+
+                        <div class="form-group" style="width:93%">
+                                <label>{% trans "Specify diagnosis (if other)" %}</label>
+                                <input type="text" name="diagnosisExtra" class="date form-control" id="diagnosisExtra"  style="width:100%"  />
+                        </div>
+                </div>
+
+                 <div class="form-group" style="width:93%">
+                        <label>{% trans "Initial diagnosis" %}</label>
+                        <select name="initialDiagnosis" id="initialDiagnosis" value="{{clinicianquestion.initialDiagnosis}}" class="form-control">
+                        <option value="initial">{% trans "Initial" %}</option>
+                        <option value="1rst relapse">{% trans "1rst relapse" %}</option>
+                        <option value="2nd relapse">{% trans "2nd relapse" %}</option>
+                        <option value="higher than 2nd relapse">{% trans "higher than 2nd relapse" %}</option>
+                  </select>
+                </div>
+
+		 <script>
+
+                        var element = document.getElementById("initialDiagnosis");
+                        element.value = "{{clinicianquestion.initialDiagnosis}}" ;
+                </script>
+
+
+		 <div class="form-group" style="width:93%">
+                        <label>{% trans "Treatment (select treatments)" %}</label>
+                        
+			 <div class="row" style="max-width:650px;">
+
+
+                            <div class="col-lg-4">
+
+				<br>
+        	                <input type="checkbox" name="treatmentCCheck" id="treatmentCCheck" value="false" autocomplete="off"/>
+                	        <div class="[ btn-group ]">
+                        	        <label for="treatmentCCheck" class="[ btn btn-default ]">
+                                	<span class="[ glyphicon glyphicon-ok ]"></span>
+	                                   <span> </span>
+        	                        </label>
+                	                <label for="treatmentCCheck" class="[ btn btn-default active ]">
+                        	            Chemotherapy
+                                	</label>
+	                        </div>
+        	            </div>
+                        <input type="hidden" name="treatmentC" id="treatmentC"  class="form-control" style="width:100%" />
+                            <div class="col-lg-4">  
+<!--	                        <label>Intensity</label>-->
+        	                <select id=" treatmentCI" class="form-control" name="treatmentCI" value="{{clinicianquestion.treatmentCI}}"style="width:100px;display:none;">
+					<option value="blank">blank</option>
+                	                <option value="high">High</option>
+                        	        <option value="medium">Medium</option>
+                                	<option value="low">Low</option>
+	                        </select>
+	                    </div>
+
+			    <script>
+
+                	        var element = document.getElementById("treatmentCI");
+        	                element.value = "{{clinicianquestion.treatmentCI}}" ;
+	                    </script>
+
+      			   <div class="col-lg-4"> 
+<!--	                        <label>Duration</label>-->
+        	                <select id="treatmentCD" class="form-control" name="treatmentCD" value="{{clinicianquestion.treatmentCD}} "style="width:200px;display:none;">
+					<option value="blank">blank</option>
+                	                <option value="less than 3 months"> less than 3 months</option>
+                        	        <option value="3 – 6 months"> 3 – 6 months</option>
+               		                <option value="6-12 months">6 – 12 months </option>
+	                               <option value="greater than 1 year"> greater than 1 year</option>
+        	               </select>
+
+                           </div>
+			</div>
+			<script>
+
+                                var element = document.getElementById("treatmentCD");
+                                element.value = "{{clinicianquestion.treatmentCD}}" ;
+                        </script>
+			
+
+
+			 <div class="row" style="max-width:650px;">
+
+
+                            <div class="col-lg-4">
+
+
+                        <br>
+	                       <input type="checkbox" name="treatmentSCheck" id="treatmentSCheck"  autocomplete="off" />
+        	                <div class="[ btn-group ]">
+                                	<label for="treatmentSCheck" class="[ btn btn-default ]">
+                	                <span class="[ glyphicon glyphicon-ok ]"></span>
+                        	           <span> </span>
+	                                </label>
+        	                        <label for="treatmentSCheck" class="[ btn btn-default active ]">
+                	                    Surgery
+                        	        </label>
+	                        </div>
+        	           </div>
+                         <input type="hidden" name="treatmentS" id="treatmentS"  class="form-control" style="width:100%" />
+                        
+			<div class="col-lg-4">
+<!--			<label>Intensity</label>-->
+                        <select id="treatmentSI" class="form-control" name="treatmentSI" value="{{clinicianquestion.treatmentSI}}" style="width:100px;display:none;">
+                                <option value="blank">blank</option>
+                                <option value="high">High</option>
+                                <option value="medium">Medium</option>
+                                <option value="low">Low</option>
+                        </select>
+                        </div>
+
+			<script>
+
+                                var element = document.getElementById("treatmentSI");
+                                element.value = "{{clinicianquestion.treatmentSI}}" ;
+                        </script>
+
+			<div class="col-lg-4">
+<!--                        <label>Duration</label>-->
+                        <select id="treatmentSD" class="form-control" name="treatmentSD" value="{{clinicianquestion.treatmentSD}}" style="width:200px;display:none;">
+				<option value="blank">blank</option>
+                                <option value="less than 3 months"> less than 3 months</option>
+                                <option value="3 – 6 months"> 3 – 6 months</option>
+                                <option value="6-12 months">6 – 12 months </option>
+                                <option value="greater than 1 year"> greater than 1 year</option>
+                        </select>
+
+
+                        </div>
+			<script>
+
+                                var element = document.getElementById("treatmentSD");
+                                element.value = "{{clinicianquestion.treatmentSD}}" ;
+                        </script>
+
+
+                        </div>
+                        
+                         <div class="row" style="max-width:650px;">
+
+
+                            <div class="col-lg-4">
+
+				<br>
+        	                <input type="checkbox" name="treatmentRCheck" id="treatmentRCheck" value="false" autocomplete="off" />
+                	        <div class="[ btn-group ]">
+                        	        <label for="treatmentRCheck" class="[ btn btn-default ]">
+                                	<span class="[ glyphicon glyphicon-ok ]"></span>
+	                                   <span> </span>
+        	                        </label>
+                	                <label for="treatmentRCheck" class="[ btn btn-default active ]">
+                        	            Radiotherapy
+                                	</label>
+	                        </div>
+        	                </div>
+                         <input type="hidden" name="treatmentR" id="treatmentR"  class="form-control" style="width:100%" />
+			</div>
+			<div class="form-group" style="width:93%">
+	                        <label>Intensity of treatment</label>
+        	                <select id="treatmentRI" class="form-control" name="treatmentRI" value="{{clinicianquestion.treatmentRI}}">
+                	                <option value="high">High</option>
+                        	        <option value="medium">Medium</option>
+                                	<option value="low">Low</option>
+	                        </select>
+
+			<script>
+
+                                var element = document.getElementById("treatmentRI");
+                                element.value = "{{clinicianquestion.treatmentRI}}" ;
+                        </script>
+
+	                        <label>Duration of treatment</label>
+        	                <select id="treatmentRD" class="form-control" name="treatmentRD" value="{{clinicianquestion.treatmentRD}}">
+                	                <option value="less than 3 months"> less than 3 months</option>
+                        	        <option value="3 – 6 months"> 3 – 6 months</option>
+                                	<option value="6-12 months">6 – 12 months </option>
+                                	<option value="greater than 1 year"> greater than 1 year</option>
+                        	</select>
+
+
+                       
+
+			<script>
+
+                                var element = document.getElementById("treatmentRD");
+                                element.value = "{{clinicianquestion.treatmentRD}}" ;
+                        </script>
+
+                </div>
+
+                 <div class="form-group" style="width:93%">
+
+
+                        <label>{% trans "Karnovsky Index " %}</label>
+                        <select name="karnovskyIndex" id="karnovskyIndex" value="{{clinicianquestion.karnovskyIndex}}" class="form-control">
+                        <option value="100">{% trans "100 – Normal; no complaints; no evidence of disease." %}</option>
+                        <option value="90">{% trans "90 – Able to carry on normal activity; minor signs or symptoms of disease." %}</option>
+                        <option value="80">{% trans "80 – Normal activity with effort; some signs or symptoms of disease." %}</option>
+                        <option value="70">{% trans "70 – Cares for self; unable to carry on normal activity or to do active work." %}</option>
+                        <option value="60">{% trans "60 – Requires occasional assistance, but is able to care for most of their personal needs." %} </option>
+                        <option value="50">{% trans "50 – Requires considerable assistance and frequent medical care." %} </option>
+                        <option value="40">{% trans "40 – Disabled; requires special care and assistance." %} </option>
+                        <option value="30">{% trans "30 – Severely disabled; hospital admission is indicated although death not imminent." %} </option>
+                        <option value="20">{% trans "20 – Very sick; hospital admission necessary; active supportive treatment necessary." %} </option>
+                        <option value="10">{% trans "10 – Moribund; fatal processes progressing rapidly." %} </option>
+                        <option value="0">{% trans "Dead" %} </option>
+
+
+                  </select>
+                </div>
+
+		<script>
+
+                                var element = document.getElementById("karnovskyIndex");
+                                element.value = "{{clinicianquestion.karnovskyIndex}}" ;
+                        </script>
+
+
+                 <div class="form-group" style="width:93%">
+                        <label>{% trans " Expected outcome" %}</label>
+                        <select name="expectedOutcome" id="expectedOutcome" value="{{clinicianquestion.expectedOutcome}}" class="form-control">
+                        <option value="greater than 90% survival probability">{% trans "Greater than 90% survival probability" %}</option>
+                        <option value="70 – 90%">{% trans "70 – 90%" %}</option>
+                        <option value="50 – 70%">{% trans "50 – 70%" %}</option>
+                        <option value="30 – 50%">{% trans "30 – 50%" %}</option>
+                        <option value="less than 30%">{% trans "less than 30%" %}</option>
+                  </select>
+                </div>
+
+
+		  <script>
+
+                                var element = document.getElementById("expectedOutcome");
+                                element.value = "{{clinicianquestion.expectedOutcome}}" ;
+                        </script>
+
+                 <div class="form-group" style="width:93%">
+                        <label>{% trans "Computer skill of the child" %}</label>
+                        <select name="computerSkills" id="computerSkills" value="{{clinicianquestion.computerSkills}}" class="form-control">
+                        <option value="very good ">{% trans "Very good" %}</option>
+                        <option value="good">{% trans "Good" %}</option>
+                        <option value="medium">{% trans "Medium" %}</option>
+                        <option value="poor">{% trans "Poor" %}</option>
+                  </select>
+                </div>
+
+		  <script>
+
+                                var element = document.getElementById("computerSkills");
+                                element.value = "{{clinicianquestion.computerSkills}}" ;
+                        </script>
+
+
+                 <div class="form-group" style="width:93%">
+                        <label>{% trans "Computer games played by the child" %}</label>
+                        <select name="computerGames" id="computerGames" value="{{clinicianquestion.computerGames}}" class="form-control">
+                        <option value="greater than 6 hours">{% trans "Greater than 6 hours" %}</option>
+                        <option value="3 – 6 hours">{% trans "3 – 6 hours" %}</option>
+                        <option value=" 1-3 hours">{% trans "1-3 hours" %}</option>
+                        <option value="less than 1 hour a day">{% trans "Less than 1 hour a day" %}</option>
+                  </select>
+                </div>
+
+		 <script>
+
+                                var element = document.getElementById("computerGames");
+                                element.value = "{{clinicianquestion.computerGames}}" ;
+                 </script>
+
+
+			
+			<div class="form-group">
+				<div class="row">
+				<div class="col-lg-12" align="center" >
+					 <input type="submit" value="{% trans "Update Questionnaire" %}"  style="width:50%;max-width:300px" class="btn btn-primary btn-lg"/>
+				</div>
+				</div>
+				<div class="row" style="height:10px;"></div>
+				<div class="row">
+				<div class="col-lg-12"  align="center">
+					<a href="./../"><button   type="button" class="btn btn-warning btn-lg" style="width:50%;max-width:300px">{% trans "   Cancel" %}  </button></a>
+				</div>
+				</div>
+			</div>
+			
+		</div>
+	</form>
+</div>
+
+
+{% ifequal 1 0 %}
+
+        <div id="audio"></div>
+<div class="class1">
+
+{% if record_id %}
+<script>
+  Indivo.Auth.setToken("{{surl_credentials.token}}","{{surl_credentials.secret}}");
+</script>
+{% endif %}
+
+<h2>{{problem.name_title}} &nbsp;&nbsp;<span style="font-size:0.7em;">
+<h4>(SNOMEDCT:{{problem.name_identifier}})</h4>
+<!--<td><p align="right"><a href="./"><button>BACK</back></a></span></h2></p></td>-->
+<td></td> 
+
+
+ <form name="myForm" onsubmit="return validateForm()"  method="post" action="">
+
+    <table class="light form">
+      <col style="width: 20%"></col>
+      <col style="width: 80%"></col>
+      <tr>
+        <td>{% trans "Problem" %}</td>
+        <td>
+          <input type="text" name="code_fullname" id="problem_fullname"  value="{{problem.name_title}}" style="width: 100%" />
+          <input type="hidden" name="code" id="code"value="{{problem.name_identifier}}" id="problem_code" /> (SNOMED CT)
+        </td>
+      </tr>
+
+      <tr>
+        <td>{% trans "Onset" %}</td>
+        <td><input type="text" name="date_onset" id="date_onset" class="date" style="width: 100%" value="{{problem.startDate}}" /></td>
+      </tr>
+      <tr>
+        <td>{% trans "Resolution" %}</td>
+        <td><input type="text" name="date_resolution" id="date_resolution"  class="date" style="width: 100%" value="{{problem.endDate}}" /></td>
+      </tr>
+      <tr><td>{% trans "Category" %}</td>
+      <td> <select name="category" id="category" value="{{problem.category}}">
+                <option value="Primary disease">{% trans "Primary disease" %}</option>
+                <option value="Co-morbidities">{% trans "Co-morbidities" %}</option>
+          </select>
+      </td>
+      </tr>
+
+	<tr>
+        <td>{% trans "Details" %}</td>
+        <td><input type="text" name="comments" id ="comments" style="width: 100%" value="{{problem.notes}}"/></td>
+      </tr>
+ 
+
+    </table>
+
+    <br />
+
+    <div style="text-align: center">
+      <input type="submit" value="{% trans "Update questionnaire" %}" style="width: 33%"/><p>
+     <!-- <input type="button" style="width: 200px" onclick="history.go(-1);" value="    Cancel    ">-->
+   
+  
+
+
+</div>
+</form>
+
+ <div align="center"><a href="./../"><button style="width: 200px">{% trans "   Cancel" %}  </button></a></div>
+
+
+<h3>{% trans "Additional Information" %}</h3>
+<div class="details">{% trans "Created at" %} {{meta.created_at}}</div>
+
+
+
+  {% endifequal %}
+
+
+
+{% endblock %}
+

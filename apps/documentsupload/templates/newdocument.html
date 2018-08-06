@@ -1,0 +1,275 @@
+{% extends 'problems/templates/base.html' %}
+{% block title %}new document{% endblock %}
+{% block content %}
+{% load i18n %}
+
+
+<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+-->
+<!--<link rel="stylesheet" type="text/css" href="{{ STATIC_HOME }}/datetimepicker-master/jquery.datetimepicker.css"/ >
+<script src="{{ STATIC_HOME }}/datetimepicker-master/jquery.js"></script>
+<script src="{{ STATIC_HOME }}/datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>-->
+<link href="{{ STATIC_HOME }}/css/datepicker.css" rel="stylesheet" type="text/css"/>
+
+<!--<script src="{{ STATIC_HOME }}/js/jquery.autocomplete.js"></script>-->
+
+
+<!--<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/smoothness/jquery-ui.css" type="text/css" media="all" />
+    <style>
+    .ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
+    .ui-timepicker-div dl { text-align: left; }
+    .ui-timepicker-div dl dt { height: 25px; margin-bottom: -25px; }
+    .ui-timepicker-div dl dd { margin: 0 10px 10px 65px; }
+    .ui-timepicker-div td { font-size: 90%; }
+    .ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
+    .ui-timepicker-rtl{ direction: rtl; }
+    .ui-timepicker-rtl dl { text-align: right; }
+    .ui-timepicker-rtl dl dd { margin: 0 65px 10px 10px; }
+    </style>
+-->
+
+<script>
+
+
+var complete=false;
+var returned=false;
+function validateForm()
+{
+var title=document.forms["myForm"]["title"].value;
+var docfile=document.forms["myForm"]["docfile"].value;
+
+if (title==null || title=="")
+  {
+  alert({% trans "'Please insert title'" %});
+  return false;
+  }
+if (docfile==null || docfile=="")
+  {
+  alert({% trans "'Please upload document'" %});
+  return false;
+  }
+
+complete=true;
+//if (date_resolution==null || date_resolution=="")
+//  {
+//  alert("Allergen must be filled");
+//  return false;
+//}
+
+returned=true;
+
+return true;
+window.close();
+}
+
+$( document ).ready(function() {
+
+	$('.date').datepicker({
+        dateFormat:'yy-mm-dd',
+        inline: true,
+        showOtherMonths: true,
+        dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        changeMonth: true,
+        changeYear: true,
+        minDate:'-26y',
+        maxDate:'+2y',
+        yearRange: "1990:2018",
+        });
+
+
+    $('#problem_fullname').autocomplete({
+      serviceUrl: 'codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#problem_code').val(data.code);
+      }
+    })
+
+
+
+        inIframe();
+        function inIframe () {
+                var div = document.getElementById('cancel_div');
+                var framediv = document.getElementById('frApp');
+		var hideDiv = (window.parent.document.getElementById('frApp') != null);
+                //if(self==top){
+                if (hideDiv){
+
+//                if(self==top){
+                        div.style.visibility = 'hidden';
+                        framediv.style.visibility = 'visible';
+
+
+                }
+                else
+                {
+                        div.style.visibility = 'visible';
+                        framediv.style.visibility = 'hidden';
+                }
+        }
+
+});
+
+
+
+</script>
+<head>
+</head>
+<body>
+
+<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:95%;" id="divContainer" >
+	<div class="row"  style="margin-left:5px;">
+		<div class="col-xs-12">
+			<h2>{% trans "New Document" %}</h2>
+		</div>
+    </div>
+
+	<div class="row" style="height:10px"></div>
+	
+	<div class="row" style="margin-left:5px;">
+  <form name="myForm" onsubmit="return validateForm()" action="new" method="post" enctype="multipart/form-data">
+           <label>{% trans "Title" %} <span style="color:red;font-weight:bold;font-size:20px;">*</span></label>
+           <input type="text" name="title" id="title"  class="form-control" style="width:100%;max-width:100%" />
+
+	    <div class="form-group">
+                        <label>{% trans "Date Performed" %}</label>
+                        <input type="text" name="registered_date" id="registered_date" class="date form-control" style="width: 100%"  autocomplete="off" readonly/>
+           </div>
+
+
+
+            {% csrf_token %}
+            <p>{{ form.non_field_errors }}</p>
+            <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
+            <p>
+                {{ form.docfile.errors }}
+                {{ form.docfile }}
+            </p> 
+			<label>{% trans "Select a file" %} <span style="color:red;font-weight:bold;font-size:20px;">*</span></label>
+            <input id="docfile" class="btn btn-default" name="docfile" type="file" /><br>
+
+            <div class="form-group">
+                        <label>{% trans "Organisation" %}</label>
+                        <input type="text" name="organisation" id="organisation"  class="form-control" style="width:100%" />
+
+           </div>
+
+	    <div class="form-group">
+                        <label>{% trans "Doctor" %}</label>
+                        <input type="text" name="doctor" id="doctor"  class="form-control" style="width:100%" />
+
+           </div>
+<!--           <div class="form-group">
+                        <label>{% trans "Organisation" %}</label>
+                        <input type="text" name="organisation" id="organisation"  class="form-control" style="width:100%" />
+
+           </div>-->
+           <div class="form-group">
+                        <label>{% trans "Reasons" %}</label>
+			    <textarea name="reasons" id="reasons" style=" width: 100%; max-width: 100%;" class="form-control"></textarea>
+<!--                        <input type="text" name="reasons" id="reasons"  class="form-control" style="width:100%" />-->
+
+           </div>
+
+	   <div class="form-group">
+                        <label>{% trans "Diagnosis" %}</label>
+                        <input type="text" name="diagnosis" id="diagnosis"  class="form-control" style="width:100%" />
+
+           </div>
+	   <div class="form-group">
+			<label>{% trans "Type" %}</label>
+			<select id="type"  name="type" value="other" class="form-control">
+				<option value="other">{% trans "Other" %}</option>
+				<option value="laboratory"> {% trans "Laboratory reports" %} </option>
+				<option value="finding"> {% trans "Findings" %} </option>
+				<option value="discharge"> {% trans "Discharge letters" %} </option>
+			</select>
+
+	   <div class="form-group">
+                        <label>{% trans "Comments" %}</label>
+			<textarea name="comments" id="comments" style=" width: 100%; max-width: 100%;" class="form-control"></textarea>
+
+
+           </div>
+
+
+<div class="form-group">
+                        <span style="color:red;font-weight:bold;font-size:20px;">*</span> <b>{% trans "Mandatory Fields" %}</b>
+                </div>
+
+
+	    <div class="row" style="height:10px;"></div>
+            <div class="row">
+            <div class="col-lg-12"  align="center">
+
+            <p><input  style="width:50%;max-width:300px" type="submit" value="{% trans 'Upload' %}" class="btn btn-primary btn-lg"/></p>
+
+            <button  style="width:50%;max-width:300px"  class="btn btn-warning btn-lg" onclick="location.href='./';return false;">{% trans "   Cancel" %}  </button>
+	    </div>
+	    </div>
+	    </div>
+
+        </form>
+
+
+
+		
+		<div class="form-group">
+			<div id="frApp" name="frApp">
+
+
+<script>
+function closeModal()
+{
+var valid = validateForm();
+
+if (!valid) return false;
+//alert('closing modal...');
+try {
+
+console.log("inside try")
+var modalfooter = window.parent.document.getElementsByClassName('modal-footer')[0];
+var button = modalfooter.getElementsByTagName('button')[0];
+button.click();
+}
+
+catch(e){}
+
+return true;
+}
+</script>
+<!--
+			 <div class="row">
+                        <div class="col-lg-12" style="text-align:center;">
+
+
+
+				 <input type="submit" value="Add New Problem" onclick="closeModal();" style="width:50%;max-width:300px" class="btn btn-primary btn-lg"/><p><p>
+           		 </div>
+                        </div>
+
+			</div>
+			<div id="cancel_div" name=cancel_div">
+
+			<div class="row">
+			<div class="col-lg-12" style="text-align:center;">
+				<input type="submit" style="width:50%;max-width:300px" value="Add New Problem" onclick="return validateForm();" class="btn btn-primary btn-lg"/>
+			</div>
+			</div>
+			<div class="row" style="height:10px"></div>
+			<div class="row">
+			<div class="col-lg-12" style="text-align:center;">
+				<button  style="width:50%;max-width:300px"  class="btn btn-primary btn-lg" onclick="location.href='./';return false;">{% trans "   Cancel" %}  </button>
+			</div>
+			</div>
+			</div>
+		</div>
+	</div>
+</form>
+-->	
+	
+
+</div>
+</body>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'problems/templates/base.html' %}
+{% load i18n %}
+{% block title %}share step{% endblock %}
+
+{% block content %}
+
+{% if record_id %}
+<script>
+ Indivo.Auth.setToken("{{surl_credentials.token}}","{{surl_credentials.secret}}");
+</script>
+{%endif%}
+
+ <script>
+      indivo_api_call = function(method, url, callback) {
+      url = '/indivoapi' + url;
+      $.ajax({
+      type: method,
+      url: url,
+      dataType: "xml",
+      success: callback,
+      async: false
+      });
+      }
+
+
+    </script>
+
+
+<html>
+<body>
+<a href="./labs" style="color: transparent; background-color: transparent; border: none;" id='butt' ></a>
+</body>
+
+</html>
+
+
+
+<script>
+
+{% for carenet in carenet_list %}
+     var url =  "/records/{{record_id}}/documents/{{document_id}}/carenets/{{carenet}}"
+     indivo_api_call("PUT",url, function(result){
+              console.log('ok')
+     });
+
+{% endfor %}
+document.getElementById('butt').click()
+//document.forms["procedForm"].submit();
+</script>
+
+
+
+
+{% endblock %}
+

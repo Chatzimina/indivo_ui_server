@@ -1,0 +1,632 @@
+{% extends 'medications/templates/base.html' %}
+{% block title %}new medication{% endblock %}
+{% block content %}
+{% load i18n %}
+
+<link type="text/css" href="/apps/allergies/static/css/jquery.autocomplete.css" rel="stylesheet">
+<head>
+<link href="{{ STATIC_HOME }}/css/datepicker.css" rel="stylesheet" type="text/css"/>
+<script>
+var nextYear = (new Date().getFullYear() + 1).toString();
+  $(document).ready(function() {
+    $('.date').datepicker({
+     dateFormat:'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        minDate:'-26y',
+        maxDate:'+2y',
+        yearRange: "1990:"+nextYear,
+    });
+    $('.startDate').datepicker({
+
+	dateFormat:'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        minDate:'-26y',
+        maxDate:'+2y',
+        yearRange: "1990:"+nextYear,
+    });
+    $('.endDate').datepicker({
+	dateFormat:'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        minDate:'-26y',
+        maxDate:'+2y',
+        yearRange: "1990:"+nextYear,
+    });
+
+    $('#drugName_title').autocomplete({
+      serviceUrl: '/apps/medications/medications/codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#drugName_identifier').val(data.code);
+      }
+    })
+   $('#provenance_title').autocomplete({
+      serviceUrl: '/apps/medications/medications/codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#provenance_identifier').val(data.code);
+      }
+    })
+   $('#drugName_title').autocomplete({
+      serviceUrl: '/apps/medications/medications/codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#drugName_identifier').val(data.code);
+      }
+    })
+
+  });
+
+
+function validateForm()
+{
+var startDate=document.forms["myForm"]["startDate"].value;
+var drugName_title=document.forms["myForm"]["drugName_title"].value;
+var endDate=document.forms["myForm"]["date"].value;
+var dispenseDaysSupply=document.forms["myForm"]["dispenseDaysSupply"].value;
+var quantity_value=document.forms["myForm"]["quantity_value"].value;
+var quantity_unit=document.forms["myForm"]["quantity_unit"].value;
+
+
+if (quantity_value==null || quantity_value=="")
+  {
+  alert({% trans "'Quantity value must be filled'" %});
+  return false;
+  }
+
+if (quantity_unit==null || quantity_unit=="")
+  {
+  alert({% trans "'Quantity unit must be filled'" %});
+  return false;
+  }
+
+if (startDate==null || startDate=="")
+  {
+  alert({% trans "'Start date must be filled'" %});
+  return false;
+  }
+if (drugName_title==null || drugName_title=="")
+ {
+  alert({% trans "'Drug name title must be filled'" %});
+  return false;
+  }
+
+    if (el('endDate').value != '')
+	{
+		var dateStr1 = el('startDate').value.split('-');
+		var date1 = new Date( parseInt(dateStr1[0]), parseInt(dateStr1[1]),parseInt(dateStr1[2]));
+
+		var dateStr2 = el('endDate').value.split('-');
+		var date2 = new Date( parseInt(dateStr2[0]), parseInt(dateStr2[1]),parseInt(dateStr2[2]));
+
+		if(!(date2 > date1))
+		{
+			alert('{% trans "End date must be greater than Start date." %}');
+			return false;
+		}
+	}
+
+//if (date==null || date=="")
+
+// {
+//  alert({% trans "'Date of fill myst be filled'" %})
+//  return false;
+// }
+
+//if (dispenseDaysSupply==null || dispenseDaysSupply=="")
+// {
+//  alert({% trans "'Dispense days supply must be filled'" %});
+//  return false;
+//  }
+
+}
+
+
+function setVisibility(id, visibility) {
+document.getElementById(id).style.display = visibility;
+}
+
+</script>
+
+
+{% if record_id %}
+<script>
+  Indivo.Auth.setToken("{{surl_credentials.token}}","{{surl_credentials.secret}}");
+</script>
+{% endif %}
+
+
+{% if jsonData != " " %}
+        {% if jsonData.5.z_score < -2 or jsonData.5.z_score > 2 %} <!--Rumination (abnormal it should be over 2 or less -2 )-->
+        <style type="text/css">
+            *
+            {
+                font-size : 12px
+            }
+
+            .class1 *
+            {
+                font-size : 20px;
+            }
+        </style>
+        {%endif%}
+     {% endif %}
+
+<style type="text/css">
+
+        #sub3 {
+
+                display: none;
+                }
+        </style>
+
+</head>
+<body>
+
+<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:95%;" id="divContainer" >
+	<form name="myForm" onsubmit="return validateForm()"  method="post" action="">
+	
+	<div class="row" style="height:10px;"></div>
+		<div class="row"  style="margin-left:5px;">
+			<div class="col-xs-12">
+				<h2>{{medication.drugName_title}}</h2>
+<!--				<h4>(RxTerms :{{medication.drugName_identifier}})</h4>-->
+			</div>
+		</div>
+		
+		<div class="row" style="height:10px"></div>
+
+		<div class="row" style="margin-left:5px;">
+			<div class="form-group">
+				<label>{% trans "Medication" %} <span style="color:red;font-weight:bold;font-size:20px;">*</span></label>
+				<input type="text" name="drugName_title" id="drugName_title"  value="{{medication.drugName_title}}" style="width:100%;" class="form-control" />
+				<input type="hidden" name="drugName_identifier" value="{{medication.drugName_identifier}}" id="drugName_identifier" />
+			</div>
+			 <div class="form-group">
+                                <label>{% trans "Start date of medication" %} <span style="color:red;font-weight:bold;font-size:20px;">*</span></label>
+                                <input type="text" name="startDate" id="startDate" value="{{medication.startDate}}" class="date form-control" style="width: 100%" autocomplete="off" readonly/>
+                        </div>
+
+			<div class="form-group">
+				<label>{% trans "End date of medication" %}</label>
+				<input type="text" id="endDate" name="endDate" value="{{medication.endDate}}" class="date form-control" style="width: 100%" autocomplete="off" readonly/>
+				<script>if ('{{medication.endDate}}' === 'None') el('endDate').value = '';</script>
+			</div>
+			<div class="form-group">
+                                <label>{% trans "Quantity value (Example: 1)" %}</label>
+                                 <select name="quantity_value" id="quantity_value" class="form-control">
+
+                                        <option value="0.25">0.25</option>
+                                        <option value="0.5">0.5</option>
+                                        <option value="0.75">0.75</option>
+                                        <option value="1.0">1.0</option>
+                                         <option value="1.25">1.25</option>
+                                         <option value="1.5">1.5</option>
+                                         <option value="1.75">1.75</option>
+                                         <option value="2.0">2.0</option>
+                                         <option value="2.5">2.5</option>
+                                         <option value="3.0">3.0</option>
+                                         <option value="3.5">3.5</option>
+                                         <option value="4.0">4.0</option>
+                                </select>
+
+                        </div>
+
+			<script>
+                                el('quantity_value').value='{{medication.quantity_value}}';
+                         </script>
+
+
+                        <div class="form-group">
+                                <label>{% trans "Quantity unit (Example tablet)" %}</label>
+                                <select name="quantity_unit" id="quantity_unit" class="form-control">
+
+                                         <option value="tablet(s)">tablet(s)</option>
+                                         <option value="drop(s)">drop(s)</option>
+                                         <option value="ampulla">ampulla</option>
+                                         <option value="application(s)">application(s)</option>
+                                         <option value="milliliter">milliliter</option>
+                                         <option value="gramm">gramm</option>
+                                         <option value="suppository">suppository</option>
+                                         <option value="piece">piece</option>
+                                         <option value="unit(s)">unit(s)</option>
+                                         <option value="milligram">milligram</option>
+                                         <option value="capsule(s)">capsule(s)</option>
+                                </select>
+                        </div>
+			<script>
+                                el('quantity_unit').value='{{medication.quantity_unit}}';
+                         </script>
+
+
+			<div class="form-group">
+<!--				<label>{% trans "Frequency value" %}</label>-->
+				<input type="hidden" name="frequency_value" value="{{medication.frequency_value}}"id="frequency_value" style="width: 100%" class="form-control"/>
+			</div>
+
+			<div class="form-group">
+				<label>{% trans "Frequency unit" %}</label>
+				<input type="hidden" name="frequency_unit" value="{{medication.frequency_unit}}"id="frequency_unit" style="width: 100%" class="form-control"/>
+			</div>
+			<div class="form-group">
+<!--				<label>{% trans "Instructions" %}</label>-->
+				<textarea type="text" name="instructions" id="instructions" style="width: 100%" class="form-control" >{{medication.instructions}}</textarea>
+			</div>
+			<div class="form-group">
+                                <label>{% trans "Pharmaceutical form" %}</label>
+                                <select name="provenance_title" value="coatedTablet" id="provenance_title" class="form-control">
+                                        <option value="coatedTablet">{% trans "Coated tablet" %}</option>
+                                        <option value="globular">{% trans "Globular" %}</option>
+                                        <option value="granulate">{% trans "Granulate" %}</option>
+                                        <option value="capsule">{% trans "Capsule" %}</option>
+                                        <option value="solution">{% trans "Solution" %}</option>
+                                        <option value="lozenge">{% trans "Lozenge" %}</option>
+                                        <option value="juice">{% trans "Juice" %}</option>
+                                        <option value="sublingualTablet">{% trans "Sublingual tablet" %}</option>
+                                        <option value="tablet">{% trans "Tablet" %}</option>
+                                        <option value="drop">{% trans "Drop" %}</option>
+                                        <option value="salve">{% trans "Salve" %}</option>
+
+                                 </select>
+                                <input type="hidden" name="provenance_identifier" value="capsule" id="provenance_identifier" value=""/>
+                        </div>
+
+			<script>
+        	                el('provenance_title').value='{{medication.provenance_title}}';
+	                 </script>
+
+
+			<div class="form-group">
+<!--			<div class="form-group">
+				<label>{% trans "Date" %}</label>-->
+				<input type="hidden" name="date" id="date1" value="{{fulfillments.0.date}}" style="width: 100%" class="date form-control"/>
+<!--			</div>			
+			<div class="form-group">
+				<label>{% trans "Dispense Days Supply" %}</label>-->
+				<input type="hidden" name="dispenseDaysSupply" value="{{fulfillments.0.dispenseDaysSupply}}" id="dispenseDaysSupply" style="width: 100%" class="form-control" />
+<!--			</div>-->
+		</div>
+		
+		<div class="row" style="margin-left:5px;" id="divExtraInfoButtons">
+			<div class="row" style="height:10px"></div>
+<!--			<input type="button" name=type value='{% trans "Toggle Extra information" %}'  class="btn btn-success btn-sm" onclick="return toggle('divExtraInfo');"/>-->
+			<div class="row" style="height:10px"></div>
+		</div>
+		
+		<div class="row" style="margin-left:5px;display:none;" id="divExtraInfo">
+<!--			<div class="form-group">
+				<label>{% trans "Quantity value" %}</label>
+				<input type="text" name="quantity_value" value="{{medication.quantity_value}}" id="quantity_value" style="width: 100%" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<label>{% trans "Quantity unit" %}</label>
+				<input type="text" name="quantity_unit" value="{{medication.quantity_unit}}" id="quantity_unit" style="width: 100%" class="form-control"/>
+			</div>-->
+			<div class="form-group">
+				<label>{% trans "Pbm" %}</label>
+				<input type="text" name="pbm" value="{{medication.pbm}}" id="pbm" style="width: 100%" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<label>{% trans "Pharmacy id" %}</label>
+				<input type="text" name="pharmacy_ncpdpid" value="{{medication.pharmacy_ncpdpid}}" id="pharmacy_ncpdpid" style="width: 100%" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<label>{% trans "Pharmacy organization" %}</label>
+				<input type="text" name="pharmacy_org" value="{{medication.pharmacy_org}}" id="pharmacy_org" style="width: 100%" class="form-control"/>
+			</div>			
+			<div class="form-group">
+				<label>{% trans "Country of pharmacy" %}</label>
+				<input type="text" name="pharmacy_adr_country" value="{{fulfillments.0.pharmacy_adr_country}}" id="pharmacy_adr_country" style="width: 100%" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<label>{% trans "City of pharmacy" %}</label>
+				<input type="text" name="pharmacy_adr_city" value="{{fulfillments.0.pharmacy_adr_city}}" id="pharmacy_adr_city" style="width: 100%" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<label>{% trans "Postalcode of pharmacy" %}</label>
+				<input type="text" name="pharmacy_adr_postalcode" value="{{fulfillments.0.pharmacy_adr_postalcode}}" id="pharmacy_adr_postalcode" style="width: 100%" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<label>{% trans "Street of pharmacy" %}</label>
+				<input type="text" name="pharmacy_adr_street" value="{{fulfillments.0.pharmacy_adr_street}}" id="pharmacy_adr_street" style="width: 100%" class="form-control"/>
+			</div>
+	<div class="form-group">
+				<label>{% trans "Provider dea number" %}</label>
+				<input type="text" name="provider_dea_number" value="{{medication.provider_dea_number}}" id="provider_dea_number" style="width: 100%" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<label>{% trans "Provider npi number" %}</label>
+				<input type="text" name="provider_npi_number" value="{{medication.provider_npi_number}}" id="provider_npi_number" style="width: 100%" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<label>{% trans "Provider email" %}</label>
+				<input type="text" name="provider_email" value="{{medication.provider_email}}" id="provider_email"  style="width: 100%" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<label>{% trans "Provider name" %}</label>
+				<input type="text" name="provider_name_given" value="{{fulfillments.0.provider_name_given}}" id="provider_name_given"  style="width: 100%" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<label>{% trans "Provider family name" %}</label>
+				<input type="text" name="provider_name_family" value="{{fulfillments.0.provider_name_family}}" id="provider_name_family"  style="width: 100%" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<label>{% trans "Provider telephone type" %}</label>
+				<input type="text" name="provider_tel_1_type" value="{{fulfillments.0.provider_tel_1_type}}" id="provider_tel_1_type" style="width: 100%" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<label>{% trans "Provider telephone" %}</label>
+				<input type="text" name="provider_tel_1_number" value="{{fulfillments.0.provider_tel_1_number}}" id="provider_tel_1_number" style="width: 100%" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<label>{% trans "Preferred number" %}</label>
+				<select name="provider_tel_1_preferred_p" value="{{medication.provider_tel_1_preferred_p}}" id="provider_tel_1_preferred_p" class="form-control">
+					<option value="true">{% trans "True" %}</option>
+					<option value="false">{% trans "False" %}</option> 
+			    </select>			
+			</div>
+			<div class="form-group">
+				<label>{% trans "Quantity dispensed value" %}</label>
+				<input type="text" name="quantityDispensed_value" value="{{medication.quantityDispensed_value}}" id="quantityDispensed_value" style="width: 100%" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<label>{% trans "Quantity dispensed unit" %}</label>
+				<input type="text" name="quantityDispensed_unit" value="{{medication.quantityDispensed_unit}}" id="quantityDispensed_unit" style="width: 100%" class="form-control"/>
+			</div>
+		</div>
+		
+		<div class="row" style="height:10px"></div>
+		
+		<div class="row">
+			<div class="row">
+			<div class="col-lg-12" align="center">
+				<input type="submit" value="{% trans "Update medication" %}" style="width:50%;max-width:300px"  class="btn btn-primary btn-lg"/>
+			</div>
+			</div>
+			<div class="row" style="height:10px;"></div>
+			<div class="row">
+			<div class="col-lg-12" align="center">
+				<a href="./../"><button style="width:50%;max-width:300px" type="button" class="btn btn-warning btn-lg">{% trans "   Cancel" %}  </button></a>
+			</div>
+			</div>
+		</div>
+	</form>
+</div>
+
+{% ifequal 1 0 %}
+<div class="class1">
+
+<h2>{{medication.drugName_title}} &nbsp;&nbsp;<span style="font-size:0.7em;">
+<h4>(SNOMEDCT:{{medication.drugName_identifier}})</h4>
+</span></h2></p></td>
+
+</span></h2>
+
+  <form name="myForm" onsubmit="return validateForm()" method="post" action="">
+    <table class="light form">
+      <col style="width: 20%"></col>
+      <col style="width: 80%"></col>
+      <tr>
+        <td>{% trans "Medication" %}</td>
+        <td>
+          <input type="text" name="drugName_title" value="{{medication.drugName_title}}"id="drugName_title" style="width: 100%" />
+          <input type="hidden" name="drugName_identifier" value="{{medication.drugName_identifier}}" id="drugName_identifier" />
+        </td>
+      </tr>
+
+      <tr>
+        <td>{% trans "End date of medication" %}</td>
+        <td><input type="text" name="endDate" value="{{medication.endDate}}"class="date" style="width: 100%" /></td>
+      </tr>
+
+      <tr>
+        <td>{% trans "Frequency value" %}</td>
+        <td><input type="text" name="frequency_value" value="{{medication.frequency_value}}"id="frequency_value" style="width: 100%" /></td>
+      </tr>
+
+      <tr>
+        <td>{% trans "Frequenct unit" %}</td>
+        <td><input type="text" name="frequency_unit" value="{{medication.frequency_unit}}"id="frequency_unit" style="width: 100%"></td>
+      </tr>
+      <tr>
+        <td>{% trans "Instructions" %}</td>
+        <td><input type="text" name="instructions" id="instructions" value="{{medication.instructions}}"style="width: 100%"></textarea></td>
+      </tr>
+      <tr>
+        <td>{% trans "Provenance title" %}</td>
+	<td> <select name="provenance_title" value="{{medication.provenance_title}}" id="provenance_title">
+                <option value="prescription">{% trans "Prescription" %}</option>
+                <option value="fulfillment">{% trans "Fulfillment" %}</option>
+                <option value="administration">{% trans "Administration" %}</option>
+				<option value="reconciliation">{% trans "Reconciliation" %}</option>
+				<option value="patientReport">{% trans "Patient Report" %}</option>
+          </select></td>
+        <input type="hidden" name="provenance_identifier" value="{{medication.provenance_identifier}}" id="provenance_identifier" />
+        </td>
+      </tr>
+      <tr>
+        <td>{% trans "Date" %}</td>
+        <td><input type="text" name="date" id="date1" class="date"style="width: 100%"></td>
+
+      </tr>
+
+       <tr>
+        <td>{% trans "Dispense Days Supply" %}</td>
+        <td><input type="text" name="dispenseDaysSupply" value="{{medication.dispenseDaysSupply}}" id="dispenseDaysSupply" style="width: 100%"></td>
+
+      </tr>
+      <tr>
+        <td>{% trans "Start date of medication" %}</td>
+        <td><input type="text" name="startDate" id="startDate" class="date"style="width: 100%"></td>
+
+      </tr>
+
+</table>
+<div align="right"><br><br>
+<input type=button name=type value='{% trans "Add extra information" %}'  style="background-color:#BDFFBD" onclick="setVisibility('sub3', 'inline');";>
+<input type=button name=type value='{% trans "Hide extra information" %}' style="background-color:#EB9999" onclick="setVisibility('sub3', 'none');";>
+<br><br>
+</div>
+<div id="sub3">
+       <table class="light form">
+       <col style="width: 20%"></col>
+       <col style="width: 80%"></col>
+
+
+
+
+<!--       <tr>
+        <td>{% trans "Quantity value" %}</td>
+        <td><input type="text" name="quantity_value" value="{{medication.quantity_value}}"id="quantity_value" style="width: 100%"></td>
+
+      </tr>
+       <tr>
+        <td>{% trans "Quantity unit" %}</td>
+        <td><input type="text" name="quantity_unit" value="{{medication.quantity_unit}}" id="quantity_unit" style="width: 100%"></td>        
+      </tr>
+       
+-->
+       {# {% regroup medication.fulfillments|dictsortreversed:"date" by date as date_list %}#}
+                {#{{date_list.0}}#}
+        {#        {% for date in date_list|slice:":1" %}#}
+                   {#<p>{{ date.grouper }}</p>#}
+       
+             
+
+                {#{% endfor %}#}
+      <tr>
+        <td>{% trans "Pbm" %}</td>
+        <td><input type="text" name="pbm" value="{{medication.pbm}}" id="pbm" style="width: 100%"></td>
+
+      </tr>
+      <tr>
+        <td>{% trans "Pharmacy id" %}</td>
+        <td><input type="text" name="pharmacy_ncpdpid" value="{{medication.pharmacy_ncpdpid}}" id="pharmacy_ncpdpid" style="width: 100%"></td>
+
+      </tr>
+      <tr>
+        <td>{% trans "Pharmacy organization" %}</td>
+        <td><input type="text" name="pharmacy_org" value="{{medication.pharmacy_org}}" id="pharmacy_org" style="width: 100%"></td>
+
+      </tr>
+      <tr>
+        <td>{% trans "Country of pharmacy" %}</td>
+        <td><input type="text" name="pharmacy_adr_country" value="{{medication.pharmacy_adr_country}}" id="pharmacy_adr_country" style="width: 100%"></td>
+
+      </tr>
+
+       <tr>
+        <td>{% trans "City of pharmacy" %}</td>
+        <td><input type="text" name="pharmacy_adr_city" value="{{medication.pharmacy_adr_city}}" id="pharmacy_adr_city" style="width: 100%"></td>
+
+      </tr>
+       <tr>
+        <td>{% trans "Postalcode of pharmacy" %}</td>
+        <td><input type="text" name="pharmacy_adr_postalcode" value="{{medication.pharmacy_adr_postalcode}}" id="pharmacy_adr_postalcode" style="width: 100%"></td>
+
+      </tr>
+       <tr>
+        <td>{% trans "Street of pharmacy" %}</td>
+        <td><input type="text" name="pharmacy_adr_street" value="{{medication.pharmacy_adr_street}}" id="pharmacy_adr_street" style="width: 100%"></td>
+
+      </tr>
+       <tr>
+        <td>{% trans "Provider dea number" %}</td>
+        <td><input type="text" name="provider_dea_number" value="{{medication.provider_dea_number}}" id="provider_dea_number" style="width: 100%"></td>
+
+      </tr>
+       <tr>
+        <td>{% trans "Provider npi number" %}</td>
+        <td><input type="text" name="provider_npi_number" value="{{medication.provider_npi_number}}" id="provider_npi_number" style="width: 100%"></td>
+
+      </tr>
+       <tr>
+        <td>{% trans "Provider email" %}</td>
+        <td><input type="text" name="provider_email" value="{{medication.provider_email}}" id="provider_email" style="width: 100%"></td>
+
+      </tr>
+       <tr>
+        <td>{% trans "Provider name" %}</td>
+        <td><input type="text" name="provider_name_given" value="{{medication.provider_name_given}}" id="provider_name_given" style="width: 100%"></td>
+
+      </tr>
+       <tr>
+        <td>{% trans "Provider family name" %}</td>
+        <td><input type="text" name="provider_name_family" value="{{medication.provider_name_family}}" id="provider_name_family" style="width: 100%"></td>
+
+      </tr>
+       <tr>
+        <td>{% trans "Provider telephone type" %}</td>
+        <td><input type="text" name="provider_tel_1_type" value="{{medication.provider_tel_1_type}}" id="provider_tel_1_type" style="width: 100%"></td>
+
+       <tr>
+        <td>{% trans "Provider telephone" %}</td>
+        <td><input type="text" name="provider_tel_1_number" value="{{medication.provider_tel_1_number}}" id="provider_tel_1_number" style="width: 100%"></td>
+
+      </tr>
+       <tr>
+        <td>{% trans "Preferred number" %}</td>
+        <!--<td><input type="text" name="provider_tel_1_preferred_p" id="provider_tel_1_preferred_p" style="width: 100%"></td>-->
+	<td><select name="provider_tel_1_preferred_p" value="{{medication.provider_tel_1_preferred_p}}" id="provider_tel_1_preferred_p">
+                <option value="true">{% trans "True" %}</option>
+                <option value="false">{% trans "False" %}</option> 
+          </select></td>
+
+      </tr>
+       <tr>
+        <td>{% trans "Quantity dispensed value" %}</td>
+        <td><input type="text" name="quantityDispensed_value" value="{{medication.quantityDispensed_value}}" id="quantityDispensed_value" style="width: 100%"></td>
+
+      </tr>
+       <tr>
+        <td>{% trans "Quantity dispensed unit" %}</td>
+        <td><input type="text" name="quantityDispensed_unit" value="{{medication.quantityDispensed_unit}}" id="quantityDispensed_unit" style="width: 100%"></td>
+
+      </tr>
+
+</div>
+    </table>
+<div align="right">
+<input type=button name=type value='{% trans "Hide extra information" %}' style="background-color:#EB9999" onclick="setVisibility('sub3', 'none');";>
+</div>
+
+    <br />
+
+
+
+
+</div>
+
+
+
+
+
+<div class="class1">
+    <div style="text-align: center">
+      <input type="submit" value="{% trans "Update medication" %}" style="width: 33%"/><p><p>
+<!--      <input type="button" style="width: 200px" onclick="history.go(-1);" value="    Cancel    ">-->
+   </div>
+    </form>
+</div>
+</div>
+<!--<div align="center"><a href="./"><button style="width: 200px">   {% trans "Cancel" %}  </button></a></div>-->
+<!--   <p align="center"><a href="#" onclick="history.back();"><button style="width: 200px">{% trans " Cancel" %} </button></a><p>-->
+ <div align="center"><a href="./../"><button style="width: 200px">{% trans "   Cancel" %}  </button></a></div>
+    
+<!--      <input type="button" style="width: 200px" onclick="history.go(-1);" value="    Cancel    ">-->
+ 
+ 
+<!-- <p align="center"><a href="#" onclick="history.back();"><button style="width: 200px"> Back </button></a><p>-->
+
+
+
+</body>
+
+
+{% endifequal %}
+{% endblock %}
+
+
+</html>

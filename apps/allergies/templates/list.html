@@ -1,0 +1,337 @@
+{% extends 'problems/templates/base.html' %}
+{% block title %}allergy list{% endblock %}
+{% block content %}
+{% load i18n %}
+
+{% if record_id %}
+<script>
+  Indivo.Auth.setToken("{{surl_credentials.token}}","{{surl_credentials.secret}}");
+</script>
+{% endif %}
+
+
+<script>
+var i=0;
+var array=[];
+var carenets=[];
+var uniqueList=[];
+function checkSharing2(){
+
+{% for p in allergies %}
+
+var url = '/records/{{record_id}}/documents/{{p.id}}/carenets/';
+
+ indivo_api_call("GET", url, function(result) {
+
+
+      var carenets_xml = $(result).find('Carenets').find('Carenet');
+      carenets = [];
+      carenets_xml.each(function(i, carenet) {
+        carenets.push({'id': $(carenet).attr('id'), 'name' : $(carenet).attr('name')});
+        uniqueList.push({'problem_id':'{{p.id}}','id': $(carenet).attr('id'), 'name' : $(carenet).attr('name')});
+
+      });
+
+
+    });
+
+
+{% endfor %}
+
+}
+
+function shareNew2(){
+var problems_ids=[];
+var problem_to_share=[];
+
+if(uniqueList.length >0){
+console.log('inside');
+        for(m=0; m<uniqueList.length ;m++){
+
+                problems_ids.push(uniqueList[m]['problem_id']);
+
+        }
+
+        {%for p in allergies %}
+
+                if (problems_ids.indexOf('{{p.id}}')<=-1){
+                        console.log('sdsds')
+                        for (j=0; j<carenets.length; j++){
+
+                                var url =  "/records/{{record_id}}/documents/{{p.id}}/carenets/"+carenets[j]['id']
+                                indivo_api_call("PUT",url, function(result){
+                                console.log('ok')
+                                });
+
+
+                        }
+                }
+        {%endfor%}
+
+}
+
+var iframe = document.getElementsByClassName('indivo')[0];
+iframe.src=iframe.src;
+}
+
+
+
+   function setPageSize() 
+   {   	
+   if (!el('divList')) return false;
+   	el('divList').style.width = (el('divContainer').offsetWidth-0).toString() + 'px';   	
+	if (window.top.document.getElementById('app_container'))
+		el('divContainer').style.width = (window.top.document.getElementById('app_container').offsetWidth-0).toString() + 'px';	
+   }
+   
+   setInterval('setPageSize();', 500);
+</script>
+
+
+
+<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:100%;overflow-x:hidden;" id="divContainer" >
+	<div class="row"  style="margin-left:5px;">
+		<div class="col-xs-12">
+		<h2>{% trans "Allergies List" %} {% if in_carenet %}(Shared){% endif %}</h2>
+		</div>
+    </div>
+	<div class="row"  style="height:10px;"></div>
+	{% if not in_carenet %}
+	<div class="row"  style="height:10px;"></div>
+   <div class="row"  id="divButtons" style="width:300px;margin-left:5px;">
+      <div class="col-xs-5" style="text-align:left;">
+         <a href="new" class="btn btn-success btn-sm" >{% trans "add an allergy" %}</a>
+      </div>
+      <div class="col-xs-5" style="text-align:left;">
+         <a href="archived" class="btn btn-danger btn-sm">{% trans "deleted allergies" %}</a>
+      </div>
+	   <div class="col-xs-1" ></div>
+   </div>
+   <div class="row"  style="height:10px;"></div>
+   {% endif %}
+   
+   {% ifequal num_allergies 0 %}
+	  <table class="light" id="myTable">
+      <thead>
+        <tr>
+          <th scope="col"><b>{% trans "Allergic reaction" %}</b></th>
+          <!--<th><b>Allergen type</b></th>
+          <th><b>Drug class allergen</b></th>-->
+          <th><b>{% trans "Severity title" %}</b></th>
+          <th><b>{% trans "Modify/Delete" %}</b></th>
+        </tr>
+      </thead>
+      <tfoot>
+ <div class="col-xs-12" style="text-align: right">
+
+
+
+
+          <td colspan="3" style="text-align: right">{{num_allergies}} allerg{% ifequal num_allergies 1 %}{% else %}ies{% endifequal %}</td>
+</div>
+      </tfoot>
+      <tbody>
+
+   {% else %}
+   <div class="row" id="divList" style="margin-left:5px;">
+      <div class="col-xs-12">
+         <div class="row" style="border:1px solid silver;">
+            <div class="col-xs-4">
+               <b>{% trans "Allergic reaction" %}</b>
+            </div>
+            <div class="col-xs-4">
+               <b>{% trans "Severity title" %}</b>
+            </div>            
+            <div class="col-xs-4">
+               <b>{% trans "Modify/Delete" %}</b>
+            </div>
+         </div>
+         {% for p in allergiesWithImages %}
+         <div class="row" style="border-left:1px solid silver;border-right:1px solid silver;border-bottom:1px solid silver;">
+            <div class="col-xs-4">
+               <span id="td_id" style="display:none">{{problems}}</span>
+                <a href="{{p.0.id}}">{{p.0.allergic_reaction_title}}</a>
+				{% if jsonData != " "%} 
+				{% if jsonData.5.z_score < -2 or jsonData.5.z_score > 2%}
+	    
+                <p><a href="{{p.0.id}}">{% load static %}<img src="{{ STATIC_HOME }}{{p.1}}" alt="alternative text" height="180px" width="230px" /></p></a>
+			   {% endif %}
+			   {% endif %}
+            </div>
+            <div class="col-xs-4">
+				{% if jsonData != " "%}
+              {% if jsonData.5.z_score < -2 and p.0.severity_title == "Severe" or p.0.severity_title == "severe" or jsonData.5.z_score > 2 and p.0.severity_title == "Severe" or p.0.severity_title == "severe" %} 
+                     {{p.0.severity_title}}
+              {% else %}
+		   	         {{p.0.severity_title}} 
+              {% endif %}
+				{% else %}
+					   {{p.0.severity_title}} 
+				{% endif %}
+            </div>
+           
+            <div class="col-xs-4">
+               {% if not in_carenet %}	    			
+               <div class="row">
+                  <div class="col-md-4" >
+                     <a href="edit/{{p.0.id}}"><button  class="btn btn-primary btn-sm" style="width:100px;">{% trans "edit" %}</button></a>
+                  </div>
+				
+                  <div class="col-md-4" >
+                     <a href="delete/{{p.0.id}}"><button  class="btn btn-danger btn-sm"  style="width:100px;">{% trans "delete" %}</button></a>
+                  </div>
+				  <div class="col-xs-2" ></div>
+               </div>
+               {% endif %}
+            </div>
+         </div>
+         {% endfor %}
+         <div class="row" style="border-left:1px solid silver;border-right:1px solid silver;border-bottom:1px solid silver;">
+            <div class="col-xs-12" style="text-align: right">
+               {{num_allergies}} {% ifequal num_allergies 1 %}allergy{% else %}allergies{% endifequal %}
+            </div>
+         </div>
+      </div>
+   </div>
+   {% endifequal %}
+</div>
+
+
+<script>
+
+//        setTimeout('checkSharing2();shareNew2()');//"{{allergiesWithImages}}","{{record_id}}");shareNew("{{record_id}}");',10);
+</script>
+
+
+
+
+{% ifequal 1 0 %}
+<div class="class1">
+
+
+  <h2>{% trans "Allergies List" %} {% if in_carenet %}(Shared){% endif %}</h2>
+
+  {% ifequal num_allergies 0 %}
+  {% else %}
+    <table class="light" id="myTable">
+      <thead>
+        <tr>
+          <th scope="col"><b>{% trans "Allergic reaction" %}</b></th>
+          <!--<th><b>Allergen type</b></th>
+	  <th><b>Drug class allergen</b></th>-->
+	  <th><b>{% trans "Severity title" %}</b></th>
+          <th><b>{% trans "Modify/Delete" %}</b></th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="3" style="text-align: right">{{num_allergies}} allerg{% ifequal num_allergies 1 %}{% else %}ies{% endifequal %}</td>
+        </tr>
+      </tfoot>
+      <tbody>
+
+
+
+      {% for p in allergiesWithImages %}
+     
+          <tr class="{% cycle 'odd' 'even' %}">
+            <!--<td><a href="{{p.id}}">{{p.allergic_reaction_title}}</a></td>-->
+	    <!--<td>{{p.category_title}}</td>            
+            <td>{{p.drug_class_allergen_title}}</td>-->
+	      <td><a href="{{p.0.id}}">{{p.0.allergic_reaction_title}}</a>
+        {% if jsonData != " "%} 
+	    {% if jsonData.5.z_score < -2 or jsonData.5.z_score > 2%}
+	    
+                  <p><a href="{{p.0.id}}">{% load static %}<img src="{{ STATIC_HOME }}{{p.1}}" alt="alternative text" height="180px" width="230px" /></p></a></td>
+
+  	   {% endif %}
+
+	{%endif %}
+        {% if jsonData != " "%}
+              {% if jsonData.5.z_score < -2 and p.0.severity_title == "Severe" or p.0.severity_title == "severe" or jsonData.5.z_score > 2 and p.0.severity_title == "Severe" or p.0.severity_title == "severe" %} 
+                        	<td bgcolor="#d90000"><font color="white"> {{p.0.severity_title}}</font> </td>
+              {% else %}
+		   	        <td> {{p.0.severity_title}} </td>
+              {% endif %}
+        {% else %}
+              <td> {{p.0.severity_title}} </td>
+        {% endif %}
+
+            
+	    <td>
+		<a href="edit/{{p.0.id}}"><button>{% trans "edit" %}</button></a>
+	    <a href="delete/{{p.0.id}}"><button>{% trans "delete" %}</button></a>
+                       <!--<form method="POST" action="delete">
+                             <input type="hidden" name="docid" value="{{p.id}}"/>
+		             <input type="hidden" name="status" value="archived"/>
+                             <input type="hidden" name="reason" value="archived"/>
+		             <input type="submit" name="delete"/>
+                       </form>-->
+	    </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endifequal %}
+
+  {% if not in_carenet %}
+  	<p><a href="new">{% trans "[add an allergy]" %}</a></p>
+<!--  	<p><a href="test">[test message send]</a></p>-->
+   	<p><a href="archived">{% trans "[deleted allergies]" %}</a></p>
+  {% endif %}
+</div>
+{% endifequal %}
+
+{% if ids %}
+ <div style="float:left;">
+
+                          <script>
+                                Indivo.Widget.DocumentAccessMulti.add('{{record_id}}', '{{ids}}');
+                          </script>
+
+                        </div>
+{% endif %}
+
+
+
+
+
+</body>
+{% endblock %}
+
+
+<script>
+      Indivo.setup('{{INDIVO_UI_SERVER_BASE}}');
+</script>
+
+
+<script>
+//        setTimeout('checkSharing2();shareNew2()');//"{{measurements}}","{{record_id}}");shareNew("{{record_id}}");',10);
+
+var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+console.log('width = ' + width);
+if (width <= 400)
+{
+	el('divList1').style.fontSize = '10px';
+	//el('divList2').style.fontSize = '12px';
+	el('divList').style.fontSize = '12px';
+	//alert('1');
+	//$( "input" ).css('fontSize', '8px');
+	var inputs1 = document.getElementsByClassName('btn');
+	for (var i=0;i<inputs1.length;i++)
+	{
+		inputs1[i].style.fontSize = '8px !important';
+		//alert('2');
+		break;
+	}
+	
+	var inputs2 = document.getElementsByTagName('input');
+	for (var i=0;i<inputs2.length;i++)
+	{
+		inputs2[i].style.fontSize = '8px !important';
+		//alert('3');
+		break;
+	}
+}
+</script>
+

@@ -1,0 +1,123 @@
+{% extends 'problems/templates/base.html' %}
+{% block title %}new problem{% endblock %}
+{% block content %}
+{% load i18n %}
+
+<script>
+$(document).ready(function() {
+    $('.date').datepicker({'dateFormat':'yy-mm-dd'});
+    $('#problem_fullname').autocomplete({
+      serviceUrl: 'codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#problem_code').val(data.code);
+      }
+    })
+  });
+
+function validateForm()
+{
+var problem_fullname=document.forms["myForm"]["problem_fullname"].value;
+var date_onset=document.forms["myForm"]["date_onset"].value;
+var date_resolution=document.forms["myForm"]["date_resolution"].value;
+
+if (problem_fullname==null || problem_fullname=="")
+  {
+  alert({% trans "'Problem must be filled'" %});
+  return false;
+  }
+
+if (date_onset==null || date_onset=="")
+  {
+  alert({% trans "'Start date must be filled'" %});
+  return false;
+}
+
+//if (date_resolution==null || date_resolution=="")
+//  {
+//  alert("Allergen must be filled");
+//  return false;
+//}
+
+}
+
+</script>
+<head>
+{% if jsonData %}
+        {% if jsonData.5.z_score < -1 or jsonData.5.z_score > 2 %} <!--Rumination (abnormal it should be over 2 or less -2 )-->
+        <style type="text/css">
+            *
+            {
+                font-size : 12px
+            }
+
+            .class1 *
+            {
+                font-size : 20px;
+            }
+        </style>
+        {%endif%}
+{% endif %}
+
+        <meta charset="utf-8">
+        <title>Speak.js Demo</title>
+        <script src="{{ STATIC_HOME }}/speakClient.js"></script>
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+<body>
+        <div id="audio"></div>
+<div class="class1">
+
+<h2>{% trans "New Problem" %} &nbsp;&nbsp;<span style="font-size:0.7em; font-weight: normal; text-transform: uppercase">
+<!--[<a href="./">Cancel</a>]-->
+</span></h2>
+
+  <form name="myForm" onsubmit="return validateForm()"  method="post" action="">
+    <table class="light form">
+      <col style="width: 20%"></col>
+      <col style="width: 80%"></col>
+      <tr>
+        <td>{% trans "Problem" %}</td>
+        <td>
+          <input type="text" name="code_fullname" id="problem_fullname" style="width: 100%" />
+          <input type="hidden" name="code" value="00000" id="problem_code" />
+        </td>
+      </tr>
+
+      <tr>
+        <td>{% trans "Onset" %}</td>
+        <td><input type="text" name="date_onset" class="date" id="date_onset" style="width: 100%" /></td>
+      </tr>
+
+      <tr>
+        <td>{% trans "Resolution" %}</td>
+        <td><input type="text" name="date_resolution" class="date" id="date_resolution" style="width: 100%" /></td>
+      </tr>
+      <tr><td>{% trans "Category" %}</td>
+      <td> <select name="category" id="category">
+                <option value="Primary disease">{% trans "Primary disease" %}</option>
+                <option value="Co-morbidities">{% trans "Co-morbidities" %}</option>
+          </select>
+      </td>
+      </tr>
+      <tr>
+        <td>{% trans "Details" %}</td>
+        <td><textarea name="comments" cols="50" rows="3" wrap="soft" style="width: 100%"></textarea></td>
+      </tr>
+    </table>
+
+    <br />
+   
+    <div style="text-align: center">
+      <input type="submit" value="Add New Problem" style="width: 33%"/><p><p>
+<!--      <input type="button" style="width: 200px" onclick="history.go(-1);" value="    Cancel    ">-->
+    </div>
+</form>  
+    <div align="center"><a href="./"><button style="width: 200px">{% trans "   Cancel" %}  </button></a></div>
+ 
+</div>
+</div>
+</body>
+{% endblock %}

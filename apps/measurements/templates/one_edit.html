@@ -1,0 +1,314 @@
+{% extends 'problems/templates/base.html' %}
+{% block title %}problem list{% endblock %}
+{% block content %}
+{% load i18n %}
+
+{% if record_id %}
+<script>
+  Indivo.Auth.setToken("{{surl_credentials.token}}","{{surl_credentials.secret}}");
+</script>
+{% endif %}
+<head>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="{{ STATIC_HOME }}/datetimepicker-master/jquery.datetimepicker.css"/ >
+<script src="{{ STATIC_HOME }}/datetimepicker-master/jquery.js"></script>
+<script src="{{ STATIC_HOME }}/datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
+
+
+<script src="{{ STATIC_HOME }}/js/jquery.autocomplete.js"></script>
+
+
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/smoothness/jquery-ui.css" type="text/css" media="all" />
+    <style>
+    .ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
+    .ui-timepicker-div dl { text-align: left; }
+    .ui-timepicker-div dl dt { height: 25px; margin-bottom: -25px; }
+    .ui-timepicker-div dl dd { margin: 0 10px 10px 65px; }
+    .ui-timepicker-div td { font-size: 90%; }
+    .ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
+    .ui-timepicker-rtl{ direction: rtl; }
+    .ui-timepicker-rtl dl { text-align: right; }
+    .ui-timepicker-rtl dl dd { margin: 0 65px 10px 10px; }
+    </style>
+
+
+
+
+<script>
+ Date.prototype.addHours = function(h) {    
+   this.setTime(this.getTime() + (h*60*60*1000)); 
+   return this;   
+}
+  $(document).ready(function() {
+  
+  
+  /*
+     var startdate1 = ('{{measurement.measurementDate}}').split("T");
+     startDate = startdate1[0].split("-");
+     startdate = startDate[2]+"-"+startDate[1]+"-"+startDate[0];
+     startdate1 = (startdate+" "+startdate1[1]).slice(0,19);
+
+	 var tzoffset = (new Date()).getTimezoneOffset()/60;
+
+     $('.date').datetimepicker({
+  onSelectDate: function(date){
+            //    date = date.replace(/ A/g, "T")
+      //date1=date
+      //document.getElementById("measurementDate").value = date1.toISOString();
+	  document.getElementById("measurementDate").value = date.addHours(0).toISOString();
+    },
+    onSelectTime: function(time){
+       //date1=time;
+
+      //document.getElementById("measurementDate").value = date1.toISOString();
+	  document.getElementById("measurementDate").value = time.addHours(-tzoffset).toISOString();
+	  
+	  var selDate = time.addHours(tzoffset);
+	  el('spDate').innerHTML = '{% trans "Selected Date" %}: ' + selDate.toLocaleDateString() + ' ' + selDate.toLocaleTimeString();
+    },
+    format:'Y-m-dTH:s.sssZ',
+		minDate:'1990/01/01',
+		maxDate:'2018/01/01',
+		mask:'29:59 99',
+		step:5,
+		ampm: true
+    });
+	
+	*/
+	
+	var nextYear = (new Date().getFullYear() + 1).toString();
+	//alert(nextYear);
+$('#measurementDate_input').datetimepicker({
+		onSelectDate: function(date){            
+			//document.getElementById("date_onset").value = date.addHours(0).toISOString();
+			el('spDate').innerHTML = '{% trans "Selected Date" %}: ' + document.getElementById("measurementDate_input").value+ ' ' + document.getElementById("time_measurementDate_input").value;
+			el('measurementDate').value = document.getElementById("measurementDate_input").value + 'T' + document.getElementById("time_measurementDate_input").value + ':00.000Z';
+			this.hide();
+		},
+
+		format:'Y-m-d',
+		//startDate: this.time,
+		minDate:'1990/01/01',
+		maxDate: nextYear + '/12/31',
+		timepicker:false,
+	});
+	
+	$('#time_measurementDate_input').datetimepicker({     
+		onSelectTime: function(time){
+			el('spDate').innerHTML = '{% trans "Selected Date" %}: ' + document.getElementById("measurementDate_input").value+ ' ' + document.getElementById("time_measurementDate_input").value;
+			//2017-03-01T13:22:32.663Z
+			el('measurementDate').value = document.getElementById("measurementDate_input").value + 'T' + document.getElementById("time_measurementDate_input").value + ':00.000Z';
+			this.hide();
+		},
+		step:5,
+		datepicker:false,
+		format:'H:i'
+    });
+	
+	
+	
+	
+	
+	
+	
+    $('#name').autocomplete({
+      serviceUrl: 'codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#name_value').val(data.code);
+      }
+    })
+   
+   
+
+ 
+  });
+
+
+
+
+
+function validateForm()
+{
+
+var name=document.forms["myForm"]["name"].value;
+var value=document.forms["myForm"]["value"].value;
+var measurementDate=document.forms["myForm"]["measurementDate"].value;
+
+
+
+if (name==null || name=="" )//|| provider_name==null || provider_name=="" || provider_institution==null || provider_institution=="" || locationn==null || locationn=="" ||comments==null ||comments=="" ||date_performed==null ||date_performed=="")
+  {
+  alert({% trans "'Please fill title.'" %});
+  return false;
+  }
+if(value==null ||value==""){
+  alert({%trans "'Please fill value.'" %});
+  return false;
+}
+if(measurementDate==null || measurementDate=="" || measurementDate=="__:__ __"){
+
+    alert({%trans "'Please fill date.'" %});
+  return false;
+}
+
+var x=document.forms["myForm"]["value"].value;
+
+                  if (isNaN(x))
+                  {
+                    alert({% trans "'Please add number to value field'" %});
+                    return false;
+                  }
+
+
+complete=true;
+
+window.close();
+}
+
+
+
+
+
+
+</script>
+
+
+<script>
+   function setPageSize()
+   {   	
+
+		el('divContainer').style.width = '99%';
+   }
+   
+   setInterval('setPageSize();', 500);
+   
+   
+   
+function kindselected(sender)
+{
+	var measurement_type = sender.value;
+	if (measurement_type === 'weight')
+		el('unit').value = 'kg';
+	else if (measurement_type === 'systole' || measurement_type === 'diastole')
+		el('unit').value = 'mmHg';
+	else if (measurement_type === 'pulse')
+		el('unit').value = 'bpm';
+	else if (measurement_type === 'body temperature')
+		el('unit').value = '°C';
+}
+   
+</script>
+</head>
+<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:100%;overflow-x:hidden;" id="divContainer" >
+	<form name="myForm" onsubmit="return validateForm()" method="post" action="">
+		<div class="row" style="height:10px"></div>
+		
+		
+		<div class="row"  style="margin-left:5px;">
+			<div class="col-xs-12">
+				<!--h2>{{measurement.name}} &nbsp;&nbsp;<span style="font-size:0.7em;"-->
+				<h2>{{measurement.kind}} &nbsp;&nbsp;</h2>
+				<h4>(SNOMEDCT:{{measurement.name_value}})</h4>
+			</div>
+		</div>
+		
+		<div class="row" style="height:10px"></div>
+		
+		<div class="row"  style="margin-left:5px;width:95%;">
+			<div class="form-group" style="display:none;">
+			<label>{% trans "Name" %}</label>
+			<input type="text" name="name" id="name" value="{{measurement.name}}" style="width: 100%" class="form-control"/>
+          <input type="hidden" name="name_value" value="{{measurement.name_value}}" id="name_value" /> <!--(SNOMED CT)-->
+		</div>
+		<div class="form-group" style="display:none;">
+			<label>{% trans "Number" %}</label>
+			<input type="text" name="number" id="number" style="width: 100%" value="{{measurement.number}}" class="form-control" />
+        </div>
+		<div class="form-group">
+			<label>{% trans "Value" %} <span style="color:red;font-weight:bold;font-size:20px;">*</span></label>
+			<input type="text" name="value" id="value" style="width: 100%" value="{{measurement.value}}"  class="form-control"/>
+      </div>
+
+		 <div class="form-group">
+                        <label>{% trans "Kind" %} <span style="color:red;font-weight:bold;font-size:20px;">*</span></label>
+
+                         <select name="kind" id="kind" class="form-control" value='weight' onchange="kindselected(this);">>
+                                        <option value="weight">{% trans "Weight" %}</option>
+                                        <option value="systole">{% trans "Systole" %}</option>
+                                        <option value="diastole">{% trans "Diastole" %}</option>
+                                        <option value="pulse">{% trans "Pulse" %}</option>
+                                        <option value="body temperature">{% trans "Body Temperature" %}</option>
+                                  </select>
+
+
+	          </div>
+
+            
+		  <div class="form-group">
+			<label>{% trans "Unit" %} <span style="color:red;font-weight:bold;font-size:20px;">*</span></label>
+			<input type="text" name="unit" id="unit" style="width: 100%" value="{{measurement.unit}}" class="form-control" readonly/>
+		  </div>
+                 <div class="form-group">
+                        <label>{% trans "Measurement date" %} <span style="color:red;font-weight:bold;font-size:20px;">*</span></label>
+						<br/>
+                        <input type="text" name="measurementDate1" class="date form-control" id="measurementDate1" readonly style="width:100%;display:none;" />
+						<input type="text" name="measurementDate_input"  id="measurementDate_input" style="width:200px;display:inline;" class="form-control date" autocomplete="off" readonly/>
+						<input type="text" name="time_measurementDate_input"  id="time_measurementDate_input" style="width:100px;display:inline;" value="00:00" class="form-control date" />
+						<input type="hidden" name="measurementDate"  id="measurementDate" style="width:200px;display:inline;" class="form-control" />
+						
+						<br/>
+						<span id="spDate"></span>
+						<script>
+						AttachEvent(window, 'load', function(){
+						
+							el('kind').value='{{measurement.kind}}';
+							kindselected(el('kind'));
+						
+						
+							var date = '{{measurement.measurementDate}}';
+							el('measurementDate_input').value = date.split('T')[0];
+							el('time_measurementDate_input').value = date.split('T')[1].split(':')[0] + ':' + date.split('T')[1].split(':')[1];
+							document.getElementById('measurementDate').value= date
+							
+							el('spDate').innerHTML = '{% trans "Selected Date" %}: ' + el("measurementDate_input").value+ ' ' + el("time_measurementDate_input").value;
+						});
+						//var tzoffset = (new Date()).getTimezoneOffset()/60;
+						//var dt = new Date('{{measurement.measurementDate}}').addHours(tzoffset);
+						//el('spDate').innerHTML = '{% trans "Selected Date" %}: ' + dt.toLocaleDateString() + ' ' + dt.toLocaleTimeString();
+						</script>
+                </div>
+
+	         <script>
+                        window.onload=function(){document.getElementById('measurementDate').value='{{measurement.measurementDate}}';}
+                 </script>
+				 
+				 <div class="form-group">
+			<span style="color:red;font-weight:bold;font-size:20px;">*</span> <b>{% trans "Mandatory Fields" %}</b>
+		</div>
+	  
+		  </div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="row">
+		<div class="col-lg-12" align="center" >
+			 <input type="submit" value="{% trans "Update measurement" %}"  style="width:50%;max-width:300px;" class="btn btn-primary btn-lg"/>
+		</div>
+		</div>
+		<div class="row" style="height:10px;"></div>
+		<div class="row">
+		<div class="col-lg-12"  align="center">
+			<a href="./../"><button   type="button" class="btn btn-warning btn-lg" style="width:50%;max-width:300px;">{% trans "   Cancel" %}  </button></a>
+		</div>
+		</div>
+	</div>
+	</form>
+</div>
+
+{% endblock %}
+</body>
+</html>

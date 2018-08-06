@@ -1,0 +1,100 @@
+{% extends 'problems/templates/base.html' %}
+{% block title %}problem list{% endblock %}
+{% block content %}
+{% load i18n %}
+<head>
+    {% if jsonData %}
+        {% if jsonData.5.z_score < -1 or jsonData.5.z_score > 2 %} <!--Rumination (abnormal it should be over 2 or less -2 )-->
+        <style type="text/css">
+            *
+            {
+                font-size : 12px
+            }
+
+            .class1 *
+            {
+                font-size : 20px;
+            }
+        </style>
+        {%endif%}
+     {% endif %}
+ 
+        <meta charset="utf-8">
+        <title>Speak.js Demo</title>
+<!--        <script src="{{ STATIC_HOME }}/speakClient.js"></script>-->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+<body>
+
+<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:100%;overflow-x:hidden;" id="divContainer" >
+        <div class="row"  style="margin-left:5px;">
+                <div class="col-xs-12">
+                <h2>{% trans "Upload documents" %} {% if in_carenet %}(Shared){% endif %}</h2>
+                </div>
+    </div>
+{% if not in_carenet %}
+    <div class="row" id="divList" style="margin-left:5px;">
+      <div class="col-xs-12">
+         <div class="row" style="border:1px solid silver;">
+            <div class="col-xs-3">
+               <b>{% trans "Title" %}</b>
+            </div>
+            <div class="col-xs-3">
+               <b>{% trans "Date" %}</b>
+            </div>
+            <div class="col-xs-3">
+               <b>{% trans "Link" %}</b>
+            </div>
+            <div class="col-xs-3">
+               <b>{% trans "Restore" %}</b>
+            </div>
+
+         </div>
+
+         {% for p in documents %}
+
+          <div class="row" style="border-left:1px solid silver;border-right:1px solid silver;border-bottom:1px solid silver;">
+            <div class="col-xs-3">
+               <span id="td_id" style="display:none">{{documents}}</span>
+             {{p.title}}
+            </div>
+            <div class="col-xs-3">
+              <script>
+                           var startDate = '{{p.registered_date}}';
+                           document.write(startDate.split('T')[0]);
+              </script>
+            </div>
+            <div class="col-xs-3">
+                 <a  href="{{p.id}}" target="_blank"  >{% trans "Open" %} </a>
+            </div>
+            
+            <div class="col-xs-3">
+
+<!--          <div class="col-md-5">-->
+                 <a href="restore/{{p.id}}"><button class="btn btn-primary btn-small">{% trans "restore" %}</button></a>
+ 
+
+
+            </div>
+
+           </div>
+	   {% endfor %}
+
+
+
+      </div>
+{%endif %}
+
+  {% if not in_carenet %}
+       <p align="center" ><br/><a href="./"><button style="width: 200px;margin-top:10px;" class="btn btn-warning btn-lg"> {% trans "Back" %} </button></a><p>
+
+   
+  {% endif %}
+ 
+
+
+</body>
+{% endblock %}
+

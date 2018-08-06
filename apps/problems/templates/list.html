@@ -1,0 +1,308 @@
+{% extends 'problems/templates/base.html' %}
+{% load i18n %}
+{% block title %}problem list{% endblock %}
+{% block content %}
+<title>Speak.js Demo</title>
+<!--<script src="{{ STATIC_HOME }}/speakClient.js"></script>-->
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+{% if record_id %}
+<script>
+ Indivo.Auth.setToken("{{surl_credentials.token}}","{{surl_credentials.secret}}");
+</script>
+{% endif %}
+ <script>
+ 
+ 
+      indivo_api_call = function(method, url, callback) {
+      url = '/indivoapi' + url;
+      $.ajax({
+      type: method,
+      url: url,
+      dataType: "xml",
+      success: callback,
+      async: false
+      });
+      }
+
+
+    </script>
+
+
+
+
+<script>
+
+var i=0;
+var array=[];
+var carenets=[];
+var uniqueList=[];
+function checkSharing2(){
+
+{% for p in problems %}
+
+var url = '/records/{{record_id}}/documents/{{p.id}}/carenets/';
+
+ indivo_api_call("GET", url, function(result) {
+
+
+      var carenets_xml = $(result).find('Carenets').find('Carenet');
+      carenets = [];
+      carenets_xml.each(function(i, carenet) {
+        carenets.push({'id': $(carenet).attr('id'), 'name' : $(carenet).attr('name')});
+        uniqueList.push({'problem_id':'{{p.id}}','id': $(carenet).attr('id'), 'name' : $(carenet).attr('name')});
+
+      });
+
+
+    });
+
+
+{% endfor %}
+
+}
+
+function shareNew2(){
+var problems_ids=[];
+var problem_to_share=[];
+
+if(uniqueList.length >0){
+console.log('inside');
+	for(m=0; m<uniqueList.length ;m++){
+
+        	problems_ids.push(uniqueList[m]['problem_id']);
+      
+	}
+
+	{%for p in problems %}
+
+		if (problems_ids.indexOf('{{p.id}}')<=-1){
+                        console.log('sdsds')
+                        for (j=0; j<carenets.length; j++){
+                                
+                                var url =  "/records/{{record_id}}/documents/{{p.id}}/carenets/"+carenets[j]['id']
+				indivo_api_call("PUT",url, function(result){
+				console.log('ok')
+				});
+
+			
+			}
+		}
+	{%endfor%}
+
+}
+
+var iframe = document.getElementsByClassName('indivo')[0];
+iframe.src=iframe.src;
+}
+
+   function setPageSize()
+   {
+  
+	if (!el('divList')) return false; 
+   	el('divList').style.width = (el('divContainer').offsetWidth-0).toString() + 'px';   	
+	if (window.top.document.getElementById('app_container')) {
+		el('divContainer').style.width = (window.top.document.getElementById('app_container').offsetWidth-0).toString() + 'px';	
+		
+	}
+   }
+   
+   setInterval('setPageSize();', 500);
+   
+   var tzoffset = (new Date()).getTimezoneOffset()/60;
+   
+   
+Date.prototype.addHours = function(h) {    
+   this.setTime(this.getTime() + (h*60*60*1000)); 
+   return this;   
+}
+</script>
+<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:100%;overflow-x:hidden;" id="divContainer" >
+	<div class="row"  style="margin-left:5px;">
+		<div class="col-xs-12">
+		<h2>{% trans "Problems List" %} {% if in_carenet %}(Shared){% endif %}</h2>
+		</div>
+    </div>
+
+	 {% if not in_carenet %}
+   <div class="row"  id="divButtons" style="width:400px;margin-left:5px;">
+      <div class="col-xs-5" style="text-align:left;">
+         <a href="new" class="btn btn-success btn-sm" >{% trans "add a problem" %}</a>
+      </div>
+      <div class="col-xs-5" style="text-align:left;">
+         <a href="archived" class="btn btn-danger btn-sm">{% trans "deleted problems" %}</a>
+      </div>
+	   <div class="col-xs-1" ></div>
+   </div>
+   <div class="row"  style="height:20px;"></div>
+   {% endif %}
+   
+
+   {% ifequal num_problems 0 %}
+   {% else %}
+
+
+   <div class="row" id="divList" style="margin-left:5px;">
+      <div class="col-xs-12">
+         <div class="row" style="border:1px solid silver;">
+            <div class="col-xs-3">
+               <b>{% trans "Name" %}</b>
+            </div>
+            <div class="col-xs-3">
+               <b>{% trans "Onset" %}</b>
+            </div>
+            <div class="col-xs-3">
+               <b>{% trans "Resolution" %}</b>
+            </div>
+            <div class="col-xs-3">
+               
+{% if not in_carenet %}
+               <b>{% trans "Modify" %} / </b>
+			   <b>{% trans "Delete" %}</b>
+               {% endif %}
+            </div>
+         </div>
+         {% for p in problems %}
+         <div class="row" style="border-left:1px solid silver;border-right:1px solid silver;border-bottom:1px solid silver;">
+            <div class="col-xs-3">
+               <span id="td_id" style="display:none">{{problems}}</span>
+               <a  href="{{p.id}}"  >{{p.name_title}}</a>
+            </div>
+            <div class="col-xs-3"> <!--{{p.startDate}}-->
+				<script>
+			   //var startDate = '{{p.startDate}}';
+			   //document.write(startDate.split('T')[0]);
+			  
+			   if ('{{p.startDate}}' != 'None')
+			   {
+			    try {
+				
+				var startDate = new Date('{{p.startDate}}').addHours(tzoffset);
+				document.write( '' + startDate.toLocaleDateString() + ' ' + startDate.toLocaleTimeString());
+				}
+				catch(e){}
+				}
+			   </script>
+            </div>
+            <div class="col-xs-3"><!--{{p.endDate}}-->
+			<script>
+			   //var startDate = '{{p.endDate}}';
+			   //document.write(startDate.split('T')[0]); 
+			   
+			   if ('{{p.endDate}}' != 'None')
+			   {
+			   try {
+			   var endDate = new Date('{{p.endDate}}').addHours(tzoffset);
+				document.write( ''+endDate.toLocaleDateString() + ' ' + endDate.toLocaleTimeString());
+				}
+				catch(e){}
+			 }
+				
+			</script>
+            </div>
+            <div class="col-xs-3">
+               {% if not in_carenet %}	    			
+               <div class="row">
+                  <div class="col-md-5" >
+                     <a href="edit/{{p.id}}"><button  class="btn btn-primary btn-sm" style="width:95%;">{% trans "edit" %}</button></a>
+                  </div>
+				
+                  <div class="col-md-5" >
+                     <a href="delete/{{p.id}}"><button  class="btn btn-danger btn-sm"  style="width:95%;">{% trans "delete" %}</button></a>
+                  </div>
+				  <div class="col-md-1" ></div>
+               </div>
+               {% endif %}
+            </div>
+         </div>
+         {% endfor %}
+         <div class="row" style="border-left:1px solid silver;border-right:1px solid silver;border-bottom:1px solid silver;">
+            <div class="col-xs-12" style="text-align: right">
+               {{num_problems}} problem{% ifequal num_problems 1 %}{% else %}s{% endifequal %}
+            </div>
+         </div>
+      </div>
+   </div>
+   {% endifequal %}
+  {% if record_id %} 
+   <div style="float:left;">
+
+                          <script>
+                                Indivo.Widget.DocumentAccessMulti.add('{{record_id}}', '{{ids}}');
+                          </script>
+
+                        </div>
+{% endif %}
+	
+   {% ifequal num_problems 0 %}
+   <div class="table-responsive">
+      <table class="table">
+         <thead>
+            <tr>
+               <th ><b>{% trans "Name" %}</b></th>
+               <th><b>{% trans "Onset" %}</b></th>
+               <th><b>{% trans "Resolution" %}</b></th>
+               {% if not in_carenet %}
+               <th><b>{% trans "Modify/Delete" %}</b></th>
+               {% endif %}
+            </tr>
+         </thead>
+         <tbody>
+            <span id="td_id" style="display:none">{{problems}}</span>
+            {% for p in problems %}
+            <!--tr class="{% cycle 'odd' 'even' %}"-->
+            <tr>
+               <td >
+                  <a  href="{{p.id}}"  >{{p.name_title}}</a>
+               </td>
+               <td>
+			   {{p.startDate}}
+			   
+			   </td>
+               <td>{{p.endDate}}</td>
+               {% if not in_carenet %}
+               <td>
+                  <div class="row">
+                     <div class="col-lg-6" >
+                        <a href="edit/{{p.id}}"><button  class="btn btn-primary">{% trans "edit" %}</button></a>
+                     </div>
+                     <div class="col-lg-6" >
+                        <a href="delete/{{p.id}}"><button  class="btn btn-danger btn-sm">{% trans "delete" %}</button></a>
+                     </div>
+                  </div>
+               </td>
+               {% endif %}
+            </tr>
+            {% endfor %}
+	<div class="col-xs-12" style="text-align: right">
+
+
+               <td colspan="4" style="text-align: right">{{num_problems}} problem{% ifequal num_problems 1 %}{% else %}s{% endifequal %}</td>
+	</div>
+         </tbody>
+      </table>
+   </div>
+   {% else %}
+   {% endifequal %}
+   
+   
+   
+  
+</div>
+
+
+<script>
+
+ //alert('');
+ //var scale = 0.5;
+	//	 $('body').css({
+                
+      //          transform: 'scale('+(scale)+')', // set zoom
+        //        transformOrigin: '50% 0' // set transform scale base
+          //  });
+//	setTimeout('checkSharing2();shareNew2()');
+
+//'checkSharing("{{problems}}","{{record_id}}");shareNew("{{record_id}}");',10);
+</script>
+{% endblock %}

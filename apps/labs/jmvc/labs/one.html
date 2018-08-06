@@ -1,0 +1,46 @@
+{% extends 'problems/templates/base.html' %}
+{% block title %}problem list{% endblock %}
+{% block content %}
+<head>
+</head>
+<body>
+        <div id="audio"></div>
+<div class="class1">
+
+{% if record_id %}
+<script>
+  Indivo.Auth.setToken("{{surl_credentials.token}}","{{surl_credentials.secret}}");
+</script>
+{% endif %}
+
+<h2>{{problem.name_title}} &nbsp;&nbsp;<span style="font-size:0.7em;">[<a href="./">BACK</a>]</span></h2>
+
+{% if record_id %}
+  <script>
+    Indivo.Widget.DocumentAccess.add('{{record_id}}', '{{lab_id}}');
+  </script>
+{% endif %}
+
+<table class="light" style="width: 66%; margin: 2em 0;">
+  <tbody>
+    <col style="width: 25%"></col>
+    <col style="width: 75%"></col>
+    <tr><th scope="row"> Collected at: {{ lab.collected_at|date:"d M Y" }}</td></tr>
+    <tr><th scope="row">Status title:  {{ lab.status_title }}</td></tr>
+    <tr><th scope="row">Quantitative result value: {{ lab.quantitative_result_value_value }} </td></tr><tr><td> Quantitative result unit: {{ lab.quantitative_result_value_unit }}
+</td></tr>
+    <tr><td> Quantitative result normal range minimum value: {{ lab.quantitative_result_normal_range_min_value }}</td></tr><tr><td>  Quantitative result normal range minimum unit{{ lab.quantitative_result_normal_range_min_unit }}</td></tr>
+    <tr><td> Quantitative result normal range maximum value: {{ lab.quantitative_result_normal_range_max_value }} </td></tr><tr><td> Quantitative result normal range maximum unit:{{ lab.quantitative_result_normal_range_max_unit }}</td> </tr>
+
+  </tbody>
+</table>
+
+<h3>Additional Information</h3>
+<div class="details">Created at {{meta.created_at}}</div>
+
+<p align="center"><a href="#" onclick="history.back();"><button style="width: 200px"> Back </button></a><p>
+</body>
+
+
+{% endblock %}
+

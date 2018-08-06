@@ -1,0 +1,139 @@
+{% extends 'allergies/templates/base.html' %}
+{% block title %}Archived allergies list{% endblock %}
+{% block content %}
+{% load i18n %}
+<head>
+
+</head>
+
+<script>
+   function setPageSize()
+   {   	
+   	el('divList').style.width = (el('divContainer').offsetWidth-0).toString() + 'px';   	
+	if (window.top.document.getElementById('app_container'))
+		el('divContainer').style.width = (window.top.document.getElementById('app_container').offsetWidth-0).toString() + 'px';	
+   }
+   
+   setInterval('setPageSize();', 500);
+</script>
+
+<body>
+
+<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:100%;overflow-x:hidden;" id="divContainer" >
+<div class="row" style="height:20px;"></div>
+   
+	<div class="row"  style="margin-left:5px;">
+		<div class="col-xs-12">
+		<h2>{% trans "Deleted allergies list" %} {% if in_carenet %}(Shared){% endif %}</h2>
+		</div>
+    </div>
+	
+	<div class="row"  style="height:10px;"></div>
+	
+   {% ifequal num_allergies 0 %}
+   {% else %}
+   <div class="row" id="divList" style="margin-left:5px;">
+      <div class="col-xs-12">
+         <div class="row" style="border:1px solid silver;">
+            <div class="col-xs-4">
+               <b>{% trans "Allergic reaction" %}</b>
+            </div>
+            <div class="col-xs-4">
+               <b>{% trans "Severity title" %}</b>
+            </div>            
+            <div class="col-xs-4">
+               <b>{% trans "Modify/Delete" %}</b>
+            </div>
+         </div>
+         {% for p in allergies %}
+         <div class="row" style="border-left:1px solid silver;border-right:1px solid silver;border-bottom:1px solid silver;">
+            <div class="col-xs-4">
+               <a href="{{p.id}}">{{p.allergic_reaction_title}}</a>
+            </div>
+            <div class="col-xs-4">
+				{{p.severity_title}}
+            </div>
+           
+            <div class="col-xs-4">
+               <a href="restore/{{p.id}}"><button class="btn btn-sm btn-primary">{% trans "restore" %}</button></a>
+            </div>
+         </div>
+         {% endfor %}
+         <div class="row" style="border-left:1px solid silver;border-right:1px solid silver;border-bottom:1px solid silver;">
+            <div class="col-xs-12" style="text-align: right">
+               {{num_allergies}} Deleted {% ifequal num_allergies 1 %}allergy{% else %}allergies{% endifequal %}
+            </div>
+         </div>
+      </div>
+   </div>
+   {% endifequal %}
+   
+   <div class="row" style="height:10px;"></div>
+   
+   <div class="row" style="margin-left:50px;">
+	<div class="col-xs-12" style="text-align: center;">
+		<a href="./"><button style="width: 50%"  class="btn btn-lg btn-warning"> {% trans "Back" %} </button>
+	</div>
+   </div>
+</div>
+
+
+
+
+
+{% ifequal 1 0 %}
+<div id="audio"></div>
+<div class="class1">
+
+  <h2>{% trans "Deleted allergies list" %} {% if in_carenet %}(Shared){% endif %}</h2>
+
+  {% ifequal num_allergies 0 %}
+  {% else %}
+    <table class="light" id="myTable">
+      <thead>
+        <tr>
+          <th scope="col"><b>{% trans "Allergic reaction" %}</b></th>
+          <!--<th><b>Allergen type</b></th>
+	  <th><b>Drug class allergen</b></th>-->
+	  <th><b>{% trans "Severity title" %}</b></th>
+          <th><b>{% trans "Restore" %}</b></th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="3" style="text-align: right">{{num_allergies}} Deleted allerg{% ifequal num_allergies 1 %}{% else %}ies{% endifequal %}</td>
+        </tr>
+      </tfoot>
+      <tbody>
+        {% for p in allergies %}
+          <tr class="{% cycle 'odd' 'even' %}">
+            <td><a href="{{p.id}}">{{p.allergic_reaction_title}}</a></td>
+	    <!--<td>{{p.category_title}}</td>            
+            <td>{{p.drug_class_allergen_title}}</td>-->
+	    <td>{{p.severity_title}}</td>
+            <!--<td><a href="delete?docid={{p.id}}">[Delete the Allergy]</a>--!>
+	     <td><a href="restore/{{p.id}}"><button>{% trans "restore" %}</button></a> 
+	    
+                       <!--<form method="POST" action="delete">
+                             <input type="hidden" name="docid" value="{{p.id}}"/>
+		             <input type="hidden" name="status" value="archived"/>
+                             <input type="hidden" name="reason" value="archived"/>
+		             <input type="submit" name="delete"/>
+                       </form>-->
+	    </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endifequal %}
+
+  {% if not in_carenet %}
+	<div align="center"><a href="./"><button style="width: 200px"> {% trans "Back" %} </button></a></div>
+<!--	<p align="center"><input type="button" style="width: 200px" onclick="history.go(-1);" value="    Back    "></p>-->
+ 
+
+  {% endif %}
+</div>
+{% endifequal %}
+</body>
+{% endblock %}

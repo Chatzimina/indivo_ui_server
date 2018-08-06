@@ -1,0 +1,280 @@
+{% extends 'problems/templates/base.html' %}
+{% block title %}problem list{% endblock %}
+{% block content %}
+{% load i18n %}
+
+<link rel="stylesheet" type="text/css" href="{{ STATIC_HOME }}/datetimepicker-master/jquery.datetimepicker.css"/ >
+<script src="{{ STATIC_HOME }}/datetimepicker-master/jquery.js"></script>
+<script src="{{ STATIC_HOME }}/datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
+
+
+<script src="{{ STATIC_HOME }}/js/jquery.autocomplete.js"></script>
+
+
+ 
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/smoothness/jquery-ui.css" type="text/css" media="all" />
+    <style>
+    .ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
+    .ui-timepicker-div dl { text-align: left; }
+    .ui-timepicker-div dl dt { height: 25px; margin-bottom: -25px; }
+    .ui-timepicker-div dl dd { margin: 0 10px 10px 65px; }
+    .ui-timepicker-div td { font-size: 90%; }
+    .ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
+    .ui-timepicker-rtl{ direction: rtl; }
+    .ui-timepicker-rtl dl { text-align: right; }
+    .ui-timepicker-rtl dl dd { margin: 0 65px 10px 10px; }
+    </style>
+
+
+
+<script>
+
+    
+$(document).ready(function() {
+     $('#date_onset').datetimepicker({
+     onSelectDate: function(date){
+            //    date = date.replace(/ A/g, "T")
+      date1=date
+      document.getElementById("date_onset").value = date1.toISOString();
+    },
+    onSelectTime: function(time){
+       date1=time;
+
+      document.getElementById("date_onset").value = date1.toISOString();
+    },
+    format:'d-m-Y H:m:s',
+    mask:'29:59 99',
+    step:5,
+    ampm: true
+    });
+
+    $('#date_resolution').datetimepicker({
+     onSelectDate: function(date){
+            //    date = date.replace(/ A/g, "T")
+      date1=date
+      document.getElementById("date_resolution").value = date1.toISOString();
+    },
+    onSelectTime: function(time){
+       date1=time;
+
+      document.getElementById("date_resolution").value = date1.toISOString();
+    },
+    format:'d-m-Y H:m:s',
+    mask:'29:59 99',
+    step:5,
+    ampm: true
+    });
+
+    $('#problem_fullname').autocomplete({
+      serviceUrl: 'codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#problem_code').val(data.code);
+      }
+    })
+  });
+ 
+function validateForm()
+{
+var problem_fullname=document.forms["myForm"]["problem_fullname"].value;
+var date_onset=document.forms["myForm"]["date_onset"].value;
+var date_resolution=document.forms["myForm"]["date_resolution"].value;
+alert(date_onset);
+if (problem_fullname==null || problem_fullname=="")
+  {
+  alert({% trans "'Problem must be filled'" %});
+  return false;
+  }
+
+if (date_onset==null || date_onset=="" || date_onset=="__:__ __")
+  {
+  alert({% trans "'Start date must be filled'" %});
+  return false;
+}
+
+
+
+
+
+
+//if (date_resolution==null || date_resolution=="")
+//  {
+//  alert("Allergen must be filled");
+//  return false;
+//}
+
+}
+
+
+
+</script>
+<head>
+
+{% if jsonData %}
+        {% if jsonData.5.z_score < -1 or jsonData.5.z_score > 2 %} <!--Rumination (abnormal it should be over 2 or less -2 )-->
+        <style type="text/css">
+            *
+            {
+                font-size : 12px
+            }
+
+            .class1 *
+            {
+                font-size : 20px;
+            }
+        </style>
+        {%endif%}
+     {% endif %}
+
+        <meta charset="utf-8">
+        <title>Speak.js Demo</title>
+<!--        <script src="{{ STATIC_HOME }}/speakClient.js"></script>-->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+<body>
+
+
+<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:95%;" id="divContainer" >
+	<div id="audio"></div>
+	{% if record_id %}
+	<script>
+	  Indivo.Auth.setToken("{{surl_credentials.token}}","{{surl_credentials.secret}}");
+	</script>
+	{% endif %}
+	<form name="myForm" onsubmit="return validateForm()"  method="post" action="">
+		<div class="row"  style="margin-left:5px;">
+			<div class="col-xs-12">
+			<h2>{{problem.name_title}}</h2>
+			<h4>(SNOMEDCT:{{problem.name_identifier}})</h4>
+			</div>
+		</div>
+
+		<div class="row" style="height:10px"></div>
+		
+		<div class="row" style="margin-left:5px;">
+			<div class="form-group">
+				<label>{% trans "Problem" %}</label>
+				<input type="text" name="code_fullname" id="problem_fullname"  value="{{problem.name_title}}" style="width:100%;" class="form-control" />
+				<input type="hidden" name="code" id="code"value="{{problem.name_identifier}}" id="problem_code" /> (SNOMED CT)
+			</div>
+			<div class="form-group">
+				<label>{% trans "Onset" %}</label>
+				<input type="text" name="date_onset" id="date_onset" class="date form-control" style="width: 100%" value="{{problem.startDate}}" />
+			</div>
+			<div class="form-group">
+				<label>{% trans "Resolution" %}</label>
+				<input type="text" name="date_resolution" id="date_resolution"  class="date form-control" style="width: 100%" value="{{problem.endDate}}" />
+			</div>
+			<div class="form-group">
+				<label>{% trans "Category" %}</label>
+				<select name="category" id="category" value="{{problem.category}}" class="form-control">
+					<option value="Primary disease">{% trans "Primary disease" %}</option>
+					<option value="Co-morbidities">{% trans "Co-morbidities" %}</option>
+			    </select>
+			</div>
+			<div class="form-group">
+				<label>{% trans "Details" %}</label>
+				<textarea name="comments" id ="comments" style="width: 100%"  class="form-control">{{problem.notes}}</textarea>
+			</div>
+			
+			<div class="form-group">
+				<div class="row">
+				<div class="col-lg-12" align="center" >
+					 <input type="submit" value="{% trans "Update Problem" %}"  style="width:50%;max-width:300px" class="btn btn-primary btn-lg"/>
+				</div>
+				</div>
+				<div class="row" style="height:10px;"></div>
+				<div class="row">
+				<div class="col-lg-12"  align="center">
+					<a href="./../"><button   type="button" class="btn btn-primary btn-lg" style="width:50%;max-width:300px">{% trans "   Cancel" %}  </button></a>
+				</div>
+				</div>
+			</div>
+			
+		</div>
+	</form>
+</div>
+
+
+{% ifequal 1 0 %}
+
+        <div id="audio"></div>
+<div class="class1">
+
+{% if record_id %}
+<script>
+  Indivo.Auth.setToken("{{surl_credentials.token}}","{{surl_credentials.secret}}");
+</script>
+{% endif %}
+
+<h2>{{problem.name_title}} &nbsp;&nbsp;<span style="font-size:0.7em;">
+<h4>(SNOMEDCT:{{problem.name_identifier}})</h4>
+<!--<td><p align="right"><a href="./"><button>BACK</back></a></span></h2></p></td>-->
+<td></td> 
+
+
+ <form name="myForm" onsubmit="return validateForm()"  method="post" action="">
+
+    <table class="light form">
+      <col style="width: 20%"></col>
+      <col style="width: 80%"></col>
+      <tr>
+        <td>{% trans "Problem" %}</td>
+        <td>
+          <input type="text" name="code_fullname" id="problem_fullname"  value="{{problem.name_title}}" style="width: 100%" />
+          <input type="hidden" name="code" id="code"value="{{problem.name_identifier}}" id="problem_code" /> (SNOMED CT)
+        </td>
+      </tr>
+
+      <tr>
+        <td>{% trans "Onset" %}</td>
+        <td><input type="text" name="date_onset" id="date_onset" class="date" style="width: 100%" value="{{problem.startDate}}" /></td>
+      </tr>
+      <tr>
+        <td>{% trans "Resolution" %}</td>
+        <td><input type="text" name="date_resolution" id="date_resolution"  class="date" style="width: 100%" value="{{problem.endDate}}" /></td>
+      </tr>
+      <tr><td>{% trans "Category" %}</td>
+      <td> <select name="category" id="category" value="{{problem.category}}">
+                <option value="Primary disease">{% trans "Primary disease" %}</option>
+                <option value="Co-morbidities">{% trans "Co-morbidities" %}</option>
+          </select>
+      </td>
+      </tr>
+
+	<tr>
+        <td>{% trans "Details" %}</td>
+        <td><input type="text" name="comments" id ="comments" style="width: 100%" value="{{problem.notes}}"/></td>
+      </tr>
+ 
+
+    </table>
+
+    <br />
+
+    <div style="text-align: center">
+      <input type="submit" value="{% trans "Update Problem" %}" style="width: 33%"/><p>
+     <!-- <input type="button" style="width: 200px" onclick="history.go(-1);" value="    Cancel    ">-->
+   
+  
+
+
+</div>
+</form>
+
+ <div align="center"><a href="./../"><button style="width: 200px">{% trans "   Cancel" %}  </button></a></div>
+
+
+<h3>{% trans "Additional Information" %}</h3>
+<div class="details">{% trans "Created at" %} {{meta.created_at}}</div>
+
+
+
+  {% endifequal %}
+
+
+
+{% endblock %}
+

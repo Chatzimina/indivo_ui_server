@@ -1,0 +1,13 @@
+<Models xmlns="http://indivo.org/vocab/xml/documents#">
+  <Model name="Filedocument">
+    <Field name="registered_date">{{registered_date}}</Field>
+    <Field name="title">{{title}}</Field>
+    <Field name="filename">{{filename}}</Field>
+    <Field name="organisation">{{organisation}}</Field>
+    <Field name="doctor">{{doctor}}</Field>
+    <Field name="diagnosis">{{diagnosis}}</Field> 
+    <Field name="reasons">{{reasons}}</Field>
+    <Field name="comments">{{comments}}</Field>
+    <Field name="type_of_file">{{type_of_file}}</Field>
+  </Model>
+</Models>

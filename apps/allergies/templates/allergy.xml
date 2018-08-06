@@ -1,0 +1,16 @@
+<Models xmlns="http://indivo.org/vocab/xml/documents#">
+  <Model name="Allergy">
+    <Field name="allergic_reaction_title">{{allergic_reaction_title}}</Field>
+    <Field name="allergic_reaction_system">http://purl.bioontology.org/ontology/SNOMEDCT/</Field>
+    <Field name="allergic_reaction_identifier">{{allergic_reaction_identifier}}</Field>
+    <Field name="category_title">{{category_title}}</Field>
+    <Field name="category_system">http://purl.bioontology.org/ontology/SNOMEDCT/</Field>
+    <Field name="category_identifier">{{category_identifier}}</Field>
+    <Field name="drug_class_allergen_title">{{drug_class_allergen_title}}</Field>
+    <Field name="drug_class_allergen_system">http://purl.bioontology.org/ontology/NDFRT/</Field>
+    <Field name="drug_class_allergen_identifier">{{drug_class_allergen_identifier}}</Field>
+    <Field name="severity_title">{{severity_title}}</Field>
+    <Field name="severity_system">http://purl.bioontology.org/ontology/SNOMEDCT/</Field>
+    <Field name="severity_identifier">{{severity_identifier}}</Field>
+  </Model>
+</Models>

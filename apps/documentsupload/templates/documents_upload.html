@@ -1,0 +1,393 @@
+{% extends 'problems/templates/base.html' %}
+{% load i18n %}
+{% block title %}documents list{% endblock %}
+{% block content %}
+
+
+<style>
+
+
+</style>
+
+
+<meta charset="utf-8">
+<!--<title>Speak.js Demo</title>-->
+<!--<script src="{{ STATIC_HOME }}/speakClient.js"></script>-->
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+{% if record_id %}
+
+<script>
+  Indivo.Auth.setToken("{{surl_credentials.token}}","{{surl_credentials.secret}}");
+</script>
+{% endif %}
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" />
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="/jmvc/ui/resources/js/bootbox.js"></script>
+
+
+<script>
+
+
+
+
+
+//  localStorage.setItem('documents_id_doc', 'tt');
+  var documents_id="";
+  var click="False";
+ 
+  function shareDocuments(){
+
+   documents_id="";
+//   $("input:checkbox").each(function(){
+//    var $this = $(this);
+   
+//    if($this.is(":checked")){
+
+//        documents_id+=$this.attr("id")+","  
+
+ //   }
+   
+ //  });
+
+   if(documents_id !=""){ 
+            var url = '/widgets/DocumentAccess?record_id={{record_id}}&document_id={{documents.0.id}}';
+            signed_url = Indivo.Auth.signURL(url);
+
+//	   localStorage.setItem('documents_id_doc', documents_id); 
+            document.getElementById('iframee').src=Indivo.UI_SERVER_BASE + signed_url
+        
+	   document.getElementById('widget').style.visibility = 'visible';
+   }
+   else
+   {
+	alert('Please select documents.');
+   }
+
+
+//   $('input[type=checkbox]').removeAttr('checked');
+}
+
+  function shareFunction(id){
+var url = '/widgets/DocumentAccess?record_id={{record_id}}&document_id='+id;
+       signed_url = Indivo.Auth.signURL(url);
+
+		bootbox.dialog({
+		title: {% trans "' Sharing and Audit '" %},
+        message: '<div class="row" style="width:100%;height:300px;">  ' +
+           			'<div class="col-lg-12" style="text-align:center;"> ' +
+						'<center><iframe style="width:100%;height:290px;border:0px solid black;"  src="'+ Indivo.UI_SERVER_BASE + signed_url +'"></iframe></center>' + 
+           			'</div> ' +
+				'</div>',
+                buttons: {
+					success: {
+						label: "Close",
+						className: "btn-info btn-lg",
+						callback: function () {
+						}
+					}
+				}  
+
+		});
+window.top.scrollTo(0,0);
+		
+		return false;
+	   var url = '/widgets/DocumentAccess?record_id={{record_id}}&document_id='+id;
+           signed_url = Indivo.Auth.signURL(url);
+
+
+        
+           document.getElementById(id+'mm').src=Indivo.UI_SERVER_BASE + signed_url
+            var w = window.open("", "", "width=200, height=200, scrollbars=yes");
+        //alert(ICJX_JXPath);
+
+            var html = $("#"+id).html();
+           
+//            $(w.document.body).html(html);
+	    w.document.write(html);
+            w.document.body.innerHTML = html;
+            w.document.close();
+
+
+//	    document.getElementById(id).style.display = '';
+      
+
+   }
+
+
+   function setPageSize()
+   {   	
+   if (!el('divList')) return false;
+   	el('divList').style.width = (el('divContainer').offsetWidth-0).toString() + 'px';   	
+	if (window.top.document.getElementById('app_container'))
+		el('divContainer').style.width = (window.top.document.getElementById('app_container').offsetWidth-0).toString() + 'px';	
+   }
+   
+   setInterval('setPageSize();', 500);
+
+
+
+
+
+ 
+
+
+</script>
+
+
+<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:100%;overflow-x:hidden;" id="divContainer" >
+	<div class="row"  style="margin-left:5px;">
+		<div class="col-xs-12">
+		<h2>{% trans "Upload documents" %} {% if in_carenet %}(Shared){% endif %}</h2>
+		</div>
+    </div>
+
+
+{% if not in_carenet %}
+<div class="row" style="width:400px;">
+      <div class="col-lg-12" style="text-align:left;padding:20px;">
+         <a href="new" class="btn btn-success btn-sm"  style="margin:20x;">{% trans "add a document" %}</a>
+		 <a href="archived" class="btn btn-danger btn-sm" style="margin:20x;">{% trans "deleted documents" %}</a>
+      </div>
+</div>
+
+{% endif %}
+
+{% if not in_carenet %}
+    <div class="row" id="divList" style="margin-left:5px;">
+      <div class="col-xs-12">
+         <div class="row" style="border:1px solid silver;">
+            <div class="col-xs-3">
+               <b>{% trans "Title" %}</b>
+            </div>
+            <div class="col-xs-3">
+               <b>{% trans "Details" %}</b>
+            </div>
+            <div class="col-xs-1">
+               <b>{% trans "Link" %}</b>
+            </div>
+            <div class="col-xs-2">
+		<b> {% trans "Shared with"%}</b>
+            </div>
+            <div class="col-xs-3">
+               <b>{% trans "Delete" %} / {% trans "Share" %}</b>
+            </div>
+
+         </div>
+
+         {% for p in documents %}
+
+          <div class="row" style="border-left:1px solid silver;border-right:1px solid silver;border-bottom:1px solid silver;">
+            <div class="col-xs-3">
+               
+             {{p.title}}
+            </div>
+            <div class="col-xs-3">
+		<a  href="details/{{p.id}}" >{% trans "Details" %}</a>
+              <script>
+//                           var startDate = '{{p.registered_date}}';
+  //                         document.write(startDate.split('T')[0]);
+              </script>
+            </div>
+            <div class="col-xs-1">
+      		 <a  href="{{p.id}}" target="_blank"  >{% trans "Open" %} </a> 
+	    </div>
+
+            	
+
+ <script>
+indivo_api_call = function(method, url, callback) {
+      url = '/indivoapi' + url;
+      $.ajax({
+      type: method,
+      url: url,
+      dataType: "xml",
+      success: callback
+      });
+      }
+
+var result_c="";
+function sharing(){
+      get_carenets(true, function(carenets) {
+      result_c=""
+      var shared_with = "only your guardians";
+
+      for(i=0; i<carenets.length; i++){
+      	result_c+=carenets[i]['name']
+        result_c+=" ";
+      }
+     
+      if(result_c!=""){
+           id='{{p.id}}'
+		 document.getElementById(id+'sh').innerHTML +=result_c;
+
+	}
+     else{
+		id='{{p.id}}'
+		document.getElementById(id+'sh').innerHTML = " - ";
+     }
+    });
+
+ function get_carenets(doc_specific, callback) {
+
+
+   var url = '/records/{{record_id}}/documents/{{p.id}}/carenets/';
+
+    indivo_api_call("GET", url, function(result) {
+      var carenets_xml = $(result).find('Carenets').find('Carenet');
+      var carenets = [];
+
+      carenets_xml.each(function(i, carenet) {
+        carenets.push({'id': $(carenet).attr('id'), 'name' : $(carenet).attr('name')});
+      });
+      callback(carenets);
+    });
+  }
+}
+sharing();
+
+</script>
+
+
+                
+                <script>
+                         var url = '/widgets/DocumentAccess?record_id={{record_id}}&document_id={{p.id}}';
+                         signed_url = Indivo.Auth.signURL(url);
+                </script>
+               
+              
+
+
+             <div class="col-xs-2" id='{{p.id}}sh' name='{{p.id}}sh' > 
+
+
+
+	    </div>
+            
+            <div class="col-xs-3">
+				<a href="delete/{{p.id}}" class="btn btn-danger btn-sm" >{% trans "delete" %}</a>
+				<input id="share" type="button" value="{% trans 'Share' %}" class="btn btn-primary btn-sm" onclick="return shareFunction('{{p.id}}');"/>
+            
+         <!--   </div>
+
+             <div class="col-md-2">-->
+
+		
+
+<!--		<div id="modeltext" style="display:none">
+		    <p id="linker" ></p>
+		    <script type="text/javascript">
+		        var news = "http://google.com";
+		        jQuery(document).ready(function() {
+			        jQuery('#linker').html('<script>function test(){Indivo.Auth.setToken("{{surl_credentials.token}}","{{surl_credentials.secret}}"); var url = "/widgets/DocumentAccess?record_id={{record_id}}&document_id={{p.id}}";signed_url = Indivo.Auth.signURL(url);} test(); alert("ok"); <\/script>');
+			        });
+		    </script>
+		    This is for testing according to the concept.
+    
+			</div>
+
+-->
+
+
+
+
+
+
+		
+  		<div id="{{p.id}}" name="{{p.id}}"  style="display: none;">
+		<script>
+	//		 var url = '/widgets/DocumentAccess?record_id={{record_id}}&document_id={{p.id}}';
+	//		 signed_url = Indivo.Auth.signURL(url);
+		</script>
+	                <iframe class="indivo" id='{{p.id}}mm' name='{{p.id}}mm' src="" frameborder="0" scrolling="no"></iframe>
+		</div>
+              
+                  <!--<input type="checkbox" id="{{p.id}}" /><br>                -->
+             
+             </div>
+
+          </div>
+            {% endfor %}
+
+	
+
+      </div>
+{%endif %}
+   
+   {% if in_carenet %}
+
+	 <div class="row" id="divList" style="margin-left:5px;">
+      <div class="col-xs-12">
+         <div class="row" style="border:1px solid silver;">
+            <div class="col-xs-4">
+               <b>{% trans "Title" %}</b>
+            </div>
+            <div class="col-xs-4">
+               <b>{% trans "Date" %}</b>
+            </div>
+            <div class="col-xs-4">
+               <b>{% trans "Link" %}</b>
+            </div>
+
+         </div>
+
+         {% for p in documents %}
+
+          <div class="row" style="border-left:1px solid silver;border-right:1px solid silver;border-bottom:1px solid silver;">
+            <div class="col-xs-4">
+               
+             {{p.title}}
+            </div>
+            <div class="col-xs-4">
+              <script>
+                           var startDate = '{{p.registered_date}}';
+                           document.write(startDate.split('T')[0]);
+              </script>
+            </div>
+            <div class="col-xs-4">
+                 <a  href="{{p.id}}" target="_blank"  >Open </a>
+            </div>
+
+
+
+
+          </div>
+            {% endfor %}
+
+
+	
+
+
+
+
+   {% endif %}
+
+
+<!--	 {% if not in_carenet %}
+         <form action="documentsupload" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>{{ form.non_field_errors }}</p>
+            <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
+            <p>
+                {{ form.docfile.errors }}
+                {{ form.docfile }}
+            </p>
+             <input id="docfile" class="btn btn-default" name="docfile" type="file" /><br>
+
+            <p><input type="submit" value="Upload" /></p>
+        </form>
+
+   {% endif %}-->
+
+
+
+{% if not in_carenet %}
+
+
+
+  {% endif %}
+</div>
+{% endblock %}

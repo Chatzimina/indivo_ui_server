@@ -1,0 +1,156 @@
+{% extends 'problems/templates/base.html' %}
+{% block title %}Export data{% endblock %}
+{% block content %}
+
+<head>
+ <style type="text/css">
+{% if jsonData.6.z_score < 0%} 
+           *
+            {
+                font-size : 20px;
+            }
+
+            .class1 *
+            {
+                font-size : 20px;
+            }
+{%endif %}
+.black_overlay{
+        display: none;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        z-index:1001;
+        -moz-opacity: 0.8;
+        opacity:.80;
+        filter: alpha(opacity=80);
+}
+
+.white_content {
+        display: none;
+        position: absolute;
+        top: 30%;
+        left: 30%;
+        width: 25%;
+        height: 15%;
+        padding: 16px;
+        border: 16px;
+        background-color:#E1E1E1;
+        z-index:1002;
+        overflow: auto;
+	font-size : 12px;
+}
+#colorDiv {
+        background-color: #66C266;
+}
+
+</style>
+
+
+<script type = "text/javascript">
+function loadingForm(){
+
+document.getElementById('dwh').style.display='block';document.getElementById('fade').style.display='block'	
+}
+function OnSubmitForm(form) {
+
+ 	var procedures = ($("input[name=procedures]:checked").map(
+     		function () {return this.value;}).get().join("_"));
+	var labs = ($("input[name=labs]:checked").map(
+                function () {return this.value;}).get().join("_"));
+	var medications = ($("input[name=medications]:checked").map(
+                function () {return this.value;}).get().join("_"));
+	var allergies = ($("input[name=allergies]:checked").map(
+                function () {return this.value;}).get().join("_"));
+	var problems = ($("input[name=problems]:checked").map(
+                function () {return this.value;}).get().join("_"));
+
+
+        if (labs == "yes" || procedures == "yes" || medications == "yes" ||allergies == "yes" || problems == "yes"){
+        //document.getElementById('labs').style.display='block';document.getElementById('fade').style.display='block'
+  	//             var delay="0.1"; //how many seconds you wnat the delay to be
+	//var count='0';
+	var Texts=new Array();
+	Texts[0]='<img src='+'"{{ STATIC_HOME }}/ajax-loader.gif"'+'><p> Procedures are loading';
+	Texts[1]="Labs are loading";
+	Texts[2]="what text you want";
+
+	//function changeText(){
+	//alert(Texts[0]);
+	//document.getElementById('labs').innerHTML=Texts[count];
+	//count++;
+	//if(count==Texts.length){count='0';}
+	//setTimeout("changeText()",delay*1000);}
+
+
+	for (var i=0;i<Texts.length;i++)
+	{
+	//alert(Texts[i]); 
+		//document.getElementById('labs').innerHTML=Texts[i];
+		document.getElementById('labs').style.display='block';document.getElementById('fade').style.display='block'
+		
+        }
+}
+
+    
+
+}
+</script>
+</head>
+
+<body>
+
+<div id="content">
+<h2>Export Profile as RDF/XML{% if in_carenet %} (Shared){% endif %}</h2>
+
+ <form action="exportrdf" method="POST">
+	
+       <p>
+        <h3><b><br>Select Format</b></h3>
+
+        <p>
+
+
+
+	<select name="format" id="format">
+	<option value="xml">xml</option>
+	<option value="json">json</option>
+	<option value="rdf">rdf</option>
+	</select>
+
+
+        <p>
+        <h3><b><br>Select Data</b></h3>
+
+        <p>
+
+    <br><input type="checkbox" id ="checkbox" name="demographics" value="yes"> Demographics
+        <br><input type="checkbox" id ="checkbox" name="labs" value="yes"> Laboratory Results
+        <br><input type="checkbox" id ="checkbox" name="allergies" value="yes"> Allergies
+        <br><input type="checkbox" id ="checkbox" name="problems" value="yes"> Problems
+        <br><input type="checkbox" name="medications" value="yes"> Medications
+        <br><input type="checkbox" name="measurements" value="yes"> Measurements
+        <br><input type="checkbox" name="appointments" value="yes"> Appointments
+	<br><input type="checkbox" name="procedures" value="yes"> Procedures
+        <p><p>
+
+        <br><input type="submit" value="   Download   " >
+        </p>
+  </form>
+  <p>
+  <p>
+  <p>
+  <br>
+<!--  <p><a href="problemsxml">[Export problems as RDF/XML </a></p>
+  <p><a href="labsxml">[Export labs as RDF/XML]</a></p>
+  <p><a href="proceduresxml">[Export procedures as RDF/XML]</a></p>
+  <p><a href="demographicsxml">[Export demographics as RDF/XML]</a></p>
+  <p><a href="allxml">[Export demographics/problems/pocedures as RDF/XML]</a></p>-->
+</div>
+</div>
+</body>
+
+{% endblock %}

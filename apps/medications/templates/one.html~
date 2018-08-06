@@ -1,0 +1,151 @@
+{% extends 'medications/templates/base.html' %}
+{% block title %}medication{% endblock %}
+{% block content %}
+{% load i18n %}
+
+
+<head>
+
+{% if record_id %}
+<script>
+  Indivo.Auth.setToken("{{surl_credentials.token}}","{{surl_credentials.secret}}");
+</script>
+{% endif %}
+
+
+
+
+{% if jsonData != " " %}
+        {% if jsonData.5.z_score < -2 or jsonData.5.z_score > 2 %} <!--Rumination (abnormal it should be over 2 or less -2 )-->
+        <style type="text/css">
+            *
+            {
+                font-size : 12px
+            }
+
+            .class1 *
+            {
+                font-size : 20px;
+            }
+        </style>
+        {%endif%}
+     {% endif %}
+</head>
+
+<body>
+
+<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:95%;" id="divContainer" >
+
+	<div class="row" style="height:20px"></div>
+	<div class="row">
+		<div class="form-group" style="text-align:center;">
+			<input type="button" style="width:50%;" value="{% trans " Back" %}" onclick="location.href='./';return false;" class="btn btn-primary btn-lg"/>
+		</div>	
+	</div>
+	<div class="row"  style="margin-left:5px;">
+		<div class="col-xs-12">
+		<h2>{{medication.drugName_title}}</h2>
+		</div>
+    </div>
+
+	<div class="row" style="height:10px"></div>
+	
+	<div class="row" style="margin-left:5px;">		
+		<div class="col-lg-6" style="border:0px solid black;">
+			<div class="form-group">
+				<label>{% trans "End date" %}&nbsp;</label>
+				{{medication.endDate}}
+			</div>
+			<div class="form-group">
+				<label>{% trans "Frequency value" %}&nbsp;</label>
+				{{medication.frequency_value}}
+			</div>
+			<div class="form-group">
+				<label>{% trans "Frequency unit" %}&nbsp;</label>
+				{{medication.frequency_unit}}
+			</div>
+			<div class="form-group">
+				<label>{% trans "Instructions" %}&nbsp;</label>
+				{{medication.instructions}}
+			</div>
+			<div class="form-group">
+				<label>{% trans "Provenance title" %}&nbsp;</label>
+				{{medication.provenance_title}}
+			</div>
+			<div class="form-group">
+				<label>{% trans "Quantity value" %}&nbsp;</label>
+				{{medication.quantity_value}}
+			</div>
+			<div class="form-group">
+				<label>{% trans "Quantity unit" %}&nbsp;</label>
+				{{medication.quantity_unit}}
+			</div>
+			<div class="form-group">
+				<label>{% trans "Start date" %}&nbsp;</label>
+				{{medication.startDate}}
+			</div>
+			<div class="form-group">
+				<label>{% trans "Fill date" %}&nbsp;</label>
+				{{medication.fulfillments.0}}
+			</div>
+			<div class="form-group">
+				<label>{% trans "End date" %}&nbsp;</label>
+				{{medication.endDate}}
+			</div>
+			<div class="form-group">
+				<label>{% trans "Created at" %}&nbsp;</label>
+				{{meta.created_at}}
+			</div>
+		</div>
+		<div class="col-lg-6" style="float:left;border:0px solid black;">
+			<div style="float:right;">
+			{% if record_id %}
+			  <script>
+				Indivo.Widget.DocumentAccess.add('{{record_id}}', '{{medication_id}}');
+			  </script>
+			{% endif %}
+			</div>
+		</div>
+	</div>
+	<div class="row" style="height:10px"></div>
+	<div class="row">
+		<div class="form-group" style="text-align:center;">
+			<input type="button" style="width:50%;" value="{% trans " Back" %}" onclick="location.href='./';return false;" class="btn btn-primary btn-lg"/>
+		</div>	
+	</div>
+</div>
+
+{% ifequal 1 0 %}
+
+<div class="class1">
+
+
+<table class="light" style="width: 66%; margin: 2em 0;">
+  <tbody>
+    <col style="width: 25%"></col>
+    <col style="width: 75%"></col>
+    <tr><th scope="row">{% trans "End date" %}</th><td>{{medication.endDate}}</td></tr>
+    <tr><th scope="row">{% trans "Frequency value" %}</th><td>{{medication.frequency_value}}</td></tr>
+    <tr><th scope="row">{% trans "Frequency unit" %}</th><td>{{medication.frequency_unit}}</td></tr>
+    <tr><th scope="row">{% trans "Instructions" %}</th><td>{{medication.instructions}}</td></tr>
+    <tr><th scope="row">{% trans "Provenance title" %}</th><td>{{medication.provenance_title}}</td></tr>
+    <tr><th scope="row">{% trans "Quantity value" %}</th><td>{{medication.quantity_value}}</td></tr>
+    <tr><th scope="row">{% trans "Quantity unit" %}</th><td>{{medication.quantity_unit}}</td></tr>
+    <tr><th scope="row">{% trans "Start date" %}</th><td>{{medication.startDate}}</td></tr>
+    <tr><th scope="row">{% trans "Fill date" %}</th><td>{{medication.fulfillments.0}}</td></tr>
+    <tr><th scope="row">{% trans "End date"%}</th><td>{{medication.endDate}}</td></tr>
+   
+  </tbody>
+</table>
+
+<h3>{% trans "Additional Information" %}</h3>
+<div class="details">{% trans "Created at" %} {{meta.created_at}}</div>
+
+	<div align="center"><a href="./"><button style="width: 200px">{% trans " Back" %}</button></a></div>
+
+
+</div>
+
+{% endifequal %}
+</body>
+{% endblock %}

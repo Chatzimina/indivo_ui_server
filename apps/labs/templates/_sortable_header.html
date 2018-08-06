@@ -1,0 +1,69 @@
+{% load i18n %}
+{% if order_by == header_name %}
+        {% if header_text == "Date Measured" %}
+        <span class="input-update has-tooltip sortable" data-val="-{{ header_name }}" data-name="order_by" data-placement="top" rel="tooltip" data-original-title="Change Sort Direction">{% trans "Date Measured" %}</span>
+        <span class="icon-arrow-down"></span>
+         {% endif %}
+
+
+        {% if header_text == "Lab Status" %}
+        <span class="input-update has-tooltip sortable" data-val="-{{ header_name }}" data-name="order_by" data-placement="top" rel="tooltip" data-original-title="Change Sort Direction">{% trans "Lab Status" %}</span>
+        <span class="icon-arrow-down"></span>
+        {% endif %}
+
+
+        {% if header_text == "Lab Test Name" %}
+        <span class="input-update has-tooltip sortable" data-val="-{{ header_name }}" data-name="order_by" data-placement="top" rel="tooltip" data-original-title="Change Sort Direction">{% trans "Lab Test Name" %}</span>
+        <span class="icon-arrow-down"></span>
+        {% endif %}
+
+
+{% else %}
+        {% if "-"|add:header_name == order_by %}
+         {% if header_text == "Date Measured" %}
+
+                <span class="input-update has-tooltip sortable" data-val="{{ header_name }}" data-name="order_by" data-placement="top" rel="tooltip" data-original-title="Change Sort Direction">{% trans "Date Measured" %}</span>
+                <span class="icon-arrow-up"></span>
+           {% endif %}
+         {% if header_text == "Lab Status" %}
+
+                <span class="input-update has-tooltip sortable" data-val="{{ header_name }}" data-name="order_by" data-placement="top" rel="tooltip" data-original-title="Change Sort Direction">{% trans "Lab Status" %}</span>
+                <span class="icon-arrow-up"></span>
+           {% endif %}
+
+         {% if header_text == "Lab Test Name" %}
+
+                <span class="input-update has-tooltip sortable" data-val="{{ header_name }}" data-name="order_by" data-placement="top" rel="tooltip" data-original-title="Change Sort Direction">{% trans "Lab Test Name" %}</span>
+                <span class="icon-arrow-up"></span>
+           {% endif %}
+
+
+        {% else %}
+           {% if header_text == "Lab Status" %}
+
+                <span class="input-update has-tooltip sortable" data-val="{{ header_name }}" data-name="order_by" data-placement="top" rel="tooltip" data-original-title="Sort">{% trans "Lab Status" %}</span>
+            {% endif %}
+
+            {% if header_text == "Date Measured" %}
+
+                <span class="input-update has-tooltip sortable" data-val="{{ header_name }}" data-name="order_by" data-placement="top" rel="tooltip" data-original-title="Sort">{% trans "Date Measured" %}</span>
+            {% endif %}
+
+            {% if header_text == "Lab Test Name" %}
+
+                <span class="input-update has-tooltip sortable" data-val="{{ header_name }}" data-name="order_by" data-placement="top" rel="tooltip" data-original-title="Sort">{% trans "Lab Test Name" %}</span>
+            {% endif %}
+
+        {% endif %}
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+

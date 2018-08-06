@@ -1,0 +1,119 @@
+{% extends 'problems/templates/base.html' %}
+{% block title %}problem list{% endblock %}
+{% block content %}
+
+<body>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+$(".z_score").each(function() {
+//$(document).ready(function() {
+ // executes when HTML-Document is loaded and DOM is ready
+ alert('test');
+
+// var txtclass1Elements = document.getElementsByClassName("z_score");
+//Alert the value of each of them
+//for(var i = 0; i < txtclass1Elements.length; i++){
+//     alert(txtclass1Elements[i].value);
+     
+//}
+ //var z_score = parseFloat(this.value);
+ //var z_score = document.getElementById('.z_score').innerHTML;
+ //var z_score_float = parseFloat(z_score);
+ //var category = document.getElementById('category').innerHTML;
+ //var subcategory = document.getElementById('subcategory').innerHTML;
+alert(z_score)
+ //if (z_score < 0)
+  //{
+    //  alert("z_score" +z_score+" is under zero in category"+category+"and subcategory"+subcategory);
+     // return false      
+ // }
+});
+});
+
+
+$(window).load(function() {
+ // executes when complete page is fully loaded, including all frames, objects and images
+   var content = document.getElementById('z_score').innerHTML;
+
+ alert(content);
+ return false
+
+});
+
+</script>
+<script>
+//$(document).ready(function () {
+//$.getJSON('webservice.html', jsonData, function(jsonData) {
+//    $(jsonData).each(function() {
+ //   var json=jsonData
+  //  var tr;
+ //   for (var i = 0; i < json.length; i++) {
+//        tr = $('<tr/>');
+//        tr.append("<td>" + json.i.category + "</td>");
+//        tr.append("<td>" + json.i.subcategory + "</td>");
+//        tr.append("<td>" + json.i.z_score + "</td>");
+ //       $('table').append(tr);
+//    }
+//});
+
+//$.each(jsonData, function(key, val) {
+//    var tr=$('<tr></tr>');
+//    $.each(val, function(k, v){
+ ///       $('<td>'+v+'</td>').appendTo(tr);
+  //  });
+  //  tr.appendTo('#display');
+//});
+
+var data = jsonData;
+var str = ""
+for (var item in data){
+    str += '<tr>';
+    for(idata in data.category[item]){
+        str += '<td>'+data.category[item]+'</td>';
+    }
+    str += '</tr>';
+}
+
+
+var content = document.getElementById('z_score').innerText;
+alert(content)
+$('#z_score').text()
+
+document.body.onload = function()  {
+    var content = document.getElementById("z_score").innerText;
+    alert("ehllpo");
+}
+
+
+</script>
+
+
+
+<table>
+    <tr>
+        <th>category</th>
+        <th>subcategory</th>
+        <th>z_score</th>
+    </tr>
+
+{%for p in jsonData%}
+<tr><td><span  value ="{{p.category}}" class="category" >{{ p.category }}</span></td>
+<td><span  value="{{p.subcategory}} "class="subcategory">{{ p.subcategory }} </span></td>
+<td><span  class="z_score" value="{{p.z_score}}">{{ p.z_score }}</span></td></tr>
+{#{% if p.z_score >= 0 %}#}
+<script type="text/javascript">
+function functionOne() { alert('You clicked the top text'); }
+
+</script>
+{#{% endif %}#}
+{%endfor%}
+</tr>
+</table>
+
+</body>
+
+{% endblock %}
+
+

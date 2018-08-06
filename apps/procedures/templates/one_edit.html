@@ -1,0 +1,232 @@
+{% extends 'problems/templates/base.html' %}
+{% block title %}problem list{% endblock %}
+{% block content %}
+{% load i18n %}
+<html>
+{% if record_id %}
+<script>
+  Indivo.Auth.setToken("{{surl_credentials.token}}","{{surl_credentials.secret}}");
+</script>
+{% endif %}
+<link type="text/css" href="/apps/allergies/static/css/jquery.autocomplete.css" rel="stylesheet">
+<head>
+<link href="{{ STATIC_HOME }}/css/datepicker.css" rel="stylesheet" type="text/css"/>
+<script>
+var nextYear = (new Date().getFullYear() + 1).toString();
+  $(document).ready(function() {
+    $('.date').datepicker({
+     dateFormat:'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        minDate:'-26y',
+        maxDate:'+2y',
+        yearRange: "1990:"+nextYear,
+        });
+
+
+    $('#problem_fullname').autocomplete({
+      serviceUrl:'/apps/procedures/procedures/codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#problem_code').val(data.code);
+      }
+    })
+    
+    $('#comments').autocomplete({
+      serviceUrl: '/apps/procedures/procedures/codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#comments_code').val(data.code);
+      }
+    })
+
+
+  });
+
+
+function validateForm()
+{
+var problem_fullname=document.forms["myForm"]["problem_fullname"].value;
+var provider_name=document.forms["myForm"]["provider_name"].value;
+var provider_institution=document.forms["myForm"]["provider_institution"].value;
+var locationn=document.forms["myForm"]["location"].value;
+var comments=document.forms["myForm"]["comments"].value;
+var date_performed=document.forms["myForm"]["date_performed"].value;
+if (problem_fullname==null || problem_fullname=="" ) //|| provider_name==null || provider_name=="" || provider_institution==null || provider_institution=="" || locationn==null || locationn=="" ||comments==null ||comments=="")
+  {
+  alert({% trans "'Please fill title.'" %});
+  return false;
+  }
+if(date_performed==null ||date_performed=="")
+ {
+  alert({% trans "'Please fill date.'" %});
+  return false;
+  }
+
+}
+
+
+</script>
+
+
+
+     {% if jsonData != " " %}
+
+           {% if jsonData.5.z_score < -2 or jsonData.5.z_score > 2 %} <!--physical abilities (abnormal it should be over 2 or less -2 )-->
+             <style type="text/css">
+               *
+               {
+                 font-size : 12px
+               }
+
+               .class1 *
+               {
+                  font-size : 20px;
+               }
+             </style>
+	  {% endif %}
+        {% endif %}
+</head>
+<body>
+<script>
+   function setPageSize()
+   {   	
+   	el('divList').style.width = (el('divContainer').offsetWidth-0).toString() + 'px';   	
+	if (window.top.document.getElementById('app_container'))
+		el('divContainer').style.width = (window.top.document.getElementById('app_container').offsetWidth-0).toString() + 'px';	
+   }
+   
+   setInterval('setPageSize();', 500);
+</script>
+<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:100%;overflow-x:hidden;" id="divContainer" >
+	<form name="myForm" onsubmit="return validateForm()" method="post" action="">
+		<div class="row" style="height:10px"></div>
+		
+		
+		<div class="row"  style="margin-left:5px;">
+			<div class="col-xs-12">
+				<h2>{{problem.name_type}} &nbsp;&nbsp;<span style="font-size:0.7em;">
+			<!--	<h4>(SNOMEDCT:{{problem.name}})</h4>-->
+			</div>
+		</div>
+		
+		<div class="row" style="height:10px"></div>
+		
+		<div class="row"  style="margin-left:5px;">
+			<div class="form-group">
+			<label>{% trans "Procedure" %}</label>
+			<input type="text" name="code_fullname" id="problem_fullname" value="{{problem.name_type}}" style="width: 100%" class="form-control"/>
+          <input type="hidden" name="code" value="{{problem.name_abbrev}}" id="problem_code" /> <!--(SNOMED CT)-->
+		</div>
+		<div class="form-group">
+			<label>{% trans "Date Performed" %}</label>
+			<input type="text" name="date_performed" class="date form-control" style="width: 100%" value="{{problem.date_performed}}" autocomplete="off" />
+        </div>
+		<div class="form-group">
+			<label>{% trans "Doctor Name" %}</label>
+			<input type="text" name="provider_name" style="width: 100%" value="{{problem.provider_name}}"  class="form-control"/>
+      </div>
+		  <div class="form-group">
+			<label>{% trans "Hospital" %}</label>
+			<input type="text" name="provider_institution" style="width: 100%" value="{{problem.provider_institution}}" class="form-control"/>
+		  </div>
+		  <div class="form-group">
+				<label>{% trans "Location" %}</label>
+				<input type="text" name="location" style="width: 100%" value="{{problem.location}}" class="form-control"/>
+			</div>
+		  <div class="form-group">
+				<label>{% trans "Comments" %}</label>
+				<input type="text" name="comments" id="comments" style="width: 100%" value="{{problem.comments}}" class="form-control"/>
+          <input type="hidden" name="comments_code" id="comments_code" value="{{problem.name_type}}"/> 
+		  </div>
+		  
+		  
+		  </div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="row">
+		<div class="col-lg-12" align="center" >
+			 <input type="submit" value="{% trans "Update Procedure" %}"  style="width:50%;max-width:300px;" class="btn btn-primary btn-lg"/>
+		</div>
+		</div>
+		<div class="row" style="height:10px;"></div>
+		<div class="row">
+		<div class="col-lg-12"  align="center">
+			<!--a href="./../"><button   type="button" class="btn btn-primary btn-lg" style="width:50%;max-width:300px;">{% trans "   Cancel" %}  </button></a-->
+			<button onclick="history.back();"  type="button" class="btn btn-warning btn-lg" style="width:50%;max-width:300px;">{% trans "   Cancel" %}  </button>
+		</div>
+		</div>
+	</div>
+	</form>
+</div>
+
+{% ifequal 1 0 %}
+<h2>{{problem.name}} &nbsp;&nbsp;<span style="font-size:0.7em;">
+<h4>(SNOMEDCT:{{problem.name_abbrev}})</h4>
+<div class="class1">
+ <form name="myForm" onsubmit="return validateForm()" method="post" action="">
+<table class="light form">
+      <col style="width: 20%"></col>
+      <col style="width: 80%"></col>
+      <tr>
+        <td>{% trans "Procedure" %}</td>
+        <td>
+          <input type="text" name="code_fullname" id="problem_fullname" value="{{problem.name_type}}" style="width: 100%" />
+          <input type="hidden" name="code" value="{{problem.name_abbrev}}" id="problem_code" /> <!--(SNOMED CT)-->
+        </td>
+      </tr>
+
+      <tr>
+        <td>{% trans "Date Performed" %}</td>
+        <td><input type="text" name="date_performed" class="date" style="width: 100%" value="{{problem.date_performed}}" /></td>
+      </tr>
+      <tr>
+        <td>{% trans "Doctor Name" %}</td>
+        <td><input type="text" name="provider_name" style="width: 100%" value="{{problem.provider_name}}" /></td>
+      </tr>
+	<tr>
+        <td>{% trans "Hospital" %}</td>
+        <td><input type="text" name="provider_institution" style="width: 100%" value="{{problem.provider_institution}}"/></td>
+      </tr>
+	<tr>
+        <td>{% trans "Location" %}</td>
+        <td><input type="text" name="location" style="width: 100%" value="{{problem.location}}"/></td>
+      </tr>
+      <tr>
+        <td>{% trans "Comments" %}</td>
+        <td><input type="text" name="comments" id="comments" style="width: 100%" value="{{problem.comments}}"/>
+          <input type="hidden" name="comments_code" id="comments_code" value="{{problem.name_type}}"/> 
+	 </td>
+      </tr>
+
+
+
+    </table>
+
+    <br />
+    
+    <div style="text-align: center">
+      <input type="submit" value="{% trans "Update Procedure" %}" style="width: 33%"/><p>
+     <!-- <input type="button" style="width: 200px" onclick="history.go(-1);" value="    Cancel    ">-->
+    </div>
+  </form>
+<!--history.go(-2);-->
+
+<!--	<div align="center"><a href="#" onclick="history.go(-2);"><button style="width: 200px"> {% trans " Cancel" %}  </button></a></div>-->
+ <div align="center"><!--a href="./../"><button style="width: 200px">{% trans "   Cancel" %}  </button></a-->
+ <button onclick="location.href='./../';return false;" style="width: 200px">{% trans "   Cancel" %}</button>
+ 
+ </div>
+
+<h3>{% trans "Additional Information" %}</h3>
+<div class="details">{% trans "Created at" %} {{meta.created_at}}</div>
+
+
+</div>
+
+{% endifequal %}
+
+{% endblock %}
+</body>
+</html>

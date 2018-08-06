@@ -1,0 +1,142 @@
+{% extends 'problems/templates/base.html' %}
+{% block title %}archived procedure list{% endblock %}
+{% block content %}
+{% load i18n %}
+
+
+
+
+<head>
+    {% if jsonData != " " %}
+
+        {% if jsonData.5.z_score < -2 or jsonData.5.z_score > 2 %} <!--Rumination (abnormal it should be over 2 or less -2 )-->
+        <style type="text/css">
+            *
+            {
+                font-size : 12px
+            }
+
+            .class1 *
+            {
+                font-size : 20px;
+            }
+        </style>
+	{% endif %}
+    {% endif %}
+</head>
+
+<body>
+
+<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:100%;overflow-x:hidden;" id="divContainer" >
+	<div class="row"  style="margin-left:5px;">
+		<div class="col-xs-12">
+		  <h2>{% trans "Procedures List" %} {% if in_carenet %}(Shared){% endif %}</h2>
+		</div>
+    </div>
+	
+	<div class="row"  style="height:10px;"></div>
+	
+	{% ifequal num_problems 0 %}
+    {% else %}
+	<div class="row" id="divList" style="margin-left:5px;">
+      <div class="col-xs-12">
+         <div class="row" style="border:1px solid silver;">
+            <div class="col-xs-3">
+               <b>{% trans "Name" %}</b>
+            </div>
+            <div class="col-xs-3">
+               <b>{% trans "Date performed" %}</b>
+            </div>
+            <div class="col-xs-3">
+               <b>{% trans "Institution" %}</b>
+            </div>
+            <div class="col-xs-3">
+               {% if not in_carenet %}
+               <b>{% trans "Restore" %}</b>
+               {% endif %}
+            </div>
+         </div>
+		  {% for p in problems %}
+          <div class="row" style="border:1px solid silver;">
+            <div class="col-xs-3"><a href="{{p.id}}">{{p.name}}</a>
+			<script>
+			st = '{{p.status}}';
+			if (st != '')
+			{
+				document.write(', status: ' + st)
+			}
+			</script>
+			</div>
+            <div class="col-xs-3">			
+			<script>
+			   var startDate = '{{p.date_performed}}';
+			   document.write(startDate.split('T')[0]);
+			   </script>			
+			</div>
+            <div class="col-xs-3">{{p.provider_institution}}</div>
+            <div class="col-xs-3"><a href="restore/{{p.id}}"><button class="btn btn-sm btn-primary">{% trans "restore" %}</button></a></div>
+          </div> 
+        {% endfor %}
+		<div class="row" style="border:1px solid silver;" align="right">
+            <div class="col-xs-12">{{num_problems}} procedure{% ifequal num_problems 1 %}{% else %}s{% endifequal %}</div>
+          </div> 
+	 </div>
+	 {% endifequal %}
+</div>
+
+{% if not in_carenet %}
+	<div class="row" style="height:10px;"></div>
+	<div class="row" align="center">
+		<div class="col-xs-12">
+		<a href="./">
+			<button style="width: 50%" class="btn btn-warning btn-lg"> {% trans "Back" %} </button>
+		</a>
+		</div>
+	</div>
+  {% endif %}
+
+
+{% ifequal 1 0 %}
+  <h2>{% trans "Procedures List" %} {% if in_carenet %}(Shared){% endif %}</h2>
+<div class="class1">
+  {% ifequal num_problems 0 %}
+  {% else %}
+    <table class="light">
+      <thead>
+        <tr>
+          <th scope="col"><b>{% trans "Name" %}</b></th>
+          <th><b>{% trans "Date performed" %}</b></th>
+          <th><b>{% trans "Institution" %}</b></th>
+          <th><b>{% trans "Modify/Delete" %}</b></th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="3" style="text-align: right">{{num_problems}} procedure{% ifequal num_problems 1 %}{% else %}s{% endifequal %}</td>
+        </tr>
+      </tfoot>
+      <tbody>
+        {% for p in problems %}
+          <tr class="{% cycle 'odd' 'even' %}">
+            <td><a href="{{p.id}}">{{p.name}}--{{p.status}}</a></td>
+            <td>{{p.date_performed}}</td>
+            <td>{{p.provider_institution}}</td>
+            <td><a href="restore/{{p.id}}"><button>restore</button></a> 
+          </tr> 
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endifequal %}
+
+  {% if not in_carenet %}
+	<div align="center"><a href="./"><button style="width: 200px">{% trans " Back" %} </button></a></div>
+
+  	<!--<p><a href="deletedProcedures">[Deleted procedures]</a></p>-->
+  {% endif %}
+</div>
+
+{% endifequal  %}
+
+{% endblock %}
+</body>
+</html>

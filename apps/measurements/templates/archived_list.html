@@ -1,0 +1,113 @@
+{% extends 'problems/templates/base.html' %}
+{% block title %}archived measurements list{% endblock %}
+{% block content %}
+{% load i18n %}
+
+
+
+
+<head>
+<script>
+Date.prototype.addHours = function(h) {    
+   this.setTime(this.getTime() + (h*60*60*1000)); 
+   return this;   
+}
+</script>
+</head>
+
+<body>
+
+<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:100%;overflow-x:hidden;" id="divContainer" >
+	<div class="row"  style="margin-left:5px;">
+		<div class="col-xs-12">
+		  <h2>{% trans "Archived Measurements List" %} {% if in_carenet %}(Shared){% endif %}</h2>
+		</div>
+    </div>
+	
+	<div class="row"  style="height:10px;"></div>
+	
+	{% ifequal num_measurements 0 %}
+          <div class="row" id="divList" style="margin-left:5px;">
+      <div class="col-xs-12">
+         <div class="row" style="border:1px solid silver;">
+            <!--div class="col-xs-3">
+               <b>{% trans "Name" %}</b>
+            </div-->
+            <div class="col-xs-3">
+               <b>{% trans "Kind" %}</b>
+            </div>
+            <div class="col-xs-2">
+               <b>{% trans "Value" %}</b>
+            </div>
+            <div class="col-xs-2">
+               <b>{% trans "Unit" %}</b>
+            </div>
+            <div class="col-xs-2">
+            <!-- {#  {% if not in_carenet %}#}-->
+               <b>{% trans "Restore" %}</b>
+<!--              {# {% endif %}#}-->
+            </div>
+         </div>
+       <div class="row" style="border:1px solid silver;" align="right">
+
+           <div class="col-xs-12">{{num_measurements}} measurement{% ifequal num_measurements 1 %}{% else %}s{% endifequal %}</div>
+      </div>
+      {% else %} 
+	<div class="row" id="divList" style="margin-left:5px;">
+      <div class="col-xs-12">
+         <div class="row" style="border:1px solid silver;">
+            <!--div class="col-xs-3">
+               <b>{% trans "Name" %}</b>
+            </div-->
+            <div class="col-xs-3">
+               <b>{% trans "Kind" %}</b>
+            </div>
+            <div class="col-xs-2">
+               <b>{% trans "Value" %}</b>
+            </div>
+            <div class="col-xs-2">
+               <b>{% trans "Unit" %}</b>
+            </div>
+            <div class="col-xs-2">
+            <!-- {#  {% if not in_carenet %}#}-->
+               <b>{% trans "Restore" %}</b>
+<!--              {# {% endif %}#}-->
+            </div>
+         </div>
+		  {% for p in measurements %}
+          <div class="row" style="border:1px solid silver;">
+            <!--div class="col-xs-3">{{p.name}}</a></div-->
+            <div class="col-xs-3">
+
+                        {{p.kind}}
+			</div>
+            <div class="col-xs-2">			
+                         {{p.value}}
+			</div>
+            <div class="col-xs-2">{{p.unit}}</div>
+            <div class="col-xs-2"><a href="restore/{{p.id}}"><button class="btn btn-sm btn-primary">{% trans "restore" %}</button></a></div>
+          </div> 
+        {% endfor %}
+		<div class="row" style="border:1px solid silver;" align="right">
+            <div class="col-xs-12">{{num_measurements}} measurement{% ifequal num_measurements 1 %}{% else %}s{% endifequal %}</div>
+          </div> 
+	 </div>
+	 {% endifequal %}
+</div>
+
+{% if not in_carenet %}
+	<div class="row" style="height:10px;"></div>
+	<div class="row" align="center">
+		<div class="col-xs-12">
+		<a href="./">
+			<button style="width: 50%" class="btn btn-warning btn-lg"> {% trans "Back" %} </button>
+		</a>
+		</div>
+	</div>
+  {% endif %}
+
+
+
+{% endblock %}
+</body>
+</html>

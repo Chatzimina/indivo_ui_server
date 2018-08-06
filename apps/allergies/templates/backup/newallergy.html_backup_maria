@@ -1,0 +1,100 @@
+{% extends 'allergies/templates/base.html' %}
+{% block title %}new allergy{% endblock %}
+{% block content %}
+
+<script>
+  $(document).ready(function() {
+    //$('.date').datepicker({'dateFormat':'yy-mm-dd'});
+  //$('.auto-complete-tbx').each(function() { 
+  //$(this).autocomplete({
+    //  serviceUrl: 'codelookup',
+      //minChars: 2,
+      //onSelect: function (value, data) {
+        //$('.auto-complete-code').val(data.code)}
+    
+    //})
+  //});
+     $('#allergic_reaction_fullname').autocomplete({
+      serviceUrl: 'codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#allergic_reaction_code').val(data.code);
+      }
+    })
+
+    $('#category_fullname').autocomplete({
+      serviceUrl: 'codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#category_code').val(data.code);
+      }
+    })
+
+    $('#drug_class_allergen_fullname').autocomplete({
+      serviceUrl: 'codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#drug_class_allergen_code').val(data.code);
+      }
+    })
+
+    $('#severity_fullname').autocomplete({
+      serviceUrl: 'codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#severity_code').val(data.code);
+      }
+    })
+
+});
+</script>
+
+
+<h2>New Allergy &nbsp;&nbsp;<span style="font-size:0.7em; font-weight: normal; text-transform: uppercase">[<a href="./">Cancel</a>]</span></h2>
+
+  <form method="post" action="">
+    <table class="light form">
+      <col style="width: 20%"></col>
+      <col style="width: 80%"></col>
+      <tr>
+        <td>Allergy</td>
+        <td>
+          <input type="text" name="code_fullname" class="auto-complete-tbx" id="allergic_reaction_fullname" style="width: 100%"/>
+          <input type="text" name="code" class="auto-complete-code" value="" id="allergic_reaction_code"/>
+        </td>
+      </tr>
+       <td>Category</td>
+        <td>
+          <input type="text" name="code_fullname" value="" id="category_fullname" />
+          <input type="text" name="code" id="category_code" style="width: 100%" />
+        </td>
+      </tr>
+      <tr>
+	<td>Drug class allergen</td>
+	<td><input type="text" name="code_fullname" class="auto-complete-tbx" id="drug_class_allergen_fullname" style="width: 100%" />
+            <input type="text" name="code" value="" id="drug_class_allergen_code"/>
+	</td>
+      </tr>
+      <tr>
+	<!--<td>Severity</td>
+	<td><input type="text" name="code_fullname" class="auto-complete-tbx" id="severity_fullname" style="width: 100%" />
+            <input type="text" name="code" value="" id="severity_code"/>
+        </td>
+      </tr>
+      <tr>
+	 <td>Details</td>
+         <td><input type="textarea" name="comments" cols="50" rows="3" wrap="soft" style="width: 100%"></textarea>
+        </td>
+      </tr>-->
+
+      </tr>
+    </table>
+
+   <br />
+    
+    <div style="text-align: center">
+      <input type="submit" value="Add New Allergy" style="width: 33%"/>
+    </div>
+  </form>
+
+{% endblock %}

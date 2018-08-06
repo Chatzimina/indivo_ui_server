@@ -1,0 +1,388 @@
+{% extends 'problems/templates/base.html' %}
+{% block title %}Measurements list{% endblock %}
+{% block content %}
+{% load i18n %}
+
+  
+
+<head>
+
+{% if record_id %}
+<script>
+  Indivo.Auth.setToken("{{surl_credentials.token}}","{{surl_credentials.secret}}");
+</script>
+{% endif %}
+
+<!--        <script src="/apps/procedures/static/speakClient.js"></script>-->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+<body>
+
+<script>
+var i=0;
+var array=[];
+var carenets=[];
+var uniqueList=[];
+function checkSharing2(){
+
+{% for p in measurements %}
+
+var url = '/records/{{record_id}}/documents/{{p.id}}/carenets/';
+
+ indivo_api_call("GET", url, function(result) {
+
+
+      var carenets_xml = $(result).find('Carenets').find('Carenet');
+      carenets = [];
+      carenets_xml.each(function(i, carenet) {
+        carenets.push({'id': $(carenet).attr('id'), 'name' : $(carenet).attr('name')});
+        uniqueList.push({'problem_id':'{{p.id}}','id': $(carenet).attr('id'), 'name' : $(carenet).attr('name')});
+
+      });
+
+
+    });
+
+
+{% endfor %}
+
+}
+
+function shareNew2(){
+var problems_ids=[];
+var problem_to_share=[];
+
+if(uniqueList.length >0){
+console.log('inside');
+        for(m=0; m<uniqueList.length ;m++){
+
+                problems_ids.push(uniqueList[m]['problem_id']);
+
+        }
+
+        {%for p in measurements %}
+
+                if (problems_ids.indexOf('{{p.id}}')<=-1){
+                        console.log('sdsds')
+                        for (j=0; j<carenets.length; j++){
+
+                                var url =  "/records/{{record_id}}/documents/{{p.id}}/carenets/"+carenets[j]['id']
+                                indivo_api_call("PUT",url, function(result){
+                                console.log('ok')
+                                });
+
+
+                        }
+                }
+        {%endfor%}
+
+}
+
+var iframe = document.getElementsByClassName('indivo')[0];
+iframe.src=iframe.src;
+}
+
+   function setPageSize()
+   {   	
+   if (!el('divList')) return false;
+   	el('divList').style.width = (el('divContainer').offsetWidth-0).toString() + 'px';   	
+	if (window.top.document.getElementById('app_container'))
+		el('divContainer').style.width = (window.top.document.getElementById('app_container').offsetWidth-0).toString() + 'px';	
+   }
+   
+   setInterval('setPageSize();', 500);
+</script>
+<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:100%;overflow-x:hidden;" id="divContainer" >
+	<div class="row"  style="margin-left:5px;">
+		<div class="col-xs-12">
+		<h2>{% trans "Measurements List" %} {% if in_carenet %}(Shared){% endif %}</h2>
+		</div>
+    </div>
+
+<div class="row" style="width:400px;margin-left: 0px;">
+	<div class="col-xs-6">
+		<input type="button" class="btn btn-primary btn-lg" onclick="return setlist(1);" value="{% trans 'List View' %}"/>
+	</div>
+	<div class="col-xs-6">
+		<input type="button" class="btn btn-primary btn-lg" onclick="return setlist(2);" value="{% trans 'Graph View'%}"/>
+	</div>
+</div>
+
+<div class="row" id="divGraphs" style="display:none;">
+	<div class="col-lg-12">
+		<div id="divCharts" style="margin:10px;"></div>
+   
+<div id="divHtml"></div>   
+   
+  
+<script src="/jmvc/ui/resources/js/raphael.min.js"></script>
+<script src="/jmvc/ui/resources/js/morris.min.js" ></script>
+    
+   <script>
+	function setlist(k)
+	{
+		el('divGraphs').style.display = '';
+		el('divTheList').style.display = '';
+		if (k == 1)
+		{
+			el('divGraphs').style.display = 'none';
+		}
+		else
+		{
+			el('divTheList').style.display = 'none';
+			setGraphs();
+		}
+		return false;
+	}
+   Array.prototype.getUnique = function(){
+   var u = {}, a = [];
+   for(var i = 0, l = this.length; i < l; ++i){
+      if(u.hasOwnProperty(this[i])) {
+         continue;
+      }
+      a.push(this[i]);
+      u[this[i]] = 1;
+   }
+   return a;
+}
+function setGraphs()
+{
+var chartTpl = '<div class="row" style="margin-top:50px;max;max-width:800px;display:;">';
+chartTpl += '<div class="col-lg-12">';
+chartTpl += '<div class="panel panel-default">';
+chartTpl += '<div class="panel-heading">';
+chartTpl += '<h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i>[KIND] graph</h3>';
+chartTpl += '</div>';
+chartTpl += '<div class="panel-body">';
+chartTpl += '<div id="morris-line-chart-[X]" style="max-height:300px;"></div>';
+chartTpl += '</div>';
+chartTpl += '</div>';
+chartTpl += '</div>';
+chartTpl += '</div>';
+	var measurements = "";//"{{ measurements }}";
+	measurements = measurements.replace(/None/g, "null");
+	measurements = measurements.replace(/\'/g, '"');
+	measurements = measurements.replace(/&#39;/g, '"');
+        //measurements = measurements.replace(/: u"/g,': "');
+		measurements = measurements.replace(/u"/g,'"');
+
+
+	measurements = "{{ measurements2 }}";
+	measurements = measurements.replace(/&quot;/g, '"');
+//alert(measurements);
+	var measurementsObj = JSON.parse(measurements);
+	//alert(measurementsObj.length);
+	var measurementsData = [];
+	var kinds = [];
+	var str = '';
+	for (var i=0;i<measurementsObj.length;)
+	{
+		
+		var obj = measurementsObj[i];
+
+		kinds[kinds.length] = obj.kind;		
+		str += obj.kind + '<br/>';
+		if (obj.measurementDat && obj.measurementDat != '')
+		{
+			measurementsData[measurementsData.length] = {d: obj.measurementDate.replace('T',' ').replace('Z','') , value: obj.value};
+		}
+		 
+		i++;
+	}
+	
+	
+	kinds = kinds.getUnique();
+	var measurementsLines = [];
+	str = '';
+	var k = 0;
+	
+	var chartsHTML = '';
+	for (var i=0;i<kinds.length;i++)
+	{	
+		chartsHTML += chartTpl.replace('[KIND]',kinds[i]);
+		chartsHTML = chartsHTML.replace('[X]',i.toString());
+	}
+	
+	el('divCharts').innerHTML = chartsHTML;
+	
+	for (var i=0;i<kinds.length;i++)
+	{	
+		var measurementKind =  kinds[i];
+		
+		k = 0;
+		var measurementLns = [];
+		for (var j=0;j<measurementsObj.length;j++)
+		{	
+			if (measurementsObj[j].measurementDate != null && measurementsObj[j].kind == measurementKind)
+			{
+				measurementLns[measurementLns.length] = {d: measurementsObj[j].measurementDate.replace('T',' ').replace('Z','') , value: parseInt(measurementsObj[j].value)};
+				k++;	
+			}
+		}
+		
+		Morris.Line({
+        	element: 'morris-line-chart-' + i.toString(),
+        	data: measurementLns,
+        	xkey: 'd',
+        	ykeys: ['value'],
+        	labels: [kinds[i]],
+        	smooth: false,
+        	resize: true
+    	});		
+
+	
+		
+		
+	}
+	
+	
+	//el('divHtml').innerHTML = str;
+
+	return false;
+}
+	Date.prototype.addHours = function(h) {    
+   this.setTime(this.getTime() + (h*60*60*1000)); 
+   return this;   
+}
+   </script>
+    
+	</div>
+</div>
+
+	<div id="divTheList">
+	{% if not in_carenet %}
+	<div class="row"  style="height:10px;"></div>
+   <div class="row"  id="divButtons" style="width:400px;margin-left:0px;">
+      <div class="col-xs-5" style="text-align:left;">
+         <a href="new" class="btn btn-success btn-sm" >{% trans "add measurement" %}</a>
+      </div>
+      <div class="col-xs-5" style="text-align:left;">
+         <a href="archived" class="btn btn-danger btn-sm">{% trans "deleted measurements" %}</a>
+      </div>
+	   <div class="col-xs-1" ></div>
+   </div>
+   <div class="row"  style="height:10px;"></div>
+   {% endif %}
+	
+	<div class="row"  style="height:10px;"></div>
+	
+	{% ifequal num_measuremtns 0 %}
+	 <table class="light">
+      <thead>
+        <tr>
+          <th scope="col"><b>{% trans "Name" %}</b></th>
+          <th><b>{% trans "Kind" %}</b></th>
+          <th><b>{% trans "Value" %}</b></th>
+          <th><b>{% trans "Unit" %}</b></th>
+          {% if not in_carenet %}
+          <th><b>{% trans "Modify/Delete" %}</b></th>
+          {% endif %}
+
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="3" style="text-align: right">{{num_measurements}} measurement{% ifequal num_measurements 1 %}{% else %}s{% endifequal %}</td>
+        </tr>
+      </tfoot>
+      <tbody>
+
+	{% else %}
+	<div class="row" id="divList" style="margin-left:5px;">
+      <div class="col-xs-12"  id="divList1">
+         <div class="row" style="border:1px solid silver;">
+            <!--div class="col-xs-3">
+               <b>{% trans "Name" %}</b>
+            </div-->
+            <div class="col-xs-3">
+               <b>{% trans "Kind" %}</b>
+            </div>
+            <div class="col-xs-3">
+               <b>{% trans "Value/Unit" %}</b>
+            </div>
+             <div class="col-xs-3">
+               <b>{% trans "Date" %}</b>
+            </div>
+
+			<div class="col-xs-3">
+				{% if not in_carenet %}
+
+				  {% endif %}               
+            </div>
+			
+         </div>
+
+		 {% for p in measurements %}
+		 <div class="row" style="border:1px solid silver;">
+			<div class="col-xs-3"> 
+				<a href="{{p.id}}">{{p.kind}}</a>
+			</div>
+                       <div class="col-xs-3">
+				{{p.value}} {{p.unit}}
+			</div>
+			<div class="col-xs-3">
+				<script>
+					var tzoffset = (new Date()).getTimezoneOffset()/60;
+					var dt = new Date('{{p.measurementDate}}').addHours(tzoffset);
+					document.write(dt.toLocaleDateString() + ' ' + dt.toLocaleTimeString());
+				</script>
+			</div>
+                        <div class="col-xs-3">
+			{% if not in_carenet %}
+				<a href="edit/{{p.id}}"><button class="btn btn-sm btn-primary" style="width:90%;max-width:100px;">{% trans "edit" %}</button></a>
+				<a href="delete/{{p.id}}"><button class="btn btn-sm btn-danger"  style="width:90%;max-width:100px;">{% trans "delete" %}</button></a>
+			{% endif %}
+			</div>
+		 </div>
+		 
+		 {% endfor %}
+		 <div class="row">
+			<div class="col-xs-12" align="right">{{num_measurements}} measurement{% ifequal num_measurements 1 %}{% else %}s{% endifequal %}</div>
+		 </div>
+    </div>
+</div>
+      </div>
+  {% if not in_carenet %}
+  {% endif %}
+</div>
+{% if ids %}
+<div style="float:left;">
+  <script>
+		Indivo.Widget.DocumentAccessMulti.add('{{record_id}}', '{{ids}}');
+  </script>
+</div>
+{% endif %}
+{% endifequal %}
+
+
+<script>
+//        setTimeout('checkSharing2();shareNew2()');//"{{measurements}}","{{record_id}}");shareNew("{{record_id}}");',10);
+
+var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+
+if (width <= 400)
+{
+	el('divList1').style.fontSize = '12px';
+	//alert('1');
+	//$( "input" ).css('fontSize', '8px');
+	var inputs1 = document.getElementsByClassName('btn');
+	for (var i=0;i<inputs1.length;i++)
+	{
+		inputs1[i].style.fontSize = '8px';
+		//alert('2');
+		break;
+	}
+	
+	var inputs2 = document.getElementsByTagName('input');
+	for (var i=0;i<inputs2.length;i++)
+	{
+		inputs2[i].style.fontSize = '8px !important';
+		//alert('3');
+		break;
+	}
+}
+</script>
+
+{% endblock content %}

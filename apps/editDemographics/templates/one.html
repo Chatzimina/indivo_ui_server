@@ -1,0 +1,94 @@
+{% extends 'problems/templates/base.html' %}
+{% block title %}problem list{% endblock %}
+{% block content %}
+{% load i18n %}
+<head>
+
+<!--	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/annyang/1.1.0/annyang.min.js"></script>
+        <script type="text/javascript" src="{{ STATIC_HOME }}/annyang-master/annyang.js"></script>
+    	<script type="text/javascript">
+	
+//        $.getScript("//cdnjs.cloudflare.com/ajax/libs/annyang/1.1.0/annyang.min.js");
+ //       $.getScript("{{ STATIC_HOME }}/annyang-master/annyang.js");
+
+
+         if(annyang)
+        {
+            var commands = {
+                'back': function(){
+                window.location.href ="http://iapetus.ics.forth.gr/apps/problems/problems/";
+
+                }
+
+		};
+
+        annyang.debug();
+        annyang.addCommands(commands);
+        annyang.start();
+
+        }
+
+</script>-->
+
+{% if jsonData%}
+        {% if jsonData.5.z_score < -1 or jsonData.5.z_score > 2 %} <!--Rumination (abnormal it should be over 2 or less -2 )-->
+        <style type="text/css">
+            *
+            {
+                font-size : 12px
+            }
+
+            .class1 *
+            {
+                font-size : 20px;
+            }
+        </style>
+        {%endif%}
+ {% endif %}
+
+        <meta charset="utf-8">
+        <title>Speak.js Demo</title>
+        <script src="{{ STATIC_HOME }}/speakClient.js"></script>
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+<body>
+        <div id="audio"></div>
+<div class="class1">
+
+
+
+
+{% if record_id %}
+<script>
+  Indivo.Auth.setToken("{{surl_credentials.token}}","{{surl_credentials.secret}}");
+</script>
+{% endif %}
+
+<h2>{{problem.name_title}} &nbsp;&nbsp;<span style="font-size:0.7em;"></span></h2>
+
+{% if record_id %}
+  <script>
+    Indivo.Widget.DocumentAccess.add('{{record_id}}', '{{problem_id}}');
+  </script>
+{% endif %}
+
+<table class="light" style="width: 66%; margin: 2em 0;">
+  <tbody>
+    <col style="width: 25%"></col>
+    <col style="width: 75%"></col>
+    <tr><th scope="row">{% trans "Date of onset" %}</th><td>{{problem.startDate}}</td></tr>
+    <tr><th scope="row">{% trans "Date resolved" %}</th><td>{{problem.endDate}}</td></tr>
+    <tr><th scope="row">{% trans "Comments" %}</th><td>{{problem.notes}}</td></tr>
+  </tbody>
+</table>
+
+<h3>{% trans "Additional Information" %}</h3>
+<div class="details">{% trans "Created at" %} {{meta.created_at}}</div>
+
+<p align="center"><a href="./"><button style="width: 200px">{% trans " Back" %} </button></a><p>
+</body>
+
+
+{% endblock %}

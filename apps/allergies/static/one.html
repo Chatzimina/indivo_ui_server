@@ -1,0 +1,32 @@
+{% extends 'allergies/templates/base.html' %}
+{% block title %}allergy list{% endblock %}
+{% block content %}
+
+{% if record_id %}
+<script>
+  Indivo.Auth.setToken("{{surl_credentials.token}}","{{surl_credentials.secret}}");
+</script>
+{% endif %}
+
+<h2>{{allergy.name_title}} &nbsp;&nbsp;<span style="font-size:0.7em;">[<a href="./">BACK</a>]</span></h2>
+
+{% if record_id %}
+  <script>
+    Indivo.Widget.DocumentAccess.add('{{record_id}}', '{{allergy_id}}');
+  </script>
+{% endif %}
+
+<table class="light" style="width: 66%; margin: 2em 0;">
+  <tbody>
+    <col style="width: 25%"></col>
+    <col style="width: 75%"></col>
+    <tr><th scope="row">Date of onset</th><td>{{allergy.}}</td></tr>
+    <tr><th scope="row">Date resolved</th><td>{{allergy.endDate}}</td></tr>
+    <tr><th scope="row">Comments</th><td>{{allergy.notes}}</td></tr>
+  </tbody>
+</table>
+
+<h3>Additional Information</h3>
+<div class="details">Created at {{meta.created_at}}</div>
+
+{% endblock %}

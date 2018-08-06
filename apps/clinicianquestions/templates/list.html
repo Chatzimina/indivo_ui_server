@@ -1,0 +1,251 @@
+{% extends 'clinicianquestions/templates/base.html' %}
+{% load i18n %}
+{% block title %}Clinician questionnaire list{% endblock %}
+{% block content %}
+{% if record_id %}
+<script>
+ Indivo.Auth.setToken("{{surl_credentials.token}}","{{surl_credentials.secret}}");
+</script>
+{% endif %}
+ <script>
+      indivo_api_call = function(method, url, callback) {
+      url = '/indivoapi' + url;
+      $.ajax({
+      type: method,
+      url: url,
+      dataType: "xml",
+      success: callback,
+      async: false
+      });
+      }
+
+
+    </script>
+
+
+
+
+<script>
+
+var i=0;
+var array=[];
+var carenets=[];
+var uniqueList=[];
+function checkSharing2(){
+
+{% for p in clinicianquestions %}
+
+var url = '/records/{{record_id}}/documents/{{p.id}}/carenets/';
+
+ indivo_api_call("GET", url, function(result) {
+
+
+      var carenets_xml = $(result).find('Carenets').find('Carenet');
+      carenets = [];
+      carenets_xml.each(function(i, carenet) {
+        carenets.push({'id': $(carenet).attr('id'), 'name' : $(carenet).attr('name')});
+        uniqueList.push({'clinicianquestion_id':'{{p.id}}','id': $(carenet).attr('id'), 'name' : $(carenet).attr('name')});
+
+      });
+
+
+    });
+
+
+{% endfor %}
+
+}
+
+function shareNew2(){
+var clinicianquestions_ids=[];
+var clinicianquestion_to_share=[];
+
+if(uniqueList.length >0){
+console.log('inside');
+	for(m=0; m<uniqueList.length ;m++){
+
+        	clinicianquestions_ids.push(uniqueList[m]['clinicianquestion_id']);
+      
+	}
+
+	{%for p in clinicianquestions %}
+
+		if (clinicianquestions_ids.indexOf('{{p.id}}')<=-1){
+                        console.log('sdsds')
+                        for (j=0; j<carenets.length; j++){
+                                
+                                var url =  "/records/{{record_id}}/documents/{{p.id}}/carenets/"+carenets[j]['id']
+				indivo_api_call("PUT",url, function(result){
+				console.log('ok')
+				});
+
+			
+			}
+		}
+	{%endfor%}
+
+}
+
+var iframe = document.getElementsByClassName('indivo')[0];
+iframe.src=iframe.src;
+}
+
+   function setPageSize()
+   {   	
+   	el('divList').style.width = (el('divContainer').offsetWidth-0).toString() + 'px';   	
+	if (window.top.document.getElementById('app_container'))
+		el('divContainer').style.width = (window.top.document.getElementById('app_container').offsetWidth-0).toString() + 'px';	
+   }
+   
+   setInterval('setPageSize();', 500);
+   
+   var tzoffset = (new Date()).getTimezoneOffset()/60;
+   
+   
+Date.prototype.addHours = function(h) {    
+   this.setTime(this.getTime() + (h*60*60*1000)); 
+   return this;   
+}
+</script>
+<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:100%;overflow-x:hidden;" id="divContainer" >
+	<div class="row"  style="margin-left:5px;">
+		<div class="col-xs-12">
+		<h2>{% trans "Cancer Clinical Assessment Questionnaires" %} {% if in_carenet %}(Shared){% endif %}</h2>
+		</div>
+    </div>
+	
+	 {% if not in_carenet %}
+   <div class="row"  id="divButtons" style="width:300px;margin-left:5px;">
+      <div class="col-xs-5" style="text-align:left;">
+         <a href="new" class="btn btn-success btn-sm" >{% trans "New Cancer Clinical Assessment" %}</a>
+      </div><br><br>
+      <div class="col-xs-5" style="text-align:left;">
+         <a href="archived" class="btn btn-danger btn-sm">{% trans "Deleted questionnaires" %}</a>
+      </div>
+	   <div class="col-xs-1" ></div>
+   </div>
+   <div class="row"  style="height:20px;"></div>
+   {% endif %}
+   
+
+   {% ifequal num_clinicianquestions 0 %}
+   {% else %}
+
+
+   <div class="row" id="divList" style="margin-left:5px;">
+         <div class="row" style="border:1px solid silver;">
+            <div class="col-lg-8">
+               <b>{% trans "Patient Name" %}</b>
+            </div>
+            <div class="col-lg-4">
+               
+{% if not in_carenet %}
+               <b>{% trans "Modify" %} / </b>
+			   <b>{% trans "Delete" %}</b>
+               {% endif %}
+            </div>
+         </div>
+         {% for p in clinicianquestions %}
+            <div class="row" style="border-left:1px solid silver;border-right:1px solid silver;border-bottom:1px solid silver;">
+              <div class="col-lg-8">
+
+		<span id="td_id" style="display:none">{{clinicianquestions}}</span>
+               <a  href="{{p.id}}"  >{{p.patientName}}</a>
+            </div>
+            <div class="col-lg-4">
+               {% if not in_carenet %}	    			
+               <div class="row">
+                  <div class="col-md-5" >
+                     <a href="edit/{{p.id}}"><button  class="btn btn-primary btn-sm" style="width:95%;max-width:150px;">{% trans "edit" %}</button></a>
+                  </div>
+				
+                  <div class="col-md-5" >
+                     <a href="delete/{{p.id}}"><button  class="btn btn-danger btn-sm"  style="width:95%;max-width:150px;">{% trans "delete" %}</button></a>
+                  </div>
+				  <div class="col-md-1" ></div>
+               </div>
+               {% endif %}
+            </div>
+         </div>
+         {% endfor %}
+         <div class="row" style="border-left:1px solid silver;border-right:1px solid silver;border-bottom:1px solid silver;">
+            <div class="col-xs-12" style="text-align: right">
+               {{num_clinicianquestions}} clinicianquestion{% ifequal num_clinicianquestions 1 %}{% else %}s{% endifequal %}
+            </div>
+         </div>
+      </div>
+   </div>
+   {% endifequal %}
+  {% if record_id %}<!--- SHARING !!!!!!!!! ---> 
+   <!--<div style="float:left;">
+
+                          <script>
+                                Indivo.Widget.DocumentAccessMulti.add('{{record_id}}', '{{ids}}');
+                          </script>
+
+   </div>-->
+{% endif %}
+	
+   {% ifequal num_clinicianquestions 0 %}
+   <div class="table-responsive">
+      <table class="table">
+         <thead>
+            <tr>
+               <th ><b>{% trans "Patient name" %}</b></th>
+               <th><b>{% trans "Patient id" %}</b></th>
+              
+               {% if not in_carenet %}
+               <th><b>{% trans "Modify/Delete" %}</b></th>
+               {% endif %}
+            </tr>
+         </thead>
+         <tbody>
+            <span id="td_id" style="display:none">{{clinicianquestions}}</span>
+            {% for p in clinicianquestions %}
+            <!--tr class="{% cycle 'odd' 'even' %}"-->
+            <tr>
+               <td >
+                  <a  href="{{p.id}}"  >{{p.name_title}}</a>
+               </td>
+               <td>
+			   {{p.startDate}}
+			   
+			   </td>
+               <td>{{p.endDate}}</td>
+               {% if not in_carenet %}
+               <td>
+                  <div class="row">
+                     <div class="col-lg-6" >
+                        <a href="edit/{{p.id}}"><button  class="btn btn-primary">{% trans "edit" %}</button></a>
+                     </div>
+                     <div class="col-lg-6" >
+                        <a href="delete/{{p.id}}"><button  class="btn btn-danger btn-sm">{% trans "delete" %}</button></a>
+                     </div>
+                  </div>
+               </td>
+               {% endif %}
+            </tr>
+            {% endfor %}
+	<div class="col-xs-12" style="text-align: right">
+
+
+               <td colspan="4" style="text-align: right">{{num_clinicianquestions}} clinicianquestion{% ifequal num_clinicianquestions 1 %}{% else %}s{% endifequal %}</td>
+	</div>
+         </tbody>
+      </table>
+   </div>
+   {% else %}
+   {% endifequal %}
+   
+   
+   
+  
+</div>
+
+
+<script>
+//	setTimeout('checkSharing2();shareNew2()');
+
+//'checkSharing("{{clinicianquestions}}","{{record_id}}");shareNew("{{record_id}}");',10);
+</script>
+{% endblock %}

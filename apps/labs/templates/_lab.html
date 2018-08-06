@@ -1,0 +1,61 @@
+{% load i18n %}
+
+<link rel="stylesheet" type="text/css" href="/jmvc/ui/resources/css/imanagecancer.css" media="screen" />
+
+<style>
+@font-face {
+  font-family: 'HelveticaNeue';
+  font-style: normal;
+  font-weight: normal;
+  src: url("HelveticaNeue-Light.otf")  format("truetype");
+
+}
+body {
+  font-family: 'HelveticaNeue';
+  font-size:16px;
+
+}
+
+.btn-primary{
+    background-image:none;
+    text-shadow:none;
+}
+
+.btn-danger{
+    background-image:none;
+    text-shadow:none;
+}
+
+a {
+    color: #7dc042 !important;
+}
+
+
+
+</style>
+
+
+<tr>
+	<td> {{ lab.collected_at|date:"d M Y" }}</td>
+	<td> {{ lab.status_title }}</td>
+	<td> <span class="has-popover" data-content="{{ lab.adr }}" data-original-title="Address">{{ lab.org }}</span></td>
+	<td> <a href="lab/{{lab.id}}"> {{ lab.test_name_title }}</td></a>
+	<td> {{ lab.quantitative_result_value_value }} {{ lab.quantitative_result_value_unit }}
+		{% if lab.abnormal %}	
+			<span class="label label-important">abnormal</span>
+		{% endif %}
+	</td>
+	<td> {{ lab.quantitative_result_normal_range_min_value }} {{ lab.quantitative_result_normal_range_min_unit }}</td>
+	<td> {{ lab.quantitative_result_normal_range_max_value }} {{ lab.quantitative_result_normal_range_max_unit }}</td>
+	{% if not in_carenet %}
+<!--        <td> <a class="source-link" href="lab/{{lab.id}}/"><i class="icon-file has-tooltip" data-placement="left" rel="tooltip" data-original-title="View Source Document"></i></a></td>-->
+        
+	<td>
+		<a href="edit/{{lab.id}}/">
+		<button type="button" onclick="location.href='edit/{{lab.id}}/';return false;" style="width:65px;" class="btn btn-small btn-primary">{% trans "Edit" %}</button></a>	
+	</td>
+	<td><a href="delete/{{lab.id}}/"><button type="button" onclick="location.href='delete/{{lab.id}}/';return false;" class="btn btn-small btn-danger" style="width:65px;">{% trans "Delete" %}</button></a></td>
+	{% endif %}
+	<!--<td><a href="lab/delete/{{lab.id}}/"><button>delete</button></td></a>-->
+	
+</tr>

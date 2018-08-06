@@ -1,0 +1,23 @@
+<%
+  _(reports).each(function(report) {
+    var name="";
+    if (report.drug_allergen_title) {var name=report.drug_allergen_title;}
+    else if (report.drug_class_allergen_title) {var name=report.drug_class_allergen_title;}
+    else if (report.food_allergen_title) {var name=report.food_allergen_title;}
+
+    var reaction = report.allergic_reaction_title || "";
+    var category = report.category_title || "";
+    var severity = report.severity_title || "";
+%>
+  <tr>
+    <td><%= category %></td>
+    <td><%= name %></td>
+  </tr>
+  <% if(reaction) { %>
+    <tr>
+      <td colspan="2" class="details" style="padding-left: 2em; font-size: 1.1em; background-color: #fff; color: #464337">
+        Reaction: <%= reaction %><br>Severity: <%= severity %>
+      </td>
+    <tr>
+  <% } %>
+<% }) %>

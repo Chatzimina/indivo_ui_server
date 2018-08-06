@@ -1,0 +1,143 @@
+{% extends 'problems/templates/base.html' %}
+{% block title %}problem list{% endblock %}
+{% block content %}
+
+     {% if jsonData %}
+
+         {% if jsonData.5.z_score < -2 or jsonData.5.z_score > 2 %} <!-- Rumination (abnormal it should be over 2 or less -2 )-->
+        <style type="text/css">
+            *
+            {
+                font-size : 12px
+            }
+
+            .class1 *
+            {
+                font-size : 20px;
+            }
+        </style>
+        {% endif %}
+     {% endif %}
+
+{% if record_id %}
+<script>
+  Indivo.Auth.setToken("{{surl_credentials.token}}","{{surl_credentials.secret}}");
+</script>
+{% endif %}
+
+
+
+<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:95%;" id="divContainer" >
+	<div class="row">
+	<div class="col-lg-6">
+		<div class="row"  style="margin-left:5px;">
+			<div class="col-xs-12">
+				<h2>{{lab.test_name_title }}</h2>
+                              <!--  <h4> ( LOINC: {{lab.test_name_identifier}} ) </h4>-->
+
+			</div>
+		</div>
+		
+		<div class="row" style="height:10px"></div>
+		
+		<div class="row" style="margin-left:10px;">
+			<div class="form-group">
+			<label>Collected at:</label>
+				{{ lab.collected_at}}
+			</div>
+		</div>
+		<div class="row" style="margin-left:10px;">
+			<div class="form-group">
+			<label>Status title:</label>
+				{{ lab.status_title }}
+			</div>
+		</div>
+		<div class="row" style="margin-left:10px;">
+			<div class="form-group">
+			<label>Quantitative result value:</label>
+				{{ lab.quantitative_result_value_value }}
+			</div>
+		</div>
+		<div class="row" style="margin-left:10px;">
+			<div class="form-group">
+			<label>Quantitative result normal range minimum value:</label>
+				{{ lab.quantitative_result_normal_range_min_value }}
+			</div>
+		</div>
+		<div class="row" style="margin-left:10px;">
+			<div class="form-group">
+			<label>Quantitative result normal range maximum unit:</label>{{ lab.quantitative_result_normal_range_max_unit }}
+		
+			</div>
+		</div>
+<!--		<div class="row" style="margin-left:10px;">
+			<div class="form-group">
+			<label>Additional Information</label>
+			<div class="details">Created at {{meta.created_at}}</div>		
+			</div>
+		</div>-->
+		<div class="row" style="margin-left:10px;">
+			<div class="form-group" align="center">
+				<input type="button"  onclick="history.go(-1);" value="    Back    " style="width:50%;max-width:300px;" class="btn btn-warning btn-sm"/>
+			</div>
+		</div>	
+	
+	</div>	
+	<div class="col-lg-6">
+	<div style="float:left;">
+	{% if record_id %}
+  <script>
+    //Indivo.Widget.DocumentAccess.add('{{record_id}}', '{{lab_id}}');
+  </script>
+{% endif %}	
+</div>
+	</div>
+	</div>
+		
+</div>
+
+
+
+{% ifequal 1 0 %}
+
+
+<div class="class1">
+
+
+
+<body>
+        <div id="audio"></div>
+<div class="class1">
+
+{{lab}}
+
+<h1><b>{{lab.test_name_title }} </b>&nbsp;&nbsp;<span style="font-size:0.7em;"></span></h2>
+<h4> ( LOINC: {{lab.test_name_identifier}} </h4>
+
+
+<table class="light" style="width: 66%; margin: 2em 0;">
+  <tbody>
+    <col style="width: 25%"></col>
+    <col style="width: 75%"></col>
+    <tr><th scope="row"> Collected at:</th><td> {{ lab.collected_at}}</td></tr>
+    <tr><th scope="row">Status title: </th><td> {{ lab.status_title }}</td></tr>
+    <tr><th scope="row">Quantitative result value:</th><td> {{ lab.quantitative_result_value_value }} </td></tr><tr><td> Quantitative result unit: </th><td> {{ lab.quantitative_result_value_unit }}
+</td></tr>
+    <tr><td> Quantitative result normal range minimum value:</th><td> {{ lab.quantitative_result_normal_range_min_value }}</td></tr><tr><td>  Quantitative result normal range minimum unit</th><td>{{ lab.quantitative_result_normal_range_min_unit }}</td></tr>
+    <tr><td> Quantitative result normal range maximum value: </th><td>{{ lab.quantitative_result_normal_range_max_value }} </td></tr><tr><td> Quantitative result normal range maximum unit:</th><td>{{ lab.quantitative_result_normal_range_max_unit }}</td> </tr>
+
+  </tbody>
+</table>
+
+<h3>Additional Information</h3>
+<div class="details">Created at {{meta.created_at}}</div>
+<div align="center"><input type="button" style="width: 200px" onclick="history.go(-1);" value="    Cancel    "></div>
+<!--<div align="center"><a href="./"><button style="width: 200px"> Back </button></a></div>-->
+
+{% endifequal %}
+
+</body>
+
+
+{% endblock %}
+

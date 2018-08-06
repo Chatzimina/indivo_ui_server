@@ -1,0 +1,107 @@
+{% extends 'problems/templates/base.html' %}
+{% block title %}Procedure{% endblock %}
+{% block content %}
+{% load i18n %}
+{% if record_id %}
+
+<html>
+
+<head>
+<script>
+$( document ).ready(function() {
+
+
+        inIframe();
+        function inIframe () {
+                var div = document.getElementById('cancel_div');
+
+                //if(self==top){
+                var hideDiv = (window.parent.document.getElementById('frApp') != null);
+                if (hideDiv) {
+                        div.style.visibility = 'hidden';
+
+
+                }
+                else
+                {
+                        div.style.visibility = 'visible';
+
+                }
+        }
+
+});
+</script>
+
+
+</head>
+<body>
+<script>
+  Indivo.Auth.setToken("{{surl_credentials.token}}","{{surl_credentials.secret}}");
+</script>
+{% endif %}
+<div class="row" style="margin-left:5px;">
+<!--    <div id="cancel_div" name="cancel_div">
+        <div class="row" style="height:30px"></div>
+        <div class="row" style="margin-left:5px;text-align:center;">
+                        <a href="./"><button style="width: 200px" class="btn btn-lg btn-primary">{% trans " Back" %} </button></a>
+                </div>
+                <div class="row" style="height:10px"></div>
+         </div>-->
+        <div class="row"  style="margin-left:5px;">
+                        <div class="col-xs-12">
+                                <h2>{{document.title}} &nbsp;&nbsp;&nbsp;</h2>
+
+                        </div>
+                </div>
+
+        <div class="row"  style="margin-left:5px;">
+        <div class="col-lg-8">
+                <div class="row" style="margin-left:5px">
+
+                        <div class="form-group"><label>{% trans "Date" %}&nbsp;</label>{{document.registered_date}}</div>
+                        <div class="form-group"><label>{% trans "Organisation" %}&nbsp;</label>{{document.organisation}}</div>
+                        <div class="form-group"><label>{% trans "Doctor" %}&nbsp;</label>{{document.doctor}}</div>
+                        <div class="form-group"><label>{% trans "Reasons" %}&nbsp;</label>{{document.reasons}}</div>
+ 			<div class="form-group"><label>{% trans "Diagnosis" %}&nbsp;</label>{{document.diagnosis}}</div>
+                        <div class="form-group"><label>{% trans "Type" %}&nbsp;</label>{{document.type_of_file}}</div>
+                        <div class="form-group"><label>{% trans "Comments" %}&nbsp;</label>{{document.comments}}</div>
+		        <div class="form-group"><label>{% trans "Link" %}&nbsp;</label>	
+	                 <a  href="../{{document_id}}" target="_blank"  >{% trans "Open" %} </a>
+        	        </div>
+
+
+                </div>
+                <div class="row" style="height:10px;"></div>
+                <div class="row" style="margin-left:5px">
+                        <h3>Additional Information</h3>
+                        <div class="details">{% trans "Created at" %} {{meta.created_at}}</div>
+                </div>
+
+        </div>
+        <div class="col-lg-4">
+                <div style="float:left;">
+                {% if record_id %}
+                  <script>
+                        //Indivo.Widget.DocumentAccess.add('{{record_id}}', '{{problem_id}}');
+                  </script>
+                {% endif %}
+                </div>
+        </div>
+
+
+
+        </div>
+
+        <div class="row" style="height:20px;"></div>
+                <div class="row" style="margin-left:5px;text-align:center;" id="cancel_div" name="cancel_div">
+                        <a href="./../"><button style="width: 200px" class="btn btn-warning btn-sm">{% trans " Back" %} </button></a>
+                </div>
+        </div>
+
+</div>
+
+{% endblock %}
+</body>
+</html>
+
+

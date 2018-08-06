@@ -1,0 +1,124 @@
+{% extends 'clinicianquestions/templates/base.html' %}
+{% block title %}clinicianquestion list{% endblock %}
+{% block content %}
+{% load i18n %}
+<head>
+ 
+		<script>
+		Date.prototype.addHours = function(h) {    
+   this.setTime(this.getTime() + (h*60*60*1000)); 
+   return this;   
+}
+var tzoffset = (new Date()).getTimezoneOffset()/60;
+</script>
+</head>
+<body>
+
+
+    <div id="audio"></div>
+	<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:95%;" id="divContainer" >
+		<div class="row"  style="margin-left:5px;">
+			<div class="col-xs-12">
+			<h2>{% trans "Deleted Questionnaires List" %} {% if in_carenet %}(Shared){% endif %}</h2>
+			</div>
+		</div>
+		<div class="row" style="height:10px"></div>
+		
+		<div class="row" style="margin-left:5px;">
+			  {% ifequal num_clinicianquestions 0 %}
+			  {% else %}
+			  
+				<div class="row" id="divList" style="margin-left:5px;">
+				  <div class="col-xs-12">
+					 <div class="row" style="border:1px solid silver;">
+						<div class="col-xs-4">
+						   <b>{% trans "Record id" %}</b>
+						</div>
+						<div class="col-xs-4">
+						   <b>{% trans "Gender" %}</b>
+						</div>
+					
+						<div class="col-xs-4">
+						   {% if not in_carenet %}
+						   <b>{% trans "Restore" %}</b>
+						   {% endif %}
+						</div>
+					 </div>
+					 {% for p in clinicianquestions %}
+					 <div class="row" style="border-left:1px solid silver;border-right:1px solid silver;border-bottom:1px solid silver;">
+						<div class="col-xs-4">
+						   <span id="td_id" style="display:none">{{clinicianquestions}}</span>
+						   <a  href="{{p.id}}"  >{{record_id}}</a>
+						</div>
+						<div class="col-xs-4">
+						{{p.gender}}
+						</div>
+						<div class="col-xs-4">
+						   <a href="restore/{{p.id}}"><button class="btn btn-primary btn-small">{% trans "restore" %}</button></a>
+						</div>
+					 </div>
+					 {% endfor %}
+					 <div class="row" style="border-left:1px solid silver;border-right:1px solid silver;border-bottom:1px solid silver;display:;">
+						<div class="col-xs-12" style="text-align: right">
+						   {{num_clinicianquestions}} clinicianquestion{% ifequal num_clinicianquestions 1 %}{% else %}s{% endifequal %}
+						</div>
+					 </div>
+				  </div>
+			   </div>
+			  
+			  {% endifequal %}
+			  <div class="row" style="height:10px"></div>
+			  {% if not in_carenet %}
+					<div class="row" style="text-align:center;">
+						<a href="./"><button style="width: 50%" class="btn btn-warning btn-lg"> {% trans "Back" %} </button></a>
+				    </div>			   
+			  {% endif %}
+			</div>
+	</div>
+
+{% ifequal 1 0 %}
+<div class="class1">
+
+  <h2>{% trans "Deleted Problems List" %} {% if in_carenet %}(Shared){% endif %}</h2>
+
+  {% ifequal num_clinicianquestions 0 %}
+  {% else %}
+    <table class="light">
+      <thead>
+        <tr>
+          <th scope="col"><b>{% trans "Name" %}</b></th>
+          <th><b>{% trans "Onset" %}</b></th>
+          <th><b>{% trans "Resolution" %}</b></th>
+	  <th><b>{% trans "Modify/Delete" %}</b></th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="3" style="text-align: right">{{num_clinicianquestions}} clinicianquestion{% ifequal num_clinicianquestions 1 %}{% else %}s{% endifequal %}</td>
+        </tr>
+      </tfoot>
+      <tbody>
+        {% for p in clinicianquestions %}
+          <tr class="{% cycle 'odd' 'even' %}">
+            <td><a href="{{p.id}}">{{p.name_title}}</a></td>
+            <td>{{p.startDate}}</td>
+            <td>{{p.endDate}}</td>
+            <td><a href="restore/{{p.id}}"><button>{% trans "restore" %}</button></a>
+
+	    </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endifequal %}
+
+  {% if not in_carenet %}
+       <p align="center"><a href="./"><button style="width: 200px"> {% trans "Back" %} </button></a><p>
+
+   
+  {% endif %}
+ 
+
+  {% endifequal %}
+</body>
+{% endblock %}
