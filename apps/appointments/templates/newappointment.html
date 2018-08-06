@@ -1,0 +1,725 @@
+{% extends 'problems/templates/base.html' %}
+{% block title %}new problem{% endblock %}
+{% block content %}
+{% load i18n %}
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+
+
+<script src="{{ STATIC_HOME }}/jquery-1.7.min.js"></script>
+<!--<script src="{{ STATIC_HOME }}/jquery-1.7.js"></script>-->
+<script src="{{ STATIC_HOME }}/jonthornton-jquery-timepicker-578dcfd/jquery.timepicker.min.js"></script>
+<!--<script src="{{ STATIC_HOME }}/jonthornton-jquery-timepicker-578dcfd/jquery.timepicker.js"></script>-->
+<script type='text/javascript' language='javascript'     src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js'></script>
+<link href="{{ STATIC_HOME }}/jonthornton-jquery-timepicker-578dcfd/jquery.timepicker.css" type="text/css" rel="stylesheet">
+<!--<script src="{{ STATIC_HOME }}/moment-develop/moment.js"></script>
+<script src="{{ STATIC_HOME }}/bootstrap-3.3.6/js/transition.js"></script>
+<script src="{{ STATIC_HOME }}/bootstrap-3.3.6/js/collapse.js"></script>
+<script src="{{ STATIC_HOME }}/bootstrap-3.3.6/dist/js/bootstrap.min.js"></script>
+<script src="{{ STATIC_HOME }}/bootstrap-datetimepicker-master/build/js/bootstrap-datetimepicker.min.js"></script>
+-->
+<!--<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places&callback=initAutocomplete"
+        async defer></script>-->
+
+
+
+
+
+
+<script>
+
+// This example displays an address form, using the autocomplete feature
+// of the Google Places API to help users fill in the information.
+var address="";
+var placeSearch, autocomplete;
+var componentForm = {
+  street_number: 'short_name',
+  route: 'long_name',
+  locality: 'long_name',
+  //administrative_area_level_1: 'short_name',
+  country: 'long_name',
+  postal_code: 'short_name'
+};
+
+function initAutocomplete() {
+  // Create the autocomplete object, restricting the search to geographical
+  // location types.
+
+  autocomplete = new google.maps.places.Autocomplete(
+      /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+      {types: ['geocode']});
+
+  // When the user selects an address from the dropdown, populate the address
+  // fields in the form.
+  autocomplete.addListener('place_changed', fillInAddress);
+}
+
+
+// [START region_fillform]
+function fillInAddress() {
+  // Get the place details from the autocomplete object.
+  var place = autocomplete.getPlace();
+ 
+  for (var component in componentForm) {
+    document.getElementById(component).value = '';
+    document.getElementById(component).disabled = false;
+
+  }
+
+  // Get each component of the address from the place details
+  // and fill the corresponding field on the form
+
+  if ( place.address_components!=undefined){
+  for (var i = 0; i < place.address_components.length; i++) {
+    if(i==0){
+                address="";
+        }
+    var addressType = place.address_components[i].types[0];
+    if (componentForm[addressType]) {
+      var val = place.address_components[i][componentForm[addressType]];
+      document.getElementById(addressType).value = val;
+      address += val;
+    }
+  }
+  }
+  else
+  {
+	//alert("We cannot locate your address.Please complete next fields by yourself.");
+  }
+}
+// [END region_fillform]
+
+// [START region_geolocation]
+// Bias the autocomplete object to the user's geographical location,
+// as supplied by the browser's 'navigator.geolocation' object.
+function geolocate() {
+
+  if (navigator.geolocation) {
+
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var geolocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+
+      };
+
+      var circle = new google.maps.Circle({
+        center: geolocation,
+        radius: position.coords.accuracy
+      });
+      autocomplete.setBounds(circle.getBounds());
+    });
+  }
+}
+// [END region_geolocation]
+
+var map;
+
+function initMap() {
+
+  map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 15,
+    center: {lat: 35.305112, lng: 25.072669}
+  });
+  var geocoder = new google.maps.Geocoder();
+
+  document.getElementById('submitMap').addEventListener('click', function() {
+  document.getElementById('map').style.display='';
+  map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 15,
+    center: {lat: 35.305112, lng: 25.072669}
+  });
+  geocoder = new google.maps.Geocoder();
+    geocodeAddress(geocoder, map);
+  });
+}
+//google.maps.event.addDomListener(window, "load", initMap);
+function geocodeAddress(geocoder, resultsMap) {
+//  var address = document.getElementById('address').value;
+
+  geocoder.geocode({'address': address}, function(results, status) {
+    if (status === google.maps.GeocoderStatus.OK) {
+      resultsMap.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+        map: resultsMap,
+        position: results[0].geometry.location
+      });
+    } else {
+      if(status == 'ZERO_RESULTS')
+      alert('Could not locate address');
+    }
+  });
+}
+
+
+$( document ).ready(function() {
+
+
+        
+        function inIframe () {
+                var div = document.getElementById('cancel_div');
+                var framediv = document.getElementById('frApp');
+var hideDiv = (window.parent.document.getElementById('frApp') != null);
+                //if(self==top){
+                if (hideDiv){
+//alert('1');
+//                ifself==top){
+                        div.style.visibility = 'hidden';
+                        framediv.style.visibility = 'visible';
+						framediv.style.display = '';
+
+
+                }
+                else
+                {
+	//			alert('2');
+                        div.style.visibility = 'visible';
+                        framediv.style.visibility = 'hidden';
+                }
+        }
+		
+		inIframe();
+		initMap();
+		
+		 if (urlParam('dt') !== '')
+	{
+		el('date1').value = urlParam('dt');
+	}
+
+});
+
+
+
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyAYuOKSuMp876IxsVlZWsPc3mdCPdVoJ_Q&sensor=false&signed_in=true&libraries=places&language=en-US&callback=initAutocomplete"></script>
+
+<script>
+var nextYear = (new Date().getFullYear() + 1).toString();
+$(document).ready(function() {
+   $('.date').datepicker({
+        dateFormat:'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        minDate:'-26y',
+        maxDate:'+2y',
+        yearRange: "1990:"+nextYear,
+        });
+
+    $('.time').timepicker({
+		timeFormat: 'H:i',
+		show2400:true,
+	});
+     initMap();
+     initAutocomplete()
+/*  $(function() {
+    $('#datetimepicker3').datetimepicker({
+      pickDate: false
+    });
+  });
+*/
+
+/*    $('#problem_fullname').autocomplete({
+      serviceUrl: 'codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#problem_code').val(data.code);
+      }
+    })*/
+  });
+
+
+var returned=false;
+function validateForm()
+{
+var appointment_title=document.forms["myForm"]["appointment_title"].value;
+var datee=document.forms["myForm"]["date"].value;
+var time=document.forms["myForm"]["time"].value;
+
+if (appointment_title==null || appointment_title=="")
+  {
+  var alertmessage = "{% trans "'Appointment title must be filled'" %}";
+  alert(alertmessage);
+//  alert({% trans "'Appointment title must be filled'" %});
+  return false;
+  }
+
+if (datee==null || datee=="")
+  {
+  alert({% trans "'Date must be filled'" %});
+  return false;
+}
+
+if (time==null || time=="")
+  {
+  alert({% trans "'Time must be filled'" %});
+  return false;
+}
+document.getElementById('submitMap').click()
+
+returned=true;
+return true;
+
+//if (date_resolution==null || date_resolution=="")
+//  {
+//  alert("Allergen must be filled");
+//  return false;
+//}
+
+}
+
+function setForm()
+ {
+ 
+	var frmHTML = '<form id="frmAddModel" name="frmAddModel" method="post" action="new_appointment_calendar">';
+	frmHTML += '<input type="text" name="appointment_title" id="appointment_title" value="'+ el('appointment_title').value + '" class="form-control" style="width:100%" />';
+	frmHTML += '<input type="hidden" name="lastname" value="" id="lastname"  value="'+ el('lastname').value + '"/>';
+	
+	frmHTML += '<input type="text" name="name" id="name"  value="'+ el('name').value + '" />';	
+	frmHTML += '<input type="text" name="date" id="date" value="'+ el('date1').value + '" />';
+	
+	frmHTML += '<input type="text" name="time" id="time" value="'+ el('time').value + '"/>';
+	frmHTML += '<input type="text" name="alert" id="alert" value="'+ el('alert').value + '"/>';
+	
+	frmHTML += '<input type="text" name="comments" id="comments" value="'+ el('comments').value + '" />';
+	
+	frmHTML += '<input type="text" name="street_number" id="street_number" value="'+ el('street_number').value + '" />';
+	frmHTML += '<input type="text" name="route" id="route" value="'+ el('route').value + '" />';
+	frmHTML += '<input type="text" name="locality" id="locality" value="'+ el('locality').value + '" />';
+	frmHTML += '<input type="text" name="postal_code" id="postal_code" value="'+ el('postal_code').value + '" />';
+	frmHTML += '<input type="text" name="country" id="country" value="'+ el('country').value + '" />';
+	
+	frmHTML += '<input type="hidden" name="fromcalendar" id="fromcalendar" value="1" />';
+	
+	frmHTML += '</form>';
+	
+	
+	var iframe1 = window.top.document.getElementById('calendarFrame');
+	var iframe2 = window.top.document.getElementById('app_content_iframe1');
+	
+	if (!iframe2 || iframe2.src.indexOf('calendar') < 0)
+	{
+		var innerDoc = iframe1.contentDocument || iframe1.contentWindow.document;	
+		innerDoc.getElementById('divSubmitForm').innerHTML = frmHTML;
+		innerDoc.getElementById('frmAddModel').submit();
+	}
+	else
+	{
+		var innerDoc = iframe2.contentDocument || iframe2.contentWindow.document;	
+		innerDoc.getElementById('divSubmitForm').innerHTML = frmHTML;
+		innerDoc.getElementById('frmAddModel').submit();
+	}
+ }
+
+function dismissModal()
+{
+	var modalfooter = window.parent.document.getElementsByClassName('modal-footer')[0];
+	var button = modalfooter.getElementsByTagName('button')[0];
+	button.click();
+}
+
+function closeModal()
+{
+var valid = validateForm();
+
+if (!valid) return false;
+//alert('closing modal...');
+//try {
+
+setForm();
+
+setTimeout('dismissModal();', 500);
+return false;
+
+
+console.log("inside try")
+var modalfooter = window.parent.document.getElementsByClassName('modal-footer')[0];
+var button = modalfooter.getElementsByTagName('button')[0];
+button.click();
+//}catch(e){}
+
+return true;
+}
+</script>
+<head>
+<link href="{{ STATIC_HOME }}/css/datepicker.css" rel="stylesheet" type="text/css"/>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      html, body {
+ /*       height: 100%;*/
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+       position:absolute;
+/*        height: 100%;*/
+      }
+    </style>
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+    <style>
+      #locationField, #controls {
+        position: relative;
+        width: 480px;
+      }
+      #autocomplete {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 99%;
+      }
+      .label {
+        text-align: right;
+        font-weight: bold;
+        width: 100px;
+        color: #303030;
+      }
+      #address {
+       /* border: 1px solid #000090;*/
+        /*background-color: #f0f0ff;*/
+        width: 480px;
+        padding-right: 2px;
+      }
+      #address td {
+        font-size: 10pt;
+      }
+      .field {
+        width: 99%;
+      }
+      .slimField {
+        width: 80px;
+      }
+      .wideField {
+        width: 200px;
+      }
+      #locationField {
+        height: 20px;
+        margin-bottom: 2px;
+      }
+    #ui-datepicker-div { display: none; }
+    </style>
+  </head>
+
+
+
+
+{% if jsonData %}
+        {% if jsonData.5.z_score < -1 or jsonData.5.z_score > 2 %} <!--Rumination (abnormal it should be over 2 or less -2 )-->
+        <style type="text/css">
+            *
+            {
+                font-size : 12px
+            }
+
+            .class1 *
+            {
+                font-size : 20px;
+            }
+        </style>
+        {%endif%}
+{% endif %}
+
+
+
+
+        <meta charset="utf-8">
+        <title>Speak.js Demo</title>
+<!--        <script src="{{ STATIC_HOME }}/speakClient.js"></script>-->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+<body>
+<script>
+   function setPageSize()
+   {   	
+	
+	if (!el('divList')) return false;
+   
+   	if (el('divList'))el('divList').style.width = (el('divContainer').offsetWidth-0).toString() + 'px';   	
+	if (window.top.document.getElementById('app_container'))
+		el('divContainer').style.width = (window.top.document.getElementById('app_container').offsetWidth-0).toString() + 'px';	
+	el('divContainer').style.width = '95%';
+   }
+   
+   setInterval('setPageSize();', 500);
+</script>
+<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:100%;overflow-x:hidden;" id="divContainer" >
+	<form name="myForm" onsubmit="return validateForm()"  method="post" action="" accept-charset="UTF-8">
+	
+	<div class="row" style="height:10px;"></div>
+	
+	<div class="row"  style="margin-left:5px;">
+		<div class="col-xs-12">
+		<h2>{% trans "New Appointment" %} </h2>
+		</div>
+    </div>
+	
+	<div class="row"  style="height:10px;"></div>
+	
+	<div class="row" style="margin-left:5px;width:90%;">
+	
+		<div class="form-group">
+			<label>{% trans "Appointment" %} <span style="color:red;font-weight:bold;font-size:20px;">*</span></label>
+			<input type="text" name="appointment_title"   id="appointment_title" style="width: 100%" class="form-control"/>
+		</div>
+		<div class="form-group">
+			<label>{% trans "Doctor's name" %}</label>	
+			<div class="row" style="width:100%;">
+				<div class="col-xs-6">
+					<label>{% trans "Last name " %}</label>
+					<input type="text" name="lastname" id="lastname"  class="form-control" style="width:100%;"/>
+				</div>
+				<div class="col-xs-6">
+					<label>{% trans "Name " %}</label>
+					<input type="text" name="name" id="name"  class="form-control" style="width:100%;"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label>{% trans "Date" %} <span style="color:red;font-weight:bold;font-size:20px;">*</span></label>
+			<input type="text" name="date" id="date1" style="width: 100%" class="date form-control" autocomplete="off" readonly/>
+		</div>
+		<div class="form-group">
+			<label>{% trans "Time" %} <span style="color:red;font-weight:bold;font-size:20px;">*</span></label>
+			<input type="text" name="time" id="time" autocomplete="off" style="width: 100%" class="time ui-timepicker-input form-control" autocomplete="off"/>
+		</div>
+		<div class="form-group">
+			<label>{% trans "Alert time" %}</label>
+			<select id="alert" name="alert" class="form-control">
+			  <option value="never">{%trans "Never" %}</option>
+			  <option value="5">{%trans "5 minutes before" %}</option>
+			  <option value="30">{%trans "30 minutes before" %}</option>
+			  <option value="60">{%trans "60 minutes before" %}</option>
+			  <option value="1">{%trans "One day before" %}</option>
+			  <option value="2">{%trans "Two days before" %}</option>
+			</select>	
+		</div>
+		<div class="form-group">
+			<label>{% trans "Details" %}</label>
+			<textarea name="comments" id="comments" cols="50" rows="3" wrap="soft" class="form-control" style="width: 100%"></textarea>
+			<input type="hidden" name="fromcalendar" id="fromcalendar" value="0" />
+		</div>
+		<div class="form-group">
+			<label>{% trans "Address" %}</label>			
+			<div class="row" style="width:100%;margin-left:1px;">
+				<div class="col-lg-12" id="locationField">
+					<input id="autocomplete" placeholder="Enter your address" onFocus="geolocate()" type="text" class="form-control" style="width:100%"/>
+				</div>
+			</div>
+			<div class="row" style="height:20px;"></div>
+			
+			
+			
+			<div class="row" style="width:100%;">
+				<div id="address" class="col-lg-12">
+					<input type="hidden" id="street_number" value ="" name="street_number"/>
+					<input type="hidden" id="route" value="" name="route" />
+					<input type="hidden"  id="locality" name="locality" value=""/>
+					<input type="hidden" id="postal_code" name="postal_code" value=""/>
+					<input  type="hidden" name="country" id="country"  value=""/>
+					<input id="submitMap" name="submitMap" type="button" value="{% trans "Locate on map" %}" class="btn btn-small btn-primary"/>
+					<!--input id="viewMap" name="viewMap" type="button" value="{% trans "Toggle map" %}" class="btn btn-small btn-primary"
+						onclick="$('#map').toggle();"/-->
+				</div>
+				
+				<div class="col-lg-12">
+					<div id="map"  style="display:none;width: 90%; height:400px;border:0px solid black;position:static;"></div>
+				</div>
+				
+				
+				
+				<div class="col-xs-12" style="padding:20px;">
+					<span style="color:red;font-weight:bold;font-size:20px;">*</span> <b>{% trans "Mandatory Fields" %}</b>
+                </div>
+				
+				
+				<div class="col-xs-12" style="height:10px;"></div>
+				<div class="col-xs-12" id="cancel_div" align="center">
+					<input type="submit" value="{% trans "Add New Appointment" %}" style="width: 300px;"  class="btn-lg btn-primary btn"/>
+					<br/>
+					<a href="./"><button style="width: 300px" type="button"  class="btn-lg btn-warning btn"> {% trans "Cancel" %} </button></a>
+				</div>
+				
+				<div id="frApp" name="frApp">
+					<div class="row">
+						<div class="form-group" style="text-align:center;margin-top:0px;">
+							<input type="button" value='{% trans "Add New Appointment" %}' onclick="return closeModal();" style="width:250px;"  class="btn btn-primary btn-lg"/>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row" style="height:20px;"></div>
+				
+			</div>
+			<div class="row" style="height:10px;"></div>
+		</div>
+		
+		
+		
+	</div>
+
+	
+	
+	
+	
+	
+	
+	
+	</form>
+</div>
+
+
+
+{% ifequal 1 0 %}
+
+
+
+<div id="audio"></div>
+<div class="class1">
+
+<h2>{% trans "New Appointment" %} &nbsp;&nbsp;<span style="font-size:0.7em; font-weight: normal; text-transform: uppercase">
+<!--[<a href="./">Cancel</a>]-->
+</span></h2>
+
+  <form name="myForm" onsubmit="return validateForm()"  method="post" action="" accept-charset="UTF-8">
+    <table class="light form">
+      <col style="width: 20%"></col>
+      <col style="width: 80%"></col>
+      <tr>
+        <td>{% trans "Appointment" %}</td>
+        <td>
+          <input type="text" name="appointment_title" id="appointment_title" style="width: 100%" />
+        </td>
+      </tr>
+      <tr>
+        <td>{% trans "Doctor's name" %}</td>
+        <td width:"20%">{% trans "Last name " %}
+          <input type="text" name="lastname" id="lastname"  style="width: 40%"/>
+          {% trans "Name " %}
+          <input type="text" name="name" id="name"  style="width: 40%"/>
+        </td>
+      </tr>      
+      <tr>
+        <td>{% trans "Date" %}</td>
+       <td><input type="text" name="date" class="date" id="date1" style="width: 100%" /></td>
+      </tr>
+
+      <tr>
+        <td>{% trans "Time" %}</td>
+        <td><input type="time" name="time" class="time ui-timepicker-input" id="time" autocomplete="off" style="width: 100%" /></td>
+      </tr>
+      <tr>
+	<td> {% trans "Alert time" %} </td>
+	<td>
+	<select id="alert" name="alert">
+	  <option value="never">{%trans "Never" %}</option>
+	  <option value="5">{%trans "5 minutes before" %}</option>
+	  <option value="30">{%trans "30 minutes before" %}</option>
+	  <option value="60">{%trans "60 minutes before" %}</option>
+	  <option value="1">{%trans "One day before" %}</option>
+	  <option value="2">{%trans "Two days before" %}</option>
+	</select>	
+       </td>
+      </tr>
+
+<!--<input id="basicExample" class="time ui-timepicker-input" type="text" autocomplete="off">-->
+
+<!--  <div id="datetimepicker3" class="input-append">
+    <input data-format="hh:mm:ss" type="text"></input>
+    <span class="add-on">
+      <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+      </i>
+    </span>
+  </div>
+</div>
+
+-->
+
+
+
+
+
+      <tr>
+        <td>{% trans "Details" %}</td>
+        <td><textarea name="comments" cols="50" rows="3" wrap="soft" style="width: 100%"></textarea></td>
+      </tr>
+      <tr>
+	<td>{% trans "Address" %} </td>
+	<td><div id="locationField">
+      		<input id="autocomplete" placeholder="Enter your address" onFocus="geolocate()" type="text"></input>
+	     </div>
+
+	    <table id="address">
+
+<!--	        <td class="label">Street address</td>-->
+       		 <input type="hidden" id="street_number" value ="" name="street_number"
+		              ></input>
+	        <input type="hidden" id="route" value="" name="route"
+        	      ></input>
+
+
+<!--        	<td class="label">City</td>-->
+	        <input type="hidden"  id="locality" name="locality" value=""
+              ></input>
+
+
+   <!--     <td class="label">State</td>
+        <td class="slimField"><input class="field"
+              id="administrative_area_level_1" disabled="true"></input></td>-->
+<!--	       <td class="label">Zip code</td>-->
+        	<input type="hidden" id="postal_code" name="postal_code" value=""></input>
+
+
+<!--	        <td class="label">Country</td>-->
+        	<input  type="hidden" name="country" id="country"  value=""></input>
+
+
+        	<input id="submitMap" name="submitMap" type="button" value="Locate on map:">
+
+	    </table>
+
+
+
+
+   <br />
+    </div>
+
+
+   </td>
+      </tr>
+    <tr style="display:none;"> 
+ <td></td> <td width="700px" height="400px"><div id="map1" style="display:none;width: 100%; height: 100%;border:1px solid black;">----------</div>
+</td>	
+    </tr>
+    </table>
+
+</div>
+
+    <br />
+
+
+   
+    <div style="text-align: center">
+     <input type="submit" value="Add New Appointment" style="width: 33%"/><p><p>
+<!--      <input type="button" style="width: 200px" onclick="history.go(-1);" value="    Cancel    ">-->
+    </div>
+</form>  
+    <div align="center"><a href="./"><button style="width: 200px">{% trans "   Cancel" %}  </button></a></div>
+ 
+</div>
+</div>
+
+<script>
+var fromcalendar = urlParam('fromcalendar');
+if(fromcalendar === '1')
+{
+	//var iframe1 = window.top.document.getElementById('calendarFrame');
+	//var iframe2 = window.top.document.getElementById('app_content_iframe1');
+	dismissModal();
+}
+</script>
+
+{% endifequal %}
+</body>
+{% endblock %}

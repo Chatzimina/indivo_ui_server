@@ -1,0 +1,414 @@
+{% extends 'problems/templates/base.html' %}
+
+{% load i18n %}
+{% block title %}appointment list{% endblock %}
+{% block content %}
+
+<head>
+{% if record_id %}
+<script>
+  Indivo.Auth.setToken("{{surl_credentials.token}}","{{surl_credentials.secret}}");
+</script>
+{% endif %}
+
+<!--<script src="//cdnjs.cloudflare.com/ajax/libs/annyang/1.1.0/annyang.min.js"></script>-->
+       {% if jsonData %}
+        {% if jsonData.5.z_score < -2 or jsonData.5.z_score > 2 %} <!--physical abilities (abnormal it should be over 2 or less -2 )-->
+        <style type="text/css">
+            *
+            {
+                font-size : 12px
+            }
+
+            .class1 *
+            {
+                font-size : 20px;
+            }
+        </style>
+        {%endif%}
+	{% endif %}
+        <meta charset="utf-8">
+        <title>Speak.js Demo</title>
+<!--        <script src="{{ STATIC_HOME }}/speakClient.js"></script>-->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+<body onload="show_confirm()">
+
+<script>
+var i=0;
+var array=[];
+var carenets=[];
+var uniqueList=[];
+function checkSharing2(){
+
+{% for p in appointments %}
+
+var url = '/records/{{record_id}}/documents/{{p.id}}/carenets/';
+
+ indivo_api_call("GET", url, function(result) {
+
+
+      var carenets_xml = $(result).find('Carenets').find('Carenet');
+      carenets = [];
+      carenets_xml.each(function(i, carenet) {
+        carenets.push({'id': $(carenet).attr('id'), 'name' : $(carenet).attr('name')});
+        uniqueList.push({'problem_id':'{{p.id}}','id': $(carenet).attr('id'), 'name' : $(carenet).attr('name')});
+
+      });
+
+
+    });
+
+
+{% endfor %}
+
+}
+
+function shareNew2(){
+var problems_ids=[];
+var problem_to_share=[];
+
+if(uniqueList.length >0){
+console.log('inside');
+
+        for(m=0; m<uniqueList.length ;m++){
+
+                problems_ids.push(uniqueList[m]['problem_id']);
+
+        }
+
+        {%for p in appointments %}
+
+                if (problems_ids.indexOf('{{p.id}}')<=-1){
+                        console.log('sdsds')
+                        for (j=0; j<carenets.length; j++){
+
+                                var url =  "/records/{{record_id}}/documents/{{p.id}}/carenets/"+carenets[j]['id']
+                                indivo_api_call("PUT",url, function(result){
+                                console.log('ok')
+                                });
+
+
+                        }
+                }
+        {%endfor%}
+
+}
+
+var iframe = document.getElementsByClassName('indivo')[0];
+iframe.src=iframe.src;
+}
+
+
+
+   function setPageSize()
+   {  
+	if (!el('divList')) return false;
+   	el('divList').style.width = (el('divContainer').offsetWidth-0).toString() + 'px';   	
+	if (window.top.document.getElementById('app_container'))
+		el('divContainer').style.width = (window.top.document.getElementById('app_container').offsetWidth-0).toString() + 'px';	
+   }
+   
+   setInterval('setPageSize();', 500);
+</script>
+
+
+
+<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:100%;overflow-x:hidden;" id="divContainer" >
+	<div class="row"  style="margin-left:5px;">
+		<div class="col-xs-12">
+		<h2>{% trans "Appointments List" %} {% if in_carenet %}(Shared){% endif %}</h2>
+		</div>
+    </div>
+	<div class="row"  style="height:10px;"></div>
+	{% if not in_carenet %}
+	<div class="row"  style="height:10px;"></div>
+   <div class="row"  id="divButtons" style="width:400px;margin-left:5px;">
+      <div class="col-xs-5" style="text-align:left;">
+         <a href="new" class="btn btn-success btn-sm" style="width:auto%;">{% trans "add an appointment" %}</a>
+      </div>
+
+      <div class="col-xs-5" style="text-align:left;">
+         <a href="archived" class="btn btn-danger btn-sm">{% trans "deleted appointments" %}</a>
+      </div>
+   
+   </div>
+   <div class="row"  style="height:10px;"></div>
+   {% endif %}
+	
+	<div class="row" id="divList" style="margin-left:5px;">
+      <div class="col-xs-12">
+         <div class="row" style="border:1px solid silver;">
+            <div class="col-xs-3">
+               <b>{% trans "Title" %}</b>
+            </div>
+            <div class="col-xs-3">
+               <b>{% trans "Date" %}</b>
+            </div>            
+			<div class="col-xs-3">
+               <b>{% trans "Time" %}</b>
+            </div> 
+            <div class="col-xs-3">
+			{% if not in_carenet %}
+               <b>{% trans "Modify" %}/ </b>
+                           <b>{% trans "Delete" %}</b>
+
+			 {% endif %}
+            </div>
+         </div>
+         {% for p in appointments %}
+         <div class="row" style="border-left:1px solid silver;border-right:1px solid silver;border-bottom:1px solid silver;">			
+            <div class="col-xs-3">
+               <span id="td_id" style="display:none">{{appointmentss}}</span>
+                <a href="{{p.id}}">{{p.appointment_title}}</a>
+            </div>
+            <div class="col-xs-3">
+				<script>
+			   var dt = '{{p.date}}';
+			   document.write(dt.split('T')[0]);
+			   </script>
+            </div>
+			<div class="col-xs-3">
+				{{p.time}}
+            </div>
+           
+            <div class="col-xs-3">
+               {% if not in_carenet %}	    			
+               <div class="row">
+                  <div class="col-md-5" >
+		 
+                     <a href="edit/{{p.id}}"><button  class="btn btn-primary btn-sm" style="width:95%;">{% trans "edit" %}</button></a>
+                  </div>
+				
+                  <div class="col-md-5" >
+                     <a href="delete/{{p.id}}"><button  class="btn btn-danger btn-sm"  style="width:95%;">{% trans "delete" %}</button></a>
+                  </div>
+				  <div class="col-md-1" ></div>
+               </div>
+               {% endif %}
+            </div>
+         </div>
+         {% endfor %}
+         <div class="row" style="border-left:1px solid silver;border-right:1px solid silver;border-bottom:1px solid silver;">
+            <div class="col-xs-12" style="text-align: right">
+               {{num_appointments}} {% ifequal num_appointments 1 %}appointment{% else %}appointments{% endifequal %}
+            </div>
+         </div>
+      </div>
+   </div>
+	
+</div>
+
+{%if ids %}
+
+
+   <div style="float:left;">
+
+                          <script>
+                                Indivo.Widget.DocumentAccessMulti.add('{{record_id}}', '{{ids}}');
+                          </script>
+
+
+
+<script>
+//        setTimeout('checkSharing2();shareNew2()');//"{{appointments}}","{{record_id}}");shareNew("{{record_id}}");',10);
+</script>
+
+
+   </div>
+{% endif %}
+{% ifequal 1 0 %}
+
+
+	<div class="class1">
+
+  	<h2>{% trans "Appointments List" %} {% if in_carenet %}(Shared){% endif %}</h2>
+
+
+  	{% ifequal num_appointments 0 %}
+  	{% else %}
+
+       <table class="light">
+         <thead>
+           <tr>
+         	<th scope="col"><b>{% trans "Title" %}</b></th>
+          	<th><b>{% trans "Date" %}</b></th>
+          	<th><b>{% trans "Time" %}</b></th>
+                {% if not in_carenet %}
+	  	<th><b>{% trans "Modify/Delete" %}</b></th>
+                {% endif %}
+           </tr>
+         </thead>
+       <tfoot>
+        <tr>
+       		<td colspan="3" style="text-align: right">{{num_appoints}} appointment{% ifequal num_appoints 1 %}{% else %}s{% endifequal %}</td>
+        </tr>
+      </tfoot>
+      <tbody>
+        	<span id="td_id" style="display:none">{{appointmentss}}</span>
+        	{% for p in appointments %}
+          		<tr class="{% cycle 'odd' 'even' %}">
+            			<td><a href="{{p.id}}">{{p.appointment_title}}</a></td>
+
+            			<td>{{p.date}}</td>
+            			<td>{{p.time}}</td>
+                                {% if not in_carenet %}
+	    			<td><a href="edit/{{p.id}}"><button>{% trans "edit" %}</button></a>
+            				<a href="delete/{{p.id}}"><button>{% trans "delete" %}</button></a>
+                                 
+	    			</td>
+ 				{% endif %}
+          		</tr>
+      	 	{% endfor %}
+      </tbody>
+    </table>
+  {% endifequal %}
+
+  {% if not in_carenet %}
+  	<p><a href="new">{% trans "[add an appointment ]" %}</a></p>
+<!--  	<p><a href="test">[test message send]</a></p>-->
+  	<p><a href="archived">{% trans "[deleted appointments]" %}</a></p>
+
+  {% endif %}
+{{ids}}--
+{%if ids %}
+
+
+   <div style="float:left;">
+
+                          <script>
+                                Indivo.Widget.DocumentAccessMulti.add('{{record_id}}', '{{ids}}');
+                          </script>
+
+   </div>
+
+
+{% endif %}
+</body>
+
+<!--<script src="//cdnjs.cloudflare.com/ajax/libs/annyang/1.1.0/annyang.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_HOME }}/annyang-master/annyang.js"></script>-->
+
+<!--<script type="text/javascript">
+     
+    
+
+
+function show_confirm() {
+        var r = confirm("Do you want to use speech recognizer?");
+        if (r == true) {
+  	$.getScript("//cdnjs.cloudflare.com/ajax/libs/annyang/1.1.0/annyang.min.js");
+	$.getScript("{{ STATIC_HOME }}/annyang-master/annyang.js");
+	//function check()
+	//{
+	alert ('You can say : "new problem" or "deleted problems" or "problem (number)" or "edit problem (number)"');       
+        var json = document.getElementById("td_id").innerHTML;
+	var jsonModified1 = json.replace(/'/g, '"');
+	var jsonModified2 = jsonModified1.replace(/None,/g,'"None",');
+
+	
+	try{
+		var parsedjson = JSON.parse(jsonModified2);
+		//alert (parsedjson[0].startDate);
+	}
+	catch(e){
+    		console.log(e);
+	}
+
+      
+
+//check();
+
+	 if(annyang)
+        {
+            var commands = {
+                'show tps report': function() {
+                    console.log("You just said - Show tps report");
+                },
+		'new problem': function(){
+		window.location.href ="new";		
+		
+		},
+		'deleted problems' : function(){
+		window.location.href = "archived";
+		},
+		'problem :number' :function(number){
+		for( var count = 0; count <= parsedjson.length; count++){ 
+			if (number == count) {
+				alert(parsedjson[count-1].id);
+				window.location.href = parsedjson[count-1].id;
+			}
+			else if(number == 'to') {
+				window.location.href = parsedjson[1].id;
+				}
+			else if(number == 'then'){
+				window.location.href = parsedjson[9].id;
+				}
+			}
+		if (number > parsedjson.length){
+			alert("There are only " +parsedjson.length+ " problems");
+			return false;
+		}
+		},
+		'edit problem :editnumber' :function(editnumber){
+                for( var count = 0; count <= parsedjson.length; count++){
+                        if (editnumber == count) {
+                                
+                                window.location.href = "edit/"+parsedjson[count-1].id;
+                        }
+                        else if(editnumber == 'to') {
+                                window.location.href = "edit/"+parsedjson[1].id;
+                                }
+                        else if(editnumber == 'then'){
+                                window.location.href = "edit/"+parsedjson[9].id;
+                                }
+                        }
+                if (editnumber > parsedjson.length){
+                        alert("There are only " +parsedjson.length+ " problems");
+                        return false;
+                }
+                },
+		'delete problem :deletenumber': function(deletenumber){
+		 for( var count = 0; count <= parsedjson.length; count++){
+                        if (deletenumber == count) {
+				var confirmation = confirm("Are you sure you want to delete problem:"+parsedjson[count-1].name_title+"?");
+			        if (confirmation == true) {
+				
+                                window.location.href = "delete/"+parsedjson[count-1].id;
+				}
+                        }
+                        else if(deletenumber == 'to') {
+                                window.location.href = "delete/"+parsedjson[1].id;
+                                }
+                        else if(deletenumber == 'then'){
+                                window.location.href = "delete/"+parsedjson[9].id;
+                                }
+                        }
+                if (deletenumber > parsedjson.length){
+                        alert("There are only " +parsedjson.length+ " problems");
+                        return false;
+                }
+			
+		}
+		
+            };
+
+        annyang.debug();
+        annyang.addCommands(commands);  
+        annyang.start();
+ 
+//}
+
+	  }
+     }
+}
+
+</script>-->  <!-- edw teleiwnoun ta sxolia -->
+
+
+
+
+{% endifequal %}
+{% endblock %}

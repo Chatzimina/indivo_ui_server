@@ -1,0 +1,3924 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-08 13:13+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: apps/allergies/templates/archived_list.html:44
+#: apps/allergies/templates/archived_list.html:97
+#: apps/allergies/templates/archived_list.html:153
+#: apps/appointments/templates/archived_list.html:138
+#: apps/appointments/templates/one.html:323
+#: apps/appointments_backup/templates/archived_list.html:67
+#: apps/appsNotResponsive/allergies/templates/archived_list.html:73
+#: apps/appsNotResponsive/medications/templates/archived_list.html:77
+#: apps/appsNotResponsive/medications/templates/newmedication.html:468
+#: apps/appsNotResponsive/problems/templates/archived_list.html:67
+#: apps/appsNotUsed/donnorsTool/templates/archived_list.html:69
+#: apps/appsNotUsed/donnorsTool/templates/one.html:201
+#: apps/appsNotUsed/donnorsTool_old/templates/archived_list.html:69
+#: apps/appsNotUsed/donnorsTool_old/templates/one.html:157
+#: apps/appsNotUsed/problems_old/templates/archived_list.html:67
+#: apps/bulkimport/templates/archived_list.html:67
+#: apps/editDemographics/templates/archived_list.html:67
+#: apps/getSuggestions/templates/archived_list.html:67
+#: apps/measurements/templates/archived_list.html:20
+#: apps/measurements/templates/archived_list.html:108
+#: apps/medications/templates/archived_list.html:173
+#: apps/medications/templates/archived_list.html:232
+#: apps/problems/templates/archived_list.html:98
+#: apps/problems/templates/archived_list.html:141
+#: apps/procedures/templates/archived_list.html:36
+#: apps/procedures/templates/archived_list.html:102
+msgid "Back"
+msgstr ""
+
+#: apps/allergies/templates/archived_list.html:49
+#: apps/allergies/templates/archived_list.html:110
+#: apps/appsNotResponsive/allergies/templates/archived_list.html:30
+msgid "Deleted allergies list"
+msgstr ""
+
+#: apps/allergies/templates/archived_list.html:61
+#: apps/allergies/templates/archived_list.html:117
+#: apps/allergies/templates/list.html:69 apps/allergies/templates/list.html:92
+#: apps/allergies/templates/list.html:163
+#: apps/appsNotResponsive/allergies/templates/archived_list.html:37
+#: apps/appsNotResponsive/allergies/templates/list.html:42
+msgid "Allergic reaction"
+msgstr ""
+
+#: apps/allergies/templates/archived_list.html:64
+#: apps/allergies/templates/archived_list.html:120
+#: apps/allergies/templates/list.html:72 apps/allergies/templates/list.html:95
+#: apps/allergies/templates/list.html:166
+#: apps/appsNotResponsive/allergies/templates/archived_list.html:40
+#: apps/appsNotResponsive/allergies/templates/list.html:45
+msgid "Severity title"
+msgstr ""
+
+#: apps/allergies/templates/archived_list.html:67
+#: apps/allergies/templates/list.html:73 apps/allergies/templates/list.html:98
+#: apps/allergies/templates/list.html:167
+#: apps/appointments/templates/list.html:83
+#: apps/appointments/templates/list.html:147
+#: apps/appointments_backup/templates/list.html:49
+#: apps/appsNotResponsive/allergies/templates/list.html:46
+#: apps/appsNotResponsive/problems/templates/archived_list.html:43
+#: apps/appsNotResponsive/problems/templates/list.html:49
+#: apps/appsNotResponsive/procedures/templates/archived_list.html:37
+#: apps/appsNotResponsive/procedures/templates/list.html:48
+#: apps/appsNotUsed/donnorsTool/templates/archived_list.html:45
+#: apps/appsNotUsed/donnorsTool_old/templates/archived_list.html:45
+#: apps/appsNotUsed/problems_old/templates/archived_list.html:43
+#: apps/appsNotUsed/problems_old/templates/list.html:49
+#: apps/bulkimport/templates/archived_list.html:43
+#: apps/editDemographics/templates/archived_list.html:43
+#: apps/edss/templates/archived_list.html:37 apps/edss/templates/list.html:49
+#: apps/getSuggestions/templates/archived_list.html:43
+#: apps/getSuggestions/templates/list.html:49
+#: apps/measurements/templates/list.html:61
+#: apps/problems/templates/archived_list.html:117
+#: apps/problems/templates/list.html:74 apps/problems/templates/list.html:132
+#: apps/procedures/templates/archived_list.html:120
+#: apps/procedures/templates/list.html:78
+#: apps/procedures/templates/list.html:160
+msgid "Modify/Delete"
+msgstr ""
+
+#: apps/allergies/templates/archived_list.html:80
+#: apps/allergies/templates/archived_list.html:137
+#: apps/appointments/templates/archived_list.html:85
+#: apps/appointments/templates/archived_list.html:128
+#: apps/appointments_backup/templates/archived_list.html:57
+#: apps/appsNotResponsive/allergies/templates/archived_list.html:57
+#: apps/appsNotResponsive/medications/templates/archived_list.html:66
+#: apps/appsNotResponsive/problems/templates/archived_list.html:57
+#: apps/appsNotUsed/donnorsTool/templates/archived_list.html:59
+#: apps/appsNotUsed/donnorsTool_old/templates/archived_list.html:59
+#: apps/appsNotUsed/problems_old/templates/archived_list.html:57
+#: apps/bulkimport/templates/archived_list.html:57
+#: apps/editDemographics/templates/archived_list.html:57
+#: apps/getSuggestions/templates/archived_list.html:57
+#: apps/medications/templates/archived_list.html:113
+#: apps/medications/templates/archived_list.html:156
+#: apps/medications/templates/archived_list.html:221
+#: apps/problems/templates/archived_list.html:82
+#: apps/problems/templates/archived_list.html:131
+msgid "restore"
+msgstr ""
+
+#: apps/allergies/templates/archived_list.html:121
+#: apps/appointments/templates/archived_list.html:66
+#: apps/appointments/templates/archived_list.html:114
+#: apps/appointments_backup/templates/archived_list.html:43
+#: apps/appsNotResponsive/allergies/templates/archived_list.html:41
+#: apps/measurements/templates/archived_list.html:51
+#: apps/measurements/templates/archived_list.html:77
+#: apps/medications/templates/archived_list.html:136
+#: apps/problems/templates/archived_list.html:59
+#: apps/procedures/templates/archived_list.html:65
+msgid "Restore"
+msgstr ""
+
+#: apps/allergies/templates/list.html:47
+#: apps/allergies/templates/list.html:156
+#: apps/appsNotResponsive/allergies/templates/list.html:35
+msgid "Allergies List"
+msgstr ""
+
+#: apps/allergies/templates/list.html:55
+msgid "add an allergy"
+msgstr ""
+
+#: apps/allergies/templates/list.html:58
+msgid "deleted allergies"
+msgstr ""
+
+#: apps/allergies/templates/list.html:129
+#: apps/allergies/templates/list.html:206
+#: apps/appointments/templates/list.html:107
+#: apps/appointments/templates/list.html:165
+#: apps/appointments_backup/templates/list.html:67
+#: apps/appsNotResponsive/allergies/templates/list.html:84
+#: apps/appsNotResponsive/medications/templates/list.html:147
+#: apps/appsNotResponsive/medications/templates/list.html:165
+#: apps/appsNotResponsive/problems/templates/list.html:67
+#: apps/appsNotResponsive/procedures/templates/list.html:74
+#: apps/appsNotUsed/problems_old/templates/list.html:67
+#: apps/edss/templates/list.html:74 apps/getSuggestions/templates/list.html:67
+#: apps/measurements/templates/list.html:118
+#: apps/medications/templates/list.html:226
+#: apps/medications/templates/list.html:277
+#: apps/medications/templates/list.html:350
+#: apps/medications/templates/list.html:368
+#: apps/problems/templates/list.html:100 apps/problems/templates/list.html:153
+#: apps/procedures/templates/list.html:133
+#: apps/procedures/templates/list.html:186
+msgid "edit"
+msgstr ""
+
+#: apps/allergies/templates/list.html:133
+#: apps/allergies/templates/list.html:207
+#: apps/appointments/templates/list.html:111
+#: apps/appointments/templates/list.html:166
+#: apps/appointments_backup/templates/list.html:68
+#: apps/appsNotResponsive/allergies/templates/list.html:85
+#: apps/appsNotResponsive/medications/templates/list.html:148
+#: apps/appsNotResponsive/medications/templates/list.html:166
+#: apps/appsNotResponsive/problems/templates/list.html:68
+#: apps/appsNotResponsive/procedures/templates/list.html:75
+#: apps/appsNotUsed/problems_old/templates/list.html:68
+#: apps/edss/templates/list.html:75 apps/getSuggestions/templates/list.html:68
+#: apps/measurements/templates/list.html:119
+#: apps/medications/templates/list.html:227
+#: apps/medications/templates/list.html:281
+#: apps/medications/templates/list.html:351
+#: apps/medications/templates/list.html:369
+#: apps/problems/templates/list.html:104 apps/problems/templates/list.html:156
+#: apps/procedures/templates/list.html:134
+#: apps/procedures/templates/list.html:187
+msgid "delete"
+msgstr ""
+
+#: apps/allergies/templates/list.html:222
+#: apps/appsNotResponsive/allergies/templates/list.html:100
+msgid "[add an allergy]"
+msgstr ""
+
+#: apps/allergies/templates/list.html:224
+#: apps/appsNotResponsive/allergies/templates/list.html:102
+msgid "[deleted allergies]"
+msgstr ""
+
+#: apps/allergies/templates/newallergy.html:84
+#: apps/allergies/templates/one_edit.html:79
+#: apps/appsNotResponsive/allergies/templates/newallergy.html:84
+#: apps/appsNotResponsive/allergies/templates/one_edit.html:83
+msgid "'Allergic reaction must be filled'"
+msgstr ""
+
+#: apps/allergies/templates/newallergy.html:90
+#: apps/allergies/templates/one_edit.html:85
+#: apps/appsNotResponsive/allergies/templates/newallergy.html:90
+#: apps/appsNotResponsive/allergies/templates/one_edit.html:89
+msgid "'Severity must be filled'"
+msgstr ""
+
+#: apps/allergies/templates/newallergy.html:96
+#: apps/allergies/templates/one_edit.html:91
+#: apps/appsNotResponsive/allergies/templates/newallergy.html:96
+#: apps/appsNotResponsive/allergies/templates/one_edit.html:95
+msgid "'Allergen must be filled'"
+msgstr ""
+
+#: apps/allergies/templates/newallergy.html:124
+#: apps/allergies/templates/newallergy.html:187
+#: apps/appsNotResponsive/allergies/templates/newallergy.html:106
+msgid "New Allergy"
+msgstr ""
+
+#: apps/allergies/templates/newallergy.html:133
+#: apps/allergies/templates/newallergy.html:197
+#: apps/allergies/templates/one_edit.html:131
+#: apps/allergies/templates/one_edit.html:199
+#: apps/appsNotResponsive/allergies/templates/newallergy.html:116
+#: apps/appsNotResponsive/allergies/templates/one_edit.html:124
+msgid "Allergy"
+msgstr ""
+
+#: apps/allergies/templates/newallergy.html:138
+#: apps/allergies/templates/newallergy.html:203
+#: apps/allergies/templates/one.html:58 apps/allergies/templates/one.html:118
+#: apps/allergies/templates/one_edit.html:136
+#: apps/allergies/templates/one_edit.html:206
+#: apps/allergies/templates/one_edit.html:218
+#: apps/appsNotResponsive/allergies/templates/newallergy.html:122
+#: apps/appsNotResponsive/allergies/templates/one.html:48
+#: apps/appsNotResponsive/allergies/templates/one_edit.html:130
+#: apps/appsNotResponsive/allergies/templates/one_edit.html:142
+msgid "Allergen type"
+msgstr ""
+
+#: apps/allergies/templates/newallergy.html:140
+#: apps/allergies/templates/newallergy.html:207
+#: apps/allergies/templates/one_edit.html:138
+#: apps/allergies/templates/one_edit.html:210
+#: apps/appsNotResponsive/allergies/templates/newallergy.html:126
+#: apps/appsNotResponsive/allergies/templates/one_edit.html:134
+msgid "Food allergy"
+msgstr ""
+
+#: apps/allergies/templates/newallergy.html:141
+#: apps/allergies/templates/newallergy.html:208
+#: apps/allergies/templates/one_edit.html:139
+#: apps/allergies/templates/one_edit.html:211
+#: apps/appsNotResponsive/allergies/templates/newallergy.html:127
+#: apps/appsNotResponsive/allergies/templates/one_edit.html:135
+msgid "Environmental allergy"
+msgstr ""
+
+#: apps/allergies/templates/newallergy.html:142
+#: apps/allergies/templates/newallergy.html:209
+#: apps/allergies/templates/one_edit.html:140
+#: apps/allergies/templates/one_edit.html:212
+#: apps/appsNotResponsive/allergies/templates/newallergy.html:128
+#: apps/appsNotResponsive/allergies/templates/one_edit.html:136
+msgid "Drug allergy"
+msgstr ""
+
+#: apps/allergies/templates/newallergy.html:143
+#: apps/allergies/templates/newallergy.html:210
+#: apps/allergies/templates/one_edit.html:141
+#: apps/allergies/templates/one_edit.html:213
+#: apps/appsNotResponsive/allergies/templates/newallergy.html:129
+#: apps/appsNotResponsive/allergies/templates/one_edit.html:137
+msgid "Drug intolerance"
+msgstr ""
+
+#: apps/allergies/templates/newallergy.html:144
+#: apps/allergies/templates/newallergy.html:211
+#: apps/allergies/templates/one_edit.html:142
+#: apps/allergies/templates/one_edit.html:214
+#: apps/appsNotResponsive/allergies/templates/newallergy.html:130
+#: apps/appsNotResponsive/allergies/templates/one_edit.html:138
+msgid "Food intolerance"
+msgstr ""
+
+#: apps/allergies/templates/newallergy.html:148
+#: apps/allergies/templates/newallergy.html:218
+#: apps/allergies/templates/one.html:61 apps/allergies/templates/one.html:120
+#: apps/allergies/templates/one_edit.html:146
+#: apps/allergies/templates/one_edit.html:225
+#: apps/appsNotResponsive/allergies/templates/newallergy.html:137
+#: apps/appsNotResponsive/allergies/templates/one.html:50
+#: apps/appsNotResponsive/allergies/templates/one_edit.html:149
+msgid "Drug class allergen"
+msgstr ""
+
+#: apps/allergies/templates/newallergy.html:154
+#: apps/allergies/templates/one.html:64 apps/allergies/templates/one.html:122
+#: apps/allergies/templates/one_edit.html:154
+#: apps/allergies/templates/one_edit.html:233
+#: apps/appsNotResponsive/allergies/templates/one.html:52
+#: apps/appsNotResponsive/allergies/templates/one_edit.html:157
+msgid "Severity"
+msgstr ""
+
+#: apps/allergies/templates/newallergy.html:156
+#: apps/allergies/templates/newallergy.html:227
+#: apps/allergies/templates/one_edit.html:156
+#: apps/allergies/templates/one_edit.html:239
+#: apps/appsNotResponsive/allergies/templates/newallergy.html:146
+#: apps/appsNotResponsive/allergies/templates/one_edit.html:163
+msgid "Mild"
+msgstr ""
+
+#: apps/allergies/templates/newallergy.html:157
+#: apps/allergies/templates/newallergy.html:228
+#: apps/allergies/templates/one_edit.html:157
+#: apps/allergies/templates/one_edit.html:240
+#: apps/appsNotResponsive/allergies/templates/newallergy.html:147
+#: apps/appsNotResponsive/allergies/templates/one_edit.html:164
+msgid "Moderate"
+msgstr ""
+
+#: apps/allergies/templates/newallergy.html:158
+#: apps/allergies/templates/newallergy.html:229
+#: apps/allergies/templates/one_edit.html:158
+#: apps/allergies/templates/one_edit.html:241
+#: apps/appsNotResponsive/allergies/templates/newallergy.html:148
+#: apps/appsNotResponsive/allergies/templates/one_edit.html:165
+msgid "Severe"
+msgstr ""
+
+#: apps/allergies/templates/newallergy.html:159
+#: apps/allergies/templates/newallergy.html:230
+#: apps/allergies/templates/one_edit.html:159
+#: apps/allergies/templates/one_edit.html:242
+#: apps/appsNotResponsive/allergies/templates/newallergy.html:149
+#: apps/appsNotResponsive/allergies/templates/one_edit.html:166
+msgid "Life Threatening"
+msgstr ""
+
+#: apps/allergies/templates/newallergy.html:160
+#: apps/allergies/templates/newallergy.html:231
+#: apps/allergies/templates/one_edit.html:160
+#: apps/allergies/templates/one_edit.html:243
+#: apps/appsNotResponsive/allergies/templates/newallergy.html:150
+#: apps/appsNotResponsive/allergies/templates/one_edit.html:167
+msgid "Fatal"
+msgstr ""
+
+#: apps/allergies/templates/newallergy.html:171
+#: apps/allergies/templates/newallergy.html:256
+#: apps/appsNotResponsive/allergies/templates/newallergy.html:175
+msgid "Add New Allergy"
+msgstr ""
+
+#: apps/allergies/templates/newallergy.html:177
+#: apps/allergies/templates/newallergy.html:260
+#: apps/appointments/templates/newappointment.html:418
+#: apps/appointments/templates/one_edit.html:392
+#: apps/appsNotResponsive/allergies/templates/newallergy.html:179
+#: apps/appsNotResponsive/medications/templates/newmedication.html:467
+#: apps/appsNotResponsive/medications/templates/one_edit.html:325
+#: apps/calendar/templates/test/codebase/sources/dhtmlxscheduler.js:3472
+#: apps/calendar/templates/test/codebase/sources/dhtmlxscheduler.js:3510
+#: apps/calendar_backup/templates/test/codebase/sources/dhtmlxscheduler.js:3472
+#: apps/calendar_backup/templates/test/codebase/sources/dhtmlxscheduler.js:3510
+#: apps/labs/templates/newLab.html:268
+#: apps/medications/templates/newmedication.html:546
+#: apps/medications/templates/one_edit.html:495
+#: templates/ui/change_password.html:156
+#: ui/jmvc/ui/views/carenet/accounts.ejs:20
+msgid "Cancel"
+msgstr ""
+
+#: apps/allergies/templates/newallergy.html:225
+#: apps/allergies/templates/one_edit.html:237
+#: apps/appsNotResponsive/allergies/templates/newallergy.html:144
+#: apps/appsNotResponsive/allergies/templates/one_edit.html:161
+msgid " Severity"
+msgstr ""
+
+#: apps/allergies/templates/one.html:68 apps/allergies/templates/one.html:128
+#: apps/appsNotResponsive/allergies/templates/one.html:58
+msgid "Created at "
+msgstr ""
+
+#: apps/allergies/templates/one.html:85 apps/allergies/templates/one.html:130
+#: apps/appointments/templates/one.html:471
+#: apps/appointments_backup/templates/one.html:319
+#: apps/appsNotResponsive/allergies/templates/one.html:60
+#: apps/appsNotResponsive/labs/templates/archived_list.html:118
+#: apps/appsNotResponsive/medications/templates/one.html:62
+#: apps/appsNotResponsive/problems/templates/one.html:90
+#: apps/appsNotResponsive/procedures/templates/archived_list.html:59
+#: apps/appsNotResponsive/procedures/templates/one.html:58
+#: apps/appsNotUsed/donnorsTool/templates/one_edit.html:107
+#: apps/appsNotUsed/donnorsTool_old/templates/one_edit.html:107
+#: apps/appsNotUsed/problems_old/templates/one.html:90
+#: apps/bulkimport/templates/one.html:87
+#: apps/editDemographics/templates/one.html:90
+#: apps/edss/templates/archived_list.html:59 apps/edss/templates/one.html:66
+#: apps/getSuggestions/templates/one.html:90
+#: apps/labs/templates/archived_list.html:187
+#: apps/measurements/templates/one.html:57
+#: apps/measurements/templates/one.html:103
+#: apps/medications/templates/one.html:70
+#: apps/medications/templates/one.html:144
+#: apps/medications/templates/one.html:176 apps/problems/templates/one.html:97
+#: apps/problems/templates/one.html:141 apps/problems/templates/one.html:165
+#: apps/procedures/templates/archived_list.html:142
+#: apps/procedures/templates/one.html:73
+#: apps/procedures/templates/one.html:118
+#: apps/procedures/templates/one.html:146
+msgid " Back"
+msgstr ""
+
+#: apps/allergies/templates/one_edit.html:170
+#: apps/allergies/templates/one_edit.html:268
+#: apps/appsNotResponsive/allergies/templates/one_edit.html:192
+msgid "Update Allergy"
+msgstr ""
+
+#: apps/allergies/templates/one_edit.html:176
+#: apps/allergies/templates/one_edit.html:269
+#: apps/appointments/templates/newappointment.html:572
+#: apps/appointments/templates/one_edit.html:540
+#: apps/appointments_backup/templates/newappointment.html:463
+#: apps/appointments_backup/templates/one_edit.html:384
+#: apps/appsNotResponsive/allergies/templates/one_edit.html:193
+#: apps/appsNotResponsive/medications/templates/one_edit.html:327
+#: apps/appsNotResponsive/problems/templates/newproblem.html:118
+#: apps/appsNotResponsive/problems/templates/one_edit.html:148
+#: apps/appsNotResponsive/procedures/templates/one_edit.html:130
+#: apps/appsNotUsed/donnorsTool/templates/newproblem.html:112
+#: apps/appsNotUsed/donnorsTool_old/templates/newproblem.html:112
+#: apps/appsNotUsed/problems_old/templates/newproblem.html:118
+#: apps/appsNotUsed/problems_old/templates/one_edit.html:148
+#: apps/bulkimport/templates/newproblem.html:112
+#: apps/bulkimport/templates/one_edit.html:140
+#: apps/editDemographics/templates/newproblem.html:118
+#: apps/editDemographics/templates/one_edit.html:148
+#: apps/edss/templates/one_edit.html:130
+#: apps/getSuggestions/templates/newproblem.html:118
+#: apps/getSuggestions/templates/one_edit.html:148
+#: apps/labs/templates/one_edit.html:247
+#: apps/measurements/templates/newmeasurement.html:162
+#: apps/measurements/templates/one_edit.html:112
+#: apps/medications/templates/newmedication.html:331
+#: apps/medications/templates/one_edit.html:272
+#: apps/medications/templates/one_edit.html:497
+#: apps/problems/templates/newproblem.html:157
+#: apps/problems/templates/newproblem.html:222
+#: apps/problems/templates/one.edit.html:57
+#: apps/problems/templates/one_edit.html:138
+#: apps/problems/templates/one_edit.html:214
+#: apps/procedures/templates/newprocedure.html:159
+#: apps/procedures/templates/one_edit.html:147
+#: apps/procedures/templates/one_edit.html:207
+msgid "   Cancel"
+msgstr ""
+
+#: apps/allergies/templates/one_edit.html:274
+#: apps/appointments/templates/one.html:316
+#: apps/appointments/templates/one.html:468
+#: apps/appointments/templates/one_edit.html:400
+#: apps/appointments/templates/one_edit.html:543
+#: apps/appointments_backup/templates/one.html:316
+#: apps/appointments_backup/templates/one_edit.html:387
+#: apps/appsNotResponsive/allergies/templates/one_edit.html:198
+#: apps/appsNotResponsive/medications/templates/one.html:59
+#: apps/appsNotResponsive/problems/templates/one.html:87
+#: apps/appsNotResponsive/problems/templates/one_edit.html:151
+#: apps/appsNotResponsive/procedures/templates/one_edit.html:132
+#: apps/appsNotUsed/problems_old/templates/one.html:87
+#: apps/appsNotUsed/problems_old/templates/one_edit.html:151
+#: apps/bulkimport/templates/one.html:84
+#: apps/bulkimport/templates/one_edit.html:143
+#: apps/editDemographics/templates/one.html:87
+#: apps/editDemographics/templates/one_edit.html:151
+#: apps/edss/templates/one_edit.html:132
+#: apps/getSuggestions/templates/one.html:87
+#: apps/getSuggestions/templates/one_edit.html:151
+#: apps/medications/templates/one.html:173
+#: apps/problems/templates/one.html:162
+#: apps/problems/templates/one_edit.html:217
+#: apps/procedures/templates/one_edit.html:209
+msgid "Additional Information"
+msgstr ""
+
+#: apps/allergies/templates/one_edit.html:275
+#: apps/appointments/templates/one.html:316
+#: apps/appointments/templates/one.html:469
+#: apps/appointments/templates/one_edit.html:400
+#: apps/appointments/templates/one_edit.html:544
+#: apps/appointments_backup/templates/one.html:317
+#: apps/appointments_backup/templates/one_edit.html:388
+#: apps/appsNotResponsive/allergies/templates/one_edit.html:199
+#: apps/appsNotResponsive/medications/templates/one.html:60
+#: apps/appsNotResponsive/problems/templates/one.html:88
+#: apps/appsNotResponsive/problems/templates/one_edit.html:152
+#: apps/appsNotResponsive/procedures/templates/one.html:55
+#: apps/appsNotResponsive/procedures/templates/one_edit.html:133
+#: apps/appsNotUsed/problems_old/templates/one.html:88
+#: apps/appsNotUsed/problems_old/templates/one_edit.html:152
+#: apps/bulkimport/templates/one.html:85
+#: apps/bulkimport/templates/one_edit.html:144
+#: apps/editDemographics/templates/one.html:88
+#: apps/editDemographics/templates/one_edit.html:152
+#: apps/edss/templates/one.html:63 apps/edss/templates/one_edit.html:133
+#: apps/getSuggestions/templates/one.html:88
+#: apps/getSuggestions/templates/one_edit.html:152
+#: apps/measurements/templates/one.html:83
+#: apps/medications/templates/one.html:126
+#: apps/medications/templates/one.html:174
+#: apps/problems/templates/one.html:163
+#: apps/problems/templates/one_edit.html:218
+#: apps/procedures/templates/one.html:98
+#: apps/procedures/templates/one.html:143
+#: apps/procedures/templates/one_edit.html:210
+msgid "Created at"
+msgstr ""
+
+#: apps/appointments/templates/archived_list.html:46
+#: apps/appointments/templates/archived_list.html:104
+#: apps/appointments_backup/templates/archived_list.html:33
+msgid "Deleted Appointments List"
+msgstr ""
+
+#: apps/appointments/templates/archived_list.html:57
+#: apps/appointments/templates/archived_list.html:111
+#: apps/appointments/templates/list.html:73
+#: apps/appointments/templates/list.html:143
+#: apps/appointments/templates/one.html:399
+#: apps/appointments_backup/templates/archived_list.html:40
+#: apps/appointments_backup/templates/list.html:45
+#: apps/appointments_backup/templates/one.html:247
+#: apps/appsNotUsed/donnorsTool/templates/list.html:41
+#: apps/appsNotUsed/donnorsTool/templates/one.html:106
+#: apps/appsNotUsed/donnorsTool_old/templates/list.html:45
+#: apps/appsNotUsed/donnorsTool_old/templates/one.html:104
+#: apps/measurements/templates/newmeasurement.html:107
+msgid "Title"
+msgstr ""
+
+#: apps/appointments/templates/archived_list.html:60
+#: apps/appointments/templates/archived_list.html:112
+#: apps/appointments/templates/list.html:76
+#: apps/appointments/templates/list.html:144
+#: apps/appointments/templates/newappointment.html:358
+#: apps/appointments/templates/newappointment.html:460
+#: apps/appointments/templates/one.html:279
+#: apps/appointments/templates/one.html:408
+#: apps/appointments/templates/one_edit.html:327
+#: apps/appointments/templates/one_edit.html:453
+#: apps/appointments_backup/templates/archived_list.html:41
+#: apps/appointments_backup/templates/list.html:46
+#: apps/appointments_backup/templates/newappointment.html:351
+#: apps/appointments_backup/templates/one.html:256
+#: apps/appointments_backup/templates/one_edit.html:293
+#: apps/appsNotResponsive/medications/templates/newmedication.html:188
+#: apps/appsNotResponsive/medications/templates/one_edit.html:161
+#: apps/edss/templates/newedss.html:299
+#: apps/medications/templates/newmedication.html:212
+#: apps/medications/templates/newmedication.html:392
+#: apps/medications/templates/one_edit.html:160
+#: apps/medications/templates/one_edit.html:331
+#: ui/jmvc/ui/views/message/show.ejs:23
+msgid "Date"
+msgstr ""
+
+#: apps/appointments/templates/archived_list.html:63
+#: apps/appointments/templates/archived_list.html:113
+#: apps/appointments/templates/list.html:79
+#: apps/appointments/templates/list.html:145
+#: apps/appointments/templates/newappointment.html:362
+#: apps/appointments/templates/newappointment.html:465
+#: apps/appointments/templates/one.html:282
+#: apps/appointments/templates/one.html:409
+#: apps/appointments/templates/one_edit.html:331
+#: apps/appointments/templates/one_edit.html:458
+#: apps/appointments_backup/templates/archived_list.html:42
+#: apps/appointments_backup/templates/list.html:47
+#: apps/appointments_backup/templates/newappointment.html:356
+#: apps/appointments_backup/templates/one.html:257
+#: apps/appointments_backup/templates/one_edit.html:298
+msgid "Time"
+msgstr ""
+
+#: apps/appointments/templates/list.html:50
+#: apps/appointments/templates/list.html:134
+#: apps/appointments_backup/templates/list.html:36
+msgid "Appointments List"
+msgstr ""
+
+#: apps/appointments/templates/list.html:58
+msgid "add an appointment"
+msgstr ""
+
+#: apps/appointments/templates/list.html:62
+msgid "deleted appointments"
+msgstr ""
+
+#: apps/appointments/templates/list.html:177
+#: apps/appointments_backup/templates/list.html:79
+msgid "[add an appointment ]"
+msgstr ""
+
+#: apps/appointments/templates/list.html:179
+#: apps/appointments_backup/templates/list.html:81
+msgid "[deleted appointments]"
+msgstr ""
+
+#: apps/appointments/templates/newappointment.html:190
+#: apps/appointments/templates/one_edit.html:175
+#: apps/appointments_backup/templates/newappointment.html:198
+#: apps/appointments_backup/templates/one_edit.html:156
+msgid "'Appointment title must be filled'"
+msgstr ""
+
+#: apps/appointments/templates/newappointment.html:196
+#: apps/appointments/templates/one_edit.html:181
+#: apps/appointments_backup/templates/newappointment.html:204
+#: apps/appointments_backup/templates/one_edit.html:162
+msgid "'Date must be filled'"
+msgstr ""
+
+#: apps/appointments/templates/newappointment.html:202
+#: apps/appointments/templates/one_edit.html:187
+#: apps/appointments_backup/templates/newappointment.html:210
+#: apps/appointments_backup/templates/one_edit.html:168
+msgid "'Time must be filled'"
+msgstr ""
+
+#: apps/appointments/templates/newappointment.html:332
+#: apps/appointments/templates/newappointment.html:437
+#: apps/appointments_backup/templates/newappointment.html:326
+msgid "New Appointment"
+msgstr ""
+
+#: apps/appointments/templates/newappointment.html:341
+#: apps/appointments/templates/newappointment.html:446
+#: apps/appointments/templates/one_edit.html:308
+#: apps/appointments/templates/one_edit.html:436
+#: apps/appointments_backup/templates/newappointment.html:335
+#: apps/appointments_backup/templates/one_edit.html:276
+msgid "Appointment"
+msgstr ""
+
+#: apps/appointments/templates/newappointment.html:345
+#: apps/appointments/templates/newappointment.html:452
+#: apps/appointments/templates/one.html:267
+#: apps/appointments/templates/one.html:401
+#: apps/appointments/templates/one_edit.html:313
+#: apps/appointments/templates/one_edit.html:443
+#: apps/appointments_backup/templates/newappointment.html:341
+#: apps/appointments_backup/templates/one.html:249
+#: apps/appointments_backup/templates/one_edit.html:283
+msgid "Doctor's name"
+msgstr ""
+
+#: apps/appointments/templates/newappointment.html:348
+#: apps/appointments/templates/newappointment.html:453
+#: apps/appointments/templates/one.html:270
+#: apps/appointments/templates/one_edit.html:316
+#: apps/appointments/templates/one_edit.html:444
+#: apps/appointments_backup/templates/newappointment.html:342
+#: apps/appointments_backup/templates/one_edit.html:284
+msgid "Last name "
+msgstr ""
+
+#: apps/appointments/templates/newappointment.html:352
+#: apps/appointments/templates/newappointment.html:455
+#: apps/appointments/templates/one.html:273
+#: apps/appointments/templates/one_edit.html:321
+#: apps/appointments/templates/one_edit.html:446
+#: apps/appointments_backup/templates/newappointment.html:344
+#: apps/appointments_backup/templates/one_edit.html:286
+msgid "Name "
+msgstr ""
+
+#: apps/appointments/templates/newappointment.html:366
+#: apps/appointments/templates/newappointment.html:469
+#: apps/appointments/templates/one.html:300
+#: apps/appointments/templates/one.html:413
+#: apps/appointments/templates/one_edit.html:337
+#: apps/appointments/templates/one_edit.html:462
+#: apps/appointments_backup/templates/newappointment.html:360
+#: apps/appointments_backup/templates/one.html:261
+#: apps/appointments_backup/templates/one_edit.html:302
+msgid "Alert time"
+msgstr ""
+
+#: apps/appointments/templates/newappointment.html:368
+#: apps/appointments/templates/newappointment.html:472
+#: apps/appointments/templates/one_edit.html:339
+#: apps/appointments/templates/one_edit.html:465
+#: apps/appointments_backup/templates/newappointment.html:363
+#: apps/appointments_backup/templates/one_edit.html:305
+msgid "Never"
+msgstr ""
+
+#: apps/appointments/templates/newappointment.html:369
+#: apps/appointments/templates/newappointment.html:473
+#: apps/appointments/templates/one_edit.html:340
+#: apps/appointments/templates/one_edit.html:466
+#: apps/appointments_backup/templates/newappointment.html:364
+#: apps/appointments_backup/templates/one_edit.html:306
+msgid "5 minutes before"
+msgstr ""
+
+#: apps/appointments/templates/newappointment.html:370
+#: apps/appointments/templates/newappointment.html:474
+#: apps/appointments/templates/one_edit.html:341
+#: apps/appointments/templates/one_edit.html:467
+#: apps/appointments_backup/templates/newappointment.html:365
+#: apps/appointments_backup/templates/one_edit.html:307
+msgid "30 minutes before"
+msgstr ""
+
+#: apps/appointments/templates/newappointment.html:371
+#: apps/appointments/templates/newappointment.html:475
+#: apps/appointments/templates/one_edit.html:342
+#: apps/appointments/templates/one_edit.html:468
+#: apps/appointments_backup/templates/newappointment.html:366
+#: apps/appointments_backup/templates/one_edit.html:308
+msgid "60 minutes before"
+msgstr ""
+
+#: apps/appointments/templates/newappointment.html:372
+#: apps/appointments/templates/newappointment.html:476
+#: apps/appointments/templates/one_edit.html:343
+#: apps/appointments/templates/one_edit.html:469
+#: apps/appointments_backup/templates/newappointment.html:367
+#: apps/appointments_backup/templates/one_edit.html:309
+msgid "One day before"
+msgstr ""
+
+#: apps/appointments/templates/newappointment.html:373
+#: apps/appointments/templates/newappointment.html:477
+#: apps/appointments/templates/one_edit.html:344
+#: apps/appointments/templates/one_edit.html:470
+#: apps/appointments_backup/templates/newappointment.html:368
+#: apps/appointments_backup/templates/one_edit.html:310
+msgid "Two days before"
+msgstr ""
+
+#: apps/appointments/templates/newappointment.html:377
+#: apps/appointments/templates/newappointment.html:500
+#: apps/appointments/templates/one.html:303
+#: apps/appointments/templates/one_edit.html:351
+#: apps/appointments_backup/templates/newappointment.html:391
+#: apps/appsNotResponsive/problems/templates/newproblem.html:106
+#: apps/appsNotResponsive/problems/templates/one_edit.html:129
+#: apps/appsNotUsed/donnorsTool/templates/newproblem.html:100
+#: apps/appsNotUsed/donnorsTool_old/templates/newproblem.html:100
+#: apps/appsNotUsed/problems_old/templates/newproblem.html:106
+#: apps/appsNotUsed/problems_old/templates/one_edit.html:129
+#: apps/bulkimport/templates/newproblem.html:100
+#: apps/calendar/templates/test/codebase/sources/dhtmlxscheduler.js:3473
+#: apps/calendar_backup/templates/test/codebase/sources/dhtmlxscheduler.js:3473
+#: apps/editDemographics/templates/newproblem.html:106
+#: apps/editDemographics/templates/one_edit.html:129
+#: apps/getSuggestions/templates/newproblem.html:106
+#: apps/getSuggestions/templates/one_edit.html:129
+#: apps/problems/templates/newproblem.html:134
+#: apps/problems/templates/newproblem.html:205
+#: apps/problems/templates/one.edit.html:45
+#: apps/problems/templates/one_edit.html:125
+#: apps/problems/templates/one_edit.html:195
+msgid "Details"
+msgstr ""
+
+#: apps/appointments/templates/newappointment.html:381
+#: apps/appointments/templates/newappointment.html:504
+#: apps/appointments/templates/one.html:333
+#: apps/appointments/templates/one.html:422
+#: apps/appointments/templates/one_edit.html:355
+#: apps/appointments/templates/one_edit.html:480
+#: apps/appointments_backup/templates/newappointment.html:395
+#: apps/appointments_backup/templates/one.html:270
+#: apps/appointments_backup/templates/one_edit.html:320
+msgid "Address"
+msgstr ""
+
+#: apps/appointments/templates/newappointment.html:412
+msgid "Add New Appointment"
+msgstr ""
+
+#: apps/appointments/templates/one.html:285
+#: apps/appointments/templates/one.html:410
+#: apps/appointments_backup/templates/one.html:258
+#: ui/jmvc/ui/views/record/demographics_form.ejs:115
+msgid "Street"
+msgstr ""
+
+#: apps/appointments/templates/one.html:288
+#: apps/appointments/templates/one.html:411
+#: apps/appointments_backup/templates/one.html:259
+msgid "Street number"
+msgstr ""
+
+#: apps/appointments/templates/one.html:291
+#: apps/appointments/templates/one.html:415
+#: apps/appointments/templates/one_edit.html:507
+#: apps/appointments_backup/templates/one.html:263
+#: apps/appointments_backup/templates/one_edit.html:347
+#: ui/jmvc/ui/views/record/demographics_form.ejs:139
+msgid "Country"
+msgstr ""
+
+#: apps/appointments/templates/one.html:294
+#: apps/appointments/templates/one.html:412
+#: apps/appointments/templates/one_edit.html:495
+#: apps/appointments_backup/templates/one.html:260
+#: apps/appointments_backup/templates/one_edit.html:335
+#: ui/jmvc/ui/views/record/demographics_form.ejs:121
+msgid "City"
+msgstr ""
+
+#: apps/appointments/templates/one.html:297
+#: apps/appointments/templates/one.html:414
+#: apps/appointments_backup/templates/one.html:262
+msgid "Postal code"
+msgstr ""
+
+#: apps/appointments/templates/one.html:463
+#: apps/appointments_backup/templates/one.html:311
+msgid "Map"
+msgstr ""
+
+#: apps/appointments/templates/one_edit.html:87
+#: apps/appointments_backup/templates/one_edit.html:68
+msgid ""
+"'We cannot locate your address.Please complete next fields by yourself.'"
+msgstr ""
+
+#: apps/appointments/templates/one_edit.html:138
+#: apps/appointments_backup/templates/one_edit.html:125
+msgid "'We cannot locate your address'"
+msgstr ""
+
+#: apps/appointments/templates/one_edit.html:299
+msgid "Edit Appointment"
+msgstr ""
+
+#: apps/appointments/templates/one_edit.html:386
+#: apps/appointments/templates/one_edit.html:531
+#: apps/appointments_backup/templates/one_edit.html:375
+msgid "Update Appointment"
+msgstr ""
+
+#: apps/appointments/templates/one_edit.html:476
+#: apps/appointments_backup/templates/one_edit.html:316
+#: apps/appsNotResponsive/problems/templates/one.html:83
+#: apps/appsNotResponsive/procedures/templates/newprocedure.html:105
+#: apps/appsNotResponsive/procedures/templates/one.html:50
+#: apps/appsNotResponsive/procedures/templates/one_edit.html:110
+#: apps/appsNotUsed/problems_old/templates/one.html:83
+#: apps/bulkimport/templates/one.html:80
+#: apps/editDemographics/templates/one.html:83
+#: apps/edss/templates/newedss.html:303
+#: apps/edss/templates/newprocedure.html:105 apps/edss/templates/one.html:58
+#: apps/edss/templates/one_edit.html:110
+#: apps/getSuggestions/templates/one.html:83
+#: apps/problems/templates/one.html:121 apps/problems/templates/one.html:158
+#: apps/procedures/templates/newprocedure.html:134
+#: apps/procedures/templates/newprocedure.html:205
+#: apps/procedures/templates/one.html:92
+#: apps/procedures/templates/one.html:138
+#: apps/procedures/templates/one_edit.html:129
+#: apps/procedures/templates/one_edit.html:187
+msgid "Comments"
+msgstr ""
+
+#: apps/appointments/templates/one_edit.html:487
+#: apps/appointments_backup/templates/one_edit.html:327
+msgid "Street address"
+msgstr ""
+
+#: apps/appointments/templates/one_edit.html:502
+#: apps/appointments_backup/templates/one_edit.html:342
+msgid "Zip code"
+msgstr ""
+
+#: apps/appsNotResponsive/contact/templates/list.html:5
+#: apps/contact/templates/list.html:46 ui/jmvc/ui/views/contact/show.ejs:2
+#: ui/jmvc/ui/views/pha/app_tab.ejs:96 ui/jmvc/ui/views/pha/apps.ejs:71
+msgid "Contact"
+msgstr ""
+
+#: apps/appsNotResponsive/contact/templates/list.html:38
+msgid "Create message"
+msgstr ""
+
+#: apps/appsNotResponsive/contact/templates/list.html:41
+#: apps/contact/templates/list.html:52
+msgid "Subject:"
+msgstr ""
+
+#: apps/appsNotResponsive/contact/templates/list.html:42
+#: apps/contact/templates/list.html:56
+msgid "Message:"
+msgstr ""
+
+#: apps/appsNotResponsive/contact/templates/list.html:46
+#: apps/contact/templates/list.html:60
+msgid "  Send   "
+msgstr ""
+
+#: apps/appsNotResponsive/labs/views.py:256
+#: apps/appsNotResponsive/labs/views.py:442 apps/labs/views.py:262
+#: apps/labs/views.py:448
+msgid "No Results"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/views.py:258
+#: apps/appsNotResponsive/labs/views.py:444 apps/labs/views.py:264
+#: apps/labs/views.py:450
+msgid "End of Results"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/views.py:260
+#: apps/appsNotResponsive/labs/views.py:446 apps/labs/views.py:266
+#: apps/labs/views.py:452
+msgid "Showing Results "
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/_lab.html:17
+msgid "[Edit]"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/_lab.html:18
+msgid "[Delete]"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/_sortable_header.html:4
+#: apps/appsNotResponsive/labs/templates/_sortable_header.html:25
+#: apps/appsNotResponsive/labs/templates/_sortable_header.html:49
+#: apps/labs/templates/_sortable_header.html:4
+#: apps/labs/templates/_sortable_header.html:25
+#: apps/labs/templates/_sortable_header.html:49
+msgid "Date Measured"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/_sortable_header.html:10
+#: apps/appsNotResponsive/labs/templates/_sortable_header.html:30
+#: apps/appsNotResponsive/labs/templates/_sortable_header.html:44
+#: apps/labs/templates/_sortable_header.html:10
+#: apps/labs/templates/_sortable_header.html:30
+#: apps/labs/templates/_sortable_header.html:44
+msgid "Lab Status"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/_sortable_header.html:16
+#: apps/appsNotResponsive/labs/templates/_sortable_header.html:36
+#: apps/appsNotResponsive/labs/templates/_sortable_header.html:54
+#: apps/labs/templates/_sortable_header.html:16
+#: apps/labs/templates/_sortable_header.html:36
+#: apps/labs/templates/_sortable_header.html:54
+msgid "Lab Test Name"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/archived_list.html:43
+#: apps/labs/templates/archived_list.html:72
+msgid "Deleted Labs"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/archived_list.html:47
+#: apps/appsNotResponsive/labs/templates/list.html:50
+#: apps/labs/templates/archived_list.html:76 apps/labs/templates/list.html:88
+msgid "15 per page"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/archived_list.html:48
+#: apps/appsNotResponsive/labs/templates/list.html:51
+#: apps/labs/templates/archived_list.html:77 apps/labs/templates/list.html:89
+msgid "30 per page"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/archived_list.html:49
+#: apps/appsNotResponsive/labs/templates/list.html:52
+#: apps/labs/templates/archived_list.html:78 apps/labs/templates/list.html:90
+msgid "50 per page"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/archived_list.html:50
+#: apps/appsNotResponsive/labs/templates/list.html:53
+#: apps/labs/templates/archived_list.html:79 apps/labs/templates/list.html:91
+msgid "100 per page"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/archived_list.html:54
+#: apps/labs/templates/archived_list.html:83
+msgid "With Status  "
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/archived_list.html:56
+#: apps/appsNotResponsive/labs/templates/list.html:59
+#: apps/labs/templates/archived_list.html:85 apps/labs/templates/list.html:97
+msgid "All"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/archived_list.html:92
+#: apps/appsNotResponsive/labs/templates/list.html:95
+#: apps/labs/templates/archived_list.html:125
+#: apps/labs/templates/archived_list.html:155
+#: apps/labs/templates/list.html:142
+msgid "Laboratory Name"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/archived_list.html:100
+#: apps/appsNotResponsive/labs/templates/list.html:103
+#: apps/labs/templates/archived_list.html:133
+#: apps/labs/templates/archived_list.html:163
+#: apps/labs/templates/list.html:150 apps/labs/templates/list.html.py:183
+#: apps/measurements/templates/archived_list.html:44
+#: apps/measurements/templates/archived_list.html:70
+#: apps/measurements/templates/list.html:58
+#: apps/measurements/templates/list.html:83
+#: apps/measurements/templates/newmeasurement.html:129
+#: apps/measurements/templates/one.html:75
+#: apps/measurements/templates/one_edit.html:87
+msgid "Value"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/archived_list.html:101
+#: apps/appsNotResponsive/labs/templates/list.html:104
+#: apps/labs/templates/archived_list.html:134
+#: apps/labs/templates/archived_list.html:164
+#: apps/labs/templates/list.html:151
+msgid "Min"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/archived_list.html:102
+#: apps/appsNotResponsive/labs/templates/list.html:105
+#: apps/labs/templates/archived_list.html:135
+#: apps/labs/templates/archived_list.html:165
+#: apps/labs/templates/list.html:152
+msgid "Max"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/list.html:46
+#: apps/labs/templates/list.html:84
+msgid "Labs Report"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/list.html:57
+#: apps/labs/templates/list.html:95
+msgid "With Status"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/list.html:107
+#: apps/labs/templates/list.html:154 apps/labs/templates/list.html.py:186
+msgid "Modify"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/list.html:108
+#: apps/calendar/templates/test/codebase/sources/dhtmlxscheduler.js:3475
+#: apps/calendar_backup/templates/test/codebase/sources/dhtmlxscheduler.js:3475
+#: apps/labs/templates/_lab.html:21 apps/labs/templates/_lab_small.html:20
+#: apps/labs/templates/list.html:155 apps/labs/templates/list.html.py:186
+msgid "Delete"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/list.html:123
+#: apps/labs/templates/list.html:206
+msgid "[add lab]"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/list.html:125
+#: apps/labs/templates/list.html:208
+msgid "[deleted labs]"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:54
+#: apps/appsNotResponsive/labs/templates/one_edit.html:54
+#: apps/labs/templates/newLab.html:54 apps/labs/templates/one_edit.html:54
+msgid "'Quantitive result value must be filled'"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:59
+#: apps/appsNotResponsive/labs/templates/one_edit.html:59
+#: apps/labs/templates/newLab.html:59 apps/labs/templates/one_edit.html:59
+msgid "'Collected at value must be filled'"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:65
+#: apps/appsNotResponsive/labs/templates/one_edit.html:65
+#: apps/labs/templates/newLab.html:65 apps/labs/templates/one_edit.html:65
+msgid "'Quantitative result normal range minimum value must be filled'"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:71
+#: apps/appsNotResponsive/labs/templates/one_edit.html:71
+#: apps/labs/templates/newLab.html:71 apps/labs/templates/one_edit.html:71
+msgid "'Quantitative result normal range maximum value must be filled'"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:78
+#: apps/labs/templates/newLab.html:78
+msgid "'Test name title must be filled'"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:105
+#: apps/labs/templates/newLab.html:109 apps/labs/templates/newLab.html:279
+msgid "New Lab"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:114
+#: apps/appsNotResponsive/labs/templates/one_edit.html:113
+#: apps/labs/templates/newLab.html:117 apps/labs/templates/newLab.html:288
+#: apps/labs/templates/one_edit.html:116 apps/labs/templates/one_edit.html:271
+msgid "Abnormal interpretation"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:128
+#: apps/appsNotResponsive/labs/templates/one_edit.html:127
+#: apps/labs/templates/newLab.html:126 apps/labs/templates/newLab.html:302
+#: apps/labs/templates/one_edit.html:126 apps/labs/templates/one_edit.html:285
+msgid "Accession number"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:138
+#: apps/appsNotResponsive/labs/templates/one_edit.html:137
+#: apps/labs/templates/newLab.html:130 apps/labs/templates/newLab.html:312
+#: apps/labs/templates/one_edit.html:130 apps/labs/templates/one_edit.html:295
+msgid "Test name"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:146
+#: apps/appsNotResponsive/labs/templates/one_edit.html:145
+#: apps/appsNotUsed/donnorsTool/templates/list.html:43
+#: apps/appsNotUsed/donnorsTool/templates/one.html:143
+#: apps/appsNotUsed/donnorsTool/templates/one.html:144
+#: apps/appsNotUsed/donnorsTool/templates/one.html:145
+#: apps/appsNotUsed/donnorsTool/templates/one.html:182
+#: apps/appsNotUsed/donnorsTool/templates/one.html:183
+#: apps/appsNotUsed/donnorsTool/templates/one.html:184
+#: apps/appsNotUsed/donnorsTool_old/templates/list.html:47
+#: apps/appsNotUsed/donnorsTool_old/templates/one.html:141
+#: apps/appsNotUsed/donnorsTool_old/templates/one.html:142
+#: apps/appsNotUsed/donnorsTool_old/templates/one.html:143
+#: apps/labs/templates/newLab.html:135 apps/labs/templates/newLab.html:320
+#: apps/labs/templates/one_edit.html:136 apps/labs/templates/one_edit.html:303
+msgid "Status"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:149
+msgid "Correction"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:150
+msgid "Preliminary"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:151
+msgid "Final"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:160
+#: apps/appsNotResponsive/labs/templates/one_edit.html:160
+#: apps/labs/templates/newLab.html:145 apps/labs/templates/newLab.html:334
+#: apps/labs/templates/one_edit.html:147 apps/labs/templates/one_edit.html:318
+msgid "Notes"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:164
+#: apps/appsNotResponsive/labs/templates/one_edit.html:164
+#: apps/labs/templates/newLab.html:149 apps/labs/templates/newLab.html:338
+#: apps/labs/templates/one_edit.html:151 apps/labs/templates/one_edit.html:322
+msgid "Collected at"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:170
+#: apps/appsNotResponsive/labs/templates/one_edit.html:169
+#: apps/labs/templates/newLab.html:153 apps/labs/templates/newLab.html:344
+#: apps/labs/templates/one_edit.html:155 apps/labs/templates/one_edit.html:327
+msgid "Quantitative result normal range max value"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:176
+#: apps/appsNotResponsive/labs/templates/one_edit.html:175
+#: apps/labs/templates/newLab.html:157 apps/labs/templates/newLab.html:350
+#: apps/labs/templates/one_edit.html:159 apps/labs/templates/one_edit.html:333
+msgid "Quantitative result normal range max unit"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:182
+#: apps/appsNotResponsive/labs/templates/one_edit.html:181
+#: apps/labs/templates/newLab.html:161 apps/labs/templates/newLab.html:356
+#: apps/labs/templates/one_edit.html:163 apps/labs/templates/one_edit.html:339
+msgid "Quantitative result normal range min value"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:187
+#: apps/appsNotResponsive/labs/templates/one_edit.html:186
+#: apps/labs/templates/newLab.html:164 apps/labs/templates/newLab.html:361
+#: apps/labs/templates/one_edit.html:166 apps/labs/templates/one_edit.html:344
+msgid "Quantitative result normal range min unit"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:193
+#: apps/appsNotResponsive/labs/templates/one_edit.html:192
+#: apps/labs/templates/newLab.html:168 apps/labs/templates/newLab.html:367
+#: apps/labs/templates/one_edit.html:170 apps/labs/templates/one_edit.html:350
+msgid "Quantitative result value"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:199
+#: apps/appsNotResponsive/labs/templates/one_edit.html:198
+#: apps/labs/templates/newLab.html:172 apps/labs/templates/newLab.html:373
+#: apps/labs/templates/one_edit.html:174 apps/labs/templates/one_edit.html:356
+msgid "Quantitative result unit"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:207
+#: apps/appsNotResponsive/labs/templates/one_edit.html:205
+#: apps/appsNotResponsive/medications/templates/newmedication.html:207
+#: apps/appsNotResponsive/medications/templates/one_edit.html:179
+#: apps/labs/templates/newLab.html:381 apps/labs/templates/one_edit.html:363
+#: apps/medications/templates/newmedication.html:411
+#: apps/medications/templates/one_edit.html:349
+msgid "Add extra information"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:208
+#: apps/appsNotResponsive/labs/templates/newLab.html:293
+#: apps/appsNotResponsive/labs/templates/one_edit.html:206
+#: apps/appsNotResponsive/labs/templates/one_edit.html:292
+#: apps/appsNotResponsive/medications/templates/newmedication.html:208
+#: apps/appsNotResponsive/medications/templates/newmedication.html:318
+#: apps/appsNotResponsive/medications/templates/one_edit.html:180
+#: apps/appsNotResponsive/medications/templates/one_edit.html:303
+#: apps/labs/templates/newLab.html:382 apps/labs/templates/newLab.html:467
+#: apps/labs/templates/one_edit.html:364 apps/labs/templates/one_edit.html:450
+#: apps/medications/templates/newmedication.html:412
+#: apps/medications/templates/newmedication.html:522
+#: apps/medications/templates/one_edit.html:350
+#: apps/medications/templates/one_edit.html:473
+msgid "Hide extra information"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:217
+#: apps/appsNotResponsive/labs/templates/one_edit.html:215
+#: apps/labs/templates/newLab.html:185 apps/labs/templates/newLab.html:391
+#: apps/labs/templates/one_edit.html:188 apps/labs/templates/one_edit.html:373
+msgid "Quantitative result non critical range max value"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:221
+#: apps/appsNotResponsive/labs/templates/one_edit.html:219
+#: apps/labs/templates/newLab.html:189 apps/labs/templates/newLab.html:395
+#: apps/labs/templates/one_edit.html:191 apps/labs/templates/one_edit.html:377
+msgid "Quantitative result non critical range max unit"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:227
+#: apps/appsNotResponsive/labs/templates/one_edit.html:225
+#: apps/labs/templates/newLab.html:195 apps/labs/templates/newLab.html:401
+#: apps/labs/templates/one_edit.html:195 apps/labs/templates/one_edit.html:383
+msgid "Quantitative result non critical range min value"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:231
+#: apps/appsNotResponsive/labs/templates/one_edit.html:229
+#: apps/labs/templates/newLab.html:199 apps/labs/templates/newLab.html:405
+#: apps/labs/templates/one_edit.html:198 apps/labs/templates/one_edit.html:387
+msgid "Quantitative result non critical range min unit"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:237
+#: apps/appsNotResponsive/labs/templates/one_edit.html:237
+#: apps/labs/templates/newLab.html:205 apps/labs/templates/newLab.html:411
+#: apps/labs/templates/one_edit.html:201 apps/labs/templates/one_edit.html:395
+msgid "Collected by organization"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:243
+#: apps/appsNotResponsive/labs/templates/one_edit.html:243
+#: apps/labs/templates/newLab.html:211 apps/labs/templates/newLab.html:417
+#: apps/labs/templates/one_edit.html:205 apps/labs/templates/one_edit.html:401
+msgid "Country of organization"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:249
+#: apps/appsNotResponsive/labs/templates/one_edit.html:249
+#: apps/labs/templates/newLab.html:217 apps/labs/templates/newLab.html:423
+#: apps/labs/templates/one_edit.html:209 apps/labs/templates/one_edit.html:407
+msgid "City of organization"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:255
+#: apps/appsNotResponsive/labs/templates/one_edit.html:255
+#: apps/labs/templates/newLab.html:223 apps/labs/templates/newLab.html:429
+#: apps/labs/templates/one_edit.html:213 apps/labs/templates/one_edit.html:413
+msgid "Postalcode of organization"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:261
+#: apps/appsNotResponsive/labs/templates/one_edit.html:261
+#: apps/labs/templates/newLab.html:229 apps/labs/templates/newLab.html:435
+#: apps/labs/templates/one_edit.html:217 apps/labs/templates/one_edit.html:419
+msgid "Region of organization"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:267
+#: apps/appsNotResponsive/labs/templates/one_edit.html:267
+#: apps/labs/templates/newLab.html:235 apps/labs/templates/newLab.html:441
+#: apps/labs/templates/one_edit.html:221 apps/labs/templates/one_edit.html:425
+msgid "Street address of organization"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:273
+#: apps/appsNotResponsive/labs/templates/one_edit.html:273
+#: apps/labs/templates/newLab.html:241 apps/labs/templates/newLab.html:447
+#: apps/labs/templates/one_edit.html:225 apps/labs/templates/one_edit.html:431
+msgid "Collected by (Doctor's family name)"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:279
+#: apps/appsNotResponsive/labs/templates/one_edit.html:279
+#: apps/labs/templates/newLab.html:247 apps/labs/templates/newLab.html:453
+#: apps/labs/templates/one_edit.html:229 apps/labs/templates/one_edit.html:437
+msgid "Collected by (Doctor's name)"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:285
+#: apps/labs/templates/newLab.html:253 apps/labs/templates/newLab.html:459
+msgid "Collected by role "
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:297
+#: apps/labs/templates/newLab.html:263 apps/labs/templates/newLab.html:471
+msgid "Add New Lab"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/newLab.html:301
+#: apps/labs/templates/newLab.html:475
+msgid "    Cancel   "
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/one_edit.html:285
+#: apps/labs/templates/one_edit.html:233 apps/labs/templates/one_edit.html:443
+msgid "Collected by role"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/one_edit.html:296
+#: apps/labs/templates/one_edit.html:242 apps/labs/templates/one_edit.html:454
+msgid "Update Lab"
+msgstr ""
+
+#: apps/appsNotResponsive/labs/templates/one_edit.html:300
+#: apps/labs/templates/one_edit.html:458
+msgid "    Cancel    "
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/archived_list.html:26
+#: apps/medications/templates/archived_list.html:41
+#: apps/medications/templates/archived_list.html:181
+msgid "Deleted Medications List"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/archived_list.html:33
+#: apps/appsNotResponsive/medications/templates/list.html:105
+#: apps/appsNotResponsive/problems/templates/archived_list.html:40
+#: apps/appsNotResponsive/problems/templates/list.html:45
+#: apps/appsNotResponsive/procedures/templates/archived_list.html:34
+#: apps/appsNotResponsive/procedures/templates/list.html:44
+#: apps/appsNotUsed/donnorsTool/templates/archived_list.html:42
+#: apps/appsNotUsed/donnorsTool/templates/one.html:118
+#: apps/appsNotUsed/donnorsTool_old/templates/archived_list.html:42
+#: apps/appsNotUsed/donnorsTool_old/templates/one.html:116
+#: apps/appsNotUsed/problems_old/templates/archived_list.html:40
+#: apps/appsNotUsed/problems_old/templates/list.html:45
+#: apps/bulkimport/templates/archived_list.html:40
+#: apps/editDemographics/templates/archived_list.html:40
+#: apps/editDemographics/templates/list.html:99
+#: apps/edss/templates/archived_list.html:34 apps/edss/templates/list.html:44
+#: apps/getSuggestions/templates/archived_list.html:40
+#: apps/getSuggestions/templates/list.html:45
+#: apps/measurements/templates/archived_list.html:38
+#: apps/measurements/templates/archived_list.html:64
+#: apps/measurements/templates/list.html:56
+#: apps/measurements/templates/list.html:77
+#: apps/measurements/templates/one_edit.html:78
+#: apps/medications/templates/archived_list.html:53
+#: apps/medications/templates/archived_list.html:124
+#: apps/medications/templates/archived_list.html:188
+#: apps/medications/templates/list.html:137
+#: apps/medications/templates/list.html:168
+#: apps/medications/templates/list.html:242
+#: apps/medications/templates/list.html:308
+#: apps/problems/templates/archived_list.html:49
+#: apps/problems/templates/archived_list.html:114
+#: apps/problems/templates/list.html:64 apps/problems/templates/list.html:128
+#: apps/procedures/templates/archived_list.html:55
+#: apps/procedures/templates/archived_list.html:117
+#: apps/procedures/templates/list.html:74
+#: apps/procedures/templates/list.html:94
+#: apps/procedures/templates/list.html:156
+msgid "Name"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/archived_list.html:34
+#: apps/appsNotResponsive/medications/templates/list.html:106
+#: apps/medications/templates/archived_list.html:56
+#: apps/medications/templates/archived_list.html:127
+#: apps/medications/templates/archived_list.html:189
+#: apps/medications/templates/list.html:138
+#: apps/medications/templates/list.html:171
+#: apps/medications/templates/list.html:245
+#: apps/medications/templates/list.html:309
+msgid "Quantity"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/archived_list.html:35
+#: apps/appsNotResponsive/medications/templates/list.html:107
+#: apps/medications/templates/archived_list.html:59
+#: apps/medications/templates/archived_list.html:130
+#: apps/medications/templates/archived_list.html:190
+#: apps/medications/templates/list.html:139
+#: apps/medications/templates/list.html:174
+#: apps/medications/templates/list.html:248
+#: apps/medications/templates/list.html:310
+msgid "Frequency"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/archived_list.html:36
+#: apps/appsNotResponsive/medications/templates/list.html:108
+#: apps/appsNotResponsive/medications/templates/one.html:48
+#: apps/appsNotResponsive/medications/templates/one_edit.html:145
+#: apps/medications/templates/archived_list.html:62
+#: apps/medications/templates/archived_list.html:133
+#: apps/medications/templates/archived_list.html:191
+#: apps/medications/templates/list.html:140
+#: apps/medications/templates/list.html:177
+#: apps/medications/templates/list.html:251
+#: apps/medications/templates/list.html:311
+#: apps/medications/templates/newmedication.html:197
+#: apps/medications/templates/one.html:98
+#: apps/medications/templates/one.html:162
+#: apps/medications/templates/one_edit.html:145
+#: apps/medications/templates/one_edit.html:315
+#: apps/procedures/templates/list.html:104
+msgid "Instructions"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/archived_list.html:37
+#: apps/appsNotResponsive/medications/templates/list.html:109
+#: apps/medications/templates/archived_list.html:65
+#: apps/medications/templates/archived_list.html:192
+#: apps/medications/templates/list.html:141
+#: apps/medications/templates/list.html:180
+#: apps/medications/templates/list.html:312
+msgid "Started on"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/archived_list.html:38
+#: apps/appsNotResponsive/medications/templates/list.html:110
+#: apps/medications/templates/archived_list.html:193
+#: apps/medications/templates/list.html:142
+#: apps/medications/templates/list.html:313
+msgid "Stoped on"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/archived_list.html:39
+#: apps/appsNotResponsive/medications/templates/list.html:111
+#: apps/medications/templates/archived_list.html:71
+#: apps/medications/templates/archived_list.html:194
+#: apps/medications/templates/list.html:143
+#: apps/medications/templates/list.html:186
+#: apps/medications/templates/list.html:314
+msgid "Last filled"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/archived_list.html:40
+#: apps/appsNotResponsive/medications/templates/list.html:113
+#: apps/medications/templates/archived_list.html:75
+#: apps/medications/templates/archived_list.html:195
+#: apps/medications/templates/list.html:145
+#: apps/medications/templates/list.html:190
+#: apps/medications/templates/list.html:255
+#: apps/medications/templates/list.html:316
+msgid "Options"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/list.html:98
+#: apps/medications/templates/list.html:114
+#: apps/medications/templates/list.html:301
+msgid "Medications List"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/list.html:246
+#: apps/medications/templates/list.html:449
+msgid "[add a medication]"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/list.html:248
+#: apps/medications/templates/list.html:451
+msgid "[deleted medications]"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:46
+#: apps/appsNotResponsive/medications/templates/one_edit.html:44
+#: apps/appsNotResponsive/problems/templates/newproblem.html:32
+#: apps/appsNotResponsive/problems/templates/one_edit.html:33
+#: apps/appsNotUsed/problems_old/templates/newproblem.html:32
+#: apps/appsNotUsed/problems_old/templates/one_edit.html:33
+#: apps/editDemographics/templates/newproblem.html:32
+#: apps/editDemographics/templates/one_edit.html:33
+#: apps/getSuggestions/templates/newproblem.html:32
+#: apps/getSuggestions/templates/one_edit.html:33
+#: apps/medications/templates/newmedication.html:51
+#: apps/medications/templates/one_edit.html:48
+#: apps/problems/templates/newproblem.html:35
+#: apps/problems/templates/one_edit.html:33
+msgid "'Start date must be filled'"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:51
+#: apps/medications/templates/newmedication.html:56
+msgid "'End date must be filled'"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:57
+#: apps/appsNotResponsive/medications/templates/one_edit.html:49
+#: apps/medications/templates/newmedication.html:62
+#: apps/medications/templates/one_edit.html:53
+msgid "'Drug name title must be filled'"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:70
+#: apps/medications/templates/newmedication.html:75
+msgid "'Date of fill must be filled'"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:76
+#: apps/appsNotResponsive/medications/templates/one_edit.html:61
+#: apps/medications/templates/newmedication.html:81
+#: apps/medications/templates/one_edit.html:65
+msgid "'Dispense days supply must be filled'"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:139
+#: apps/medications/templates/newmedication.html:172
+#: apps/medications/templates/newmedication.html:343
+msgid "New Medication"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:150
+#: apps/appsNotResponsive/medications/templates/one_edit.html:123
+#: apps/medications/templates/newmedication.html:180
+#: apps/medications/templates/newmedication.html:354
+#: apps/medications/templates/one_edit.html:128
+#: apps/medications/templates/one_edit.html:293
+msgid "Medication"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:158
+#: apps/appsNotResponsive/medications/templates/one_edit.html:131
+#: apps/medications/templates/newmedication.html:185
+#: apps/medications/templates/newmedication.html:362
+#: apps/medications/templates/one_edit.html:133
+#: apps/medications/templates/one_edit.html:301
+msgid "End date of medication"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:163
+#: apps/appsNotResponsive/medications/templates/one.html:46
+#: apps/appsNotResponsive/medications/templates/one_edit.html:136
+#: apps/medications/templates/newmedication.html:189
+#: apps/medications/templates/newmedication.html:367
+#: apps/medications/templates/one.html:90
+#: apps/medications/templates/one.html:160
+#: apps/medications/templates/one_edit.html:137
+#: apps/medications/templates/one_edit.html:306
+msgid "Frequency value"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:168
+#: apps/appsNotResponsive/medications/templates/one_edit.html:141
+#: apps/medications/templates/newmedication.html:372
+#: apps/medications/templates/one_edit.html:311
+msgid "Frequenct unit"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:172
+#: apps/medications/templates/newmedication.html:376
+msgid "Instructions "
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:176
+#: apps/appsNotResponsive/medications/templates/one.html:49
+#: apps/appsNotResponsive/medications/templates/one_edit.html:149
+#: apps/medications/templates/newmedication.html:201
+#: apps/medications/templates/newmedication.html:380
+#: apps/medications/templates/one.html:102
+#: apps/medications/templates/one.html:163
+#: apps/medications/templates/one_edit.html:149
+#: apps/medications/templates/one_edit.html:319
+msgid "Provenance title"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:178
+#: apps/appsNotResponsive/medications/templates/one_edit.html:151
+#: apps/medications/templates/newmedication.html:203
+#: apps/medications/templates/newmedication.html:382
+#: apps/medications/templates/one_edit.html:151
+#: apps/medications/templates/one_edit.html:321
+msgid "Prescription"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:179
+#: apps/appsNotResponsive/medications/templates/one_edit.html:152
+#: apps/medications/templates/newmedication.html:204
+#: apps/medications/templates/newmedication.html:383
+#: apps/medications/templates/one_edit.html:152
+#: apps/medications/templates/one_edit.html:322
+msgid "Fulfillment"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:180
+#: apps/appsNotResponsive/medications/templates/one_edit.html:153
+#: apps/medications/templates/newmedication.html:205
+#: apps/medications/templates/newmedication.html:384
+#: apps/medications/templates/one_edit.html:153
+#: apps/medications/templates/one_edit.html:323
+msgid "Administration"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:181
+#: apps/appsNotResponsive/medications/templates/one_edit.html:154
+#: apps/medications/templates/newmedication.html:206
+#: apps/medications/templates/newmedication.html:385
+#: apps/medications/templates/one_edit.html:154
+#: apps/medications/templates/one_edit.html:324
+msgid "Reconciliation"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:182
+#: apps/appsNotResponsive/medications/templates/one_edit.html:155
+#: apps/medications/templates/newmedication.html:207
+#: apps/medications/templates/newmedication.html:386
+#: apps/medications/templates/one_edit.html:155
+#: apps/medications/templates/one_edit.html:325
+msgid "Patient Report"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:194
+#: apps/appsNotResponsive/medications/templates/one_edit.html:167
+#: apps/medications/templates/newmedication.html:216
+#: apps/medications/templates/newmedication.html:398
+#: apps/medications/templates/one_edit.html:164
+#: apps/medications/templates/one_edit.html:337
+msgid "Dispense Days Supply"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:199
+#: apps/appsNotResponsive/medications/templates/one_edit.html:172
+#: apps/medications/templates/newmedication.html:220
+#: apps/medications/templates/newmedication.html:403
+#: apps/medications/templates/one_edit.html:168
+#: apps/medications/templates/one_edit.html:342
+msgid "Start date of medication"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:217
+#: apps/appsNotResponsive/medications/templates/one.html:50
+#: apps/appsNotResponsive/medications/templates/one_edit.html:192
+#: apps/medications/templates/newmedication.html:234
+#: apps/medications/templates/newmedication.html:421
+#: apps/medications/templates/one.html:106
+#: apps/medications/templates/one.html:164
+#: apps/medications/templates/one_edit.html:181
+#: apps/medications/templates/one_edit.html:362
+msgid "Quantity value"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:222
+#: apps/appsNotResponsive/medications/templates/one.html:51
+#: apps/appsNotResponsive/medications/templates/one_edit.html:197
+#: apps/medications/templates/newmedication.html:238
+#: apps/medications/templates/newmedication.html:426
+#: apps/medications/templates/one.html:110
+#: apps/medications/templates/one.html:165
+#: apps/medications/templates/one_edit.html:185
+#: apps/medications/templates/one_edit.html:367
+msgid "Quantity unit"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:227
+#: apps/appsNotResponsive/medications/templates/one_edit.html:211
+#: apps/medications/templates/newmedication.html:242
+#: apps/medications/templates/newmedication.html:431
+#: apps/medications/templates/one_edit.html:189
+#: apps/medications/templates/one_edit.html:381
+msgid "Pbm"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:232
+#: apps/appsNotResponsive/medications/templates/one_edit.html:216
+#: apps/medications/templates/newmedication.html:246
+#: apps/medications/templates/newmedication.html:436
+#: apps/medications/templates/one_edit.html:193
+#: apps/medications/templates/one_edit.html:386
+msgid "Pharmacy id"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:237
+#: apps/appsNotResponsive/medications/templates/one_edit.html:221
+#: apps/medications/templates/newmedication.html:250
+#: apps/medications/templates/newmedication.html:441
+#: apps/medications/templates/one_edit.html:197
+#: apps/medications/templates/one_edit.html:391
+msgid "Pharmacy organization"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:242
+#: apps/appsNotResponsive/medications/templates/one_edit.html:226
+#: apps/medications/templates/newmedication.html:254
+#: apps/medications/templates/newmedication.html:446
+#: apps/medications/templates/one_edit.html:201
+#: apps/medications/templates/one_edit.html:396
+msgid "Country of pharmacy"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:248
+#: apps/appsNotResponsive/medications/templates/one_edit.html:232
+#: apps/medications/templates/newmedication.html:258
+#: apps/medications/templates/newmedication.html:452
+#: apps/medications/templates/one_edit.html:205
+#: apps/medications/templates/one_edit.html:402
+msgid "City of pharmacy"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:253
+#: apps/appsNotResponsive/medications/templates/one_edit.html:237
+#: apps/medications/templates/newmedication.html:262
+#: apps/medications/templates/newmedication.html:457
+#: apps/medications/templates/one_edit.html:209
+#: apps/medications/templates/one_edit.html:407
+msgid "Postalcode of pharmacy"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:258
+#: apps/appsNotResponsive/medications/templates/one_edit.html:242
+#: apps/medications/templates/newmedication.html:266
+#: apps/medications/templates/newmedication.html:462
+#: apps/medications/templates/one_edit.html:213
+#: apps/medications/templates/one_edit.html:412
+msgid "Street of pharmacy"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:263
+#: apps/appsNotResponsive/medications/templates/one_edit.html:247
+#: apps/medications/templates/newmedication.html:270
+#: apps/medications/templates/newmedication.html:467
+#: apps/medications/templates/one_edit.html:217
+#: apps/medications/templates/one_edit.html:417
+msgid "Provider dea number"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:268
+#: apps/appsNotResponsive/medications/templates/one_edit.html:252
+#: apps/medications/templates/newmedication.html:274
+#: apps/medications/templates/newmedication.html:472
+#: apps/medications/templates/one_edit.html:221
+#: apps/medications/templates/one_edit.html:422
+msgid "Provider npi number"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:273
+#: apps/appsNotResponsive/medications/templates/one_edit.html:257
+#: apps/medications/templates/newmedication.html:278
+#: apps/medications/templates/newmedication.html:477
+#: apps/medications/templates/one_edit.html:225
+#: apps/medications/templates/one_edit.html:427
+msgid "Provider email"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:278
+#: apps/appsNotResponsive/medications/templates/one_edit.html:262
+#: apps/medications/templates/newmedication.html:282
+#: apps/medications/templates/newmedication.html:482
+#: apps/medications/templates/one_edit.html:229
+#: apps/medications/templates/one_edit.html:432
+msgid "Provider name"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:283
+#: apps/appsNotResponsive/medications/templates/one_edit.html:267
+#: apps/medications/templates/newmedication.html:286
+#: apps/medications/templates/newmedication.html:487
+#: apps/medications/templates/one_edit.html:233
+#: apps/medications/templates/one_edit.html:437
+msgid "Provider family name"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:288
+#: apps/appsNotResponsive/medications/templates/one_edit.html:272
+#: apps/medications/templates/newmedication.html:290
+#: apps/medications/templates/newmedication.html:492
+#: apps/medications/templates/one_edit.html:237
+#: apps/medications/templates/one_edit.html:442
+msgid "Provider telephone type"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:292
+#: apps/appsNotResponsive/medications/templates/one_edit.html:276
+#: apps/medications/templates/newmedication.html:294
+#: apps/medications/templates/newmedication.html:496
+#: apps/medications/templates/one_edit.html:241
+#: apps/medications/templates/one_edit.html:446
+msgid "Provider telephone"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:297
+#: apps/appsNotResponsive/medications/templates/one_edit.html:281
+#: apps/medications/templates/newmedication.html:298
+#: apps/medications/templates/newmedication.html:501
+#: apps/medications/templates/one_edit.html:245
+#: apps/medications/templates/one_edit.html:451
+msgid "Preferred number"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:300
+#: apps/appsNotResponsive/medications/templates/one_edit.html:284
+#: apps/medications/templates/newmedication.html:300
+#: apps/medications/templates/newmedication.html:504
+#: apps/medications/templates/one_edit.html:247
+#: apps/medications/templates/one_edit.html:454
+msgid "True"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:301
+#: apps/appsNotResponsive/medications/templates/one_edit.html:285
+#: apps/medications/templates/newmedication.html:301
+#: apps/medications/templates/newmedication.html:505
+#: apps/medications/templates/one_edit.html:248
+#: apps/medications/templates/one_edit.html:455
+msgid "False"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:306
+#: apps/appsNotResponsive/medications/templates/one_edit.html:290
+#: apps/medications/templates/newmedication.html:305
+#: apps/medications/templates/newmedication.html:510
+#: apps/medications/templates/one_edit.html:252
+#: apps/medications/templates/one_edit.html:460
+msgid "Quantity dispensed value"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:311
+#: apps/appsNotResponsive/medications/templates/one_edit.html:295
+#: apps/medications/templates/newmedication.html:309
+#: apps/medications/templates/newmedication.html:515
+#: apps/medications/templates/one_edit.html:256
+#: apps/medications/templates/one_edit.html:465
+msgid "Quantity dispensed unit"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/newmedication.html:462
+#: apps/medications/templates/newmedication.html:318
+#: apps/medications/templates/newmedication.html:328
+#: apps/medications/templates/newmedication.html:531
+#: apps/medications/templates/newmedication.html:542
+msgid "Add New Medication"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/one.html:45
+#: apps/appsNotResponsive/medications/templates/one.html:54
+#: apps/medications/templates/one.html:86
+#: apps/medications/templates/one.html:122
+#: apps/medications/templates/one.html:159
+#: apps/medications/templates/one.html:168
+msgid "End date"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/one.html:47
+#: apps/medications/templates/newmedication.html:193
+#: apps/medications/templates/one.html:94
+#: apps/medications/templates/one.html:161
+#: apps/medications/templates/one_edit.html:141
+msgid "Frequency unit"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/one.html:52
+#: apps/medications/templates/one.html:114
+#: apps/medications/templates/one.html:166
+msgid "Start date"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/one.html:53
+#: apps/medications/templates/one.html:118
+#: apps/medications/templates/one.html:167
+msgid "Fill date"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/one_edit.html:55
+#: apps/medications/templates/one_edit.html:59
+msgid "'Date of fill myst be filled'"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/one_edit.html:319
+#: apps/medications/templates/one_edit.html:266
+#: apps/medications/templates/one_edit.html:489
+msgid "Update medication"
+msgstr ""
+
+#: apps/appsNotResponsive/medications/templates/one_edit.html:326
+#: apps/appsNotResponsive/procedures/templates/newprocedure.html:125
+#: apps/appsNotResponsive/procedures/templates/one_edit.html:129
+#: apps/edss/templates/newedss.html:339
+#: apps/edss/templates/newprocedure.html:125
+#: apps/edss/templates/one_edit.html:129
+#: apps/medications/templates/one_edit.html:496
+#: apps/procedures/templates/newprocedure.html:225
+#: apps/procedures/templates/one_edit.html:206
+msgid " Cancel"
+msgstr ""
+
+#: apps/appsNotResponsive/problems/templates/archived_list.html:33
+#: apps/appsNotUsed/donnorsTool/templates/archived_list.html:35
+#: apps/appsNotUsed/donnorsTool_old/templates/archived_list.html:35
+#: apps/appsNotUsed/problems_old/templates/archived_list.html:33
+#: apps/bulkimport/templates/archived_list.html:33
+#: apps/editDemographics/templates/archived_list.html:33
+#: apps/getSuggestions/templates/archived_list.html:33
+#: apps/problems/templates/archived_list.html:36
+#: apps/problems/templates/archived_list.html:107
+msgid "Deleted Problems List"
+msgstr ""
+
+#: apps/appsNotResponsive/problems/templates/archived_list.html:41
+#: apps/appsNotResponsive/problems/templates/list.html:46
+#: apps/appsNotResponsive/problems/templates/newproblem.html:90
+#: apps/appsNotResponsive/problems/templates/one_edit.html:113
+#: apps/appsNotUsed/donnorsTool/templates/archived_list.html:43
+#: apps/appsNotUsed/donnorsTool/templates/newproblem.html:90
+#: apps/appsNotUsed/donnorsTool_old/templates/archived_list.html:43
+#: apps/appsNotUsed/donnorsTool_old/templates/newproblem.html:90
+#: apps/appsNotUsed/problems_old/templates/archived_list.html:41
+#: apps/appsNotUsed/problems_old/templates/list.html:46
+#: apps/appsNotUsed/problems_old/templates/newproblem.html:90
+#: apps/appsNotUsed/problems_old/templates/one_edit.html:113
+#: apps/bulkimport/templates/archived_list.html:41
+#: apps/bulkimport/templates/newproblem.html:90
+#: apps/bulkimport/templates/one_edit.html:113
+#: apps/editDemographics/templates/archived_list.html:41
+#: apps/editDemographics/templates/newproblem.html:90
+#: apps/editDemographics/templates/one_edit.html:113
+#: apps/getSuggestions/templates/archived_list.html:41
+#: apps/getSuggestions/templates/list.html:46
+#: apps/getSuggestions/templates/newproblem.html:90
+#: apps/getSuggestions/templates/one_edit.html:113
+#: apps/problems/templates/archived_list.html:52
+#: apps/problems/templates/archived_list.html:115
+#: apps/problems/templates/list.html:67 apps/problems/templates/list.html:129
+#: apps/problems/templates/newproblem.html:117
+#: apps/problems/templates/newproblem.html:189
+#: apps/problems/templates/one.edit.html:36
+#: apps/problems/templates/one_edit.html:110
+#: apps/problems/templates/one_edit.html:179
+msgid "Onset"
+msgstr ""
+
+#: apps/appsNotResponsive/problems/templates/archived_list.html:42
+#: apps/appsNotResponsive/problems/templates/list.html:47
+#: apps/appsNotResponsive/problems/templates/newproblem.html:95
+#: apps/appsNotResponsive/problems/templates/one_edit.html:117
+#: apps/appsNotUsed/donnorsTool/templates/archived_list.html:44
+#: apps/appsNotUsed/donnorsTool/templates/newproblem.html:95
+#: apps/appsNotUsed/donnorsTool_old/templates/archived_list.html:44
+#: apps/appsNotUsed/donnorsTool_old/templates/newproblem.html:95
+#: apps/appsNotUsed/problems_old/templates/archived_list.html:42
+#: apps/appsNotUsed/problems_old/templates/list.html:47
+#: apps/appsNotUsed/problems_old/templates/newproblem.html:95
+#: apps/appsNotUsed/problems_old/templates/one_edit.html:117
+#: apps/bulkimport/templates/archived_list.html:42
+#: apps/bulkimport/templates/newproblem.html:95
+#: apps/bulkimport/templates/one_edit.html:117
+#: apps/editDemographics/templates/archived_list.html:42
+#: apps/editDemographics/templates/newproblem.html:95
+#: apps/editDemographics/templates/one_edit.html:117
+#: apps/getSuggestions/templates/archived_list.html:42
+#: apps/getSuggestions/templates/list.html:47
+#: apps/getSuggestions/templates/newproblem.html:95
+#: apps/getSuggestions/templates/one_edit.html:117
+#: apps/problems/templates/archived_list.html:55
+#: apps/problems/templates/archived_list.html:116
+#: apps/problems/templates/list.html:70 apps/problems/templates/list.html:130
+#: apps/problems/templates/newproblem.html:122
+#: apps/problems/templates/newproblem.html:194
+#: apps/problems/templates/one.edit.html:41
+#: apps/problems/templates/one_edit.html:114
+#: apps/problems/templates/one_edit.html:183
+msgid "Resolution"
+msgstr ""
+
+#: apps/appsNotResponsive/problems/templates/list.html:36
+#: apps/appsNotUsed/problems_old/templates/list.html:36
+#: apps/getSuggestions/templates/list.html:36
+#: apps/problems/templates/list.html:38
+msgid "Problems List"
+msgstr ""
+
+#: apps/appsNotResponsive/problems/templates/list.html:79
+#: apps/appsNotUsed/problems_old/templates/list.html:79
+#: apps/getSuggestions/templates/list.html:79
+msgid "[add a problem]"
+msgstr ""
+
+#: apps/appsNotResponsive/problems/templates/list.html:81
+#: apps/appsNotUsed/problems_old/templates/list.html:81
+#: apps/getSuggestions/templates/list.html:81
+msgid "[deleted problems]"
+msgstr ""
+
+#: apps/appsNotResponsive/problems/templates/newproblem.html:26
+#: apps/appsNotResponsive/problems/templates/one_edit.html:27
+#: apps/appsNotUsed/problems_old/templates/newproblem.html:26
+#: apps/appsNotUsed/problems_old/templates/one_edit.html:27
+#: apps/editDemographics/templates/newproblem.html:26
+#: apps/editDemographics/templates/one_edit.html:27
+#: apps/getSuggestions/templates/newproblem.html:26
+#: apps/getSuggestions/templates/one_edit.html:27
+#: apps/problems/templates/newproblem.html:29
+#: apps/problems/templates/one_edit.html:27
+msgid "'Problem must be filled'"
+msgstr ""
+
+#: apps/appsNotResponsive/problems/templates/newproblem.html:73
+#: apps/appsNotUsed/donnorsTool/templates/newproblem.html:73
+#: apps/appsNotUsed/donnorsTool_old/templates/newproblem.html:73
+#: apps/appsNotUsed/problems_old/templates/newproblem.html:73
+#: apps/bulkimport/templates/newproblem.html:73
+#: apps/editDemographics/templates/newproblem.html:73
+#: apps/getSuggestions/templates/newproblem.html:73
+#: apps/problems/templates/newproblem.html:103
+#: apps/problems/templates/newproblem.html:171
+#: apps/problems/templates/one.edit.html:23
+msgid "New Problem"
+msgstr ""
+
+#: apps/appsNotResponsive/problems/templates/newproblem.html:82
+#: apps/appsNotResponsive/problems/templates/one_edit.html:105
+#: apps/appsNotUsed/donnorsTool/templates/newproblem.html:82
+#: apps/appsNotUsed/donnorsTool/templates/one_edit.html:76
+#: apps/appsNotUsed/donnorsTool_old/templates/newproblem.html:82
+#: apps/appsNotUsed/donnorsTool_old/templates/one_edit.html:76
+#: apps/appsNotUsed/problems_old/templates/newproblem.html:82
+#: apps/appsNotUsed/problems_old/templates/one_edit.html:105
+#: apps/bulkimport/templates/newproblem.html:82
+#: apps/bulkimport/templates/one_edit.html:105
+#: apps/editDemographics/templates/newproblem.html:82
+#: apps/editDemographics/templates/one_edit.html:105
+#: apps/getSuggestions/templates/newproblem.html:82
+#: apps/getSuggestions/templates/one_edit.html:105
+#: apps/problems/templates/newproblem.html:111
+#: apps/problems/templates/newproblem.html:181
+#: apps/problems/templates/one.edit.html:31
+#: apps/problems/templates/one_edit.html:105
+#: apps/problems/templates/one_edit.html:171
+msgid "Problem"
+msgstr ""
+
+#: apps/appsNotResponsive/problems/templates/newproblem.html:98
+#: apps/appsNotResponsive/problems/templates/one_edit.html:120
+#: apps/appsNotUsed/problems_old/templates/newproblem.html:98
+#: apps/appsNotUsed/problems_old/templates/one_edit.html:120
+#: apps/editDemographics/templates/newproblem.html:98
+#: apps/editDemographics/templates/one_edit.html:120
+#: apps/getSuggestions/templates/newproblem.html:98
+#: apps/getSuggestions/templates/one_edit.html:120
+#: apps/problems/templates/newproblem.html:127
+#: apps/problems/templates/newproblem.html:197
+#: apps/problems/templates/one_edit.html:118
+#: apps/problems/templates/one_edit.html:186
+msgid "Category"
+msgstr ""
+
+#: apps/appsNotResponsive/problems/templates/newproblem.html:100
+#: apps/appsNotResponsive/problems/templates/one_edit.html:122
+#: apps/appsNotUsed/problems_old/templates/newproblem.html:100
+#: apps/appsNotUsed/problems_old/templates/one_edit.html:122
+#: apps/editDemographics/templates/newproblem.html:100
+#: apps/editDemographics/templates/one_edit.html:122
+#: apps/getSuggestions/templates/newproblem.html:100
+#: apps/getSuggestions/templates/one_edit.html:122
+#: apps/problems/templates/newproblem.html:129
+#: apps/problems/templates/newproblem.html:199
+#: apps/problems/templates/one_edit.html:120
+#: apps/problems/templates/one_edit.html:188
+msgid "Primary disease"
+msgstr ""
+
+#: apps/appsNotResponsive/problems/templates/newproblem.html:101
+#: apps/appsNotResponsive/problems/templates/one_edit.html:123
+#: apps/appsNotUsed/problems_old/templates/newproblem.html:101
+#: apps/appsNotUsed/problems_old/templates/one_edit.html:123
+#: apps/editDemographics/templates/newproblem.html:101
+#: apps/editDemographics/templates/one_edit.html:123
+#: apps/getSuggestions/templates/newproblem.html:101
+#: apps/getSuggestions/templates/one_edit.html:123
+#: apps/problems/templates/newproblem.html:130
+#: apps/problems/templates/newproblem.html:200
+#: apps/problems/templates/one_edit.html:121
+#: apps/problems/templates/one_edit.html:189
+msgid "Co-morbidities"
+msgstr ""
+
+#: apps/appsNotResponsive/problems/templates/one.html:81
+#: apps/appsNotUsed/problems_old/templates/one.html:81
+#: apps/bulkimport/templates/one.html:78
+#: apps/editDemographics/templates/one.html:81
+#: apps/getSuggestions/templates/one.html:81
+#: apps/problems/templates/one.html:113
+msgid "Date of onset"
+msgstr ""
+
+#: apps/appsNotResponsive/problems/templates/one.html:82
+#: apps/appsNotUsed/problems_old/templates/one.html:82
+#: apps/bulkimport/templates/one.html:79
+#: apps/editDemographics/templates/one.html:82
+#: apps/getSuggestions/templates/one.html:82
+#: apps/problems/templates/one.html:157
+msgid "Date resolved"
+msgstr ""
+
+#: apps/appsNotResponsive/problems/templates/one_edit.html:39
+#: apps/appsNotUsed/problems_old/templates/one_edit.html:39
+#: apps/editDemographics/templates/one_edit.html:39
+#: apps/getSuggestions/templates/one_edit.html:39
+#: apps/problems/templates/one_edit.html:39
+msgid "'Resolution date must be filled'"
+msgstr ""
+
+#: apps/appsNotResponsive/problems/templates/one_edit.html:139
+#: apps/appsNotUsed/donnorsTool/templates/one_edit.html:102
+#: apps/appsNotUsed/donnorsTool_old/templates/one_edit.html:102
+#: apps/appsNotUsed/problems_old/templates/one_edit.html:139
+#: apps/bulkimport/templates/one_edit.html:131
+#: apps/editDemographics/templates/one_edit.html:139
+#: apps/getSuggestions/templates/one_edit.html:139
+#: apps/problems/templates/one_edit.html:132
+#: apps/problems/templates/one_edit.html:205
+msgid "Update Problem"
+msgstr ""
+
+#: apps/appsNotResponsive/procedures/templates/archived_list.html:7
+#: apps/appsNotResponsive/procedures/templates/list.html:6
+#: apps/edss/templates/archived_list.html:7
+#: apps/procedures/templates/archived_list.html:43
+#: apps/procedures/templates/archived_list.html:110
+#: apps/procedures/templates/list.html:50
+#: apps/procedures/templates/list.html:147
+msgid "Procedures List"
+msgstr ""
+
+#: apps/appsNotResponsive/procedures/templates/archived_list.html:35
+#: apps/appsNotResponsive/procedures/templates/list.html:45
+#: apps/edss/templates/archived_list.html:35 apps/edss/templates/list.html:45
+#: apps/procedures/templates/archived_list.html:58
+#: apps/procedures/templates/archived_list.html:118
+#: apps/procedures/templates/list.html:75
+#: apps/procedures/templates/list.html:97
+#: apps/procedures/templates/list.html:157
+msgid "Date performed"
+msgstr ""
+
+#: apps/appsNotResponsive/procedures/templates/archived_list.html:36
+#: apps/appsNotResponsive/procedures/templates/list.html:46
+#: apps/appsNotResponsive/procedures/templates/newprocedure.html:97
+#: apps/appsNotResponsive/procedures/templates/one_edit.html:102
+#: apps/appsNotUsed/donnorsTool/templates/one_edit.html:92
+#: apps/appsNotUsed/donnorsTool_old/templates/one_edit.html:92
+#: apps/bulkimport/templates/one_edit.html:121
+#: apps/edss/templates/archived_list.html:36
+#: apps/edss/templates/newprocedure.html:97
+#: apps/edss/templates/one_edit.html:102
+#: apps/procedures/templates/archived_list.html:61
+#: apps/procedures/templates/archived_list.html:119
+#: apps/procedures/templates/list.html:76
+#: apps/procedures/templates/list.html:100
+#: apps/procedures/templates/list.html:158
+#: apps/procedures/templates/newprocedure.html:126
+#: apps/procedures/templates/newprocedure.html:197
+#: apps/procedures/templates/one_edit.html:121
+#: apps/procedures/templates/one_edit.html:179
+msgid "Institution"
+msgstr ""
+
+#: apps/appsNotResponsive/procedures/templates/list.html:84
+#: apps/procedures/templates/list.html:196
+msgid "[add a procedure]"
+msgstr ""
+
+#: apps/appsNotResponsive/procedures/templates/list.html:86
+#: apps/procedures/templates/list.html:197
+msgid "[deleted procedures]"
+msgstr ""
+
+#: apps/appsNotResponsive/procedures/templates/newprocedure.html:41
+#: apps/appsNotResponsive/procedures/templates/one_edit.html:39
+#: apps/edss/templates/newprocedure.html:41
+#: apps/edss/templates/one_edit.html:39
+msgid "'Please fill all the fields.'"
+msgstr ""
+
+#: apps/appsNotResponsive/procedures/templates/newprocedure.html:49
+#: apps/edss/templates/newprocedure.html:49
+#: apps/procedures/templates/newprocedure.html:105
+#: apps/procedures/templates/newprocedure.html:172
+msgid "New Procedure"
+msgstr ""
+
+#: apps/appsNotResponsive/procedures/templates/newprocedure.html:80
+#: apps/appsNotResponsive/procedures/templates/one_edit.html:86
+#: apps/edss/templates/newprocedure.html:80
+#: apps/edss/templates/one_edit.html:86
+#: apps/procedures/templates/newprocedure.html:113
+#: apps/procedures/templates/newprocedure.html:180
+#: apps/procedures/templates/one_edit.html:108
+#: apps/procedures/templates/one_edit.html:163
+msgid "Procedure"
+msgstr ""
+
+#: apps/appsNotResponsive/procedures/templates/newprocedure.html:88
+#: apps/appsNotResponsive/procedures/templates/one.html:46
+#: apps/appsNotResponsive/procedures/templates/one_edit.html:94
+#: apps/appsNotUsed/donnorsTool/templates/one_edit.html:84
+#: apps/appsNotUsed/donnorsTool_old/templates/one_edit.html:84
+#: apps/edss/templates/newprocedure.html:88 apps/edss/templates/one.html:47
+#: apps/edss/templates/one_edit.html:94
+#: apps/procedures/templates/newprocedure.html:118
+#: apps/procedures/templates/newprocedure.html:188
+#: apps/procedures/templates/one.html:88
+#: apps/procedures/templates/one.html:134
+#: apps/procedures/templates/one_edit.html:113
+#: apps/procedures/templates/one_edit.html:171
+msgid "Date Performed"
+msgstr ""
+
+#: apps/appsNotResponsive/procedures/templates/newprocedure.html:93
+#: apps/appsNotResponsive/procedures/templates/one_edit.html:98
+#: apps/appsNotUsed/donnorsTool/templates/one_edit.html:88
+#: apps/appsNotUsed/donnorsTool_old/templates/one_edit.html:88
+#: apps/edss/templates/newprocedure.html:93
+#: apps/edss/templates/one_edit.html:98
+#: apps/procedures/templates/newprocedure.html:122
+#: apps/procedures/templates/newprocedure.html:193
+#: apps/procedures/templates/one_edit.html:117
+#: apps/procedures/templates/one_edit.html:175
+msgid "Doctor Name"
+msgstr ""
+
+#: apps/appsNotResponsive/procedures/templates/newprocedure.html:101
+#: apps/appsNotResponsive/procedures/templates/one.html:49
+#: apps/appsNotResponsive/procedures/templates/one_edit.html:106
+#: apps/edss/templates/newprocedure.html:101
+#: apps/edss/templates/one_edit.html:106
+#: apps/procedures/templates/newprocedure.html:130
+#: apps/procedures/templates/newprocedure.html:201
+#: apps/procedures/templates/one.html:91
+#: apps/procedures/templates/one.html:137
+#: apps/procedures/templates/one_edit.html:125
+#: apps/procedures/templates/one_edit.html:183
+msgid "Location"
+msgstr ""
+
+#: apps/appsNotResponsive/procedures/templates/one.html:47
+#: apps/procedures/templates/one.html:89
+#: apps/procedures/templates/one.html:135
+msgid "Provider Name"
+msgstr ""
+
+#: apps/appsNotResponsive/procedures/templates/one.html:48
+#: apps/procedures/templates/one.html:90
+#: apps/procedures/templates/one.html:136
+msgid "Provider Institution"
+msgstr ""
+
+#: apps/appsNotResponsive/procedures/templates/one_edit.html:123
+#: apps/edss/templates/one_edit.html:123
+#: apps/procedures/templates/one_edit.html:141
+#: apps/procedures/templates/one_edit.html:200
+msgid "Update Procedure"
+msgstr ""
+
+#: apps/appsNotUsed/donnorsTool/templates/list.html:35
+#: apps/appsNotUsed/donnorsTool_old/templates/list.html:39
+msgid "Donors List"
+msgstr ""
+
+#: apps/appsNotUsed/donnorsTool/templates/list.html:40
+#: apps/appsNotUsed/donnorsTool/templates/one.html:105
+#: apps/appsNotUsed/donnorsTool_old/templates/list.html:44
+#: apps/appsNotUsed/donnorsTool_old/templates/one.html:103
+msgid "ID"
+msgstr ""
+
+#: apps/appsNotUsed/donnorsTool/templates/list.html:44
+#: apps/appsNotUsed/donnorsTool/templates/one.html:107
+#: apps/appsNotUsed/donnorsTool_old/templates/list.html:48
+#: apps/appsNotUsed/donnorsTool_old/templates/one.html:105
+msgid "Information"
+msgstr ""
+
+#: apps/appsNotUsed/donnorsTool/templates/list.html:68
+#: apps/appsNotUsed/donnorsTool/templates/list.html:80
+#: apps/appsNotUsed/donnorsTool_old/templates/list.html:71
+msgid "new.png"
+msgstr ""
+
+#: apps/appsNotUsed/donnorsTool/templates/list.html:89
+#: apps/appsNotUsed/donnorsTool/templates/one.html:143
+#: apps/appsNotUsed/donnorsTool/templates/one.html:182
+#: apps/appsNotUsed/donnorsTool_old/templates/list.html:84
+#: apps/appsNotUsed/donnorsTool_old/templates/one.html:141
+msgid "Accepted"
+msgstr ""
+
+#: apps/appsNotUsed/donnorsTool/templates/list.html:92
+#: apps/appsNotUsed/donnorsTool/templates/one.html:145
+#: apps/appsNotUsed/donnorsTool/templates/one.html:184
+#: apps/appsNotUsed/donnorsTool_old/templates/list.html:87
+#: apps/appsNotUsed/donnorsTool_old/templates/one.html:143
+msgid "Rejected"
+msgstr ""
+
+#: apps/appsNotUsed/donnorsTool/templates/list.html:95
+#: apps/appsNotUsed/donnorsTool/templates/one.html:144
+#: apps/appsNotUsed/donnorsTool/templates/one.html:183
+#: apps/appsNotUsed/donnorsTool_old/templates/list.html:90
+#: apps/appsNotUsed/donnorsTool_old/templates/one.html:142
+msgid "Pending"
+msgstr ""
+
+#: apps/appsNotUsed/donnorsTool/templates/list.html:108
+#: apps/appsNotUsed/donnorsTool/templates/one.html:126
+#: apps/appsNotUsed/donnorsTool_old/templates/list.html:103
+#: apps/appsNotUsed/donnorsTool_old/templates/one.html:124
+msgid "Show details"
+msgstr ""
+
+#: apps/appsNotUsed/donnorsTool/templates/newproblem.html:108
+#: apps/appsNotUsed/donnorsTool_old/templates/newproblem.html:108
+msgid "Add New Problem"
+msgstr ""
+
+#: apps/appsNotUsed/donnorsTool/templates/one.html:101
+#: apps/appsNotUsed/donnorsTool_old/templates/one.html:99
+msgid "BACK"
+msgstr ""
+
+#: apps/appsNotUsed/donnorsTool/templates/one.html:115
+#: apps/appsNotUsed/donnorsTool_old/templates/one.html:113
+msgid "Project name"
+msgstr ""
+
+#: apps/appsNotUsed/donnorsTool/templates/one.html:116
+#: apps/appsNotUsed/donnorsTool_old/templates/one.html:114
+msgid "Project summary"
+msgstr ""
+
+#: apps/appsNotUsed/donnorsTool/templates/one.html:118
+#: apps/appsNotUsed/donnorsTool_old/templates/one.html:116
+msgid "Contact person"
+msgstr ""
+
+#: apps/appsNotUsed/donnorsTool/templates/one.html:119
+#: apps/appsNotUsed/donnorsTool_old/templates/one.html:117
+msgid "CV"
+msgstr ""
+
+#: apps/appsNotUsed/donnorsTool/templates/one.html:120
+#: apps/appsNotUsed/donnorsTool_old/templates/one.html:118
+#: apps/editDemographics/templates/list.html:122
+#: ui/jmvc/ui/views/record/demographics_form.ejs:69
+msgid "Email"
+msgstr ""
+
+#: apps/appsNotUsed/donnorsTool/templates/one.html:121
+msgid "Phone"
+msgstr ""
+
+#: apps/appsNotUsed/donnorsTool/templates/one.html:122
+#: apps/appsNotUsed/donnorsTool_old/templates/one.html:120
+msgid "Project language"
+msgstr ""
+
+#: apps/appsNotUsed/donnorsTool/templates/one.html:136
+#: apps/appsNotUsed/donnorsTool/templates/one.html:179
+#: apps/appsNotUsed/donnorsTool_old/templates/one.html:138
+msgid "Description :"
+msgstr ""
+
+#: apps/appsNotUsed/donnorsTool/templates/one.html:137
+#: apps/appsNotUsed/donnorsTool/templates/one.html:180
+#: apps/appsNotUsed/donnorsTool_old/templates/one.html:139
+msgid "Consent file"
+msgstr ""
+
+#: apps/appsNotUsed/donnorsTool/templates/one.html:137
+#: apps/appsNotUsed/donnorsTool/templates/one.html:180
+#: apps/appsNotUsed/donnorsTool_old/templates/one.html:139
+msgid "Open"
+msgstr ""
+
+#: apps/appsNotUsed/donnorsTool/templates/one.html:141
+#: apps/appsNotUsed/donnorsTool/templates/one.html:151
+#: apps/appsNotUsed/donnorsTool/templates/one.html:154
+#: apps/appsNotUsed/donnorsTool/templates/one.html:158
+#: apps/appsNotUsed/donnorsTool/templates/one.html:186
+#: apps/appsNotUsed/donnorsTool/templates/one.html:189
+#: apps/appsNotUsed/donnorsTool_old/templates/one.html:145
+#: apps/appsNotUsed/donnorsTool_old/templates/one.html:148
+msgid "Concent"
+msgstr ""
+
+#: apps/appsNotUsed/donnorsTool/templates/one.html:141
+#: apps/appsNotUsed/donnorsTool/templates/one.html:151
+#: apps/appsNotUsed/donnorsTool/templates/one.html:186
+#: apps/appsNotUsed/donnorsTool_old/templates/one.html:145
+msgid "Withdraw"
+msgstr ""
+
+#: apps/appsNotUsed/donnorsTool/templates/one.html:154
+#: apps/appsNotUsed/donnorsTool/templates/one.html:158
+#: apps/appsNotUsed/donnorsTool/templates/one.html:189
+#: apps/appsNotUsed/donnorsTool_old/templates/one.html:148
+msgid "Give consent"
+msgstr ""
+
+#: apps/appsNotUsed/donnorsTool/templates/one.html:160
+#: apps/appsNotUsed/donnorsTool/templates/one.html:191
+#: apps/appsNotUsed/donnorsTool_old/templates/one.html:150
+msgid "Reject consent"
+msgstr ""
+
+#: apps/bulkimport/templates/list.html:143
+#: apps/bulkimport/templates/list.html:162
+#: apps/bulkimport/templates/list.html:173
+#: apps/bulkimport/templates/list.html:189
+#: apps/bulkimport/templates/list.html:202 ui/jmvc/ui/views/pha/app_tab.ejs:88
+#: ui/jmvc/ui/views/pha/apps.ejs:63
+msgid "Import"
+msgstr ""
+
+#: apps/bulkimport/templates/list.html:148
+msgid "Import problems:"
+msgstr ""
+
+#: apps/bulkimport/templates/list.html:151
+msgid " Import "
+msgstr ""
+
+#: apps/bulkimport/templates/list.html:158
+msgid "Import procedures:"
+msgstr ""
+
+#: apps/bulkimport/templates/list.html:169
+msgid "Import allergies:"
+msgstr ""
+
+#: apps/bulkimport/templates/list.html:185
+msgid "Import medications:"
+msgstr ""
+
+#: apps/bulkimport/templates/list.html:198
+msgid "Import labs:"
+msgstr ""
+
+#: apps/calendar/templates/list.html:12 apps/calendar/templates/list.html:13
+#: apps/calendar_backup/templates/list.html:18
+#: apps/calendar_backup/templates/list.html:19
+msgid "languagecalendar"
+msgstr ""
+
+#: apps/calendar/templates/list.html:972
+#: apps/calendar/templates/list.html:1008
+#: apps/calendar/templates/list.html:1039
+#: apps/calendar/templates/list.html:1044
+#: apps/calendar/templates/list.html:1101
+#: apps/calendar/templates/list.html:1133
+#: apps/calendar/templates/list.html:1134
+#: apps/calendar/templates/list.html:1207
+#: apps/calendar/templates/list.html:1208
+#: apps/calendar_backup/templates/list.html:1059
+#: apps/calendar_backup/templates/list.html:1060
+#: ui/jmvc/ui/views/pha/app_tab.ejs:66 ui/jmvc/ui/views/pha/apps.ejs:20
+msgid "Problems"
+msgstr ""
+
+#: apps/calendar/templates/list.html:976 apps/calendar/templates/list.html:998
+#: apps/calendar/templates/list.html:1030
+#: apps/calendar/templates/list.html:1095
+#: apps/calendar/templates/list.html:1125
+#: apps/calendar/templates/list.html:1126
+#: apps/calendar/templates/list.html:1199
+#: apps/calendar/templates/list.html:1200
+#: apps/calendar_backup/templates/list.html:1050
+#: apps/calendar_backup/templates/list.html:1052
+#: ui/jmvc/ui/views/pha/app_tab.ejs:76 ui/jmvc/ui/views/pha/apps.ejs:51
+msgid "Medications"
+msgstr ""
+
+#: apps/calendar/templates/list.html:980
+#: apps/calendar/templates/list.html:1016
+#: apps/calendar/templates/list.html:1053
+#: apps/calendar/templates/list.html:1059
+#: apps/calendar/templates/list.html:1107
+#: apps/calendar/templates/list.html:1141
+#: apps/calendar/templates/list.html:1215
+#: apps/calendar_backup/templates/list.html:1068
+#: ui/jmvc/ui/views/pha/app_tab.ejs:80 ui/jmvc/ui/views/pha/apps.ejs:55
+msgid "Procedures"
+msgstr ""
+
+#: apps/calendar/templates/list.html:984
+#: apps/calendar/templates/list.html:1024
+#: apps/calendar/templates/list.html:1065
+#: apps/calendar/templates/list.html:1073
+#: apps/calendar/templates/list.html:1113
+#: apps/calendar/templates/list.html:1148
+#: apps/calendar/templates/list.html:1222
+#: apps/calendar_backup/templates/list.html:1075
+#: ui/jmvc/ui/views/pha/apps.ejs:40
+msgid "Appointments"
+msgstr ""
+
+#: apps/calendar/templates/list.html:1087
+#: apps/calendar_backup/templates/list.html:1043
+#: ui/jmvc/ui/views/pha/apps.ejs:34
+msgid "Calendar"
+msgstr ""
+
+#: apps/calendar/templates/list.html:1088
+#: apps/calendar_backup/templates/list.html:1044
+msgid "Timeline"
+msgstr ""
+
+#: apps/calendar/templates/list.html:1181
+#: apps/calendar_backup/templates/list.html:1125
+msgid "Set window to last two months"
+msgstr ""
+
+#: apps/calendar/templates/list.html:1182
+#: apps/calendar_backup/templates/list.html:1126
+msgid "Fit all items"
+msgstr ""
+
+#: apps/calendar/templates/list.html:1183
+#: apps/calendar_backup/templates/list.html:1129
+msgid "Zoom in"
+msgstr ""
+
+#: apps/calendar/templates/list.html:1184
+#: apps/calendar_backup/templates/list.html:1130
+msgid "Zoom out"
+msgstr ""
+
+#: apps/calendar/templates/list.html:1185
+#: apps/calendar_backup/templates/list.html:1131
+msgid "Move left"
+msgstr ""
+
+#: apps/calendar/templates/list.html:1186
+#: apps/calendar_backup/templates/list.html:1132
+msgid "Move right"
+msgstr ""
+
+#: apps/calendar/templates/test/codebase/sources/dhtmlxscheduler.js:3466
+#: apps/calendar_backup/templates/test/codebase/sources/dhtmlxscheduler.js:3466
+msgid "Today"
+msgstr ""
+
+#: apps/calendar/templates/test/codebase/sources/dhtmlxscheduler.js:3467
+#: apps/calendar_backup/templates/test/codebase/sources/dhtmlxscheduler.js:3467
+msgid "Day"
+msgstr ""
+
+#: apps/calendar/templates/test/codebase/sources/dhtmlxscheduler.js:3468
+#: apps/calendar_backup/templates/test/codebase/sources/dhtmlxscheduler.js:3468
+msgid "Week"
+msgstr ""
+
+#: apps/calendar/templates/test/codebase/sources/dhtmlxscheduler.js:3469
+#: apps/calendar_backup/templates/test/codebase/sources/dhtmlxscheduler.js:3469
+msgid "Month"
+msgstr ""
+
+#: apps/calendar/templates/test/codebase/sources/dhtmlxscheduler.js:3470
+#: apps/calendar_backup/templates/test/codebase/sources/dhtmlxscheduler.js:3470
+msgid "New event"
+msgstr ""
+
+#: apps/calendar/templates/test/codebase/sources/dhtmlxscheduler.js:3471
+#: apps/calendar_backup/templates/test/codebase/sources/dhtmlxscheduler.js:3471
+msgid "Save"
+msgstr ""
+
+#: apps/calendar/templates/test/codebase/sources/dhtmlxscheduler.js:3474
+#: apps/calendar_backup/templates/test/codebase/sources/dhtmlxscheduler.js:3474
+#: apps/labs/templates/_lab.html:19 apps/labs/templates/_lab_small.html:19
+msgid "Edit"
+msgstr ""
+
+#: apps/calendar/templates/test/codebase/sources/dhtmlxscheduler.js:3477
+#: apps/calendar_backup/templates/test/codebase/sources/dhtmlxscheduler.js:3477
+msgid "Event will be deleted permanently, are you sure?"
+msgstr ""
+
+#: apps/calendar/templates/test/codebase/sources/dhtmlxscheduler.js:3478
+#: apps/calendar/templates/test/codebase/sources/dhtmlxscheduler.js:3493
+#: apps/calendar_backup/templates/test/codebase/sources/dhtmlxscheduler.js:3478
+#: apps/calendar_backup/templates/test/codebase/sources/dhtmlxscheduler.js:3493
+msgid "Description"
+msgstr ""
+
+#: apps/calendar/templates/test/codebase/sources/dhtmlxscheduler.js:3479
+#: apps/calendar_backup/templates/test/codebase/sources/dhtmlxscheduler.js:3479
+msgid "Time period"
+msgstr ""
+
+#: apps/calendar/templates/test/codebase/sources/dhtmlxscheduler.js:3480
+#: apps/calendar_backup/templates/test/codebase/sources/dhtmlxscheduler.js:3480
+msgid "Full day "
+msgstr ""
+
+#: apps/calendar/templates/test/codebase/sources/dhtmlxscheduler.js:3491
+#: apps/calendar/templates/test/codebase/sources/dhtmlxscheduler.js:3499
+#: apps/calendar_backup/templates/test/codebase/sources/dhtmlxscheduler.js:3491
+#: apps/calendar_backup/templates/test/codebase/sources/dhtmlxscheduler.js:3499
+msgid "Agenda"
+msgstr ""
+
+#: apps/calendar/templates/test/codebase/sources/dhtmlxscheduler.js:3492
+#: apps/calendar_backup/templates/test/codebase/sources/dhtmlxscheduler.js:3492
+msgid "Date "
+msgstr ""
+
+#: apps/calendar/templates/test/codebase/sources/dhtmlxscheduler.js:3496
+#: apps/calendar_backup/templates/test/codebase/sources/dhtmlxscheduler.js:3496
+msgid "Year "
+msgstr ""
+
+#: apps/calendar/templates/test/codebase/sources/dhtmlxscheduler.js:3509
+#: apps/calendar_backup/templates/test/codebase/sources/dhtmlxscheduler.js:3509
+msgid "OK"
+msgstr ""
+
+#: apps/editDemographics/templates/list.html:88
+msgid "Edit demographics"
+msgstr ""
+
+#: apps/editDemographics/templates/list.html:106
+msgid "Family name"
+msgstr ""
+
+#: apps/editDemographics/templates/list.html:114
+msgid "SIOP"
+msgstr ""
+
+#: apps/editDemographics/templates/list.html:130
+msgid "Birth date"
+msgstr ""
+
+#: apps/editDemographics/templates/list.html:199
+#: ui/jmvc/ui/views/record/demographics_form.ejs:20
+msgid "Gender"
+msgstr ""
+
+#: apps/editDemographics/templates/list.html:212
+msgid "Smoking"
+msgstr ""
+
+#: apps/editDemographics/templates/list.html:215
+#: apps/editDemographics/templates/list.html:228
+msgid "No"
+msgstr ""
+
+#: apps/editDemographics/templates/list.html:216
+#: apps/editDemographics/templates/list.html:229
+msgid "Yes"
+msgstr ""
+
+#: apps/editDemographics/templates/list.html:225
+msgid "Pregnancy"
+msgstr ""
+
+#: apps/editDemographics/templates/list.html:238
+#: apps/measurements/templates/newmeasurement.html:119
+msgid "Weight"
+msgstr ""
+
+#: apps/editDemographics/templates/list.html:246
+msgid "Weight unit"
+msgstr ""
+
+#: apps/editDemographics/templates/list.html:257
+#: templates/widgets/document_access.html:92
+msgid "Update"
+msgstr ""
+
+#: apps/edss/templates/list.html:6
+msgid "EDSS Scores List"
+msgstr ""
+
+#: apps/edss/templates/list.html:46 apps/edss/templates/newedss.html:307
+#: apps/edss/templates/one.html:48
+msgid "Doctor name"
+msgstr ""
+
+#: apps/edss/templates/list.html:47 apps/edss/templates/one.html:57
+msgid "Score"
+msgstr ""
+
+#: apps/edss/templates/list.html:84
+msgid "[add edss score]"
+msgstr ""
+
+#: apps/edss/templates/list.html:86
+msgid "[deleted scores]"
+msgstr ""
+
+#: apps/edss/templates/newedss.html:103
+msgid "'Please fill the date.'"
+msgstr ""
+
+#: apps/edss/templates/newedss.html:139
+msgid "New EDSS Score"
+msgstr ""
+
+#: apps/edss/templates/newedss.html:151
+msgid "Visual (optic) functions"
+msgstr ""
+
+#: apps/edss/templates/newedss.html:173 apps/edss/templates/newedss.html:313
+#: apps/edss/templates/one.html:50
+msgid "Brainstem functions"
+msgstr ""
+
+#: apps/edss/templates/newedss.html:187 apps/edss/templates/one.html:51
+msgid "Pyramidal functions"
+msgstr ""
+
+#: apps/edss/templates/newedss.html:210 apps/edss/templates/one.html:52
+msgid "Cerebellar functions"
+msgstr ""
+
+#: apps/edss/templates/newedss.html:226 apps/edss/templates/one.html:53
+msgid "Sensory functions"
+msgstr ""
+
+#: apps/edss/templates/newedss.html:243
+msgid "Bowel and bladder functions"
+msgstr ""
+
+#: apps/edss/templates/newedss.html:258 apps/edss/templates/one.html:55
+msgid "Cerebral functions"
+msgstr ""
+
+#: apps/edss/templates/newedss.html:274
+msgid " Ambulation"
+msgstr ""
+
+#: apps/edss/templates/one.html:49
+msgid "Visual functions"
+msgstr ""
+
+#: apps/edss/templates/one.html:54
+msgid "Bladder functions"
+msgstr ""
+
+#: apps/edss/templates/one.html:56
+msgid "Ambulation"
+msgstr ""
+
+#: apps/labs/templates/list.html:72
+msgid "add lab"
+msgstr ""
+
+#: apps/labs/templates/list.html:75
+msgid "deleted labs"
+msgstr ""
+
+#: apps/labs/templates/newLab.html:179 apps/labs/templates/one_edit.html:183
+#: apps/medications/templates/newmedication.html:227
+#: apps/medications/templates/one_edit.html:175
+msgid "Toggle Extra information"
+msgstr ""
+
+#: apps/measurements/templates/archived_list.html:27
+msgid "Archived Measurements List"
+msgstr ""
+
+#: apps/measurements/templates/archived_list.html:41
+#: apps/measurements/templates/archived_list.html:67
+#: apps/measurements/templates/list.html:57
+#: apps/measurements/templates/list.html:80
+#: apps/measurements/templates/newmeasurement.html:116
+#: apps/measurements/templates/one.html:74
+msgid "Kind"
+msgstr ""
+
+#: apps/measurements/templates/archived_list.html:47
+#: apps/measurements/templates/archived_list.html:73
+#: apps/measurements/templates/list.html:59
+#: apps/measurements/templates/list.html:86
+#: apps/measurements/templates/newmeasurement.html:133
+#: apps/measurements/templates/one.html:76
+#: apps/measurements/templates/one.html:77
+#: apps/measurements/templates/one_edit.html:91
+msgid "Unit"
+msgstr ""
+
+#: apps/measurements/templates/list.html:32
+msgid "Measurements List"
+msgstr ""
+
+#: apps/measurements/templates/list.html:40
+msgid "add measurement"
+msgstr ""
+
+#: apps/measurements/templates/list.html:43
+msgid "deleted measurements"
+msgstr ""
+
+#: apps/measurements/templates/list.html:132
+msgid "[add measurements]"
+msgstr ""
+
+#: apps/measurements/templates/list.html:134
+msgid "[deleted measurements]"
+msgstr ""
+
+#: apps/measurements/templates/newmeasurement.html:42
+#: apps/measurements/templates/one_edit.html:36
+#: apps/procedures/templates/newprocedure.html:44
+#: apps/procedures/templates/one_edit.html:48
+msgid "'Please fill title.'"
+msgstr ""
+
+#: apps/measurements/templates/newmeasurement.html:46
+#: apps/measurements/templates/one_edit.html:41
+msgid "'Please fill value.'"
+msgstr ""
+
+#: apps/measurements/templates/newmeasurement.html:54
+msgid "'Please add number to value field'"
+msgstr ""
+
+#: apps/measurements/templates/newmeasurement.html:99
+msgid "New Measurement"
+msgstr ""
+
+#: apps/measurements/templates/newmeasurement.html:112
+#: apps/measurements/templates/one.html:73
+#: apps/measurements/templates/one_edit.html:83
+msgid "Number"
+msgstr ""
+
+#: apps/measurements/templates/newmeasurement.html:120
+msgid "Systole"
+msgstr ""
+
+#: apps/measurements/templates/newmeasurement.html:121
+msgid "Diastole"
+msgstr ""
+
+#: apps/measurements/templates/newmeasurement.html:122
+msgid "Pulse"
+msgstr ""
+
+#: apps/measurements/templates/newmeasurement.html:123
+msgid "Temperature"
+msgstr ""
+
+#: apps/measurements/templates/newmeasurement.html:137
+#: apps/measurements/templates/one_edit.html:95
+msgid "Measurement date"
+msgstr ""
+
+#: apps/measurements/templates/newmeasurement.html:146
+#: apps/measurements/templates/newmeasurement.html:154
+msgid "Add New Measurement"
+msgstr ""
+
+#: apps/measurements/templates/one_edit.html:106
+msgid "Update measurement"
+msgstr ""
+
+#: apps/medications/templates/archived_list.html:68
+#: apps/medications/templates/list.html:183
+msgid "Stopped on"
+msgstr ""
+
+#: apps/medications/templates/list.html:121
+msgid "add a medication"
+msgstr ""
+
+#: apps/medications/templates/list.html:124
+msgid "deleted medications"
+msgstr ""
+
+#: apps/problems/templates/list.html:45
+msgid "add a problem"
+msgstr ""
+
+#: apps/problems/templates/list.html:48
+msgid "deleted problems"
+msgstr ""
+
+#: apps/problems/templates/one.html:117
+msgid "Date of resolved"
+msgstr ""
+
+#: apps/procedures/templates/list.html:58
+msgid "add a procedure"
+msgstr ""
+
+#: apps/procedures/templates/list.html:61
+msgid "deleted procedures"
+msgstr ""
+
+#: apps/procedures/templates/newprocedure.html:48
+#: apps/procedures/templates/one_edit.html:53
+msgid "'Please fill date.'"
+msgstr ""
+
+#: apps/procedures/templates/newprocedure.html:143
+#: apps/procedures/templates/newprocedure.html:151
+msgid "Add New Procedure"
+msgstr ""
+
+#: indivo_client_py/oauth2/httplib2/__init__.py:398
+#, python-format
+msgid "Content purported to be compressed with %s but failed to decompress."
+msgstr ""
+
+#: indivo_client_py/oauth2/httplib2/__init__.py:508
+#, python-format
+msgid "Unsupported value for qop: %s."
+msgstr ""
+
+#: indivo_client_py/oauth2/httplib2/__init__.py:511
+#: indivo_client_py/oauth2/httplib2/__init__.py:574
+#, python-format
+msgid "Unsupported value for algorithm: %s."
+msgstr ""
+
+#: indivo_client_py/oauth2/httplib2/__init__.py:571
+msgid "The challenge doesn't contain a server nonce, or this one is empty."
+msgstr ""
+
+#: indivo_client_py/oauth2/httplib2/__init__.py:577
+#, python-format
+msgid "Unsupported value for pw-algorithm: %s."
+msgstr ""
+
+#: indivo_client_py/oauth2/httplib2/__init__.py:1317
+msgid "Redirected but the response is missing a Location: header."
+msgstr ""
+
+#: templates/ui/account_init.html:4 templates/ui/account_setup.html:4
+msgid "Setup"
+msgstr ""
+
+#: templates/ui/account_init.html:22
+msgid "Enter the confirmation code to activate your account"
+msgstr ""
+
+#: templates/ui/account_init.html:31 templates/ui/reset_password.html:98
+msgid "Confirmation code:"
+msgstr ""
+
+#: templates/ui/account_init.html:39
+msgid "Activate Account"
+msgstr ""
+
+#: templates/ui/account_init.html:41 templates/ui/reset_password.html:105
+msgid "Lost your confirmation code?"
+msgstr ""
+
+#: templates/ui/account_setup.html:20
+msgid "More Characters"
+msgstr ""
+
+#: templates/ui/account_setup.html:23
+msgid "Strong!"
+msgstr ""
+
+#: templates/ui/account_setup.html:26
+msgid "Medium!"
+msgstr ""
+
+#: templates/ui/account_setup.html:29
+msgid "Weak!"
+msgstr ""
+
+#: templates/ui/account_setup.html:114
+msgid "Account setup for"
+msgstr ""
+
+#: templates/ui/account_setup.html:118
+msgid "Please choose a username and password for your account"
+msgstr ""
+
+#: templates/ui/account_setup.html:127
+msgid "Username"
+msgstr ""
+
+#: templates/ui/account_setup.html:130
+msgid "No spaces please"
+msgstr ""
+
+#: templates/ui/account_setup.html:135 templates/ui/login.html:40
+msgid "Password:"
+msgstr ""
+
+#: templates/ui/account_setup.html:138 templates/ui/change_password.html:140
+#: templates/ui/reset_password.html:114
+msgid "characters or more"
+msgstr ""
+
+#: templates/ui/account_setup.html:142 templates/ui/change_password.html:145
+#: templates/ui/reset_password.html:118
+msgid "Confirm Password:"
+msgstr ""
+
+#: templates/ui/account_setup.html:145 templates/ui/change_password.html:149
+#: templates/ui/reset_password.html:121
+msgid "Passwords must match"
+msgstr ""
+
+#: templates/ui/account_setup.html:148
+msgid "Setup Account"
+msgstr ""
+
+#: templates/ui/authorize_record_launch_app.html:4
+#: templates/ui/record_select.html:4
+msgid "Records"
+msgstr ""
+
+#: templates/ui/authorize_record_launch_app.html:5
+msgid "Authorize Record"
+msgstr ""
+
+#: templates/ui/authorize_record_launch_app.html:16
+msgid "Authorize"
+msgstr ""
+
+#: templates/ui/authorize_record_launch_app.html:18
+#: templates/ui/record_create.html:47
+msgid "Go back"
+msgstr ""
+
+#: templates/ui/authorize_record_launch_app.html:20
+#: templates/ui/index.html:733 templates/ui/record_create.html:52
+#: templates/ui/record_select.html:33
+msgid "Logout"
+msgstr ""
+
+#: templates/ui/base.html:29 templates/ui/base.html.py:54
+#: templates/ui/base_large_fonts.html:22 templates/ui/base_large_fonts.html:46
+msgid "Indivohealth-FORTH's extensions"
+msgstr ""
+
+#: templates/ui/change_password.html:4
+msgid "Change Password"
+msgstr ""
+
+#: templates/ui/change_password.html:114
+msgid "Choose a new password"
+msgstr ""
+
+#: templates/ui/change_password.html:127
+msgid "Old Password:"
+msgstr ""
+
+#: templates/ui/change_password.html:136 templates/ui/reset_password.html:111
+msgid "New Password:"
+msgstr ""
+
+#: templates/ui/change_password.html:155
+msgid "Set New Password"
+msgstr ""
+
+#: templates/ui/change_password.html:158 templates/ui/reset_password.html:126
+#: templates/ui/send_secret.html:45
+msgid "Go to login"
+msgstr ""
+
+#: templates/ui/change_password.html:172
+msgid "Delete account"
+msgstr ""
+
+#: templates/ui/footer.html:5
+msgid "Intelligent Health Lab"
+msgstr ""
+
+#: templates/ui/footer.html:10
+msgid "Children&rsquo;s Hospital Informatics Program"
+msgstr ""
+
+#: templates/ui/footer.html:15 templates/ui/footer_gpp.html:16
+msgid "Harvard Medical School"
+msgstr ""
+
+#: templates/ui/footer.html:20
+msgid "FORTH Institute of computer science"
+msgstr ""
+
+#: templates/ui/footer_gpp.html:5
+msgid "Children&rsquo;s Hospital Boston"
+msgstr ""
+
+#: templates/ui/footer_gpp.html:20
+msgid ""
+"Contact us at <a href=\"mailto:Support@genepartnership.org\" style=\"color: "
+"#999\">Support@genepartnership.org</a> "
+msgstr ""
+
+#: templates/ui/footer_gpp.html:24
+msgid "Powered by the INDIVO Personally Controlled Health Record"
+msgstr ""
+
+#: templates/ui/forgot_password.html:4 templates/ui/forgot_password.html:25
+msgid "Forgot Password"
+msgstr ""
+
+#: templates/ui/forgot_password.html:33
+msgid "You can try to initialize your account here"
+msgstr ""
+
+#: templates/ui/forgot_password.html:41
+msgid "1. Check your email and click the reset link provided"
+msgstr ""
+
+#: templates/ui/forgot_password.html:42
+msgid "2. Enter the following confirmation code:"
+msgstr ""
+
+#: templates/ui/forgot_password.html:45
+msgid "Check your email and click the reset link provided"
+msgstr ""
+
+#: templates/ui/forgot_password.html:49
+msgid "To reset your password, enter your account ID below:"
+msgstr ""
+
+#: templates/ui/forgot_password.html:64 templates/ui/forgot_password.html:77
+#: templates/ui/register.html:58 templates/ui/register.html.py:67
+msgid "Back to login"
+msgstr ""
+
+#: templates/ui/forgot_password.html:69
+#: ui/jmvc/ui/views/carenet/accounts.ejs:17
+msgid "Account ID:"
+msgstr ""
+
+#: templates/ui/forgot_password.html:72
+msgid "Password reset instructions will be sent to your contact email"
+msgstr ""
+
+#: templates/ui/forgot_password.html:75
+msgid "Send Instructions"
+msgstr ""
+
+#: templates/ui/index.html:75
+msgid "Indivohealth"
+msgstr ""
+
+#: templates/ui/index.html:465
+msgid "Demographics"
+msgstr ""
+
+#: templates/ui/index.html:547
+msgid "Select a Patient"
+msgstr ""
+
+#: templates/ui/index.html:560
+msgid "Add Patient"
+msgstr ""
+
+#: templates/ui/index.html:705
+msgid "Patients"
+msgstr ""
+
+#: templates/ui/index.html:715
+msgid "Apps"
+msgstr ""
+
+#: templates/ui/index.html:721
+msgid "Settings"
+msgstr ""
+
+#: templates/ui/index.html:724
+#: ui/jmvc/ui/views/record/demographics_form.ejs:56
+msgid "Language"
+msgstr ""
+
+#: templates/ui/index.html:985 ui/jmvc/ui/views/healthfeed/show.ejs:2
+msgid "Healthfeed"
+msgstr ""
+
+#: templates/ui/index.html:993 ui/jmvc/ui/views/message/show.ejs:2
+msgid "Inbox"
+msgstr ""
+
+#: templates/ui/index.html:1005
+msgid "Loading records..."
+msgstr ""
+
+#: templates/ui/index.html:1022
+msgid "Sharing"
+msgstr ""
+
+#: templates/ui/index.html:1027
+msgid "App Settings"
+msgstr ""
+
+#: templates/ui/login.html:4 templates/ui/login.html.py:48
+msgid "Login"
+msgstr ""
+
+#: templates/ui/login.html:27
+msgid "Welcome to"
+msgstr ""
+
+#: templates/ui/login.html:34
+msgid "Username:"
+msgstr ""
+
+#: templates/ui/login.html:44
+msgid "Forgot your password?"
+msgstr ""
+
+#: templates/ui/login.html:51 templates/ui/login.html.py:52
+msgid "No account? Register here"
+msgstr ""
+
+#: templates/ui/record_create.html:4 templates/ui/record_create.html.py:14
+#: templates/ui/record_create.html:44
+msgid "Create Record"
+msgstr ""
+
+#: templates/ui/record_create.html:30 ui/errors.py:31
+msgid "Adding records has been disabled by the administrator"
+msgstr ""
+
+#: templates/ui/record_create.html:38
+msgid "Record Name:"
+msgstr ""
+
+#: templates/ui/record_create.html:41
+msgid "You can change this name any time"
+msgstr ""
+
+#: templates/ui/record_create.html:49
+msgid "Go to my account"
+msgstr ""
+
+#: templates/ui/record_select.html:5
+msgid "Select Record"
+msgstr ""
+
+#: templates/ui/record_select.html:17
+msgid "This account has no records"
+msgstr ""
+
+#: templates/ui/record_select.html:26
+msgid "Add a Record"
+msgstr ""
+
+#: templates/ui/register.html:4
+msgid "Registration"
+msgstr ""
+
+#: templates/ui/register.html:28
+msgid "Register for"
+msgstr ""
+
+#: templates/ui/register.html:37
+msgid "Received no activation email?"
+msgstr ""
+
+#: templates/ui/register.html:42
+msgid "Your Name:"
+msgstr ""
+
+#: templates/ui/register.html:48 templates/ui/send_secret.html:37
+msgid "Account Email:"
+msgstr ""
+
+#: templates/ui/register.html:52 templates/ui/send_secret.html:40
+msgid "A confirmation code will be sent here"
+msgstr ""
+
+#: templates/ui/register.html:56
+msgid "Register"
+msgstr ""
+
+#: templates/ui/register.html:65
+msgid "Online registration is not available"
+msgstr ""
+
+#: templates/ui/reset_password.html:4 templates/ui/reset_password.html:88
+msgid "Password Reset"
+msgstr ""
+
+#: templates/ui/reset_password.html:124
+msgid "Set Password"
+msgstr ""
+
+#: templates/ui/send_secret.html:4 templates/ui/send_secret.html.py:25
+msgid "Account Activation"
+msgstr ""
+
+#: templates/ui/send_secret.html:43
+msgid "Resend Activation"
+msgstr ""
+
+#: templates/ui/terms.html:4
+msgid "Disclaimer"
+msgstr ""
+
+#: templates/widgets/document_access.html:6
+msgid "Sharing and Audit"
+msgstr ""
+
+#: templates/widgets/document_access.html:39
+msgid "Shared with"
+msgstr ""
+
+#: templates/widgets/document_access.html:39
+msgid "update"
+msgstr ""
+
+#: templates/widgets/document_access.html:85
+msgid "Share with:"
+msgstr ""
+
+#: templates/widgets/document_access.html:92
+msgid "cancel"
+msgstr ""
+
+#: ui/errors.py:13
+msgid "You need to login first"
+msgstr ""
+
+#: ui/errors.py:14
+msgid "Either the username or password is missing. Please try again."
+msgstr ""
+
+#: ui/errors.py:15
+msgid "Incorrect username or password. Please try again."
+msgstr ""
+
+#: ui/errors.py:16
+msgid "Failed to claim request token"
+msgstr ""
+
+#: ui/errors.py:17
+msgid "This account has been disabled/locked."
+msgstr ""
+
+#: ui/errors.py:18
+msgid "This account does not exist on the server."
+msgstr ""
+
+#: ui/errors.py:19
+msgid "Online registration is not available."
+msgstr ""
+
+#: ui/errors.py:20 ui/errors.py:21
+msgid "The confirmation code was wrong. Please try again."
+msgstr ""
+
+#: ui/errors.py:22
+msgid "There was a problem setting up your account. Please try again."
+msgstr ""
+
+#: ui/errors.py:23
+msgid ""
+"There was a problem updating your data. Please try again. If you are unable "
+"to change your password please contact support."
+msgstr ""
+
+#: ui/errors.py:24
+msgid "This username is too short, please choose a different one"
+msgstr ""
+
+#: ui/errors.py:25
+msgid "That username is already taken, please enter a different one"
+msgstr ""
+
+#: ui/errors.py:26
+msgid "The password is too short"
+msgstr ""
+
+#: ui/errors.py:27
+msgid "Your passwords do not match, please try again"
+msgstr ""
+
+#: ui/errors.py:28
+msgid "The current password is wrong, please try again"
+msgstr ""
+
+#: ui/errors.py:29
+msgid ""
+"There was a problem updating your password. Please try again. If you are "
+"unable to set up your account please contact support."
+msgstr ""
+
+#: ui/errors.py:30
+msgid ""
+"There was a problem resetting your password. Please try again. If you are "
+"unable to set up your account please contact support."
+msgstr ""
+
+#: ui/errors.py:32
+msgid "Please provide a name if you wish to create a record"
+msgstr ""
+
+#: ui/errors.py:33
+msgid "This carenet name is already taken, please choose a different one"
+msgstr ""
+
+#: ui/errors.py:34
+msgid "There was a problem resetting your password. Please contact support."
+msgstr ""
+
+#: ui/errors.py:35
+msgid "There was a problem retrieving app information. Please try again."
+msgstr ""
+
+#: ui/errors.py:36
+msgid ""
+"There was a problem retrieving app information (Start URL missing). Please "
+"contact support."
+msgstr ""
+
+#: ui/errors.py:37
+msgid "This App does not exist"
+msgstr ""
+
+#: ui/errors.py:38
+msgid "You are not authorized"
+msgstr ""
+
+#: ui/errors.py:39 ui/errors.py:40 ui/errors.py:41
+msgid "The server is currently unavailable. Please try again in a few minutes."
+msgstr ""
+
+#: ui/views.py:420 ui/views.py:591 ui/views_webservice.py:205
+msgid "You were logged out"
+msgstr ""
+
+#: ui/views.py:422 ui/views.py:593 ui/views_webservice.py:207
+msgid "Your password has been changed"
+msgstr ""
+
+#: ui/views.py:806 ui/views.py:848 ui/views.py:853 ui/views_webservice.py:331
+#: ui/views_webservice.py:336
+msgid "You have successfully registered."
+msgstr ""
+
+#: ui/views.py:806 ui/views.py:848 ui/views_webservice.py:331
+msgid "After an administrator has approved your account you may login."
+msgstr ""
+
+#: ui/views.py:853 ui/views_webservice.py:336
+msgid ""
+"At the link sent to your email address, enter the following confirmation "
+"code:"
+msgstr ""
+
+#: ui/views.py:870 ui/views.py:904 ui/views_webservice.py:353
+#: ui/views_webservice.py:387
+msgid ""
+"Use the link sent to your email address to proceed with account activation"
+msgstr ""
+
+#: ui/views.py:888 ui/views_webservice.py:371
+msgid "The activation email has been sent"
+msgstr ""
+
+#: ui/views.py:940 ui/views.py:1049 ui/views_webservice.py:423
+#: ui/views_webservice.py:525
+msgid "Your account is now active, you may log in below"
+msgstr ""
+
+#: ui/views.py:1284 ui/views_webservice.py:753
+msgid "Successfully created new record"
+msgstr ""
+
+#: ui/views.py:1352 ui/views_webservice.py:800
+#: ui/jmvc/ui/controllers/carenet_controller.js:320
+#: ui/jmvc/ui/views/carenet/new_carenet.ejs:12
+msgid "New carenet"
+msgstr ""
+
+#: ui/views.py:1531 ui/views.py:1712 ui/views_webservice.py:979
+#: ui/views_webservice.py:1160
+msgid "Authorize \"{{name}}\"?"
+msgstr ""
+
+#: ui/jmvc/ui/controllers/carenet_controller.js:424
+#: ui/jmvc/ui/views/carenet/carenets.ejs:15
+msgid "No accounts"
+msgstr ""
+
+#: ui/jmvc/ui/controllers/carenet_controller.js:502
+msgid "There was an error creating your new carenet: "
+msgstr ""
+
+#: ui/jmvc/ui/controllers/carenet_controller.js:509
+msgid "There was an error creating your new carenet, please try again"
+msgstr ""
+
+#: ui/jmvc/ui/controllers/carenet_controller.js:525
+msgid "Delete this carenet?\\n\\nThis action cannot be undone"
+msgstr ""
+
+#: ui/jmvc/ui/controllers/carenet_controller.js:603
+msgid "There was an error deleting the carenet, please try again"
+msgstr ""
+
+#: ui/jmvc/ui/controllers/main_controller.js:266
+msgid "Start by creating a record for this account"
+msgstr ""
+
+#: ui/jmvc/ui/controllers/pha_controller.js:285
+#: ui/jmvc/ui/controllers/pha_controller_old.js:375
+msgid ""
+"Disable this app?\\n\\nBy disabling this app it will also be removed from "
+"your carenets"
+msgstr ""
+
+#: ui/jmvc/ui/controllers/pha_controller.js:468
+#: ui/jmvc/ui/controllers/pha_controller_old.js:558
+msgid "Are you sure you want to enable "
+msgstr ""
+
+#: ui/jmvc/ui/controllers/pha_controller.js:480
+#: ui/jmvc/ui/controllers/pha_controller_old.js:570
+msgid "This app is no longer available"
+msgstr ""
+
+#: ui/jmvc/ui/controllers/pha_controller.js:483
+#: ui/jmvc/ui/controllers/pha_controller_old.js:573
+msgid "This app is not available"
+msgstr ""
+
+#: ui/jmvc/ui/controllers/pha_controller.js:486
+#: ui/jmvc/ui/controllers/pha_controller_old.js:576
+msgid "Sorry, but we were unable to enable this app."
+msgstr ""
+
+#: ui/jmvc/ui/views/carenet/accounts.ejs:7
+msgid ""
+"You must add this account to at least one carenet in order to to keep it in "
+"your accounts list"
+msgstr ""
+
+#: ui/jmvc/ui/views/carenet/accounts.ejs:14
+msgid "Add account (email)"
+msgstr ""
+
+#: ui/jmvc/ui/views/carenet/accounts.ejs:21
+msgid "Add"
+msgstr ""
+
+#: ui/jmvc/ui/views/carenet/new_carenet.ejs:7
+msgid "Drop an account"
+msgstr ""
+
+#: ui/jmvc/ui/views/carenet/show.ejs:3
+msgid "Sharing for"
+msgstr ""
+
+#: ui/jmvc/ui/views/carenet/show.ejs:5
+msgid ""
+"\n"
+"Your Indivo record contains care networks. A care network is a\n"
+"place for you to share some of your health information with a\n"
+"subset of individuals you select. For example, the \"Family\" care\n"
+"network is where you might invite your loved ones to view most of\n"
+"your health information, while the \"Work\" care network will include\n"
+"only people you work with and a much smaller subset of your health\n"
+"information.\n"
+msgstr ""
+
+#: ui/jmvc/ui/views/carenet/show.ejs:17
+msgid "Known accounts"
+msgstr ""
+
+#: ui/jmvc/ui/views/carenet/show.ejs:19
+msgid "Loading accounts"
+msgstr ""
+
+#: ui/jmvc/ui/views/carenet/show.ejs:25
+msgid "Drag accounts to carenets to start sharing with them"
+msgstr ""
+
+#: ui/jmvc/ui/views/carenet/show.ejs:30 ui/jmvc/ui/views/pha/show.ejs:23
+msgid "Loading carenets"
+msgstr ""
+
+#: ui/jmvc/ui/views/contact/show.ejs:6 ui/jmvc/ui/views/healthfeed/show.ejs:5
+msgid "no notifications"
+msgstr ""
+
+#: ui/jmvc/ui/views/contact/show.ejs:22
+#: ui/jmvc/ui/views/healthfeed/show.ejs:21
+msgid "sent by"
+msgstr ""
+
+#: ui/jmvc/ui/views/contact/show.ejs:22
+#: ui/jmvc/ui/views/healthfeed/show.ejs:21
+msgid "about"
+msgstr ""
+
+#: ui/jmvc/ui/views/contact/show.ejs:23
+#: ui/jmvc/ui/views/healthfeed/show.ejs:22
+msgid "record"
+msgstr ""
+
+#: ui/jmvc/ui/views/main/background_app_info.ejs:2
+msgid "(background app)"
+msgstr ""
+
+#: ui/jmvc/ui/views/message/one_message.ejs:4
+msgid "Back to message list"
+msgstr ""
+
+#: ui/jmvc/ui/views/message/one_message.ejs:10
+#: ui/jmvc/ui/views/message/show.ejs:20
+msgid "From"
+msgstr ""
+
+#: ui/jmvc/ui/views/message/one_message.ejs:13
+#: ui/jmvc/ui/views/message/show.ejs:21
+msgid "About"
+msgstr ""
+
+#: ui/jmvc/ui/views/message/one_message.ejs:16
+#: ui/jmvc/ui/views/message/show.ejs:22
+msgid "Subject"
+msgstr ""
+
+#: ui/jmvc/ui/views/message/one_message.ejs:19
+msgid "Received"
+msgstr ""
+
+#: ui/jmvc/ui/views/message/one_message.ejs:26
+msgid "Attachments"
+msgstr ""
+
+#: ui/jmvc/ui/views/message/one_message.ejs:35
+msgid "Accepted into Record"
+msgstr ""
+
+#: ui/jmvc/ui/views/message/one_message.ejs:37
+msgid "Accept into Record"
+msgstr ""
+
+#: ui/jmvc/ui/views/message/show.ejs:3
+msgid "Displaying messages for:"
+msgstr ""
+
+#: ui/jmvc/ui/views/message/show.ejs:5 ui/jmvc/ui/views/message/show.ejs:8
+msgid "and"
+msgstr ""
+
+#: ui/jmvc/ui/views/message/show.ejs:13
+msgid "no messages"
+msgstr ""
+
+#: ui/jmvc/ui/views/pha/app_tab.ejs:69 ui/jmvc/ui/views/pha/apps.ejs:23
+msgid "Allergies"
+msgstr ""
+
+#: ui/jmvc/ui/views/pha/app_tab.ejs:73 ui/jmvc/ui/views/pha/apps.ejs:48
+msgid "Labs"
+msgstr ""
+
+#: ui/jmvc/ui/views/pha/app_tab.ejs:84 ui/jmvc/ui/views/pha/apps.ejs:59
+msgid "Recommender"
+msgstr ""
+
+#: ui/jmvc/ui/views/pha/app_tab.ejs:92 ui/jmvc/ui/views/pha/apps.ejs:67
+msgid "Bluebutton"
+msgstr ""
+
+#: ui/jmvc/ui/views/pha/app_tab.ejs:100 ui/jmvc/ui/views/pha/apps.ejs:75
+msgid "Drugs"
+msgstr ""
+
+#: ui/jmvc/ui/views/pha/app_tab.ejs:104 ui/jmvc/ui/views/pha/apps.ejs:79
+msgid "ALGA-C"
+msgstr ""
+
+#: ui/jmvc/ui/views/pha/apps.ejs:27
+msgid "Profiler"
+msgstr ""
+
+#: ui/jmvc/ui/views/pha/apps.ejs:31
+msgid "Annotator"
+msgstr ""
+
+#: ui/jmvc/ui/views/pha/apps.ejs:37
+msgid "Psycho-emotional profiler"
+msgstr ""
+
+#: ui/jmvc/ui/views/pha/show.ejs:2
+msgid "App Settings for"
+msgstr ""
+
+#: ui/jmvc/ui/views/pha/show.ejs:4
+msgid ""
+"\n"
+"In most cases, an application should be shared with all of\n"
+"your carenets. You can limit your carenets' access by choosing\n"
+"which data to share with them. Sometimes, you may want to\n"
+"restrict an application to only some of your carenets when the\n"
+"application itself, i.e. \"My Pregnancy Manager,\" reveals\n"
+"information you want to keep private.\n"
+msgstr ""
+
+#: ui/jmvc/ui/views/pha/show.ejs:14
+msgid "Loading apps"
+msgstr ""
+
+#: ui/jmvc/ui/views/pha/show.ejs:19
+msgid "Drag the apps to the carenets you want them to be accessible from"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/create.ejs:76
+#: ui/jmvc/ui/views/record/create.ejs:227
+msgid "Create a new record"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics.ejs:8
+msgid "This is your current personal information"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics.ejs:8
+msgid "Edit your information"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics.ejs:18
+msgid "1 year"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics.ejs:18
+msgid "years"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics.ejs:23
+msgid "Born"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics.ejs:25
+msgid "old"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics.ejs:40
+msgid "Preferred language:"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics.ejs:99
+msgid "no address on file"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics.ejs:111
+msgid "Your personal information has not yet been stored"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics.ejs:116
+msgid "Update Information"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics_form.ejs:5
+msgid "Your personal information"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics_form.ejs:9
+msgid "Prefix"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics_form.ejs:10
+msgid "Given Name"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics_form.ejs:11
+msgid "Middle Name"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics_form.ejs:12
+msgid "Family Name"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics_form.ejs:13
+msgid "Suffix"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics_form.ejs:23
+msgid "Female"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics_form.ejs:24
+msgid "Male"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics_form.ejs:26
+msgid "Not Specified / Other"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics_form.ejs:31
+msgid "Birthday"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics_form.ejs:34
+msgid "dd"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics_form.ejs:35
+msgid "day"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics_form.ejs:38
+msgid "mm"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics_form.ejs:39
+msgid "month"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics_form.ejs:42
+msgid "yyyy"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics_form.ejs:43
+msgid "year"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics_form.ejs:48
+msgid "Ethnicity"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics_form.ejs:52
+msgid "Race"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics_form.ejs:59
+msgid "your preferred language"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics_form.ejs:75
+msgid "Phone 1"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics_form.ejs:81
+#: ui/jmvc/ui/views/record/demographics_form.ejs:98
+msgid "Home"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics_form.ejs:82
+#: ui/jmvc/ui/views/record/demographics_form.ejs:99
+msgid "Work"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics_form.ejs:83
+#: ui/jmvc/ui/views/record/demographics_form.ejs:100
+msgid "Cell"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics_form.ejs:88
+#: ui/jmvc/ui/views/record/demographics_form.ejs:105
+msgid "Preferred"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics_form.ejs:92
+msgid "Phone 2"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics_form.ejs:127
+msgid "ZIP Code"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics_form.ejs:133
+msgid "State"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/demographics_form.ejs:166
+msgid "* Birthday is a required field"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/info.ejs:2
+msgid "Hello"
+msgstr ""
+
+#: ui/jmvc/ui/views/record/info.ejs:5
+msgid "Loading personal information..."
+msgstr ""

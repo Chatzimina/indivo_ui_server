@@ -1,0 +1,88 @@
+{% extends 'problems/templates/base.html' %}
+{% block title %}problem list{% endblock %}
+{% block content %}
+
+<script>
+  $(document).ready(function() {
+    $('.date').datepicker({'dateFormat':'yy-mm-dd'});
+
+    $('#problem_fullname').autocomplete({
+      serviceUrl: 'codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#problem_code').val(data.code);
+      }
+    })
+    
+    $('#comments').autocomplete({
+      serviceUrl: 'codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#comments_code').val(data.code);
+      }
+    })
+
+
+  });
+</script>
+<head>
+</head>
+<body>
+        <div id="audio"></div>
+<div class="class1">
+
+{% if record_id %}
+<script>
+  Indivo.Auth.setToken("{{surl_credentials.token}}","{{surl_credentials.secret}}");
+</script>
+{% endif %}
+
+<h2>{{problem.name_title}} &nbsp;&nbsp;<span style="font-size:0.7em;">
+<h4>(SNOMEDCT:{{problem.name_identifier}})</h4>
+<!--<td><p align="right"><a href="./"><button>BACK</back></a></span></h2></p></td>-->
+<td> <p align="right"><input type="button" style="width:100px" onclick="history.go(-1);" value="Back"></p></td>
+
+
+<form method="post" action="">
+    <table class="light form">
+      <col style="width: 20%"></col>
+      <col style="width: 80%"></col>
+      <tr>
+        <td>Problem</td>
+        <td>
+          <input type="text" name="code_fullname" id="code_fullname" value="{{problem.name_title}}" style="width: 100%" />
+          <input type="text" name="code" id="code"value="{{problem.name_identifier}}" id="problem_code" /> (SNOMED CT)
+        </td>
+      </tr>
+
+      <tr>
+        <td>Date Performed</td>
+        <td><input type="text" name="date_onset" id ="date_onset"class="date" style="width: 100%" value="{{problem.startDate}}" /></td>
+      </tr>
+      <tr>
+        <td>Doctor Name</td>
+        <td><input type="text" name="date_resolution" id="date_resolution" style="width: 100%" value="{{problem.endDate}}" /></td>
+      </tr>
+	<tr>
+        <td>Institution</td>
+        <td><input type="text" name="comments" id ="comments" style="width: 100%" value="{{problem.notes}}"/></td>
+      </tr>
+ 
+
+    </table>
+
+    <br />
+
+    <div style="text-align: center">
+      <input type="submit" value="Update Problem" style="width: 33%"/><p>
+     <!-- <input type="button" style="width: 200px" onclick="history.go(-1);" value="    Cancel    ">-->
+   
+  
+
+      <p align="center"><a href="http://iapetus.ics.forth.gr/apps/problems/problems/"><button style="width: 200px"> Back </button></a><p>
+</div>
+</form>
+<h3>Additional Information</h3>
+<div class="details">Created at {{meta.created_at}}</div>
+{% endblock %}
+

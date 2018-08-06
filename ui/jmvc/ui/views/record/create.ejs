@@ -1,0 +1,379 @@
+{% load i18n %}
+
+<script>
+
+function validateForm()
+{
+var x=document.forms["new_record_form"]["familyName"].value;
+var y=document.forms["myForm"]["collected_at"].value;
+var quantitative_result_normal_range_min_value=document.forms["myForm"]["quantitative_result_normal_range_min_value"].value;
+var quantitative_result_normal_range_max_value=document.forms["myForm"]["quantitative_result_normal_range_max_value"].value;
+var test_name_title=document.forms["myForm"]["test_name_title"].value;
+
+if (x==null || x=="")
+  {
+  alert("Quantitive result value must be filled");
+  return false;
+  }
+}
+
+</script>
+
+
+
+
+<script>
+//  function handleFileSelect(evt) {
+//    var files = evt.target.files; // FileList object
+
+    // files is a FileList of File objects. List some properties.
+//    var output = [];
+//    for (var i = 0, f; f = files[i]; i++) {
+//      output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
+//                  f.size, ' bytes, last modified: ',
+//                  f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
+ //                 '</li>');
+  //  }
+   // document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
+
+//for (var i = 0, f; f = files[i]; i++) {
+      
+  //    var reader = new FileReader();
+
+
+
+      // Closure to capture the file information.
+   
+    //  alert('wtf');
+      // Read in the image file as a data URL.
+      //reader.readAsText(f);
+     // alert(reader);
+     // alert(reader.val());
+  //  }
+
+ // }
+
+  //document.getElementById('files').addEventListener('change', handleFileSelect, false);
+
+//el('app_content').style.overflowY = 'auto';
+//el('app_content').style.minHeight = '800px';
+</script>
+
+<script>
+   function setPageSize()
+   {       
+        //if (window.top.document.getElementById('app_container'))
+            el('divContainer').style.width = (document.getElementById('app_container').offsetWidth-30).toString() + 'px';    
+   }
+   
+   setInterval('setPageSize();', 500);
+</script>
+<form name="new_record_form" id="new_record_form" class="table_form" method="post" action="" onsubmit="return false;">
+<div class="container" id="divContainer" style="width:90%;height:1050px;float:left;margin-left:20px;overflow-x:hidden;overflow-y:hidden;">
+    
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>{% trans "Create a new record" %}</h2>    
+        </div>
+    </div>
+
+    <div class="row" style="height:10px;"></div>
+    
+    <div class="row">
+    
+            
+    <div class="form-group">
+        <label>Given Name:</label>
+        <input type="text" id="givenName" name="givenName" value="" tabindex="1" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Family Name:</label>
+        <input type="text" name="familyName" value="" tabindex="2"  class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label>SIOP:</label>
+      <input type="text" name="siop" id="siop" value="" tabindex="2"  class="form-control"/>
+   </div>
+   <div class="form-group">
+        <label>Month: </label>
+        <select name="month" id="month" value="01" class="form-control">
+        <option>Select Month</option>
+            <option value='01'>January</option>
+            <option value='02'>February</option>
+            <option value='03'>March</option>
+            <option value='04'>April</option>
+            <option value='05'>May</option>
+            <option value='06'>June</option>
+            <option value='07'>July</option>
+            <option value='08'>August</option>
+            <option value='09'>September</option>
+            <option value='10'>October</option>
+            <option value='11'>November</option>
+            <option value='12'>December</option>
+            </select>
+      </div>
+
+        <div class="form-group">
+        <label>Date: </label>
+         <div class="table_cell">
+            <select name="day" id="day"  class="form-control">
+            <option value='01'>01</option>
+            <option value='02'>02</option>
+            <option value='03'>03</option>
+            <option value='04'>04</option>
+            <option value='05'>05</option>
+            <option value='06'>06</option>
+            <option value='07'>07</option>
+            <option value='08'>08</option>
+            <option value='09'>09</option>
+            <option value='10'>10</option>
+            <option value='11'>11</option>
+            <option value='12'>12</option>
+            <option value='13'>13</option>
+            <option value='14'>14</option>
+            <option value='15'>15</option>
+            <option value='16'>16</option>
+            <option value='17'>17</option>
+            <option value='18'>18</option>
+            <option value='19'>19</option>
+            <option value='20'>20</option>
+            <option value='21'>21</option>
+            <option value='22'>22</option>
+            <option value='23'>23</option>
+            <option value='24'>24</option>
+            <option value='25'>25</option>
+            <option value='26'>26</option>
+            <option value='27'>27</option>
+            <option value='28'>28</option>
+            <option value='29'>29</option>
+            <option value='30'>30</option>
+            <option value='31'>31</option>
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <label>Year(yyyy)</label>
+            <input type="text" name="year" id="year" size="1000" value='2014' class="form-control">
+        </div>
+      <div class="form-group">
+            <label>Gender:</label>
+            <select name="sex" id="name" value="female" class="form-control">
+                <option value="female">Female</option>
+            <option value="male">Male</option>
+         </select>
+        </div>
+
+        <div class="form-group">
+            <label>Email Address:</div>
+            <input type="text" name="email" value="" size="130 "tabindex="3" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <div class="error_area row" style="display:none;"></div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <button id="create_record_submit" type="submit" tabindex="4" class="btn btn-lg btn-primary">Create</button>
+                    <img class="loader" src="jmvc/ui/resources/images/spinner-small.gif" style="display:none;" />
+                </div>            
+                <div class="col-lg-6">
+                <!-- @todo Create a record_controller method to select the first (or last selected) record tab -->
+                    <button class="btn btn-lg btn-danger" type="button" onclick="$('#healthfeed').is('*') ? $('#healthfeed').click() : $('#message').click()">Cancel</button>
+                </div>
+            </div>
+            
+        </div>
+            
+    </div>
+    
+    <div class="row" style="height:10px;"></div>
+    
+    <div class="row">
+        <div class="col-lg-12">
+            <h2> Or create multiple records </h2>
+        </div>
+    </div>
+
+    <div class="row" style="height:10px;"></div>
+    <div class="row">
+        <input type="hidden" name="outputtext">
+        <script>
+        // Read the specified text file and display it in the <pre> element below
+    function readfile(f) {
+    alert('ok');
+    var reader = new FileReader();  // Create a FileReader object
+    reader.readAsText(f);           // Read the file
+    reader.onload = function() {    // Define an event handler
+        var text = reader.result;   // This is the file contents
+        var out = document.getElementById("output");    // Find output element
+        out.innerHTML = "";                             // Clear it
+//        out.appendChild(document.createTextNode(text)); // Display file contents
+        document.new_record_form.outputtext.value += text;
+        }
+        reader.onerror = function(e) {  // If anything goes wrong
+            console.log("Error", e);    // Just log it
+        };
+    }
+    </script>
+            Select file containg records:
+            <input type="file" onchange="readfile(this.files[0])"/>
+            <pre id="output"></pre>
+             <button id="create_record_submit" type="submit" class="btn btn-lg btn-primary" tabindex="4" >Create</button>    
+    </div>
+    
+</form>
+    </div>
+
+{% ifequal 1 0 %}
+<h2>{% trans "Create a new record" %}</h2>
+<form name="new_record_form" id="new_record_form" class="table_form" method="post" action="" onsubmit="return false;">
+    <div class="table_row">
+        <div class="table_cell">Given Name:</div>
+        <div class="table_cell">
+            <input type="text" id="givenName" name="givenName" value="" tabindex="1"  />
+        </div>
+    </div>
+    <div class="table_row">
+        <div class="table_cell">Family Name:</div>
+        <div class="table_cell">
+            <input type="text" name="familyName" value="" tabindex="2" />
+        </div>
+    </div>
+
+        <div class="table_row">
+                <div class="table_cell">SIOP:</div>
+                <div class="table_cell">
+                        <input type="text" name="siop" id="siop" value="" tabindex="2" />
+                </div>
+        </div>
+
+
+
+        <div class="table_row">
+            
+        <div class="table_cell"> 
+
+            Month: </div>
+         <div class="table_cell">
+            <select name="month" id="month" value="01">Select Month</option>
+            <option value='01'>January</option>
+            <option value='02'>February</option>
+            <option value='03'>March</option>
+            <option value='04'>April</option>
+            <option value='05'>May</option>
+            <option value='06'>June</option>
+            <option value='07'>July</option>
+            <option value='08'>August</option>
+            <option value='09'>September</option>
+            <option value='10'>October</option>
+            <option value='11'>November</option>
+            <option value='12'>December</option>
+            </select>
+
+          </div>
+
+        <div class="table_cell">
+            Date: </div>
+         <div class="table_cell">
+            <select name="day" id="day" value="01">
+            <option value='01'>01</option>
+            <option value='02'>02</option>
+            <option value='03'>03</option>
+            <option value='04'>04</option>
+            <option value='05'>05</option>
+            <option value='06'>06</option>
+            <option value='07'>07</option>
+            <option value='08'>08</option>
+            <option value='09'>09</option>
+            <option value='10'>10</option>
+            <option value='11'>11</option>
+            <option value='12'>12</option>
+            <option value='13'>13</option>
+            <option value='14'>14</option>
+            <option value='15'>15</option>
+            <option value='16'>16</option>
+            <option value='17'>17</option>
+            <option value='18'>18</option>
+            <option value='19'>19</option>
+            <option value='20'>20</option>
+            <option value='21'>21</option>
+            <option value='22'>22</option>
+            <option value='23'>23</option>
+            <option value='24'>24</option>
+            <option value='25'>25</option>
+            <option value='26'>26</option>
+            <option value='27'>27</option>
+            <option value='28'>28</option>
+            <option value='29'>29</option>
+            <option value='30'>30</option>
+            <option value='31'>31</option>
+            </select>
+        </div>
+
+
+        <div class="table_cell">Year(yyyy)</div>
+    <div class="table_cell"><input type="text" name="year" id="year" size="1000" value='2014'></div>
+
+</div>
+          
+         
+        
+        <div class="table_row">
+                <div class="table_cell">Gender:</div>
+                <div class="table_cell">
+            <select name="sex" id="name" value="female">
+            <option value="female">Female</option>
+                        <option value="male">Male</option>
+                        </select>
+                </div>
+        </div>
+
+    <div class="table_row"> 
+        <div class="table_cell">Email Address:</div>
+        <div class="table_cell">
+            <input type="text" name="email" value="" size="130 "tabindex="3" />
+            
+            <div class="main_action_button">
+                <div class="error_area" style="display:none;"></div>
+                <button id="create_record_submit" type="submit" tabindex="4" >Create</button>
+                <img class="loader" src="jmvc/ui/resources/images/spinner-small.gif" style="display:none;" />
+                <p class="moreinfo">
+                    <!-- @todo Create a record_controller method to select the first (or last selected) record tab -->
+                    <a href="javascript:;" onclick="$('#healthfeed').is('*') ? $('#healthfeed').click() : $('#message').click()">Cancel</a>
+                </p>
+            </div>
+        </div>
+    </div>
+<div><input type="hidden" name="outputtext"></div>
+
+
+
+<p><p>
+<h2> Or create multiple records </h2>
+<p><p>
+
+</p></p></p></p>
+<script>
+// Read the specified text file and display it in the <pre> element below
+function readfile(f) {
+    alert('ok');
+    var reader = new FileReader();  // Create a FileReader object
+    reader.readAsText(f);           // Read the file
+    reader.onload = function() {    // Define an event handler
+        var text = reader.result;   // This is the file contents
+        var out = document.getElementById("output");    // Find output element
+        out.innerHTML = "";                             // Clear it
+//        out.appendChild(document.createTextNode(text)); // Display file contents
+        document.new_record_form.outputtext.value += text;
+    }
+    reader.onerror = function(e) {  // If anything goes wrong
+        console.log("Error", e);    // Just log it
+    };
+}
+</script>
+Select file containg records:
+<input type="file" onchange="readfile(this.files[0])"></input>
+<pre id="output"></pre>
+ <button id="create_record_submit" type="submit" tabindex="4" >Create</button>
+
+</form>
+{% endifequal%}

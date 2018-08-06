@@ -1,0 +1,66 @@
+{% extends 'problems/templates/base.html' %}
+{% block title %}problem list{% endblock %}
+{% block content %}
+<head>
+        {% if jsonData.6.z_score < 0%} <!--physical abilities (abnormal it should be over 2 or less -2 )-->
+        <style type="text/css">
+            *
+            {
+                font-size : 12px
+            }
+
+            .class1 *
+            {
+                font-size : 20px;
+            }
+        </style>
+        {%endif%}
+        <meta charset="utf-8">
+
+
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+<body>
+        <div id="audio"></div>
+<div class="class1">
+
+  <h2>Problems List {% if in_carenet %}(Shared){% endif %}</h2>
+
+  {% ifequal num_problems 0 %}
+  {% else %}
+    <table class="light">
+      <thead>
+        <tr>
+          <th scope="col"><b>Name</b></th>
+          <th><b>Onset</b></th>
+          <th><b>Resolution</b></th>
+	  <th><b>Modify/Delete</b></th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <td colspan="3" style="text-align: right">{{num_problems}} problem{% ifequal num_problems 1 %}{% else %}s{% endifequal %}</td>
+        </tr>
+      </tfoot>
+      <tbody>
+        {% for p in problems %}
+          <tr class="{% cycle 'odd' 'even' %}">
+            <td><a href="{{p.id}}">{{p.name_title}}</a></td>
+            <td>{{p.startDate}}</td>
+            <td>{{p.endDate}}</td>
+	    <td><a href="restore/{{p.id}}/">[restore]</a> 
+	    </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endifequal %}
+
+  {% if not in_carenet %}
+        <p align="center"><a href="http://iapetus.ics.forth.gr/apps/problems/problems/"><button style="width: 200px"> Back </button></a><p>
+   
+  {% endif %}
+</body>
+{% endblock %}

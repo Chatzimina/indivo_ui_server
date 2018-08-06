@@ -1,0 +1,92 @@
+{% extends 'problems/templates/base.html' %}
+{% block title %}new problem{% endblock %}
+{% block content %}
+
+<script>
+$(document).ready(function() {
+    $('.date').datepicker({'dateFormat':'yy-mm-dd'});
+    $('#problem_fullname').autocomplete({
+      serviceUrl: 'codelookup',
+      minChars: 2,
+      onSelect: function(value, data) {
+        $('#problem_code').val(data.code);
+      }
+    })
+  });
+
+$(document).ready(function validateForm()
+{
+var problem_fullname=document.forms["myForm"]["problem_fullname"].value;
+var date_onset=document.forms["myForm"]["date_onset"].value;
+var category_fullname=document.forms["myForm"]["category_fullname"].value;
+
+if (problem_fullname==null || problem_fullname=="")
+  {
+  alert("Probem must be filled");
+  return false;
+  }
+
+if (date_onset==null || date_onset=="")
+  {
+  alert("Start date must be filled");
+  return false;
+}
+
+if (category_fullname==null || category_fullname=="")
+  {
+  alert("Allergen must be filled");
+  return false;
+}
+
+});
+
+</script>
+<head>
+</head>
+<body>
+        <div id="audio"></div>
+<div class="class1">
+
+<h2>New Problem &nbsp;&nbsp;<span style="font-size:0.7em; font-weight: normal; text-transform: uppercase">
+<!--[<a href="./">Cancel</a>]-->
+</span></h2>
+
+  <form method="post" action="">
+    <table class="light form">
+      <col style="width: 20%"></col>
+      <col style="width: 80%"></col>
+      <tr>
+        <td>Problem</td>
+        <td>
+          <input type="text" name="code_fullname" id="problem_fullname" style="width: 100%" />
+          <input type="text" name="code" value="" id="problem_code" />
+        </td>
+      </tr>
+
+      <tr>
+        <td>Onset</td>
+        <td><input type="text" name="date_onset" class="date" id="date_onset" style="width: 100%" /></td>
+      </tr>
+
+      <tr>
+        <td>Resolution</td>
+        <td><input type="text" name="date_resolution" class="date" id="date_resolution" style="width: 100%" /></td>
+      </tr>
+
+      <tr>
+        <td>Details</td>
+        <td><textarea name="comments" cols="50" rows="3" wrap="soft" style="width: 100%"></textarea></td>
+      </tr>
+    </table>
+
+    <br />
+    
+    <div style="text-align: center">
+      <input type="submit" value="Add New Problem" style="width: 33%"/><p><p>
+<!--      <input type="button" style="width: 200px" onclick="history.go(-1);" value="    Cancel    ">-->
+    </div>
+  </form>
+   <p align="center"><a href="http://iapetus.ics.forth.gr/apps/problems/problems/"><button style="width: 200px"> Back </button></a><p>
+
+</body>
+{% endblock %}

@@ -1,0 +1,1030 @@
+{% load i18n %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+   <head>
+      <style>
+         #languages{
+         position: absolute;
+         right: 50px;
+         margin-right: 230px;
+         top:3px;
+         }
+         #languages2{
+         position: absolute;
+         right: 80px;
+         margin-right: 230px;
+         top:6px;
+         }
+         #deleteaccount {
+         position: relative; top: 850px;left: 0; right: 10%; bottom: 0;
+         margin: 0 0 32px;
+         font-size: 1.25em;
+         text-align: center;
+         }
+         #blank_div {
+         height: 30px;
+         overflow: hidden;
+         }
+         
+      </style>
+      <!--   <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/1.1.0/annyang.min.js"></script> 
+         <script type="text/javascript" src="/apps/problems/static/annyang-master/annyang.js"></script>
+         <script type="text/javascript">
+         $( document ).ready( function() {
+         
+         $('app_content').function() 
+         					//if(annyang)
+         					//{
+         							//var commands = {
+         							//'show tps report': function() {
+         							//console.log("You just said - Show tps report");
+         							//},
+         	//'test': function(){
+         	alert('ok');
+         			window.location.href ="allergies";
+         
+         		//	}
+         					//};
+         
+         					//annyang.debug();
+         					//annyang.init(commands);
+         					//annyang.start();}
+         //});
+         });
+         </script>-->
+      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      <!-- note we don't use the standard header here, so we don't double include stuff -->
+      <!--               
+         existingexisting_account_id
+                'existing_username_id
+         -->
+      <!--		-->
+      {% if jsonData != " " %}
+      {% if jsonData.5.z_score < -2 or jsonData.5.z_score > 2 %}
+      <!--link type="text/css" href="/jmvc/ui/resources/css/ui_large_fonts.css" rel="Stylesheet" /-->
+      <link type="text/css" href="/jmvc/ui/resources/css/ui.css" rel="Stylesheet" />
+      {% else %}
+      <link type="text/css" href="/jmvc/ui/resources/css/ui.css" rel="Stylesheet" />
+      {% endif %}
+      {% else %}
+      <link type="text/css" href="/jmvc/ui/resources/css/ui.css" rel="Stylesheet" />
+      {% endif %}
+      {% if branding %}
+      <title>{{ branding.pretty_name_prepend }} {{ branding.pretty_name }}</title>
+      {% else %}
+      <title>{% trans "Indivohealth" %}</title>
+      {% endif %}
+      <script type="text/javascript">
+         <!--
+            function getConfirmation(){
+               var retVal = confirm("Are you sure you want to delete your account ?");
+               if( retVal == true ){
+                  alert("Account deleted");
+                  document.myform.submit();
+                      return true;
+               }else{
+                  alert("Cancelled request");
+                      return false;
+               }
+            }
+            //-->
+      </script>
+      <style type="text/css">
+         body {
+         --padding-top: 51px;  
+         }
+         .text-center {
+         padding-top: 20px;
+         }
+         .col-xs-12 {
+         background-color: #fff;
+         }
+         #sidebar {
+         height: 100%;
+         padding-right: 0;
+         padding-top: 20px;
+         }
+         #sidebar .nav {
+         width: 95%;
+         }
+         #sidebar li {
+         border:0 #f2f2f2 solid;
+         border-bottom-width:1px;
+         }
+         /* collapsed sidebar styles */
+         @media screen and (max-width: 767px) {
+         .row-offcanvas {
+         position: relative;
+         -webkit-transition: all 0.25s ease-out;
+         -moz-transition: all 0.25s ease-out;
+         transition: all 0.25s ease-out;
+         }
+         .row-offcanvas-right
+         .sidebar-offcanvas {
+         right: -41.6%;
+         }
+         .row-offcanvas-left
+         .sidebar-offcanvas {
+         left: -41.6%;
+         }
+         .row-offcanvas-right.active {
+         right: 41.6%;
+         }
+         .row-offcanvas-left.active {
+         left: 41.6%;
+         }
+         .sidebar-offcanvas {
+         position: absolute;
+         top: 0;
+         width: 41.6%;
+         }
+         #sidebar {
+         padding-top:0;
+         }
+         }
+         
+         
+         .app_container
+         {
+         	margin:0px;
+         	padding:0px;
+         }
+         
+         .app_content
+         {
+         	margin:3px;
+         	padding:0px;
+         	height:4000px;
+         }
+         
+         .app_content_iframe1{
+         	overflow-y: hidden;
+				overflow-x: hidden;
+				width:100%;
+				height:4000px;
+         }
+         .app_content_iframe{
+         	overflow-y: hidden;
+				overflow-x: hidden;
+				width:100%;
+				height:4000px;
+         }
+         
+                     .app_content_pane11
+                     {
+                     width:100%;
+                     overflow-x:hidden;
+                     overflow-y:hidden;
+                     height:4000px;
+                     }
+                     
+      </style>
+    <!--[if lt IE 9]>
+        <script type="text/javascript" src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script type="text/javascript" src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+       <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+    	<script type="text/javascript" src="/jmvc/ui/resources/js/metismenu/metisMenu.min.js"></script>
+      <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+      <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" />
+      <link rel="stylesheet" href="/jmvc/ui/resources/js/metismenu/main.css" type="text/css" />
+      
+      <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+      <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+      <script type="text/javascript" src="/jmvc/ui/resources/js/javascript.js" ></script>
+      <script>          
+      	function ppp()
+      	{
+      		alert(el('add_record_tab').click);
+      		
+
+      	}
+      	
+      	//setTimeout('ppp();',5000);
+         var msg1 = '';
+         var msg2 = '';
+         var theWidth = window.innerWidth;
+         var first_page_view = true;
+         function detectmob() { 
+         	 if( navigator.userAgent.match(/Android/i)
+         	 || navigator.userAgent.match(/webOS/i)
+         	 || navigator.userAgent.match(/iPhone/i)
+         	 || navigator.userAgent.match(/iPad/i)
+         	 || navigator.userAgent.match(/iPod/i)
+         	 || navigator.userAgent.match(/BlackBerry/i)
+         	 || navigator.userAgent.match(/Windows Phone/i)
+         	 ){
+         		return true;
+         	  }
+         	 else {
+         		return false;
+         	  }
+         	}
+                function setMessages()
+                {
+         	//return false;
+                	var msg = '';
+                	//msg = 'window width = ' + theWidth;
+         	//msg += '<br/>iframe height = ' + msg1;
+         	//msg += '<br/>' + msg2;
+         	msg += '<br/>footer_responsive display = ' + el('footer_responsive').style.display;
+                	el('messages').innerHTML = msg;
+                }
+                
+                setInterval('setElementsSize()', 1000);
+                function setElementsSize()
+                {
+                //return false;
+                	theWidth = screen.innerWidth;
+         	   	theWidth = window.innerWidth;
+                	if (theWidth >= 800)
+                	{
+                		//return false;
+         		document.body.style.overflowY = 'auto';
+                	}
+                	var divAppSelector = el('app_selector');
+                	var currentWidth = 0;
+         	
+                	if (theWidth <= 768)// || detectmob())
+                	{
+                		divAppSelector.style.display = 'none';
+                		el('app_container').style.width = (theWidth-15).toString() + 'px';
+                		el('app_container').style.left = '5px';
+                		el('app_container').style.position = 'absolute';
+         		
+         		el('tabs').style.width = (theWidth-40).toString() + 'px';
+                		el('tabs').style.left = '5px';
+                		el('tabs').style.position = 'absolute';
+         		
+         		//alert('');
+         		el('liAppsMenu').style.display = '';
+         		el('appsMenuTop').style.display = '';
+         		//	el('appsMenuContainer').style.display = '';
+         		el('record_tabs').style.display = 'none';
+         		el('selPatients').style.display = '';
+         		//document.body.style.overflowY = 'hidden';
+         		document.body.style.overflowX = 'hidden';
+         		
+         		
+         		el('footer').style.display = 'none';
+         		//el('footer_responsive').style.display = 'block';
+         		
+         		currentWidth = (theWidth-40).toString();	
+         		
+                	}
+                	else 
+                	{
+                		divAppSelector.style.display = '';	
+                		
+                		el('app_container').style.width = (el('container').offsetWidth - divAppSelector.offsetWidth - 10).toString() + 'px';
+                		el('app_container').style.left = divAppSelector.offsetWidth.toString()	 + 'px';
+                		el('app_container').style.position = '';
+         		
+         				el('tabs').style.width = (el('container').offsetWidth - divAppSelector.offsetWidth - 10).toString() + 'px';
+                		el('tabs').style.left = divAppSelector.offsetWidth.toString()	 + 'px';
+                		el('tabs').style.position = '';				
+         		
+         		el('liAppsMenu').style.display = 'none';
+         		el('appsMenuTop').style.display = 'none';
+         		//el('appsMenuContainer').style.display = 'none';
+         		el('record_tabs').style.display = '';
+         		el('selPatients').style.display = 'none';
+         		
+         		el('footer').style.display = '';
+         		el('footer_responsive').style.display = 'none';
+         		
+         		currentWidth = (el('container').offsetWidth - divAppSelector.offsetWidth - 10).toString();
+         		
+         		
+					el('app_container').style.height =  (window.innerHeight - 200) + 'px';
+						    		
+         		//document.body.style.overflowY = 'hidden';
+                }
+         	
+         	//el('footer_responsive').style.display = 'block';
+         	el('footer_responsive').style.zIndex = 10000000000000000;
+         	
+         	el('divMenuBar').style.width = theWidth + 'px';
+         	
+         	
+				el('app_container').style.width =  (theWidth-20).toString() + 'px';         	
+				el('app_container').style.width =  (window.offsetHeight-50).toString() + 'px';
+				
+				
+				el('app_container').style.height =  '4000px';
+				el('app_container').style.overflowX = 'hidden';
+			   el('app_container').style.overflowY = 'hidden';
+				
+				//el('app_content').style.width =  '100%';         	
+				el('app_content').style.height =  '4000px';//(el('app_container').offsetHeight-30).toString()+ 'px';
+				el('app_content').style.overflowX = 'hidden';
+			   //el('app_content').style.overflowY = 'hidden';
+         	
+         	el('app_content_iframe').style.width = (theWidth.toString() - 100).toString() + 'px';
+         	//el('app_content_iframe').style.height = (window.innerHeight-30).toString() + 'px';//el('app_container').offsetHeight + 'px';
+         	el('app_content_iframe').style.height = el('app_content').offsetHeight + 'px';
+         	
+         	//if (el('app_content_iframe1'))el('app_content_iframe1').setAttribute('scrolling','no');
+         	//if (el('app_content_iframe'))el('app_content_iframe').setAttribute('scrolling','no');
+
+				var iframes = document.getElementsByClassName('app_content_iframe1');         	
+				for (var i=0;i<iframes.length;i++)
+				{
+					iframes[0].setAttribute('scrolling','no');
+				}
+				
+				iframes = document.getElementsByClassName('app_content_iframe');         	
+				for (var i=0;i<iframes.length;i++)
+				{
+					iframes[0].setAttribute('scrolling','no');
+				}
+         	
+         	
+         	var divList = getIframeElement('divList');			
+         	
+         	if (divList)
+         	{
+         		//divList.style.width = (parseInt(currentWidth) - 30).toString() + 'px';
+         		divList.style.width = '300px';
+         		msg1 = (parseInt(currentWidth) - 30).toString() + 'px';
+         	}
+         	else 
+         	{
+         		msg1 =  'NULL44' + Math.random().toString();
+         	}
+         	
+         	var iframeElement = document.getElementsByClassName('app_content_iframe')[0];
+         	if (iframeElement)
+         	{
+         		resizeIframe(iframeElement);
+         	}
+         	else{
+         		iframeElement = document.getElementsByClassName('app_content_iframe1')[0];
+         		resizeIframe(iframeElement);
+         		do_resize = false;
+         	}
+         	
+                	resizeIframe(iframeElement);
+                	setMessages();
+                
+                	return false;
+                }
+          
+          
+          var do_resize = true;
+          function resizeIframe(obj) {
+            try
+            {
+         	if (!obj) 
+         		return false;
+         	obj.height = obj.contentWindow.document.body.scrollHeight + 100;
+         	
+         	
+         	
+         	var setHeight = false;
+         	var Iframe = document.getElementById("app_content_iframe1");
+         	if (Iframe)
+         	{
+         		setHeight = true;
+         		var pos = Iframe.contentWindow.document.body.scrollTop;
+         		msg2 = pos;
+         		if (pos > 0)
+         		{
+         			setHeight = false;
+         		}
+         	}
+         	if (do_resize)
+         	{
+         		obj.height = el('app_container').offsetHeight +200;//+ 'px';
+         		do_resize = false;
+         	}
+         	
+         	if (obj.className != 'app_content_iframe1')
+         	{
+         		obj.className = 'app_content_iframe1';
+         		obj.id = 'app_content_iframe1';
+         	}
+              }
+              catch(e){}
+           }
+          
+          function getIframeElement(id)
+          {			
+         	var ifrm = el('app_content_iframe');
+         	var win = ifrm.contentWindow;
+         	var doc = ifrm.contentDocument? ifrm.contentDocument: ifrm.contentWindow.document;
+         	var divList = doc.getElementById('divList');
+          }
+                
+                $(document).ready(function() {
+                	  setElementsSize();
+                	
+                	$('[data-toggle=offcanvas]').click(function() {				
+         		$('#divNavBar').toggle();
+                	});
+                	
+                });
+                
+                $(window).bind('resize', function() {
+         	do_resize = true;
+                	setElementsSize();
+                });
+          
+          function setAppsMenu()
+          {
+          //return false;
+         	var appsMenu = el('appsMenu');
+         	var appsMenuItems = el('active_app_tabs').getElementsByTagName('li');
+         	
+         	var appsMenuHtml = '';
+         	var appsMenuHtml1 = '';
+         	for (var i=0;i<appsMenuItems.length;)
+         	{
+         		var menuItem = appsMenuItems[i];
+         		var menuID = appsMenuItems[i].id;
+         		var dataurl = menuItem.getAttribute('data-url');
+         		appsMenuHtml += '<li style="list-style-type: none;">';
+         		appsMenuHtml += '<a style="padding:0px 0px 0px 0px;" href="javascript:void(0);" onclick="el(\'' + menuID + '\').click();$(\'#divNavBar\').toggle();return false;">';
+         		appsMenuHtml += menuItem.innerHTML;
+         		appsMenuHtml += '</a>';
+         		appsMenuHtml += '</li>';
+         		appsMenuHtml += '<li class="divider"></li>';
+         		
+         		appsMenuHtml1 += '<li>';
+         		appsMenuHtml1 += '<a href="javascript:void(0);" onclick="el(\'' + menuID + '\').click();el(\'nav-expander\').click();return false;">';
+         		appsMenuHtml1 += menuItem.innerHTML;
+         		appsMenuHtml1 += '</a>';
+         		appsMenuHtml1 += '</li>';
+         		i++;
+         	} 
+         	
+         	appsMenuItems = el('record_owned_options').getElementsByTagName('li');
+         				
+         	for (var i=0;i<appsMenuItems.length;)
+         	{
+         		var menuItem = appsMenuItems[i];
+         		var menuID = appsMenuItems[i].id;
+         		var dataurl = menuItem.getAttribute('data-url');
+         		appsMenuHtml += '<li style="list-style-type: none;">';
+         		appsMenuHtml += '<a style="padding:0px 0px 0px 0px;" href="javascript:void(0);" onclick="el(\'' + menuID + '\').click();$(\'#divNavBar\').toggle();return false;">';
+         		appsMenuHtml += menuItem.innerHTML;
+         		appsMenuHtml += '</a>';
+         		appsMenuHtml += '</li>';
+         		appsMenuHtml += '<li class="divider"></li>';
+         		
+         		appsMenuHtml1 += '<li>';
+         		appsMenuHtml1 += '<a href="javascript:void(0);" onclick="el(\'' + menuID + '\').click();el(\'nav-expander\').click();return false;">';
+         		appsMenuHtml1 += menuItem.innerHTML;
+         		appsMenuHtml1 += '</a>';
+         		appsMenuHtml1 += '</li>';
+         		
+         		
+         		i++;
+         	}
+         	appsMenu.innerHTML = appsMenuHtml;
+         	el('ulAppsMenu').innerHTML = appsMenuHtml;
+         	el('ulAppsMenu1').innerHTML = appsMenuHtml1;
+         	setTimeout('setAppsMenu();', 1000);
+          }
+          
+          function loadPatients()
+          {
+          	//return false;
+         	window.frames['app_content_iframe'].className = 'in_app_container embed-responsive-item';
+         	
+         	var record_tabs = el('record_tabs').getElementsByTagName('a');	
+         	
+         	if (record_tabs.length > 1 && el('selPatients').selectedIndex <= 0 &&  el('selPatients1').selectedIndex <= 0)
+         	{
+         		el('selPatients').length = 0;
+         		el('selPatients1').length = 0;
+         		var option1 = document.createElement("option");
+         		option1.text = 'Select a Patient';
+         		option1.value = '-1';
+         		
+         		el('selPatients').add(option1);
+         		el('selPatients1').add(option1);
+         		
+         		for (var i=0;i<record_tabs.length;)
+         		{
+         			var className = record_tabs[i].className;
+         			var option = null;
+         			if (className === 'record_tab')
+         			{
+         				option = document.createElement("option");
+         				option.text = "+ Add Patient";
+         				option.value = className;
+         				option.style.backgroundColor = 'orange';
+         			}
+         			else
+         			{
+         				//var patient_id = className.split('_')[4];
+         				var patient_id = className;
+         				var patient_name = record_tabs[i].innerHTML;
+         				option = document.createElement("option");
+         				option.text = patient_name;
+         				option.value = patient_id;
+         			}
+         			
+         			if (option)
+         			{
+         				el('selPatients').add(option);
+         				el('selPatients1').add(option);
+         			}
+         			
+         			i++;
+         		}
+         		el('selPatients1').selectedIndex = 0;
+         	}
+         	
+         	setTimeout('loadPatients();', 1000);
+          }
+          
+          function onPageLoad()
+          {
+          //return false;
+         	setAppsMenu();
+         	loadPatients();
+         	if (first_page_view && !detectmob())		
+						{			
+							el('nav-expander').click();
+							first_page_view = false;
+						}    
+          }
+          
+          AttachEvent(window, 'load', function (){onPageLoad();});
+          
+          function onPatientSelect(sender)
+          {
+         	var patient_id = sender.value;
+         	//alert(patient_id);
+         	var elem = document.getElementsByClassName(patient_id)[0];
+         	if (elem)
+         	{
+         		elem.click();
+         	}
+         	return false;
+          }
+             
+      </script>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link type="text/css" href="/jmvc/ui/resources/bootstrap-custom.css" rel="stylesheet"/>
+   </head>
+   <!--body class="ui_alert ui_record ui_main" style="overflow-y: auto;"-->
+   <body style="overflow-y: auto;">
+	
+	   
+   <div id="wrapper">
+      <!--nav style="background-color:#faf4e6;"-->
+      <nav>
+        <ul class="list-unstyled main-menu" >
+          
+          <!--Include your navigation here-->
+          <li class="text-right"><a href="#" id="nav-close"><span class="glyphicon glyphicon-remove"></span></a></li>
+
+           
+                        <!--li>
+                            <a id="menu-account" href="/"><span class="glyphicon glyphicon-user"></span> My Account</a>
+                        </li-->
+                         
+                         <li>
+                            <a  id="menu-patients" href="javascript:void(0);"><span class="glyphicon glyphicon-th-list"></span> Patients</a>
+                            <ul id="ulPatients">
+										<li>
+										<select id="selPatients1" name="selPatients1" onchange="onPatientSelect(this);" class="form-control">
+										</select>
+										</li>	
+                            </ul>
+                        </li>
+                        
+                        <li>
+                            <a  id="menu-apps" href="javascript:void(0);"><span class="glyphicon glyphicon-th"></span> Apps</a>
+                            <ul id="ulAppsMenu1"></ul>
+                        </li>
+                        
+                         <li>
+                            <a id="menu-settings" href="javascript:void(0);" 
+                            onclick="return showSettings();"><span class="glyphicon glyphicon-cog"></span> Settings</a>
+                        </li>
+                        <li>
+                            <a id="menu-languages" href="javascript:void(0);"><span class="glyphicon glyphicon-flag"></span> Language</a>
+                            <ul>
+										<li><a href="javascript:void(0);" onclick="document.setLangEnglish.submit();return false;">English</a></li>
+                           	<li><a href="javascript:void(0);" onclick="document.setLangGreek.submit();return false;">Ελληνικά</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a id="menu-logout" href="/logout"><span class="glyphicon glyphicon-off"></span> Logout</a>
+                        </li>
+
+            <script>
+            	function showSettings()
+            	{
+            		var iframe = '<iframe id="app_content_iframe1" name="app_content_iframe1" ';
+            		iframe += ' frameborder="no" style="width:100%;height:100%" ';
+            		iframe += ' src="/change_password" scrolling="no"></iframe>';
+            		var diviframe = document.createElement('div');
+            		diviframe.innerHTML = iframe;
+            		if (el('app_content_iframe1'))
+            		{
+            			el('app_content_iframe1').src = '/change_password';
+            			//alert('exists');
+            		}
+            		else
+            		{
+            			//el('app_content').appendChild(diviframe);
+            			el('app_content').innerHTML = iframe;
+            			//alert('!exists');
+            		}
+            	}
+                var currentPage = 'main';
+                //alert(currentPage);
+                //if (currentPage == 'main') {
+                //if (el('menu-' + currentPage))el('menu-' + currentPage).style.color = 'white';
+                //}
+            </script>
+          <!--li><a href="#">Menu One <span class="icon"></span></a></li>
+          <li><a href="#">Menu Two <span class="icon"></span></a></li>
+          <li><a href="#">Menu Three <span class="icon"></span></a></li>
+          <li><a href="#">Dropdown</a>
+            <ul class="list-unstyled">
+                <li class="sub-nav"><a href="#">Sub Menu One <span class="icon"></span></a></li>
+                <li class="sub-nav"><a href="#">Sub Menu Two <span class="icon"></span></a></li>
+                <li class="sub-nav"><a href="#">Sub Menu Three <span class="icon"></span></a></li>
+                <li class="sub-nav"><a href="#">Sub Menu Four <span class="icon"></span></a></li>
+                <li class="sub-nav"><a href="#">Sub Menu Five <span class="icon"></span></a></li>
+            </ul>
+          </li>
+          <li><a href="#">Menu Four <span class="icon"></span></a></li>
+          <li><a href="#">Menu Five <span class="icon"></span></a></li-->
+        </ul>
+      </nav>
+      
+      <div class="container" style="width:100%;height:80%;">
+      	<div class="row" style="height:20px;"></div>
+      	<div class="row">
+      		<div class="col-lg-12" style="border:0px solid black;">
+					<iframe id="iframe_app_container1" name="iframe_app_container1" style="width:100%;height:1000px;display:none;" src="about:blank"></iframe>
+					 <iframe id="app_content_iframe" class="in_app_container" name="app_content_iframe" src="" 
+                        style="margin-left: 0px; padding-left: 0px; border: 1px solid green; width: 100%;  height: 793px;display:none;" 
+                        onload="" frameborder="no"></iframe>
+					<script>
+					//window.frames['iframe_app_container'].location.href = 'http://139.91.190.144/apps/problems/problems/';					
+					</script>
+					
+					<div id="app_container" class="app_content_pane11 container row" 
+						style="min-height:500px;height:80%;margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; border: 0px solid red; float: left; 
+						 background-color: rgb(242, 246, 255);">
+                     <!--div id="blank_div" class="blank_div"></div-->
+                     <div id="app_content" class="in_app_container" style="overflow-y: hidden; float: left; margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px;"></div>
+                     <iframe id="app_content_iframe" class="in_app_container" name="app_content_iframe" src="" 
+                        style="margin-left: 0px; padding-left: 0px; border: 1px solid green; width: 100%; display: none; height: 793px;" 
+                        onload="" frameborder="no"></iframe>
+                  </div>
+				</div>      	
+      	</div>
+      </div>
+      
+      
+    </div>
+    
+    
+    <div class="navbar navbar-inverse navbar-fixed-top">      
+        
+        <!--Include your brand here-->
+        <a class="navbar-brand" href="main.aspx">IndivoHealth</a>
+        <div class="navbar-header pull-right">
+          <a id="nav-expander" class="nav-expander fixed">
+            <i class="fa fa-bars fa-lg white"></i>
+          </a>
+        </div>
+    </div>	
+   
+   
+   
+   <div id="footer_responsive" class="row" style="width:105%;display:none;z-index:100000000000;bottom:0px;height:45px;background-color:#F8F8F8;border:1px solid silver;position:absolute;">
+<!--               <div class="col-xs-3">
+                  <a href="http://chip.org/laboratories/ihl/">
+                  <img style="width:45px;margin-left:10px;" src="/jmvc/ui/resources/images/badges/ihl-badge.png">
+                  </a>
+               </div>
+               <div class="col-xs-3">
+                  <a href="http://chip.org/">
+                  <img style="width:45px;" src="/jmvc/ui/resources/images/badges/chip-badge.png">
+                  </a>
+               </div>
+               <div class="col-xs-3">
+                  <a href="http://hms.harvard.edu/">
+                  <img style="width:45px;" src="/jmvc/ui/resources/images/badges/hms-alt.png">
+                  </a>
+               </div>
+               <div class="col-xs-3">
+                  <a href="http://www.ics.forth.gr/">
+                  <img style="width:45px;margin-top:8px;" src="/jmvc/ui/resources/images/badges/forth.png">
+                  </a>
+               </div>-->
+            </div>
+   
+
+{% ifequal 1 1 %}
+
+
+
+
+
+
+      <div id="messages" style="display:none;z-index:100000;padding:10px;min-width:200px;position:fixed;left:0px;top:0px;border:1px solid black;background-color:white;"><br>footer_responsive display = none</div>
+      <div id="wrapper_old" style="display:none;">
+         <div id="full_height">
+            <!-- header with logo and account settings -->
+            <div id="header" style="display:none;">
+               <div id="header_logo_and_name">
+                  <span id="header_site_name">
+                  Indivohealth<span id="header_trademark">™</span>
+                  </span>
+                  <span id="header_fullname"> for John Smith</span>
+               </div>
+               <div id="languages">
+                  <form name="setLangEnglish" action="/i18n/setlang/" method="POST">
+                     <input name="next" value="/" type="hidden">
+                     <input name="language" value="en" type="hidden">
+                     <a href="#" onclick="document.setLangEnglish.submit();return false;"><img src="/jmvc/ui/resources/images/app_icons_32/united_kingdom_flag.png" height="25" width="25"></a>
+                  </form>
+               </div>
+               <div id="languages2">
+                  <form name="setLangGreek" action="/i18n/setlang/" method="POST">
+                     <input name="next" value="/" type="hidden">
+                     <input name="language" value="el" type="hidden">
+                     <a href="#" onclick="document.setLangGreek.submit();return false;"><img src="/jmvc/ui/resources/images/app_icons_32/Greece-Flag-Greek1.png" height="20" width="25"></a>
+                  </form>
+               </div>
+               <!-- Settings & Logout -->
+               <div id="header_controls">
+                  <form id="myform" action="/deleteaccount">
+                     <!-- <img class="header_icons" alt="settings" src="/jmvc/ui/resources/images/icons_16/delete.png" />
+                        <a href="javascript:{}" onclick="getConfirmation();" >Delete account</a>
+                        -->
+                     <a href="/change_password">
+                     <img class="header_icons" alt="settings" src="/jmvc/ui/resources/images/icons_16/package_settings.png">
+                     Settings
+                     </a>
+                     <a id="logout" href="/logout">
+                     <img class="header_icons" alt="logout" style="opacity: 0.7;" src="/jmvc/ui/resources/images/icons_16/goto.png">
+                     Logout
+                     </a>
+                  </form>
+               </div>
+            </div>
+            <!-- container for alert messages -->
+            <div id="alerts"></div>
+         </div>
+         <div id="page-wrapper">
+            <div id="container" class="container">
+               <!-- top navbar -->
+               <div style="width: 1920px;" class="navbar navbar-default navbar-fixed-top" role="navigation" id="divMenuBar">
+                  <div style="float:left;padding:8px; font-color:silver;font-size:20px;">Indivohealth</div>
+                  <ul class="nav nav-tabs" id="divMobileMenu" style="display:;float:right;margin-right:10px;border:0px solid black;">
+                     <li style="display:none;"><a href="javascript:void(0);">Indivohealth</a></li>
+                     <li style="display: none;" class="dropdown" id="liAppsMenu">
+                        <ul id="ulAppsMenu" class="dropdown-menu"></ul>
+                     </li>
+                     <li>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">My Account <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                           <li style="list-style-type: none;"><a href="/change_password">Settings</a></li>
+                           <li class="divider"></li>
+                           <li style="list-style-type: none;"><a href="javascript:void(0);" onclick="document.setLangEnglish.submit();return false;">English</a></li>
+                           <li style="list-style-type: none;"><a href="javascript:void(0);" onclick="document.setLangGreek.submit();return false;">Ελληνικά</a></li>
+                           <li class="divider"></li>
+                           <li style="list-style-type: none;"><a href="/logout">Logout</a></li>
+                        </ul>
+                     </li>
+                  </ul>
+                  <div class="container" style="display:none;">
+                     <div class="navbar-header" style="display:;">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#divNavBar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Indivohealth</a>
+                     </div>
+                     <!-- Collect the nav links, forms, and other content for toggling -->
+                     <div id="appsMenuTop" class="nav-collapse" style="background-color: rgb(248, 248, 248); display: none;">
+                        <ul class="dropdown-menu" style="list-style-type: none;height:auto;" id="appsMenu">
+                        </ul>
+                     </div>
+                     <div class="nav-collapse" id="divNavBar" style="display:none;background-color:#F8F8F8;">
+                        <ul class="nav navbar-nav navbar-right navbar-user">
+                           <!--li class="dropdown languages-dropdown" id="appsMenuContainer" style="display:none;background-color:#F8F8F8;">
+                              <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Apps</a>
+                              <ul class="dropdown-menu" style="list-style-type: none;height:auto;" id="appsMenu"></ul>
+                              </li-->
+                           <li class="dropdown languages-dropdown" style="background-color:#F8F8F8;">
+                              <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Select Languange</a>
+                              <ul class="dropdown-menu" style="list-style-type: none;">
+                                 <li style="list-style-type: none;"><a href="#" onclick="document.setLangEnglish.submit();return false;">English</a></li>
+                                 <li class="divider"></li>
+                                 <li style="list-style-type: none;"><a href="#" onclick="document.setLangGreek.submit();return false;">Ελληνικά</a></li>
+                              </ul>
+                           </li>
+                           <li class="dropdown user-dropdown" style="background-color:#F8F8F8;">
+                              <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+                              <ul class="dropdown-menu" style="list-style-type: none;">
+                                 <li style="list-style-type: none;"><a href="/change_password"><i class="fa fa-gear"></i> Settings</a></li>
+                                 <li class="divider"></li>
+                                 <li style="list-style-type: none;"><a href="/logout"><i class="fa fa-power-off"></i> Logout</a></li>
+                              </ul>
+                           </li>
+                        </ul>
+                     </div>
+                     <!-- /.navbar-collapse -->
+                  </div>
+               </div>
+               <!-- the tab bar -->
+               <div id="tabs" class="row" style="margin-top: 0px; margin-left: 0px; float: left; width: 980px; left: 180px;">
+                  <div class="col-xs-4">
+                     {% if not SETTINGS.HIDE_HEALTHFEED %}
+                     <a id="healthfeed" class="main_tab" href="javascript:void(0);">
+                     <img src="/jmvc/ui/resources/images/app_icons_32/healthfeed.png" alt="" />
+                     {% trans "Healthfeed" %}
+                     </a>
+                     {% endif %}
+                  </div>
+                  <div class="col-xs-4">
+                     {% if not SETTINGS.HIDE_INBOX %}
+                     <a id="message" class="main_tab" href="javascript:void(0);">
+                     <img src="/jmvc/ui/resources/images/app_icons_32/inbox.png" alt="" />
+                     {% trans "Inbox" %}
+                     </a>
+                     {% endif %}
+                     </a>
+                  </div>
+                  <div class="col-xs-4">
+                     <select id="selPatients" name="selPatients" onchange="onPatientSelect(this);" style="padding:5px;font-size:10px;width:120px;display:none;">
+                     </select>
+                     <div id="record_tabs">
+                        {% if SETTINGS.ALLOW_ADDING_RECORDS %}
+                        <a id="add_record_tab" class="record_tab" href="javascript:void(0);"><img src="/jmvc/ui/resources/images/add_11.png" alt="+" /></a>
+                        {% endif %}
+                        <span id="loading_records_hint">{% trans "Loading records..." %}</span>
+                     </div>
+                  </div>
+                  <div id="record_tabs" style="border: 0px solid black;">
+                  </div>
+               </div>
+               <div class="row" style="float:left;">
+                  <div class="row row-offcanvas row-offcanvas-left" id="divSidebar" style="margin-left:10px;">
+                     <!-- sidebar -->
+                     <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+                        <!-- the app selector -->
+                        <div class="ui_app_list" id="app_selector" style="width: 180px; padding: 5px;">
+                           <ul id="active_app_tabs" style="display: none;"></ul>
+                           <ul id="background_app_tabs" style="display: none"></ul>
+                           <ul id="record_owned_options">
+                              {% if not SETTINGS.HIDE_SHARING %}
+                              <li id="carenet" data-controller="carenet" data-appType="internal">
+                                 <img class="app_tab_img" src="/jmvc/ui/resources/images/icons_24/groupevent.png" alt="" />{% trans "Sharing" %}				
+                              </li>
+                              {% endif %}
+                              {% if not SETTINGS.HIDE_APP_SETTINGS %}
+                              <li id="pha" data-controller="pha" data-appType="internal">
+                                 <img class="app_tab_img" src="/jmvc/ui/resources/images/icons_24/settings.png" alt="" />{% trans "App Settings" %}
+                              </li>
+                              {% endif %}
+                           </ul>
+                           <!-- default behavior is to start into healthfeed, so the app selector is disabled in the beginning -->
+                           <div id="app_selector_cover"> </div>
+                        </div>
+                     </div>
+                  </div>
+                  
+                  <!-- main app content -->
+                  <!--div id="app_container" class="app_content_pane" style="max-width:200px;border:1px solid red;"-->
+                  <div id="app_container" class="app_content_pane11 container" style="margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; border: 0px solid red; float: left; width: 980px; left: 180px; background-color: rgb(242, 246, 255);">
+                     <!--div id="blank_div" class="blank_div"></div-->
+                     <div id="app_content" class="in_app_container" style="overflow-y: hidden; float: left; margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px;"></div>
+                     <iframe id="app_content_iframe2" class="in_app_container2" name="app_content_iframe2" src="" 
+                        style="margin-left: 0px; padding-left: 0px; border: 1px solid green; width: 100%; display: none; height: 793px;" 
+                        onload="" frameborder="no"></iframe>
+                  </div>
+               </div>
+               <!-- row -->
+            </div>
+            <!-- container -->
+            <!--p><p><p><p><p-->
+            <!-- footer -->
+            <div id="footer" class="row">				
+            </div>
+            <div id="footer_responsive_old" class="row" style="width:105%;display:none;z-index:100000000000;bottom:0px;height:45px;background-color:#F8F8F8;border:1px solid silver;position:absolute;">
+<!--               <div class="col-xs-3">
+                  <a href="http://chip.org/laboratories/ihl/">
+                  <img style="width:45px;margin-left:10px;" src="/jmvc/ui/resources/images/ihl-badge.png">
+                  </a>
+               </div>
+               <div class="col-xs-3">
+                  <a href="http://chip.org/">
+                  <img style="width:45px;" src="/jmvc/ui/resources/images/chip-badge.png">
+                  </a>
+               </div>
+               <div class="col-xs-3">
+                  <a href="http://hms.harvard.edu/">
+                  <img style="width:45px;" src="/jmvc/ui/resources/images/hms-alt.png">
+                  </a>
+               </div>
+               <div class="col-xs-3">
+                  <a href="http://www.ics.forth.gr/">
+                  <img style="width:45px;margin-top:8px;" src="/jmvc/ui/resources/images/forth.png">
+                  </a>
+               </div>
+            </div>-->
+         </div>
+         <!-- used for jquery tools overlay -->
+         <div class="overlay" id="overlay">
+            <div class="wrap"></div>
+         </div>
+      </div>
+      
+      <!--	<script src="//cdnjs.cloudflare.com/ajax/libs/annyang/1.1.0/annyang.min.js"></script>
+         <script type="text/javascript">
+             
+         	if (annyang) {
+         var commands = {
+         'hello': function() {
+         alert('world!');
+         window.location.href = "/apps/allergies/#app_content";
+         }
+         
+         };
+                  annyang.debug();
+                              annyang.init(commands);
+         annyang.addCommands(commands);
+                              annyang.start();
+         }
+         </script>-->
+         
+{% endifequal %}    
+
+<!-- wrapper -->
+      <script compress="true" type="text/javascript" src="/jmvc/steal/steal.js"></script>
+      <script type="text/javascript">      
+         var ACCOUNT_ID = "{{ ACCOUNT_ID }}";
+         try
+         {
+         	steal('ui');
+         }
+         catch(e){}
+      </script>  
+
+
+
+   <!-- Javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!--script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="http://dimitra.no-ip.info/hookupweb/menu/js/jquery-1.10.2.min.js"><\/script>')</script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script-->
+    <script src="/jmvc/ui/resources/js/metismenu/jquery.navgoco.js"></script>
+    <script src="/jmvc/ui/resources/js/metismenu/main.js"></script>
+    
+    <script>
+        //$(document).ready(function () {
+        jQuery(function ($) {
+
+            //Navigation Menu Slider
+            $('#nav-expander').on('click', function (e) {
+                e.preventDefault();
+                $('body').toggleClass('nav-expanded');
+            });
+            $('#nav-close').on('click', function (e) {
+                e.preventDefault();
+                $('body').removeClass('nav-expanded');
+            });
+
+
+            // Initialize navgoco with default options
+            $(".main-menu").navgoco({
+                caret: '<span class="caret"></span>',
+                accordion: false,
+                openClass: 'open',
+                save: true,
+                cookie: {
+                    name: 'navgoco',
+                    expires: false,
+                    path: '/'
+                },
+                slide: {
+                    duration: 100,
+                    easing: 'swing'
+                }
+            });
+
+
+        });
+      </script>   
+         
+         
+   </body>
+</html>

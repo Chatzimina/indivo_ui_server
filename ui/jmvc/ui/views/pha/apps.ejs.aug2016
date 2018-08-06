@@ -1,0 +1,121 @@
+{% load i18n %}
+
+<% _(all_apps).each(function(app, i) {
+	
+
+	var input_id = "app_" + app.id.replace(/-/g, '_'); %>
+
+
+<!--&& app.name !=='Calendar'-->
+ <% if (app.name !== 'Recom Links'  && app.name !=='Top 5 recommended' && app.name !== 'Edit demographics' && app.name !== 'getSuggestions' && app.name !=='ExportRDFAvatar') { %> 
+                
+
+		<div class="app <%= app.enabled ? '' : 'disabled' %> <%= app.autonomous ? 'autonomous' : '' %>" style="height:100px; background-image: url('<%=  app.getImageSource() %>');" <%= app %>>
+
+
+		<b class="app_name">
+
+
+		   <% if (app.name == 'Problems') { %>
+                                {% trans "Problems" %}
+                          <% } %>
+                          <% if (app.name == 'Allergies') { %>
+                                {% trans "Allergies" %}
+
+                           <% } %>
+			 <% if (app.name == 'Profiler') { %>
+                              {% trans "Profiler" %}
+                          <% } %>
+
+			 <% if (app.name == 'Annotator') { %>
+                              {% trans "Annotator" %}
+                          <% } %>
+			 <% if (app.name == 'Calendar') { %>
+                              {% trans "Calendar" %}
+                          <% } %>
+			 <% if (app.name == 'Psycho-Emotional Profiler') { %>
+                              {% trans "Psycho-emotional profiler" %}
+                          <% } %>
+			 <% if (app.name == 'Appointments') { %>
+                              {% trans "Appointments" %}
+                          <% } %>
+
+                           <% if (app.name == 'Measurements') { %>
+                              {% trans "Measurements" %}
+                          <% } %>
+
+
+
+
+                         <% if (app.name == 'Labs') { %>
+                              {% trans "Labs" %}
+                          <% } %>
+                           <% if (app.name == 'Medications') { %>
+                                {% trans "Medications" %}
+
+                           <% } %>
+                           <% if (app.name == 'Procedures') { %>
+                                {% trans "Procedures" %}
+
+                           <% } %>
+                            <% if (app.name == 'Recommender') { %>
+                                {% trans "Recommender" %}
+
+                           <% } %>
+                            <% if (app.name == 'Import') { %>
+                                {% trans "Import" %}
+
+                           <% } %>
+                            <% if (app.name == 'Bluebutton') { %>
+                                {% trans "Bluebutton" %}
+
+                           <% } %>
+                           <% if (app.name == 'Contact') { %>
+                                {% trans "Contact" %}
+
+                           <% } %>
+                            <% if (app.name == 'Drugs') { %>
+                                {% trans "Drugs" %}
+
+                           <% } %>
+                            <% if (app.name == 'ALGA-C') { %>
+                                {% trans "ALGA-C" %}
+
+                           <% } %>
+
+
+
+			<% if (app.name !== 'Problems' & app.name !== 'Allergies' & app.name !== 'Medications' & app.name !== 'Procedures' & app.name !== 'Recommender' & app.name !== 'Import' & app.name !== 'Bluebutton' & app.name !== 'Contact' & app.name !== 'Drugs' & app.name !== 'ALGA-C'  & app.name !== 'Labs' & app.name !== 'Appointments'  & app.name !== 'Annotator'  & app.name !== 'Psycho-Emotional Profiler'  & app.name !== 'Calendar'  & app.name !== 'Profiler' & app.name !== 'Measurements') { %>
+				<%= app.name %>
+			<% } %>
+			</b>
+	
+		<div class="app_info">
+			
+			<b><%= app.name %></b>
+			<div class="app_description"><%= app.description %></div>
+			<!--<span><%= app.app_id %></span>-->
+				
+		</div>
+
+
+ 	
+		 <div class="app_options">
+                        <input type="checkbox" id="<%= input_id %>" name="enable_app" value="1" <%= app.enabled ? 'checked="checked"' : '' %> <%= app %> /> 
+                        <label for="<%= input_id %>">Enable</label>
+			
+                </div>
+<%} %>
+<p><p><p><p><p>
+<p><p><p><p><p>
+<p><p><p><p><p>
+
+
+
+
+<p><p><p><p><p>
+		
+
+	</div>
+<% }) %>
+<div style="clear: left;"> </div>

@@ -1,0 +1,65 @@
+{% load i18n %}
+
+<div style="height: 48px; text-align: right; font-size: .85em; text-transform: uppercase; margin: 16px;">
+  <a class="message_list" href="#" style="display:none;">[{% trans "Back to message list" %}]</a>
+</div>
+
+<table class="one_message" id="<%= message.id %>">
+  <tbody>
+    <tr>
+      <td>{% trans "From" %}:</td><td><%= message.sender %></td>
+    <tr>
+    <tr style="display:none;">
+      <td>{% trans "About" %}:</td><td><%= account.get_record_label(message.record_id) %></td>
+    <tr>
+    <tr>
+      <td>{% trans "Subject" %}:</td><td><%= message.subject %></td>
+    <tr>
+    <tr>
+      <td>
+	  {% trans "Received" %}:</td>
+	  <td  id="tdDate"><%= UI.UTILS.dateTimeToPrettyString(message.received_at) %>
+		<script>
+		var d = new Date('<%= message.received_at %>');			
+		var n = d.toLocaleDateString('en-us', options);
+		document.getElementById('tdDate').innerHTML = '<span>' + n + '</span>';
+		</script>	  
+	  </td>
+    </tr>
+    <% if (message.attachments.length > 0) { %>
+      <% $(message.attachments).each(function(i, attachment) { %>
+        <tr>
+          <td>
+            <% if (i === 0) { %>
+              {% trans "Attachments" %}:
+            <% } %>
+          </td>
+          <td style="padding: 0 0.25em;">
+            #<%= attachment.num %>
+            &middot;
+            <%=attachment.type%>
+            &middot;
+            <% if (attachment.doc_id) { %>
+            	[{% trans "Accepted into Record" %}]
+            <% } else { %>
+            	[<a class="attachment_accept" id="attachment_<%= attachment.num %>">{% trans "Accept into Record" %}</a>]
+            <% } %>
+            
+          </td>
+        </tr>
+      <% }); %>
+    <% } %>
+  </tbody>
+</table>
+
+<div id="one_message_body" class="undoreset">
+  <%== message.attr("body") %>
+</div>
+
+<div style="width:100%;text-align:center;">
+	<input type="button" class="btn btn-success btn-lg" value="{% trans "Back to message list" %}" class="message_list" onclick="el('message').click();return setMenuVisibility();"
+		style="margin-top:20px;background-color:#3276B1;padding:10px;border:0px solid black;color:white;font-size:20px;font-weight:bold;"/>
+</div>
+<script>
+window.scrollTo(0, 0);
+</script>

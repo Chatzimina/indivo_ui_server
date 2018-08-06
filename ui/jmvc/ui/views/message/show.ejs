@@ -1,0 +1,82 @@
+{% load i18n %}
+<h2>{% trans "Inbox" %}</h2>
+<p>{% trans "Displaying messages for:" %} 
+	<% if (labels.length <=2) { %>
+		<%= labels.join(' {% trans "and" %} ') %>
+	<% } else { %>
+		<% var lastLabel = labels.pop() %> 
+		<%= labels.join(', ') %> {% trans "and" %} <%= lastLabel %>
+	<% } %>
+</p>
+<% if (messages.length == 0) { %>
+
+  <em>{% trans "no messages" %}</em>
+
+<% } else { %>
+ 
+ <style>
+ .about{display:none;}
+ th, td{
+	max-width:250px !important;
+	padding:10px !important;
+ }
+ 
+ </style>
+ <script>
+ var options = {
+    weekday: "long", year: "numeric", month: "short",
+    day: "numeric", hour: "2-digit", minute: "2-digit"
+};
+</script>
+<!--table class="light messages"-->
+<table style="width:90%;" class="responsive">
+  <thead>
+    <tr>
+<!--      <th class="from">{% trans "From" %}</th>-->
+      <th class="about">{% trans "About" %}</th>
+      <th>{% trans "Subject" %}</th>
+      <th class="date">{% trans "Date" %}</th>
+      <th class="attachment">
+      	<img class="icon paperclip" src="/jmvc/ui/resources/images/paperclip.png" alt="has attachment" title="has attachment">
+      </th>
+      <th class="archive"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for (var i=0; i<messages.length; i++) { %>
+      <tr <%= messages[i] %> class="<%=(i%2)===0?'odd':'even'%>
+                 <%= (!messages[i].read_at) ? 'unread' : '' %>
+        ">
+       <!-- <td><div class="marker"> </div><%= messages[i].sender %></td>-->
+        <!--td><%= account.get_record_label(messages[i].record_id) %></td-->
+        <td>
+        	<%= messages[i].subject %>
+        </td>
+        <td id="tdDate_<%=i%>">
+			<%= UI.UTILS.dateTimeToPrettyString(messages[i].received_at) %>
+			
+			<script>
+			var d = new Date('<%= messages[i].received_at %>');
+			
+			var n = d.toLocaleDateString('en-us', options);
+			//document.getElementById('tdDate_<%=i%>').innerHTML = '<span>' + '<%= UI.UTILS.dateTimeToPrettyString(messages[i].received_at) %> -- ' + n + '</span>';
+			document.getElementById('tdDate_<%=i%>').innerHTML = '<span>' + n + '</span>';
+			</script>
+		</td>
+        <td>
+        	<% if (messages[i].attachments && messages[i].attachments.length > 0) { %>
+        		<img class="icon paperclip" src="/jmvc/ui/resources/images/paperclip.png" alt="attachment" title="attachment">
+        	<% } %>
+        </td>
+        <td>
+        	<img class="icon archive" src="/jmvc/ui/resources/images/delete.png" alt="delete" title="delete message">
+        </td>
+      </tr>
+      <% } %>
+   </tbody>
+</table>
+
+<% } %>
+<script>
+//alert('');
+</script>

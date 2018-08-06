@@ -1,0 +1,45 @@
+<Models xmlns="http://indivo.org/vocab/xml/documents#">
+  <Model name="Medication">
+    <Field name="drugName_title">{{drugName_title}}</Field>
+    <Field name="drugName_system">http://purl.bioontology.org/ontology/RXNORM/</Field>
+    <Field name="drugName_identifier">{{drugName_identifier}}</Field>
+    <Field name="endDate">{{endDate}}</Field>
+    <Field name="frequency_value">{{frequency_value}}</Field>
+    <Field name="frequency_unit">{{frequency_unit}}</Field>
+    <Field name="instructions">{{instructions}}</Field>
+    <Field name="provenance_title">{{provenance_title}}</Field>
+    <Field name="provenance_system">http://smartplatforms.org/terms/codes/MedicationProvenance#</Field>
+    <Field name="provenance_identifier">{{provenance_identifier}}</Field>
+    <Field name="quantity_value">{{quantity_value}}</Field>
+    <Field name="quantity_unit">{{quantity_unit}}</Field>
+    <Field name="startDate">{{startDate}}</Field>
+    <Field name="fulfillments">
+      <Models>
+        <Model name="Fill">
+          <Field name="date">{{date}}</Field>
+          <Field name="dispenseDaysSupply">{{dispenseDaysSupply}}</Field>
+          <Field name="pbm">{{pbm}}</Field>
+          <Field name="pharmacy_ncpdpid">{{pharmacy_ncpdpid}}</Field>
+          <Field name="pharmacy_org">{{pharmacy_org}}</Field>
+          <Field name="pharmacy_adr_country">{{pharmacy_adr_country}}</Field>
+          <Field name="pharmacy_adr_city">{{pharmacy_adr_city}}</Field>
+          <Field name="pharmacy_adr_postalcode">{{pharmacy_adr_postalcode}}</Field>
+          <Field name="pharmacy_adr_street">{{pharmacy_adr_street}}</Field>
+          <Field name="provider_dea_number">{{provider_dea_number}}</Field>
+          <Field name="provider_npi_number">{{provider_npi_number}}</Field>
+          <Field name="provider_email">{{provider_email}}</Field>
+          <Field name="provider_name_given">{{provider_name_given}}</Field>
+          <Field name="provider_name_family">{{provider_name_family}}</Field>
+          <Field name="provider_tel_1_type">{{provider_tel_1_type}}</Field>
+          <Field name="provider_tel_1_number">{{provider_tel_1_number}}</Field>
+          <Field name="provider_tel_1_preferred_p">{{provider_tel_1_preferred_p}}</Field>
+          <Field name="quantityDispensed_value">{{quantityDispensed_value}}</Field>
+          <Field name="quantityDispensed_unit">{{quantityDispensed_unit}}</Field>
+        </Model>
+ 
+      </Models>
+
+    </Field>
+  </Model>
+</Models>
+

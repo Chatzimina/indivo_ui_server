@@ -1,0 +1,324 @@
+{% load i18n %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en' lang='en'>
+	<head>
+<style>
+#languages{
+position: absolute;
+right: 50px;
+margin-right: 230px;
+top:3px;
+}
+
+#languages2{
+position: absolute;
+right: 80px;
+margin-right: 230px;
+top:6px;
+}
+
+#deleteaccount {
+        position: relative; top: 850px;left: 0; right: 10%; bottom: 0;
+        margin: 0 0 32px;
+        font-size: 1.25em;
+        text-align: center;
+
+
+
+}
+
+
+#blank_div {
+    height: 30px;
+    overflow: hidden;
+}
+
+#footer { height: 100px; }
+
+
+
+
+
+
+</style>
+
+	
+
+                <!--   <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/1.1.0/annyang.min.js"></script> 
+                   <script type="text/javascript" src="{{SERVER_ROOT_DIR}}/apps/problems/static/annyang-master/annyang.js"></script>
+                   <script type="text/javascript">
+			$( document ).ready( function() {
+    			$('app_content').function() 
+                                        //if(annyang)
+                                        //{
+                                                //var commands = {
+                                                //'show tps report': function() {
+                                                //console.log("You just said - Show tps report");
+                                                //},
+						//'test': function(){
+						alert('ok');
+                				window.location.href ="allergies";
+
+                			//	}
+                                        //};
+
+                                        //annyang.debug();
+                                        //annyang.init(commands);
+                                        //annyang.start();}
+			 	//});
+			});
+                   </script>-->
+		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+		<!-- note we don't use the standard header here, so we don't double include stuff -->
+
+
+<!--               {{existing_record}}
+	existingexisting_account_id{{existing_account_id}}
+        'existing_username_id{{existing_username_id}}
+-->
+
+
+
+<!--		{{record_id}}-->
+          {% if jsonData != " " %}
+
+		{% if jsonData.5.z_score < -2 or jsonData.5.z_score > 2 %}
+	
+                         <link type="text/css" href="/jmvc/ui/resources/css/ui_large_fonts.css" rel="Stylesheet" />
+		{% else %}
+			<link type="text/css" href="/jmvc/ui/resources/css/ui.css" rel="Stylesheet" />
+		{% endif %}
+          {% else %}
+                 <link type="text/css" href="/jmvc/ui/resources/css/ui.css" rel="Stylesheet" />
+          {% endif %}
+
+		
+		{% if branding %}
+			<title>{{ branding.pretty_name_prepend }} {{ branding.pretty_name }}</title>
+		{% else %}
+			<title>{% trans "Indivohealth" %}</title>
+		{% endif %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<script>
+$(window).bind("load", function() { 
+       
+       var footerHeight = 0,
+           footerTop = 0,
+           $footer = $("#footer");
+           
+       positionFooter();
+       
+       function positionFooter() {
+       
+                footerHeight = $footer.height();
+                footerTo = ($(window).scrollTop()+$(window).height()-footerHeight)+200;
+                footerTop = footerTo +"px";
+
+               if ( ($(document.body).height()+footerHeight) < $(window).height()) {
+                   $footer.css({
+                        position: "absolute",
+                   //}).animate({
+                        top: footerTop
+                   })
+               } else {
+                   $footer.css({
+                        position: "static"
+                   })
+               }
+               
+       }
+
+       $(window)
+               .scroll(positionFooter)
+               .resize(positionFooter)
+               
+});
+
+
+</script>
+
+
+<script type="text/javascript">
+<!--
+function getConfirmation(){
+   var retVal = confirm("Are you sure you want to delete your account ?");
+   if( retVal == true ){
+      alert("Account deleted");
+      document.myform.submit();
+          return true;
+   }else{
+      alert("Cancelled request");
+          return false;
+   }
+}
+//-->
+</script>
+
+	</head>
+	<body>	
+		<div id="full_height">
+                			
+			<!-- header with logo and account settings -->
+			<div id="header">
+				<div id="header_logo_and_name">
+					{% if branding %}
+						<div id="header_logo_div">
+							<img id="header_logo" alt="header_logo" src='{{ branding.logo_image_src }}'/>
+						</div>
+					{% endif %}
+					<span id="header_site_name">
+						{% if branding %}
+							 {{ branding.pretty_name_prepend }} {{ branding.pretty_name }}
+						{% else %}
+							{% trans "Indivohealth" %}<span id="header_trademark">&trade;</span>
+						{% endif %}
+					</span>
+					<span id="header_fullname"></span>
+				</div>
+  <div id="languages" >
+
+
+               <form name="setLangEnglish" action="/i18n/setlang/" method="POST">{% csrf_token %}
+                   <input name="next" type="hidden" value="/" />
+                   <input type="hidden" name="language" value="en" />
+                   <a href="#" onclick="document.setLangEnglish.submit();return false;"><img src="/jmvc/ui/resources/images/app_icons_32/united_kingdom_flag.png" height="25" width="25"></a>
+               </form>
+
+             </div>
+             <div id="languages2" >
+               <form name="setLangGreek" action="/i18n/setlang/" method="POST">{% csrf_token %}
+                   <input name="next" type="hidden" value="/" />
+                   <input type="hidden" name="language" value="el" />
+                 <a href="#" onclick="document.setLangGreek.submit();return false;"><img src="/jmvc/ui/resources/images/app_icons_32/Greece-Flag-Greek1.png" height="20" width="25"></a>
+               </form>
+         </div>
+				
+				<!-- Settings & Logout -->
+				<div id="header_controls">
+<form id="myform" action="/deleteaccount">
+					
+					<!-- <img class="header_icons" alt="settings" src="/jmvc/ui/resources/images/icons_16/delete.png" />
+					<a href="javascript:{}" onclick="getConfirmation();" >{% trans "Delete account" %}</a>
+-->
+					<a href="{% url ui.views.change_password %}">
+						<img class="header_icons" alt="settings" src="/jmvc/ui/resources/images/icons_16/package_settings.png" />
+						{% trans "Settings" %}
+					</a>
+					<a id="logout" href="{% url ui.views.logout %}">
+						<img class="header_icons" alt="logout" style="opacity: 0.7;" src="/jmvc/ui/resources/images/icons_16/goto.png" />
+						{% trans "Logout" %}
+					</a>
+</form>
+				</div>
+			</div>
+			
+			<!-- container for alert messages -->
+			<div id="alerts"></div>
+			
+			<div id="container">
+					
+				<!-- the tab bar -->
+				<div id="tabs">
+					{% if not SETTINGS.HIDE_HEALTHFEED %}
+					<a id="healthfeed" class="main_tab" href="javascript:void(0);">
+						<img src="/jmvc/ui/resources/images/app_icons_32/healthfeed.png" alt="" />
+						{% trans "Healthfeed" %}
+					</a>
+					{% endif %}
+					{% if not SETTINGS.HIDE_INBOX %}
+					<a id="message" class="main_tab" href="javascript:void(0);">
+						<img src="/jmvc/ui/resources/images/app_icons_32/inbox.png" alt="" />
+						{% trans "Inbox" %}
+					</a>
+					{% endif %}
+				<!--	<a id="contact" class="main_tab" href="javascript:void(0);">
+                                                <img src="/jmvc/ui/resources/images/app_icons_32/healthfeed.png" alt="" />
+                                                {% trans "Contact" %}
+                                        </a>
+	-->
+					<div id="record_tabs">
+						{% if SETTINGS.ALLOW_ADDING_RECORDS %}
+						<a id="add_record_tab" class="record_tab" href="javascript:void(0);"><img src="/jmvc/ui/resources/images/add_11.png" alt="+" /></a>
+						{% endif %}
+						<span id="loading_records_hint">{% trans "Loading records..." %}</span>
+					</div>
+				</div>
+				
+				<!-- the app selector -->
+				<div id="app_selector">
+					<ul id="active_app_tabs" style="display: none;"></ul>
+					<ul id="background_app_tabs" style="display: none"></ul>
+					
+					<ul id="record_owned_options">
+						{% if not SETTINGS.HIDE_SHARING %}
+						<li id="carenet" data-controller="carenet" data-appType="internal">
+							<img class="app_tab_img" src="/jmvc/ui/resources/images/icons_24/groupevent.png" alt="" />{% trans "Sharing" %}
+						</li>
+						{% endif %}
+						{% if not SETTINGS.HIDE_APP_SETTINGS %}
+						<li id="pha" data-controller="pha" data-appType="internal">
+							<img class="app_tab_img" src="/jmvc/ui/resources/images/icons_24/settings.png" alt="" />{% trans "App Settings" %}
+						</li>
+						{% endif %}
+					</ul>
+					
+					<!-- default behavior is to start into healthfeed, so the app selector is disabled in the beginning -->
+					<div id="app_selector_cover"> </div>
+				</div>
+				
+				<!-- main app content -->
+				<div id="app_container" class="app_content_pane">
+				<div id="blank_div" class="blank_div"></div>
+					<div id="app_content" class="in_app_container"></div>
+					<iframe id="app_content_iframe" class="in_app_container" src="" style="display: none" frameBorder="no"></iframe>
+				</div>
+				</div>
+				<p><p><p><p><p>
+				<!-- footer -->
+				
+				<div id="footer">
+			
+				{% if branding %}
+					{% include branding.footer_template %}
+				{% else %}
+					{% include 'ui/footer.html' %}
+				{% endif %}
+		
+				</div>
+			</div>
+			
+			<!-- used for jquery tools overlay -->
+			<div class="overlay" id="overlay"><div class="wrap"></div></div>
+		</div>
+	</body>
+	
+	<!-- development or production NOTE: steal path is at the top-level jmvc dir -->
+	<script compress="true" type="text/javascript" src="/jmvc/steal/steal.js"></script>
+	<script type="text/javascript">
+		var ACCOUNT_ID = "{{ ACCOUNT_ID }}";
+		steal('ui');
+	</script>
+
+<!--	<script src="//cdnjs.cloudflare.com/ajax/libs/annyang/1.1.0/annyang.min.js"></script>
+       
+                   <script type="text/javascript">
+                       
+                  		if (annyang) {
+					  var commands = {
+						'hello': function() {
+ 							  alert('world!');
+							  window.location.href = "/apps/allergies/#app_content";
+						}
+					  
+  				};
+  		                        annyang.debug();
+                                        annyang.init(commands);
+					annyang.addCommands(commands);
+                                        annyang.start();
+				}
+                   </script>-->
+
+
+
+</html>

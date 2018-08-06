@@ -1,0 +1,16 @@
+<Models xmlns="http://indivo.org/vocab/xml/documents#">
+  <Model name="Appointment">
+    <Field name="appointment_title">{{appointment_title|escape}}</Field>
+    <Field name="lastname">{{lastname|escape}}</Field>
+    <Field name="name">{{name|escape}}</Field>
+    <Field name="date">{{date|escape}}</Field>
+    <Field name="time">{{time}}</Field>
+    <Field name="alert">{{alert}}</Field>
+    <Field name="comments">{{comments|escape}}</Field>
+    <Field name="street_number">{{street_number|escape}}</Field>
+    <Field name="route">{{route|escape}}</Field>
+    <Field name="locality">{{locality|escape}}</Field>
+    <Field name="postal_code">{{postal_code|escape}}</Field>
+    <Field name="country">{{country|escape}}</Field>
+  </Model>
+</Models>

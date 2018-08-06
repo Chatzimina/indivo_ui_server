@@ -1,0 +1,170 @@
+@font-face {
+  font-family: 'HelveticaNeue';
+  font-style: normal;
+  font-weight: normal;
+  src: url("HelveticaNeue-Light.otf")  format("truetype");
+
+}
+body {
+  font-family: 'HelveticaNeue';
+  font-size:16px;
+
+}
+
+a {
+    color: #7dc042 !important;
+}
+
+a[href^="mailto:"] {
+
+     color: #7dc042 !important;
+}
+
+.btn-danger, .btn-danger:focus, .btn-danger:active, .btn-danger.active, .open .dropdown-toggle.btn-danger {
+    color: #fff !important;
+    background-color: #d4d4d4 !important;
+    border-color: #d4d4d4 !important;
+    font-size: 100% !important;
+    font-weight: bold !important;
+    background-image:none;
+    outline:0;
+}
+
+.btn-danger:hover {
+    color: #fff !important;
+    background-color: #bbbbbb !important;
+    border-color: #bbbbbb !important;
+    font-size: 100% !important;
+    font-weight: bold !important;
+    background-image:none;
+    outline:0;
+}
+
+.btn-success, .btn-success:focus, .btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
+    color: #fff !important;
+    background-color: #7dc042 !important;
+    border-color: #7dc042 !important;
+    font-size: 100% !important;
+    font-weight: bold !important;
+    outline:0;
+}
+
+.btn-success:hover{
+    color: #fff !important;
+    background-color: #47a944 !important;
+    border-color: #47a944 !important;
+    font-size: 100% !important;
+    font-weight: bold !important;
+    outline:0;
+}
+
+.btn-primary, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary,.btn-primary.disabled, .btn-primary[disabled]{
+    color: #7dc042;
+    background-color: #ffffff;
+    border-color: #7dc042 !important;
+    font-size: 100% !important;
+    font-weight: bold !important;
+    outline:0;
+}
+.btn-primary:hover{
+    color: #ffffff;
+    background-color: #7dc042 !important;
+    border-color: #7dc042!important;
+    font-size: 100% !important;
+    font-weight: bold !important;
+    outline:0;
+}
+
+.btn{
+        background-image: -webkit-linear-gradient(top, #ffffff, #fffffff) !important;
+        background-image:none !important;
+        background-repeat:no-repeat !important;
+        outline:0;
+        width:auto;
+}
+
+.btn-warning, .btn-warning:focus, .btn-warning:active, .btn-warning.active, .open .dropdown-toggle.btn-warning {
+    color: #bbb !important;
+    background-color: #fff !important;
+    border-color: #bbb !important;
+    font-size: 100% !important;
+    font-weight: bold !important;
+    background-image:none;
+    outline:0;
+}
+
+.btn-warning:hover {
+    color: #fff !important;
+    background-color: #bbbbbb !important;
+    border-color: #bbbbbb !important;
+    font-size: 100% !important;
+    font-weight: bold !important;
+    background-image:none;
+    outline:0;
+}
+
+.btn.btn-primary.btn-sm:hover{
+    color: #ffffff;
+    background-color: #7dc042 !important;
+    border-color: #7dc042!important;
+    font-size: 100% !important;
+    font-weight: bold !important;
+    outline:0;
+}
+
+.btn.btn-primary.btn-sm {
+    color: #7dc042;
+    background-color: #ffffff !important;
+    border-color: #7dc042 !important;
+    font-size: 100% !important;
+    font-weight: bold !important;
+    outline:0;
+
+
+}
+
+.btn.btn-primary.btn-lg:hover{
+    color: #ffffff;
+    background-color: #7dc042 !important;
+    border-color: #7dc042!important;
+    font-size: 100% !important;
+    font-weight: bold !important;
+    outline:0;
+}
+
+.btn.btn-primary.btn-lg {
+    color: #7dc042;
+    background-color: #ffffff !important;
+    border-color: #7dc042 !important;
+    font-size: 100% !important;
+    font-weight: bold !important;
+    outline:0;
+
+
+}
+
+
+
+.btn.btn-warning.btn-sm{
+
+    color: #bbb !important;
+    background-color: #fff !important;
+    border-color: #bbb !important;
+    font-size: 100% !important;
+    font-weight: bold !important;
+    background-image:none;
+    outline:0;
+}
+
+.btn.btn-warning.btn-sm:hover {
+
+    color: #fff !important;
+    background-color: #bbbbbb !important;
+    border-color: #bbbbbb !important;
+    font-size: 100% !important;
+    font-weight: bold !important;
+    background-image:none;
+    outline:0;
+
+
+}

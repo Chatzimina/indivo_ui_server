@@ -1,0 +1,578 @@
+{% extends 'problems/templates/base.html' %}
+{% block title %}edit appointment{% endblock %}
+{% block content %}
+{% load i18n %}
+<script src="{{ STATIC_HOME }}/jquery-1.7.min.js"></script>
+<script src="{{ STATIC_HOME }}/jquery-1.7.js"></script>
+<script src="{{ STATIC_HOME }}/jonthornton-jquery-timepicker-578dcfd/jquery.timepicker.min.js"></script>
+<script src="{{ STATIC_HOME }}/jonthornton-jquery-timepicker-578dcfd/jquery.timepicker.js"></script>
+<script type='text/javascript' language='javascript'     src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js'></script>
+<link href="{{ STATIC_HOME }}/jonthornton-jquery-timepicker-578dcfd/jquery.timepicker.css" type="text/css" rel="stylesheet">
+<link href="{{ STATIC_HOME }}/css/datepicker.css" rel="stylesheet" type="text/css"/>
+
+<script>
+var address="";
+
+if('{{appointment.street_number}}'!='None'){
+
+	address+="{{appointment.street_number}} ";
+}
+
+if('{{appointment.route}}'!='None'){
+	address+="{{appointment.route}} ";
+}
+if('{{appointment.locality}}'!='None'){
+	address+="{{appointment.locality}} ";
+}
+
+if('{{appointment.country}}'!='None'){
+	address+="{{appointment.country}} ";
+}
+if('{{appointment.postal_code}}'!='None'){
+	address+="{{appointment.postal_code}} ";
+}
+var placeSearch, autocomplete;
+var componentForm = {
+  street_number: 'short_name',
+  route: 'long_name',
+  locality: 'long_name',
+  //administrative_area_level_1: 'short_name',
+  country: 'long_name',
+  postal_code: 'short_name'
+};
+
+function initAutocomplete() {
+  // Create the autocomplete object, restricting the search to geographical
+  // location types.
+
+  autocomplete = new google.maps.places.Autocomplete(
+      /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+      {types: ['geocode']});
+
+  // When the user selects an address from the dropdown, populate the address
+  // fields in the form.
+  autocomplete.addListener('place_changed', fillInAddress);
+}
+
+
+// [START region_fillform]
+function fillInAddress() {
+  // Get the place details from the autocomplete object.
+  var place = autocomplete.getPlace();
+
+  for (var component in componentForm) {
+    document.getElementById(component).value = '';
+    document.getElementById(component).disabled = false;
+
+  }
+
+  // Get each component of the address from the place details
+  // and fill the corresponding field on the form
+
+  if ( place.address_components!=undefined){
+  for (var i = 0; i < place.address_components.length; i++) {
+    if(i==0){
+                address="";
+        }
+    var addressType = place.address_components[i].types[0];
+    if (componentForm[addressType]) {
+      var val = place.address_components[i][componentForm[addressType]];
+      document.getElementById(addressType).value = val;
+      address += val;
+    }
+  }
+  }
+  else
+  {
+        //alert({% trans "'We cannot locate your address.Please complete next fields by yourself.'" %});
+  }
+}
+
+function geolocate() {
+
+  if (navigator.geolocation) {
+
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var geolocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+
+      };
+
+      var circle = new google.maps.Circle({
+        center: geolocation,
+        radius: position.coords.accuracy
+      });
+      autocomplete.setBounds(circle.getBounds());
+    });
+  }
+}
+// [END region_geolocation]
+
+var map;
+
+function initMap() {
+
+  map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 15,
+    center: {lat: 35.305112, lng: 25.072669}
+  });
+  var geocoder = new google.maps.Geocoder();
+
+  document.getElementById('submitMap').addEventListener('click', function() {
+    geocodeAddress(geocoder, map);
+  });
+}
+
+function geocodeAddress(geocoder, resultsMap) {
+//  var address = document.getElementById('address').value;
+
+  geocoder.geocode({'address': address}, function(results, status) {
+    if (status === google.maps.GeocoderStatus.OK) {
+      resultsMap.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+        map: resultsMap,
+        position: results[0].geometry.location
+      });
+    } else {
+
+
+	   alert({% trans "'We cannot locate your address'" %});
+
+    }
+  });
+}
+
+    
+</script>
+
+ <script src="https://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyAYuOKSuMp876IxsVlZWsPc3mdCPdVoJ_Q&sensor=false&signed_in=true&libraries=places&language=en-US&&callback=initAutocomplete"></script>
+
+<script>
+var nextYear = (new Date().getFullYear() + 1).toString();
+
+$(document).ready(function() {
+$('.date').datepicker({
+	dateFormat:'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true,
+        minDate:'-26y',
+        maxDate:'+2y',
+        yearRange: "1990:"+nextYear,
+        });
+
+    $('.time').timepicker({
+		timeFormat: 'H:i',
+		show2400:true,
+	});
+     initMap();
+     initAutocomplete();
+     if (address!= "")
+{
+        document.getElementById("autocomplete").value = address;
+}
+if('{{appointment.route}}' !='' && '{{appointment.route}}' != null && '{{appointment.route}}' != 'None'){
+     document.getElementById("submitMap").click();
+
+}
+
+});
+
+
+
+function validateForm()
+{
+var appointment_title=document.forms["myForm"]["appointment_title"].value;
+var datee=document.forms["myForm"]["date"].value;
+var time=document.forms["myForm"]["time"].value;
+
+if (appointment_title==null || appointment_title=="")
+  {
+  alert("{% trans "'Appointment title must be filled'" %}");
+  return false;
+  }
+
+if (datee==null || datee=="")
+  {
+  alert({% trans "'Date must be filled'" %});
+  return false;
+}
+
+if (time==null || time=="")
+  {
+  alert({% trans "'Time must be filled'" %});
+  return false;
+}
+}
+
+</script>
+
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      html, body {
+ /*       height: 100%;*/
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+/*        height: 100%;*/
+      }
+    </style>
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+    <style>
+      #locationField, #controls {
+        position: relative;
+        width: 480px;
+      }
+      #autocomplete {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 99%;
+      }
+      .label {
+        text-align: right;
+        font-weight: bold;
+        width: 100px;
+        color: #303030;
+      }
+      #address {
+       /* border: 1px solid #000090;*/
+        /*background-color: #f0f0ff;*/
+        width: 480px;
+        padding-right: 2px;
+      }
+      #address td {
+        font-size: 10pt;
+      }
+      .field {
+        width: 99%;
+      }
+      .slimField {
+        width: 80px;
+      }
+      .wideField {
+        width: 200px;
+      }
+      #locationField {
+        height: 20px;
+        margin-bottom: 2px;
+      }
+	  #ui-datepicker-div { display: none; }
+    </style>
+
+{% if jsonData %}
+        {% if jsonData.5.z_score < -1 or jsonData.5.z_score > 2 %} <!--Rumination (abnormal it should be over 2 or less -2 )-->
+        <style type="text/css">
+            *
+            {
+                font-size : 12px
+            }
+
+            .class1 *
+            {
+                font-size : 20px;
+            }
+	 #ui-datepicker-div { display: none; }
+        </style>
+        {%endif%}
+     {% endif %}
+
+        <meta charset="utf-8">
+        <title>Speak.js Demo</title>
+<!--        <script src="{{ STATIC_HOME }}/speakClient.js"></script>-->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+<body>
+<script>
+   function setPageSize()
+   {   	
+   	if (el('divList'))el('divList').style.width = (el('divContainer').offsetWidth-0).toString() + 'px';   	
+	else if (window.top.document.getElementById('app_container'))
+		el('divContainer').style.width = (window.top.document.getElementById('app_container').offsetWidth-0).toString() + 'px';	
+	
+}
+
+setInterval('setPageSize();', 500);
+</script>
+
+{% if record_id %}
+<script>
+  Indivo.Auth.setToken("{{surl_credentials.token}}","{{surl_credentials.secret}}");
+</script>
+{% endif %}
+ <div id="audio"></div>
+<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:100%;overflow-x:hidden;" id="divContainer" >
+	<form name="myForm" onsubmit="return validateForm()"  method="post" action="" accept-charset="UTF-8">
+	
+	<div class="row" style="height:10px;"></div>
+	
+	<div class="row"  style="margin-left:5px;">
+		<div class="col-xs-12">
+		<h2>{% trans "Edit Appointment" %} </h2>
+		</div>
+    </div>
+	
+	<div class="row"  style="height:10px;"></div>
+	
+	<div class="row" style="margin-left:5px;width:90%;">
+	
+		<div class="form-group">
+			<label>{% trans "Appointment" %} <span style="color:red;font-weight:bold;font-size:20px;">*</span>	</label>
+			<input type="text" name="appointment_title"   id="appointment_title" style="width: 100%" class="form-control"
+				value="{{appointment.appointment_title}}"/>
+		</div>
+		<div class="form-group">
+			<label>{% trans "Doctor's name" %}</label>	
+			<div class="row" style="width:100%;">
+				<div class="col-xs-6">
+					<label>{% trans "Last name " %}</label>
+					<input type="text" name="lastname" id="lastname"  class="form-control" style="width:100%;"
+						value="{{appointment.lastname}}"/>
+				</div>
+				<div class="col-xs-6">
+					<label>{% trans "Name " %}</label>
+					<input type="text" name="name" id="name"  class="form-control" style="width:100%;" value="{{appointment.name}}"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label>{% trans "Date" %} <span style="color:red;font-weight:bold;font-size:20px;">*</span></label>
+			<input type="text" name="date" id="date" style="width: 100%" class="date form-control" value="{{appointment.date}}" autocomplete="off" readonly/>
+		</div>
+		<div class="form-group">
+			<label>{% trans "Time" %} <span style="color:red;font-weight:bold;font-size:20px;">*</span></label>
+			<input type="text" name="time" id="time" autocomplete="off" style="width: 100%" 
+				value="{{appointment.time}}"
+				class="time ui-timepicker-input form-control" autocomplete="off"/>
+		</div>
+
+		<div class="form-group">
+                        <label>{% trans "Alert time" %}</label>
+                        <select id="alert" name="alert" class="form-control">
+                          <option value="never">{%trans "Never" %}</option>
+                          <option value="5">{%trans "5 minutes before" %}</option>
+                          <option value="30">{%trans "30 minutes before" %}</option>
+                          <option value="60">{%trans "60 minutes before" %}</option>
+                          <option value="1">{%trans "One day before" %}</option>
+                          <option value="2">{%trans "Two days before" %}</option>
+                        </select>
+
+	         <script>
+                        el('alert').value='{{appointment.alert}}';
+                 </script>
+
+                </div>
+
+		<div class="form-group">
+			<label>{% trans "Details" %}</label>
+			<textarea name="comments" cols="50" rows="3" wrap="soft" class="form-control" style="width: 100%">{{appointment.comments}}</textarea>
+		</div>
+		<div class="form-group">
+			<label>{% trans "Address" %}</label>			
+			<div class="row" style="width:100%;margin-left:1px;">
+				<div class="col-lg-12" id="locationField">
+					<input id="autocomplete" placeholder="Enter your address" onFocus="geolocate()" type="text" class="form-control" style="width:100%"/>
+				</div>
+			</div>
+			<div class="row" style="height:20px;"></div>
+			<div class="row" style="width:100%;">
+				<div id="address" class="col-lg-12">
+					<input type="hidden" id="street_number" value ="{{appointment.street_number}}" name="street_number"/>
+					<input type="hidden" id="route" value="{{appointment.route}}" name="route" />
+					<input type="hidden"  id="locality" name="locality" value="{{appointment.locality}}"/>
+					<input type="hidden" id="postal_code" name="postal_code" value="{{appointment.postal_code}}"/>
+					<input  type="hidden" name="country" id="country"  value="{{appointment.country}}"/>
+					<input id="submitMap" name="submitMap" type="button" value="Locate on map" class="btn btn-small btn-primary"/>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12" style="padding:40px;">
+                        <span style="color:red;font-weight:bold;font-size:20px;">*</span> <b>{% trans "Mandatory Fields" %}</b>
+                </div>
+				</div>
+			
+		</div>
+		
+		
+	</div>
+	
+	<div class="row" style="height:10px;"></div>
+	<div class="row">
+		<div class="row">
+		<div class="col-lg-12" align="center">
+			<input type="submit" value="{% trans "Update Appointment" %}" style="width: 300px;"  class="btn-lg btn-primary btn"/>
+		</div>
+		</div>
+		<div class="row" style="height:10px;"></div>
+		<div class="row">
+		<div class="col-lg-12" align="center">
+			<a href="./../"><button style="width: 300px" type="button"  class="btn-lg btn-warning btn"> {% trans "Cancel" %} </button></a>
+		</div>
+		</div>
+	</div>
+	
+	<div class="row" style="height:10px;"></div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div id="map" style="width: 100%; height: 100%;min-height:400px;"></div>
+				</div>
+			</div>
+	
+	<div class="row" style="height:10px;"></div>
+	<div class="row">
+		<div class="form-group">
+			&nbsp;&nbsp;&nbsp;&nbsp;<label>{% trans "Additional Information" %}</label> {% trans "Created at" %} {{meta.created_at}}
+		</div>	
+	</div>
+
+	</form>
+</div>
+
+
+
+{% ifequal 1 0 %}
+
+
+
+
+
+        <div id="audio"></div>
+<div class="class1">
+
+{% if record_id %}
+<script>
+  Indivo.Auth.setToken("{{surl_credentials.token}}","{{surl_credentials.secret}}");
+</script>
+{% endif %}
+
+<h2>{{appointment.appointment_title}} &nbsp;&nbsp;<span style="font-size:0.7em;">
+
+<!--<td><p align="right"><a href="./"><button>BACK</back></a></span></h2></p></td>-->
+<td></td> 
+
+
+ <form name="myForm" onsubmit="return validateForm()"  method="post" action="">
+
+    <table class="light form">
+      <col style="width: 20%"></col>
+      <col style="width: 80%"></col>
+      <tr>
+        <td>{% trans "Appointment" %}</td>
+        <td>
+          <input type="text" name="appointment_title" id="appointment_title"  value="{{appointment.appointment_title}}" style="width: 100%" />
+
+        </td>
+      </tr>
+      <tr>
+        <td>{% trans "Doctor's name" %}</td>
+        <td width:"20%">{% trans "Last name " %}
+          <input type="text" name="lastname" id="lastname"  value="{{appointment.lastname}}" style="width: 40%"/>
+          {% trans "Name " %}
+          <input type="text" name="name" id="name"   value="{{appointment.name}}" style="width: 40%"/>
+        </td>
+
+      </tr>
+
+      <tr>
+        <td>{% trans "Date" %}</td>
+       <td><input type="text" name="date" class="date" id="date" style="width: 100%"  value="{{appointment.date}}"/></td>
+      </tr>
+
+      <tr>
+        <td>{% trans "Time" %}</td>
+        <td><input type="time" name="time" class="time ui-timepicker-input" id="time" autocomplete="off" style="width: 100%" value="{{appointment.time}}"/></td>
+      </tr>
+       <tr>
+        <td> {% trans "Alert time" %} </td>
+        <td>
+        <select id="alert" name="alert">
+          <option value="never">{%trans "Never" %}</option>
+          <option value="5">{%trans "5 minutes before" %}</option>
+          <option value="30">{%trans "30 minutes before" %}</option>
+          <option value="60">{%trans "60 minutes before" %}</option>
+          <option value="1">{%trans "One day before" %}</option>
+          <option value="2">{%trans "Two days before" %}</option>
+        </select>
+       </td>
+      </tr>
+
+       <tr>
+        <td>{% trans "Comments" %}</td>
+        <td><textarea name="comments"  value="{{appointment.comments}}" cols="50" rows="3" wrap="soft" style="width: 100%"></textarea></td>
+      </tr>
+      <tr>
+        <td>{% trans "Address" %} </td>
+        <td><div id="locationField">
+                <input id="autocomplete" placeholder="Enter your address" onFocus="geolocate()" type="text"></input>
+             </div>
+
+            <table id="address">
+              <tr>
+                <td class="label">{% trans "Street address" %}</td>
+                 <td class="slimField"><input type="text" class="field" id="street_number" name="street_number"
+                             value="{{appointment.street_number}}"></input></td>
+                <td class="wideField" colspan="2"><input class="field" id="route" name="route" value="{{appointment.route}}"
+                      ></input></td>
+              </tr>
+
+              <tr>
+                <td class="label">{% trans "City" %}</td>
+                <td class="wideField" colspan="3"><input type="text" class="field" id="locality" name="locality" value="{{appointment.locality}}" ></input></td>
+              </tr>
+              <tr>
+   <!--     <td class="label">State</td>
+        <td class="slimField"><input class="field"
+              id="administrative_area_level_1" disabled="true"></input></td>-->
+               <td class="label">{% trans "Zip code" %}</td>
+                <td class="wideField"><input class="field" type="text" id="postal_code" name="postal_code" value="{{appointment.postal_code}}"
+              ></input></td>
+              </tr>
+              <tr>
+                <td class="label">{% trans "Country" %}</td>
+                <td class="wideField" colspan="3"><input type="text" class="field" name="country" value="{{appointment.country}}"
+                      id="country"></input></td>
+              </tr>
+              <tr>
+		<input id="submitMap" type="button" value="Locate on map:">
+              </tr>
+            </table>
+   <br />
+    </div>
+
+
+   </td>
+      </tr>
+    <tr>
+ <td></td> <td width="700px" height="700px"><div id="map" style="width: 100%; height: 100%;">
+</td>
+    </tr> 
+
+    </table>
+
+    <br />
+
+    <div style="text-align: center">
+      <input type="submit" value="{% trans "Update Appointment" %}" style="width: 33%"/><p>
+     <!-- <input type="button" style="width: 200px" onclick="history.go(-1);" value="    Cancel    ">-->
+   
+  
+
+
+</div>
+</form>
+
+ <div align="center"><a href="./../"><button style="width: 200px">{% trans "   Cancel" %}  </button></a></div>
+
+
+<h3>{% trans "Additional Information" %}</h3>
+<div class="details">{% trans "Created at" %} {{meta.created_at}}</div>
+
+{% endifequal %}
+
+{% endblock %}
+

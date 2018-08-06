@@ -1,0 +1,167 @@
+{% load i18n %}
+
+<% if (accounts.length > 0) {
+$(accounts).each(function(i, a) { %>
+	<div class="account" <%= a %>>
+		<div class="account_name"><%= a.fullName ? a.fullName : a.id %></div>
+		<div class="account_id"><%= a.id %></div>
+		<div class="error_area" <%== (a.in_no_carenet) ? '' : 'style="display: none;"' %>>{% trans "You must add this account to at least one carenet in order to to keep it in your accounts list" %}</div>
+	</div>
+<% });
+} %>
+<div class="account new" <%= null %>>
+	<div class="account_name">
+		<img src="/jmvc/ui/resources/images/add_20.png" alt="" />
+		{% trans "Add account (email)" %}
+	</div>
+	<form id="new_account_form" action="javascript:void(0);" method="get" style="display: none;">
+		<div class="account_id">{% trans "Account ID:" %}</div>
+		<input type="text" class="account_name" placeholder="" name="new_account_id" value="" />
+		<div class="account_buttons">
+			<button type="reset" class="small">{% trans "Cancel" %}</button>
+			<button type="submit">{% trans "Add" %}</button>
+		</div>
+		<div class="error_area" style="display: none;"></div>
+	</form>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+
+
+<script>
+//function listCookies() {
+//    var theCookies = document.cookie.split(';');
+//    var aString = '';
+//    for (var i = 1 ; i <= theCookies.length; i++) {
+//        aString += theCookies[i-1];
+//    }
+//    alert(aString);
+//    var neww=aString.split('=');
+ //   alert(neww[0]);
+
+//}
+
+//listCookies();
+
+var accountCompanion='';
+record_id = el('selPatients1').value.split('record_')[2];
+//alert(record_id);
+var url = '/indivoapi/records/'+record_id+'/sharescompanion/';
+
+
+apicall(url,getUserAccount_success,getUserAccount_error)
+
+function apicall(url,onsuccess, onerror)
+{
+ $.ajax({
+   url: url,
+   dataType: 'text',
+   crossDomain:true,
+   cors:true,
+   success: onsuccess,
+   error: onerror
+ });
+}
+
+var json;
+function getUserAccount_success(result)
+{
+
+	json = JSON.parse(result);
+
+
+	//var xmlDoc = ( new window.DOMParser() ).parseFromString(result, "text/xml");
+	//var shares = (xmlDoc.getElementsByTagName('Share'));
+	//for (var i=0; i<shares.length; i++){
+        //	if(shares[i].getAttribute('account')){
+        //        	accountCompanion = shares[i].getAttribute('account');
+        //        	break;}
+	// }
+	// alert(accountCompanion);
+	// if (accountCompanion!=''){
+	//	var url2 ='/api/accounts/'+accountCompanion;
+//		apicall(url2,getUserName_success,getUserAccount_error)
+//	}
+
+	var text = "";
+	for(var i=0; i<json.length; i++){
+
+	text+=' <div class="account" > <div class="account_name">'+json[i].name+'</div> <div class="account_id">'+json[i].email+'<br><input id="delete" type="button" value="Delete" onclick="deleteShare('+"'"+json[i].email+"'"+');" /></div> </div>';
+}
+//alert(text);
+	document.getElementById("text").innerHTML = text;
+
+}
+
+function getUserName_success(result){
+
+
+//alert(result);
+
+}
+
+
+function getUserAccount_error(error){
+
+alert(error.toSource());
+
+}
+
+function apicallDel(url,onsuccess, onerror)
+{
+ $.ajax({
+   url: url,
+   type:'DELETE',
+   dataType: 'text',
+   crossDomain:true,
+   cors:true,
+   success: onsuccess,
+   error: onerror
+ });
+}
+
+function deleteShare(email){
+	var url = '/indivoapi/records/'+record_id+'/shares/'+email
+	apicallDel(url,delete_share_success,getUserAccount_error)
+
+}
+
+function delete_share_success(result){
+
+
+	alert('Companion deleted successfully.');
+	var url = '/indivoapi/records/'+record_id+'/sharescompanion/';
+
+
+	apicall(url,getUserAccount_success,getUserAccount_error)
+
+}
+</script>
+
+<br><br>
+<h3> {% trans "Add guardian" %} </h3><h5> {% trans "(A guardian is a person that you share your whole personal health record. For example children under 16 years old have to share their personal health record with an adult in order to manage it. )" %} </h5>
+
+
+
+
+<div id="text"> </div>
+<div class="companion new" <%= null %>>
+        <div class="companion_name">
+                <img src="/jmvc/ui/resources/images/add_20.png" alt="" />
+                {% trans "Add guardian (email)" %}
+        </div>
+        <form id="new_companion_form" action="javascript:void(0);" method="get" style="display: none;">
+                <div class="companion_id">{% trans "Account ID:" %}</div>
+                <input type="text" class="companion_name" placeholder="" name="new_companion_id" value="" />
+                <div class="companion_buttons">
+                        <button type="reset" id="resetbutton" class="small">{% trans "Cancel" %}</button>
+                        <button type="submit">{% trans "Add" %}</button>
+                </div>
+                <div class="error_area" style="display: none;"></div>
+        </form>
+</div>
+
+<div style="clear: left;"> </div>

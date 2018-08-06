@@ -1,0 +1,507 @@
+{% extends 'problems/templates/base.html' %}
+{% block title %}Appointment{% endblock %}
+{% block content %}
+{% load i18n %}
+<script src="{{ STATIC_HOME }}/jquery-1.7.min.js"></script>
+<script src="{{ STATIC_HOME }}/jquery-1.7.js"></script>
+<script src="{{ STATIC_HOME }}/jonthornton-jquery-timepicker-578dcfd/jquery.timepicker.min.js"></script>
+<script src="{{ STATIC_HOME }}/jonthornton-jquery-timepicker-578dcfd/jquery.timepicker.js"></script>
+<script type='text/javascript' language='javascript'     src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js'></script>
+<link href="{{ STATIC_HOME }}/jonthornton-jquery-timepicker-578dcfd/jquery.timepicker.css" type="text/css" rel="stylesheet">
+<script>
+var address="";
+ address+="{{appointment.street_number}}";
+address+="{{appointment.route}}";
+address+="{{appointment.city}}";
+address+="{{appointment.country}}";
+address+="{{appointment.postal_code}}";
+
+
+var placeSearch, autocomplete;
+var componentForm = {
+  street_number: 'short_name',
+  route: 'long_name',
+  locality: 'long_name',
+  //administrative_area_level_1: 'short_name',
+  country: 'long_name',
+  postal_code: 'short_name'
+};
+
+function initAutocomplete() {
+  // Create the autocomplete object, restricting the search to geographical
+  // location types.
+
+  autocomplete = new google.maps.places.Autocomplete(
+      /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+      {types: ['geocode']});
+
+  // When the user selects an address from the dropdown, populate the address
+  // fields in the form.
+  autocomplete.addListener('place_changed', fillInAddress);
+}
+
+
+// [START region_fillform]
+function fillInAddress() {
+  // Get the place details from the autocomplete object.
+  var place = autocomplete.getPlace();
+
+  for (var component in componentForm) {
+    document.getElementById(component).value = '';
+    document.getElementById(component).disabled = false;
+
+  }
+
+  // Get each component of the address from the place details
+  // and fill the corresponding field on the form
+  if ( place.address_components!=undefined){
+  for (var i = 0; i < place.address_components.length; i++) {
+    if(i==0){
+                address="";
+        }
+   // var addressType = place.address_components[i].types[0];
+    //if (componentForm[addressType]) {
+    //  var val = place.address_components[i][componentForm[addressType]];
+    //  document.getElementById(addressType).value = val;
+     // address += val;
+   // }
+
+  }
+}
+  else
+  {
+        alert("We cannot locate your address.Please complete next fields by yourself.");
+  }
+}
+function geolocate() {
+
+  if (navigator.geolocation) {
+
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var geolocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+
+      };
+
+      var circle = new google.maps.Circle({
+        center: geolocation,
+        radius: position.coords.accuracy
+      });
+      autocomplete.setBounds(circle.getBounds());
+    });
+  }
+}
+// [END region_geolocation]
+
+
+$( document ).ready(function() {
+
+
+        inIframe();
+        function inIframe () {
+                var div = document.getElementById('cancel_div');
+//                var framediv = document.getElementById('iframe_div');
+//                if(self==top){
+ //if(self==top){
+                var hideDiv = (window.parent.document.getElementById('frApp') != null);
+                if (hideDiv) {
+
+                        div.style.visibility = 'hidden';
+  //                      framediv.style.visibility = 'visible';
+//alert('hidden');
+
+                }
+                else
+                {
+                        div.style.visibility = 'visible';
+    //                    framediv.style.visibility = 'hidden';
+//alert('visible');
+                }
+        }
+
+});
+
+
+    </script>
+<script>
+
+var map;
+
+function initMap() {
+
+  map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 15,
+    center: {lat: 35.305112, lng: 25.072669}
+  });
+  var geocoder = new google.maps.Geocoder();
+
+  document.getElementById('submitMap').addEventListener('click', function() {
+    geocodeAddress(geocoder, map);
+  });
+}
+
+function geocodeAddress(geocoder, resultsMap) {
+//  var address = document.getElementById('address').value;
+  geocoder.geocode({'address': address}, function(results, status) {
+
+
+
+    if (status === google.maps.GeocoderStatus.OK) {
+
+   
+      resultsMap.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+        map: resultsMap,
+        position: results[0].geometry.location
+      });
+    } else {
+      alert('We cannot locate your address');
+    }
+  });
+}
+
+
+</script>
+ <script src="https://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyAYuOKSuMp876IxsVlZWsPc3mdCPdVoJ_Q&sensor=false&signed_in=true&libraries=places&callback=initAutocomplete"></script>
+
+<script>
+$(document).ready(function() {
+     initMap();
+     initAutocomplete();
+     document.getElementById("submitMap").click();
+});
+
+</script>
+<head>
+
+{% if jsonData%}
+        {% if jsonData.5.z_score < -1 or jsonData.5.z_score > 2 %} <!--Rumination (abnormal it should be over 2 or less -2 )-->
+        <style type="text/css">
+            *
+            {
+                font-size : 12px
+            }
+
+            .class1 *
+            {
+                font-size : 20px;
+            }
+        </style>
+        {%endif%}
+ {% endif %}
+
+        <meta charset="utf-8">
+        <title>Speak.js Demo</title>
+        <script src="{{ STATIC_HOME }}/speakClient.js"></script>
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+ <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+    <style>
+      #locationField, #controls {
+        position: relative;
+        width: 480px;
+      }
+      #autocomplete {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 99%;
+      }
+      .label {
+        text-align: right;
+        font-weight: bold;
+        width: 100px;
+        color: #303030;
+      }
+      #address {
+       /* border: 1px solid #000090;*/
+        /*background-color: #f0f0ff;*/
+        width: 480px;
+        padding-right: 2px;
+      }
+      #address td {
+        font-size: 10pt;
+      }
+      .field {
+        width: 99%;
+      }
+      .slimField {
+        width: 80px;
+      }
+      .wideField {
+        width: 200px;
+      }
+      #locationField {
+        height: 20px;
+        margin-bottom: 2px;
+      }
+	  
+    </style>
+
+
+<style>
+.addressHidden {
+    display: none;
+}
+</style>
+</head>
+<body>
+<div id="audio"></div>
+{% if record_id %}
+<script>
+  Indivo.Auth.setToken("{{surl_credentials.token}}","{{surl_credentials.secret}}");
+</script>
+{% endif %}
+<script>
+   function setPageSize()
+   {   	
+   	if (el('divList'))el('divList').style.width = (el('divContainer').offsetWidth-0).toString() + 'px';   	
+	if (window.top.document.getElementById('app_container'))
+		el('divContainer').style.width = (window.top.document.getElementById('app_container').offsetWidth-0).toString() + 'px';	
+	
+   }
+   
+   setInterval('setPageSize();', 500);
+</script>
+
+{% if record_id %}
+<script>
+  Indivo.Auth.setToken("{{surl_credentials.token}}","{{surl_credentials.secret}}");
+</script>
+{% endif %}
+
+<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:100%;overflow-x:hidden;" id="divContainer" >	
+	<div class="row" style="height:10px;"></div>
+	
+	<div class="row"  style="margin-left:5px;">
+		<div class="col-xs-6">
+		<h2>{{appointment.appointment_title}}</h2>
+		</div>
+		<div class="col-xs-6">
+				{% if record_id %}
+		  <script>
+			//Indivo.Widget.DocumentAccess.add('{{record_id}}', '{{appointment_id}}');
+		  </script>
+		{% endif %}
+		</div>
+    </div>
+	
+	<div class="row"  style="height:10px;"></div>	
+	<div class="row" style="margin-left:5px;width:90%;">	
+		
+		<div class="form-group">
+			<label>{% trans "Doctor's name" %}</label>	
+			<div class="row" style="width:100%;">
+				<div class="col-xs-6">
+					<label>{% trans "Last name " %}</label> {{appointment.lastname}}
+				</div>
+				<div class="col-xs-6">
+					<label>{% trans "Name " %}</label> {{appointment.name}}
+				</div>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label>{% trans "Date" %}</label> {{appointment.date}}
+		</div>
+		<div class="form-group">
+			<label>{% trans "Time" %}</label> {{appointment.time}}
+		</div>
+		<div class="form-group">
+			<label>{% trans "Street" %}</label> {{appointment.route}}
+		</div>
+		<div class="form-group">
+			<label>{% trans "Street number" %}</label> {{appointment.street_number}}
+		</div>
+		<div class="form-group">
+			<label>{% trans "Country" %}</label> {{appointment.country}}
+		</div>
+		<div class="form-group">
+			<label>{% trans "City" %}</label> {{appointment.locality}}
+		</div>
+		<div class="form-group">
+			<label>{% trans "Postal code" %}</label> {{appointment.postal_code}}
+		</div>
+		<div class="form-group">
+			<label>{% trans "Alert time" %}</label> {{appointment.alert}}
+		</div>
+		<div class="form-group">
+			<label>{% trans "Details" %}</label> {{appointment.comments}}
+		</div>
+		
+	</div>
+	<div class="row" style="height:10px;"></div>
+	<div class="row">
+		<div class="col-lg-12">
+			<div id="map" style="width:100%;height:100%;min-height:400px;"></div>
+		</div>
+	</div>
+	<div class="row" style="height:10px;"></div>
+<!--	<div class="row">
+		<div class="form-group">
+			&nbsp;&nbsp;&nbsp;&nbsp;<label>{% trans "Additional Information" %}</label> {% trans "Created at" %} {{meta.created_at}}
+		</div>	
+	</div>-->
+	<div class="row" style="height:10px;"></div>
+	<div class="row" id="cancel_div">
+		<div class="row">
+		<div class="col-lg-12" align="center">
+			<a href="./"><button style="width: 300px" type="button"  class="btn-lg btn-warning btn"> {% trans "Back" %} </button></a>
+		</div>
+		</div>
+	</div>
+</div>
+
+
+<div id="addressHidde" name="addressHidden" style="display:none;">
+     <tr style="display:none;">
+
+        <td>{% trans "Address" %} </td>
+        <td><div id="locationField">
+                <input id="autocomplete" placeholder="Enter your address" onFocus="geolocate()" type="text"></input>
+             </div>
+
+            <table id="address">
+              <tr>
+                <td class="label">Street number</td>
+                 <td class="slimField"><input type="text" class="field" id="street_number" name="street_number"
+                             value="{{appointment.street_number}}"></input></td>
+              </tr>
+
+	      <tr>
+		 <td class="label">Street address</td>
+                 <td class="slimField"><input type="text" class="field" id="route" name="route"
+                             value="{{appointment.route}}"></input></td>
+              </tr>
+
+              <tr>
+                <td class="label">City</td>
+                <td class="wideField" colspan="3"><input class="field" id="locality" name="locality" value="{{appointment.locality}}" ></input></td>
+              </tr>
+              <tr>
+   <!--     <td class="label">State</td>
+        <td class="slimField"><input class="field"
+              id="administrative_area_level_1" disabled="true"></input></td>-->
+               <td class="label">Zip code</td>
+                <td class="wideField"><input class="field" id="postal_code" name="postal_code" value="{{appointment.postal_code}}"
+              ></input></td>
+              </tr>
+              <tr>
+                <td class="label">Country</td>
+                <td class="wideField" colspan="3"><input class="field" name="country" value="{{appointment.country}}"
+                      id="country"></input></td>
+              </tr>
+              <tr>
+                <input id="submitMap" type="button" value="Locate on map:">
+              </tr>
+            </table>
+</div>
+
+
+{% ifequal 1 0 %}
+
+
+
+        <div id="audio"></div>
+<div class="class1">
+{% if record_id %}
+<script>
+  Indivo.Auth.setToken("{{surl_credentials.token}}","{{surl_credentials.secret}}");
+</script>
+{% endif %}
+
+<h2>{{appointment.appointment_title}} &nbsp;&nbsp;<span style="font-size:0.7em;"></span></h2>
+
+{% if record_id %}
+  <script>
+    Indivo.Widget.DocumentAccess.add('{{record_id}}', '{{appointment_id}}');
+  </script>
+{% endif %}
+
+<table class="light" style="width: 66%; margin: 2em 0;">
+  <tbody>
+    <col style="width: 25%"></col>
+    <col style="width: 75%"></col>
+    <tr><th scope="row">{% trans "Title" %}</th><td>{{appointment.appointment_title}}</td></tr>
+<tr>	
+        <td>{% trans "Doctor's name" %}</td>
+        <td width:20%"> {{appointment.lastname}}
+          {{appointment.name}}</td>
+        </td>
+
+      </tr>
+
+    <tr><th scope="row">{% trans "Date" %}</th><td>{{appointment.date}}</td></tr>
+    <tr><th scope="row">{% trans "Time" %}</th><td>{{appointment.time}}</td></tr>
+    <tr><th scope="row">{% trans "Street" %}</th><td>{{appointment.route}}</td></tr>
+    <tr><th scope="row">{% trans "Street number" %}</th><td>{{appointment.street_number}}</td></tr>
+     <tr><th scope="row">{% trans "City" %}</th><td>{{appointment.locality}}</td></tr>
+    <tr><th scope="row">{% trans "Alert time" %}</th><td>{{appointment.alert}}</td></tr>
+    <tr><th scope="row">{% trans "Postal code" %}</th><td>{{appointment.postal_code}}</td></tr>
+    <tr><th scope="row">{% trans "Country" %}</th><td>{{appointment.country}}</td></tr>
+
+
+
+<div id="addressHidde" name="addressHidden" >
+     <tr style="display:none;">
+
+        <td>{% trans "Address" %} </td>
+        <td><div id="locationField">
+                <input id="autocomplete" placeholder="Enter your address" onFocus="geolocate()" type="text"></input>
+             </div>
+
+            <table id="address">
+              <tr>
+                <td class="label">Street number</td>
+                 <td class="slimField"><input type="text" class="field" id="street_number" name="street_number"
+                             value="{{appointment.street_number}}"></input></td>
+              </tr>
+
+	      <tr>
+		 <td class="label">Street address</td>
+                 <td class="slimField"><input type="text" class="field" id="route" name="route"
+                             value="{{appointment.route}}"></input></td>
+              </tr>
+
+              <tr>
+                <td class="label">City</td>
+                <td class="wideField" colspan="3"><input class="field" id="locality" name="locality" value="{{appointment.locality}}" ></input></td>
+              </tr>
+              <tr>
+   <!--     <td class="label">State</td>
+        <td class="slimField"><input class="field"
+              id="administrative_area_level_1" disabled="true"></input></td>-->
+               <td class="label">Zip code</td>
+                <td class="wideField"><input class="field" id="postal_code" name="postal_code" value="{{appointment.postal_code}}"
+              ></input></td>
+              </tr>
+              <tr>
+                <td class="label">Country</td>
+                <td class="wideField" colspan="3"><input class="field" name="country" value="{{appointment.country}}"
+                      id="country"></input></td>
+              </tr>
+              <tr>
+                <input id="submitMap" type="button" value="Locate on map:">
+              </tr>
+            </table>
+</div>
+</div>
+<tr><th scope="row">{% trans "Map" %}</th><td width="700px" height="700px"><div id="map" style="width: 100%; height: 100%;"></td></tr>
+
+  </tbody>
+</table>
+
+<h3>{% trans "Additional Information" %}</h3>
+<div class="details">{% trans "Created at" %} {{meta.created_at}}</div>
+
+<p align="center"><a href="./"><button style="width: 200px">{% trans " Back" %} </button></a><p>
+
+{% endifequal%}
+
+</body>
+
+
+{% endblock %}

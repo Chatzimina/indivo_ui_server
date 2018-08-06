@@ -1,0 +1,141 @@
+
+{% load i18n %}
+<head>
+<style>
+
+li p {
+    white-space: nowrap;
+}
+
+
+.img_styl { 
+  margin: 0 12px 0 2px;
+  vertical-align: middle;
+  width :24px;
+}
+</style>
+
+</head>
+
+<script>
+
+
+function createtable() {
+var response = '';
+$.ajax({ type: "GET",   
+         url: "/testfunc/",   
+         async: false,
+         dataType: 'html',
+         success : function(text)
+         {
+             response = text;
+         }
+});
+if (response=='updated'){
+
+document.getElementById('donorsDiv').style.display = 'inline';
+}
+else
+{
+document.getElementById('donorsDiv').style.display = 'none';
+}
+setTimeout(createtable, 3000); 
+
+}
+</script>
+<!--&& app.name !=='Calendar'-->
+<% if (isBackgroundApp) { %>
+	<li <%= app %> id="<%= app.id %>" data-appType="background" ><img class="app_tab_img" src="<%= app.getImageSource() %>"/><%= app.name %></li>
+<% } else { %>
+	<% if (app.name !== 'Recom Links'  && app.name !=='Top 5 recommended' && app.name !== 'Edit demographics' & app.name !=='getSuggestions' & app.name !=='ExportRDFAvatar') { %>
+
+
+               <% if (app.name == 'Donors tool') { %>
+                      <li <%= app %> id="<%= app.id %>" data-appType="external" data-url="<%= startURL %>"><img class="app_tab_img" src="<%= app.getImageSource() %>"/><%= app.name %>
+
+                     <div id="donorsDiv" name="donorsDiv" style="display: none;"> <img class="img_styl" src="/apps/procedures/static/alertred.png" style="width: 7%; "/> </div> </li>
+			  <script>
+        		  createtable();
+        		</script>
+               <% } %>
+               <% if (app.name != 'Donors tool') { %>
+			 <li <%= app %> id="<%= app.id %>" data-appType="external" data-url="<%= startURL %>"><img class="app_tab_img" src="<%= app.getImageSource() %>"/>
+
+
+			  <% if (app.name == 'Problems') { %>
+				{% trans "Problems" %}
+                          <% } %>
+			  <% if (app.name == 'Allergies') { %>
+				{% trans "Allergies" %}
+
+                           <% } %>
+	 		 <% if (app.name == 'Labs') { %>
+                              {% trans "Labs" %}
+                          <% } %>
+			   <% if (app.name == 'Medications') { %>
+                                {% trans "Medications" %}
+
+                           <% } %>
+			   <% if (app.name == 'Procedures') { %>
+                                {% trans "Procedures" %}
+
+                           <% } %>
+			    <% if (app.name == 'Recommender') { %>
+                                {% trans "Recommender" %}
+
+                           <% } %>
+			    <% if (app.name == 'Import') { %>
+                                {% trans "Import" %}
+
+                           <% } %>
+			    <% if (app.name == 'Bluebutton') { %>
+                                {% trans "Bluebutton" %}
+
+                           <% } %>
+			   <% if (app.name == 'Contact') { %>
+                                {% trans "Contact" %}
+
+                           <% } %>
+			    <% if (app.name == 'Drugs') { %>
+                                {% trans "Drugs" %}
+
+                           <% } %>
+			    <% if (app.name == 'ALGA-C') { %>
+                                {% trans "ALGA-C" %}
+
+                           <% } %>
+                             <% if (app.name == 'Measurements') { %>
+                                {% trans "Measurements" %}
+
+                           <% } %>
+                           <% if (app.name == 'Calendar') { %>
+                                {% trans "Calendar" %}
+
+                           <% } %>
+                            <% if (app.name == 'Psycho-emotional profiler') { %>
+                                {% trans "Psycho-emotional profiler" %}
+
+                           <% } %>
+
+                            <% if (app.name == 'Appointments') { %>
+                                {% trans "Appointments" %}
+
+                           <% } %>
+
+
+                            <% if (app.name == 'Profiler') { %>
+                                {% trans "Profiler" %}
+
+                           <% } %>
+
+
+			  <% if (app.name !== 'Problems' & app.name !== 'Allergies' & app.name !== 'Medications' & app.name !== 'Procedures' & app.name !== 'Recommender' & app.name !== 'Import' & app.name !== 'Bluebutton' & app.name !== 'Contact' & app.name !== 'Drugs' & app.name !== 'ALGA-C'  & app.name !== 'Labs' & app.name !== 'Measurements' & app.name !== 'Calendar' & app.name !== 'Appointments' & app.name !== 'Psycho-emotional profiler' & app.name !== 'Profiler')  { %>
+				<%= app.name %>
+			  <% } %>
+			</li>
+
+
+		  <% } %>
+
+	<% } %>
+<% } %>

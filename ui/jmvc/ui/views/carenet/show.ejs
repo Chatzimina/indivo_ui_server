@@ -1,0 +1,56 @@
+{% load i18n %}
+<style>
+
+.video-container {
+	position:relative;
+	padding-bottom:56.25%;
+	padding-top:30px;
+	height:0;
+	overflow:hidden;
+}
+
+.video-container iframe, .video-container object, .video-container embed {
+	position:absolute;
+	top:0;
+	left:0;
+	width:50%;
+	height:50%;
+}
+</style>
+<h2>{% trans "Sharing for" %} <%= label %></h2>
+
+<p>{% blocktrans %}
+Your Indivo record contains care networks. A care network is a
+place for you to share some of your health information with a
+subset of individuals you select. For example, the "Family" care
+network is where you might invite your loved ones to view most of
+your health information, while the "Work" care network will include
+only people you work with and a much smaller subset of your health
+information.
+{% endblocktrans %}</p>
+
+
+<iframe style="width:100%;height:100%;min-height:300px;max-width:800px;max-height:600px;" src="https://www.youtube.com/embed/XAj6RmJe-mw" frameborder="0" allowfullscreen></iframe>
+
+
+
+<!-- Accounts List -->
+<h3>{% trans "Known accounts" %}</h3> <h5>{% trans "(Accounts that you have already added to a carenet)" %}</h5>
+<div id="known_accounts">
+	<h4><img class="loader" src="jmvc/ui/resources/images/spinner-small.gif" />{% trans "Loading accounts" %}</h4>
+</div>
+
+<!--<h4>{% trans "Add companion" %} </h4>-->
+<div id="known_companion">
+<!-- <h4><img class="loader" src="jmvc/ui/resources/images/spinner-small.gif" />{% trans "Loading companion" %}</h4>-->
+</div>
+
+<p id="carenet_drag_accounts" class="drag_instructions" style="display: none;">
+	<img src="jmvc/ui/resources/images/arrow-down.png" alt="" />
+	{% trans "Drag accounts to carenets to start sharing with them" %}
+</p>
+
+<!-- Carenets -->
+<div id="sharing_carenets" style="display: none;">
+	<h4><img class="loader" src="jmvc/ui/resources/images/spinner-small.gif" />{% trans "Loading carenets" %}</h4>
+</div>

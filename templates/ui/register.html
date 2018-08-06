@@ -1,0 +1,325 @@
+{% extends "ui/base.html" %}
+{% load i18n %}
+
+{% block title_suffix %}{% trans "Registration" %}{% endblock %}
+
+<head>
+<link rel="stylesheet" type="text/css" href="/jmvc/ui/resources/css/imanagecancer.css" media="screen" />
+
+<style>
+body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+
+}
+
+
+</style>
+</head>
+
+{% block readyscript %}
+	<script type="text/javascript">
+		$(document).ready(function() {
+			document.body.style.backgroundColor = '#fafafa';
+                        document.body.style.backgroundImage = 'url()';
+			$('#full_name').focus();
+			$('#signup_form').submit(function() {
+				$('#full_name').removeClass('error');
+				$('#account_id').removeClass('error');
+				if (!$('#full_name').val()) {
+					$('#full_name').addClass('error').focus();
+					return false;
+				}
+				var filter = /^\S+@\S+$/;
+				if (!filter.test($('#account_id').val())) {
+					$('#account_id').addClass('error').focus();
+					return false;
+				}
+				return true;
+			});
+
+			$('#role').click(function() {
+			      if ( this.value == 'doctor'){
+      //.....................^.......
+
+
+					 $("#speciality").show();
+					$("#health_organisation").show();
+					 $("#address_organisation").show();
+					$("#pilot").hide();
+			      }
+			      else {
+					$("#speciality").hide();
+                                        $("#health_organisation").hide();
+                                         $("#address_organisation").hide();
+				}
+    			});
+		});
+		
+
+		function validateForm()
+		{
+		        var cancer=document.forms["signup_form"]["cancer"].value;
+			var selection = document.getElementById('chkpatient');
+			  if (selection.checked && cancer =="-1"){
+			    	alert("Please select cancer type") ;
+				return false;
+			    }
+			   if (selection.checked && cancer =="-2"){
+				if (document.getElementById('cancerDisease1').value == ""){
+//			        alert(document.getElementById('cancerDisease1');
+                                alert("Please add cancer type under selection \"Other\"") ;
+				return false;
+				}
+                            }
+
+			return true;
+
+		}
+	</script>
+{% endblock %}
+
+{% block welcome_prefix %}{% trans "Register for" %}{% endblock %}
+
+{% block main %}
+	<!-- Registration Form -->
+	{% if SECONDARY %}
+	<div style="margin-top: 1em; font-size: 3em; text-align: center;">
+		{{ SECONDARY|make_list|slice:":3"|join:"" }} – {{ SECONDARY|make_list|slice:"3:"|join:"" }}
+	</div>
+	<p class="moreinfo" style="margin-top: 2em; text-align: center;">
+		<a href="/accounts/{{ ACCOUNT_ID }}/send_secret">{% trans "Received no activation email?" %}</a>
+	</p>
+	{% else %}{% if SETTINGS.REGISTRATION.enable %}
+	<form id="signup_form" class="table_form" method="post" action="/register" onsubmit="return validateForm()">
+		<div class="row">
+			<div class="cell">{% trans "Your Name:" %}(Surname Name)<span style="color:red;font-weight:bold;font-size:20px;"> *</span></div>
+			<div class="cell">
+				<input type="text" id="full_name" name="full_name" tabindex="1" />
+			</div>
+		</div>
+		 <div class="row">
+                        <div class="cell">{% trans "Your place of residence:" %}</div>
+                        <div class="cell">
+                                <input type="text" id="placeOfResidence" name="placeOfResidence" tabindex="1" />
+                        </div>
+                </div>
+
+		  <div class="row" style="display:none;">
+                        <div class="cell">{% trans "Role" %}</div>
+                        <div class="cell">
+                                <select name="role" id="role" value="patient" class="form-control">
+                                        <option value="patient">{% trans "Patient" %}</option>
+                                        <option value="companion">{% trans "Companion" %}</option>
+                                        <option value="doctor">{% trans "Doctor" %}</option>
+                                        <option value="research">{% trans "Research project" %}</option>
+                                </select>
+                        </div>
+                </div>
+
+
+		  <div class="row" style="display:;">
+                        <div class="cell">{% trans "Role" %}</div>
+                        <div class="cell">
+                                <label style="font-size:15px;">{% trans "I am a..." %}</label>
+                                <br/>
+                                <input type="checkbox" id="chkpatient" checked onchange="role_selected('patient');"> <label for="chkpatient" style="font-size:15px;">{% trans "Patient" %}</label>
+                                <br/>
+                                <input type="checkbox" id="chkcompanion" onchange="role_selected('companion');"> <label for="chkcompanion" style="font-size:15px;">{% trans "Companion of a Patient" %}</label>
+                                <br/>
+                                <input type="checkbox" id="chkdoctor" onchange="role_selected('doctor');"> <label for="chkdoctor" style="font-size:15px;">{% trans "Medical Doctor" %}</label>
+                                <br/>
+                                <input type="checkbox" id="chkresearch" onchange="role_selected('research');"> <label for="chkresearch" style="font-size:15px;">{% trans "Researcher" %}</label>
+                                <select name="role1" id="role1" value="patient" class="form-control" style="display:none;">
+                                        <option value="patient">{% trans "Patient" %}</option>
+                                        <option value="companion">{% trans "Companion" %}</option>
+                                        <option value="doctor">{% trans "Doctor" %}</option>
+                                        <option value="research">{% trans "Research project" %}</option>
+                                </select>
+                        </div>
+                </div>
+
+
+
+                 <div class="row" style="display:none;">
+                        <div class="cell">{% trans "Cancer information" %}</div>
+                        <div class="cell">
+                                <input type="text" id="cancerDisease" name="cancerDisease" tabindex="1" />
+                        </div>
+                </div>
+				<script>
+				function type_selected(sender)
+				{
+					el('cancerDisease1').style.display = 'none';
+					if (sender.value == '-1')
+					{
+						el('cancerDisease').value = '';
+					}
+					else if (sender.value == '-2')
+					{
+						el('cancerDisease1').style.display = '';
+					}
+					else
+					{
+						el('cancerDisease').value = sender.options[sender.selectedIndex].text;
+					}
+				}
+				</script>
+
+			 <div class="row" id="showCancer">
+                        <div class="cell">{% trans "Cancer type" %}</div>
+                        <div class="cell">
+                                <select onclick="type_selected(this);" class="form-control" id="cancer">
+								<option value="None">{% trans "Select" %}</option>
+								<option>{% trans "Breast cancer" %}</option>
+								<option>{% trans "Bladder cancer" %}</option>
+								<option>{% trans "Lung cancer" %}</option>
+								<option>{% trans "Brain cancer" %}</option>
+								<option>{% trans "MelanomaBreast cancer" %}</option>
+								<option>{% trans "Non-Hodgkin lymphoma" %}</option>
+								<option>{% trans "Cervical cancer" %}</option>
+								<option>{% trans "Ovarian cancer" %}</option>
+								<option>{% trans "Colorectal cancer" %}</option>
+								<option>{% trans "Pancreatic cancer" %}</option>
+								<option>{% trans "Esophageal cancer" %}</option>
+								<option>{% trans "Prostate cancer" %}</option>
+								<option>{% trans "Kidney cancer" %}</option>
+								<option>{% trans "Skin cancer" %}</option>
+								<option>{% trans "Leukemia" %}</option>
+								<option>{% trans "Thyroid cancer" %}</option>
+								<option>{% trans "Liver cancer" %}</option>
+								<option>{% trans "Uterine cancer" %}</option>
+								<option value="-2">{% trans "Other" %}</option>
+								</select>
+								
+								<input type="text" id="cancerDisease1" name="cancerDisease1" style="display:none;"  />
+                        </div>
+                </div>
+
+                 <div class="row" id="showPreferences">
+                        <div class="cell">{% trans "Sharing preferences" %}</div>
+                        <div class="cell">
+                                <select name="sharingPreferences" id="sharingPreferences" value="yes" class="form-control">
+                                        <option value="yes">{% trans "Yes, I agree that my health data is used for research of any kind after proper anonymization" %}</option>
+                                        <option value="no">{% trans "No, I do not wish to provide my data for research project" %}</option>
+                                        <option value="individually">{% trans "I want to decide about this individually for each planned research project" %}</option>
+                                  </select>
+
+
+                        </div>
+		</div>
+	
+		
+		
+		<script>
+		function el(id){return document.getElementById(id);}
+		function role_selected(mode)
+		{
+			el('chkpatient').checked = false;
+			el('chkcompanion').checked = false;
+			el('chkdoctor').checked = false;
+			el('chkresearch').checked = false;
+			
+			el('chk' + mode).checked = true;
+			
+			el('role').value = mode;
+			if (mode == 'patient'){
+
+				document.getElementById('showCancer').style.display = '';
+				document.getElementById('showPreferences').style.display = '';
+			}
+			else{
+
+				document.getElementById('showCancer').style.display = 'none';
+				document.getElementById('showPreferences').style.display='none';
+			}
+			if ( mode == 'doctor'){
+      //.....................^.......
+
+
+                                         $("#speciality").show();
+                                        $("#health_organisation").show();
+                                         $("#address_organisation").show();
+                                           $("#pilot").hide();
+                              }
+                              else {
+					 $("#pilot").show();
+                                        $("#speciality").hide();
+                                        $("#health_organisation").hide();
+                                         $("#address_organisation").hide();
+                                }
+
+		}
+		
+		role_selected('patient');
+		</script>
+		
+		
+		<div class="row" style="display:none;" id="speciality">
+                        <div class="cell">{% trans "Speciality" %}</div>
+                        <div class="cell">
+                                <input type="text" id="speciality" name="speciality" tabindex="1" />
+                        </div>
+                </div>
+
+		 <div class="row" style="display:none;" id="health_organisation">
+                        <div class="cell">{% trans "Full name of health organisation" %}</div>
+                        <div class="cell">
+                                <input type="text" id="health_organisation" name="health_organisation" tabindex="1" />
+                        </div>
+                </div>
+
+
+		 <div class="row" style="display:none;" id="address_organisation">
+                        <div class="cell">{% trans "Full address of your organisation" %}</div>
+                        <div class="cell">
+                                <input type="text" id="address_organisation" name="address_organisation" tabindex="1" />
+                        </div>
+                </div>
+
+		 <div class="row"  style="display:;" id="pilot">
+                        <div class="cell">{% trans "Pilot" %}</div>
+                        <div class="cell">
+                                <select name="pilot" id="pilot" value="none" class="form-control">
+                                        <option value="none">{% trans "None" %}</option>
+                                        <option value="german pilot">{% trans "German Pilot" %}</option>
+                                        <option value="italian pilot">{% trans "Italian Pilot" %}</option>
+                                  </select>
+
+
+                        </div>
+
+                </div>
+
+	
+		<div class="row">
+			<div class="cell">{% trans "Account Email:" %}<span style="color:red;font-weight:bold;font-size:20px;"> *</span> </div>
+			<div class="cell">
+				<input type="text" id="account_id" name="account_id" tabindex="2" onkeyup="$('#contact_email').attr('placeholder', this.value)" />
+				{% if SETTINGS.REGISTRATION.set_primary_secret %}
+				<p class="moreinfo">{% trans "A confirmation code will be sent here" %}</p>
+				{% endif %}
+				 <div class="form-group">
+                        <span style="color:red;font-weight:bold;font-size:20px;">*</span> <b>{% trans "Mandatory Fields" %}</b>
+                </div>
+
+				<div class="main_action_button">
+					<button id="submit" type="submit" name="submit" class="btn btn-success btn-sm" tabindex="3" onclick="if (el('cancerDisease1').style.display!='none'){el('cancerDisease').value=el('cancerDisease1').value;}">{% trans "Register" %}</button>
+					<p class="moreinfo">
+						<a href="/login">{% trans "Back to login" %}</a>
+					</p>
+				</div>
+			</div>
+		</div>
+                </div>
+
+
+
+	</form>
+	{% else %}
+	<div class="login_error">{% trans "Online registration is not available" %}</div>
+	<p class="moreinfo">
+		<a href="/login">{% trans "Back to login" %}</a>
+	</p>
+	{% endif %}
+	{% endif %}
+{% endblock %}

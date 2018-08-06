@@ -1,0 +1,45 @@
+{% load i18n %}
+<h2>{% trans "Healthfeed" %}</h2>
+
+<div>
+ <em>{% trans "no notifications" %}</em>
+</div>
+<% if (notifications.length === 0) { %>
+  <em>{% trans "no notifications" %}</em>
+
+<% } %>
+
+<!--<% for (var i=0; i<notifications.length; i++) {
+  %>
+  <div class="notification">
+    <blockquote class="content">
+      <%= notifications[i].content %>
+    </blockquote>
+
+    <% if (notifications[i].document !== null) { %>-->
+<!--      [<a href="/records/<%= notifications[i].record.id %>/documents/<%= notifications[i].document.id %>" class="goto_document">go</a>]-->
+    <% } %>
+
+    <!-- Warning: don't use record_id in the id attr!! Issue with JQuery UI record tab panels!! -->
+<!--    <div class="details" style="font-style: italic; font-size: .85em; color: #777; margin: -1em 0 0 1.5em">
+      &nbsp;&ndash; {% trans "sent by" %} <%= notifications[i].sender %> {% trans "about" %}
+      <%= notifications[i].record.label %>&rsquo;s {% trans "record" %}
+      <span class="created_at">
+       - <%= UI.UTILS.dateTimeToPrettyString(notifications[i].received_at) %>
+      </span>
+    </div>
+  </div>
+<% } %>-->
+
+
+<div>
+<br>
+
+<!--<br /><br /><br />-->
+<!--             http://iapetus.ics.forth.gr/apps/recomlinks/start_auth?record_id=15ab5a3b-440c-4bc7-8879-d6111bfd97a6&amp-->
+
+<!-- <iframe src=<%document.URL %>/apps/recomlinks/start_auth?record_id=<%= notifications[0].record.id %>&;" style="height:525px; width:80%" frameborder="0"></iframe> -->
+<!--<iframe src="http://iapetus.ics.forth.gr/apps/recomlinks/start_auth?record_id=<%= notifications[0].record.id %>&;" style="height:525px; width:80%" frameborder="0"></iframe>-->
+<!--[<iframe src="http://www.iapetus.ics.forth.gr/apps/recomlinks/start_auth?record_id=<=%notifications[0].record.id%>"  style="height:60%; width:80%"></iframe>-->
+
+</div>

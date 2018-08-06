@@ -1,0 +1,161 @@
+{% extends "ui/base_login.html" %}
+{% load i18n %}
+
+{% block title_suffix %}{% trans "Login" %}{% endblock %}
+<head>
+<link rel="stylesheet" type="text/css" href="/jmvc/ui/resources/css/imanagecancer.css" media="screen" />
+</head>
+
+{% block readyscript %}
+<style>
+.modal450 > .modal-dialog {
+    width:450px !important;
+}
+</style>
+<script type="text/javascript" src="/jmvc/ui/resources/js/javascript.js" ></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="/jmvc/ui/resources/js/bootbox.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#username').focus();
+			$('#login_form').submit(function() {
+				$('#username').removeClass('error');
+				$('#password').removeClass('error');
+				if (!$('#username').val()) {
+					$('#username').addClass('error').focus();
+					return false;
+				}
+				if (!$('#password').val()){
+					$('#password').addClass('error').focus();
+					return false;
+				}
+				return true;
+			});
+		});
+		
+		
+		function submitProblem()
+		{
+			//alert('Problem submited!');
+			var validationMessage = FormValidation('divFormProblem') ;
+			if (validationMessage != '')
+			{
+				alert(validationMessage);
+				return false;
+			}
+			
+			var frmProblem = el('frmProblem');
+			frmProblem.submit();
+			
+			return false;
+		}
+		
+		function readURL(input, imageDataElementID, imageElementID) {                                                
+			if (input.files && input.files[0]) {
+			//alert(input.files[0].toSource());
+			var filename = input.value.toLowerCase();
+			//alert(filename);
+			if (filename.indexOf('.png') < 0 && filename.indexOf('.jpg') < 0 && filename.indexOf('.jpeg') < 0 && filename.indexOf('.bmp') < 0)
+			{
+				alert('Please select an image file.');
+				return false;
+			}
+				var reader = new FileReader();
+
+				reader.onload = function (e) {
+					$('#' + imageElementID).attr('src', e.target.result);
+					//el(targetid).value = encodeURIComponent(e.target.result);
+					$('#' + imageDataElementID).val(e.target.result);
+					//$('#' + imageDataElementID).val('imgdata');
+					//alert($('#' + imageDataElementID).val());
+				}
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+		
+		function openReportDialog()
+		{
+			bootbox.dialog({
+                     title: {% trans "' Report a problem '" %},
+					 className: 'modal450', 
+                     message: '<form id="frmProblem" name="frmProblem" action="/reportbugs" method="post" enctype="multipart/form-data" ><div id="divFormProblem" class="row" style="width:400px;border:0px solid black;">  ' +
+                         			'<div class="col-lg-12" style="margin:0px;width:100%;border:0px solid black;" > ' +
+      								'<div class="form-group" style="width:100%;"><label>Fullname <span style="color:red;font-size:20px;">*</span></label><input req="1" type="text" style="width:380px;" id="txtFullname" name="txtFullname" class="form-control"/></div>' + 
+									'<div class="form-group" style="width:100%;"><label>E-mail <span style="color:red;font-size:20px;">*</span></label><input type="text" req="1" email="1" style="width:380px;" id="txtEmail" name="txtEmail" class="form-control"/></div>' + 
+									'<div class="form-group" style="width:100%;"><label>Where did the problem appear? <span style="color:red;font-size:20px;">*</span></label><select req="1" style="width:380px;" id="selApp" name="selApp" class="form-control"><option value="-1">Select</option><option value="indivo">Indivo</option><option value="imanagemydrugs">iManageMyDrugs</option><option value="myhealthavatar">MyHealthAvatar</option></select></div>' + 
+									'<div class="form-group" style="width:100%;"><label>Problem Description <span style="color:red;font-size:20px;">*</span></label><textarea req="1" style="width:380px;height:150px;" id="txtDescription" name="txtDescription" class="form-control"/></div>' + 
+									'<div class="form-group" style="width:100%;"><label>Screenshot</label><input onchange="readURL(this,\'hdnImageData\', \'imgInsert\');" type="file" req="0" style="width:380px;" id="txtAtt" name="txtAtt" class="form-control"/><br/><img id="imgInsert"  src="#" style="width: 100px; height: 100px;display:none" onload="this.style.display=\'\';" /><input type="hidden" id="hdnImageData" name="hdnImageData"/></div>' + 
+									'<div class="form-group" style="width:100%;"><label><span style="color:red;font-size:20px;">*</span> Required Field.</label></div>' +								
+                         			'</div> ' +		
+														
+      								'</div></form>' + 
+									'<div  class="row" style="width:400px;border:0px solid black;"><div class="form-group" style="width:100%;" align="center"><input type="button" value="Submit Problem" id="btnSubmitProblem" class="btn-primary btn-lg" onclick="return submitProblem();"/></div></div>' 
+									
+									,
+                     buttons: {
+					 /*
+                         success: {
+                             label: "Submit",
+                             className: "btn-info btn-lg",
+                             callback: function () {
+								submitProblem();
+								return false;
+                             }
+                         }
+						 */
+                     }
+                 }
+             );
+			return false;
+		}
+	</script>
+{% endblock %}
+
+{% block welcome_prefix %}{% trans "Welcome to" %}{% endblock %}
+
+{% block main %}
+	<!-- Login Form -->
+	
+
+<meta name="viewport" content="width=device-width, maximum-scale=1.0">
+<img src="/jmvc/ui/resources/images/topright.png" 
+                     	style="position:absolute;top:0px;right:0px;opacity:1.0;filter:alpha(opacity=100);" id="imgTopRight"/>  
+                     <img id="imgBottomLeft" src="/jmvc/ui/resources/images/bottomleft.png?1" 
+                     style="display:;position:absolute;bottom:0px;left:0px;opacity:1.0;filter:alpha(opacity=100);"/>
+	
+<form id="login_form" class="table_form" method="post" action="/login" style="padding:0px;margin:0px;">
+		<input type="hidden" name="return_url" value="{{RETURN_URL}}" />
+		
+			<div class="row" style="width:100%;height:30px;"></div>
+				<div class="row" style="width:100%;border:0px solid red;" align="center">
+				
+				<!--div class="col-lg-12" style="width:100%;border:0px solid blue;"-->
+				<div class="form-group">
+				<label style="display:none;">{% trans "Username:" %}</label>
+				<input type="text" id="username" placeholder="{% trans "Username" %}" name="username" tabindex="1" style="width:300px;" class="form-control" />
+			</div>
+			<div class="form-group">
+				<label style="display:none;">{% trans "Password:" %}</label>
+				<input type="password" placeholder="{% trans "Password" %}" id="password" name="password" tabindex="2" style="width:300px;" class="form-control" />
+			</div>
+			<div class="form-group">
+				<a class="login_action_link" href="/forgot_password">{% trans "Forgot your password?" %}</a>
+			</div>
+			<div class="form-group">
+				<button id="submit" type="submit" name="submit" style="width:200px;" class="btn btn-primary btn-lg" tabindex="3">{% trans "Login" %}</button>
+					{% if SETTINGS.REGISTRATION.enable %}
+					<p class="moreinfo">
+						 <a href="/terms">{% trans "No account? Register here" %}</a>
+						 <br/>
+						 <a href="javascript:void(0);" onclick="return openReportDialog();">{% trans "Report a problem" %}</a> 
+				<!--	<a href="/register">{% trans "No account? Register here" %}</a>-->
+					<p>
+					{% endif %}
+			</div>
+			<!--/div-->
+				</div>
+		</form>
+{% endblock %}
+
+ 

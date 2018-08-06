@@ -1,0 +1,160 @@
+Purchase Amount: [{"patient_id":"0361e719-b396-414f-afe7-392c9f604889"}
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:dcterms="http://purl.org/dc/terms/"
+   xmlns:foaf="http://xmlns.com/foaf/0.1/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:sp="http://smartplatforms.org/terms#"
+   xmlns:v="http://www.w3.org/2006/vcard/ns#"
+>
+  <rdf:Description rdf:about="http://indivo.org/records/0361e719-b396-414f-afe7-392c9f604889/demographics">
+    <sp:email>hatziminamaria@gmail.com</sp:email>
+    <foaf:gender>female</foaf:gender>
+    <rdf:type rdf:resource="http://smartplatforms.org/terms#Demographics"/>
+    <v:bday rdf:datatype="http://www.w3.org/2001/XMLSchema#date">1984-04-01</v:bday>
+    <v:n rdf:nodeID="Naa3f3909ad6e4249ad8f31d3bcc38fa0"/>
+    <sp:belongsTo rdf:resource="http://indivo.org/records/0361e719-b396-414f-afe7-392c9f604889"/>
+    <sp:medicalRecordNumber rdf:resource="Indivo Recordhttp://indivo.org/records/0361e719-b396-414f-afe7-392c9f604889"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="Indivo Recordhttp://indivo.org/records/0361e719-b396-414f-afe7-392c9f604889">
+    <dcterms:identifier>http://indivo.org/records/0361e719-b396-414f-afe7-392c9f604889</dcterms:identifier>
+    <dcterms:title>Indivo Record 0361e719-b396-414f-afe7-392c9f604889</dcterms:title>
+    <rdf:type rdf:resource="http://smartplatforms.org/terms#Code"/>
+    <sp:system>Indivo Record</sp:system>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Naa3f3909ad6e4249ad8f31d3bcc38fa0">
+    <v:given-name>maria</v:given-name>
+    <v:family-name>chatz</v:family-name>
+    <rdf:type rdf:resource="http://www.w3.org/2006/vcard/ns#Name"/>
+  </rdf:Description>
+</rdf:RDF>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:dcterms="http://purl.org/dc/terms/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:sp="http://smartplatforms.org/terms#"
+>
+  <rdf:Description rdf:nodeID="N7106a7d71d5f464d908dfbd2f20b5969">
+    <dcterms:title>Immunization refused (finding)</dcterms:title>
+    <rdf:type rdf:resource="http://smartplatforms.org/terms#CodedValue"/>
+    <sp:code rdf:resource="http://purl.bioontology.org/ontology/SNOMEDCT/275984001"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.bioontology.org/ontology/SNOMEDCT/275984001">
+    <dcterms:identifier>275984001</dcterms:identifier>
+    <rdf:type rdf:resource="http://smartplatforms.org/terms/codes/SNOMED"/>
+    <dcterms:title>Immunization refused (finding)</dcterms:title>
+    <rdf:type rdf:resource="http://smartplatforms.org/terms#Code"/>
+    <sp:system>http://purl.bioontology.org/ontology/SNOMEDCT/</sp:system>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://indivo.org/records/0361e719-b396-414f-afe7-392c9f604889/problems/23404cfc-e477-4a70-85df-3070521e0c60">
+    <rdf:type rdf:resource="http://smartplatforms.org/terms#Problem"/>
+    <sp:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2015-11-02T00:00:00</sp:startDate>
+    <sp:problemName rdf:nodeID="N7106a7d71d5f464d908dfbd2f20b5969"/>
+    <sp:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2015-11-15T00:00:00</sp:endDate>
+    <sp:belongsTo rdf:resource="http://indivo.org/records/0361e719-b396-414f-afe7-392c9f604889"/>
+  </rdf:Description>
+</rdf:RDF>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>
+</rdf:RDF>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:dcterms="http://purl.org/dc/terms/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:sp="http://smartplatforms.org/terms#"
+>
+  <rdf:Description rdf:about="http://purl.bioontology.org/ontology/SNOMEDCT/82275008">
+    <dcterms:title>Allergic granulomatosis angiitis (disorder)</dcterms:title>
+    <sp:system>http://purl.bioontology.org/ontology/SNOMEDCT/</sp:system>
+    <dcterms:identifier>82275008</dcterms:identifier>
+    <rdf:type rdf:resource="http://smartplatforms.org/terms#Code"/>
+    <rdf:type rdf:resource="http://smartplatforms.org/terms/codes/SNOMED"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nfc9601c995264cf4b723e9363768d7da">
+    <dcterms:title>Food allergy</dcterms:title>
+    <rdf:type rdf:resource="http://smartplatforms.org/terms#CodedValue"/>
+    <sp:code rdf:resource="http://purl.bioontology.org/ontology/SNOMEDCT/414285001"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.bioontology.org/ontology/SNOMEDCT/414285001">
+    <dcterms:title>Food allergy</dcterms:title>
+    <rdf:type rdf:resource="http://smartplatforms.org/terms/codes/AllergyCategory"/>
+    <rdf:type rdf:resource="http://smartplatforms.org/terms#Code"/>
+    <dcterms:identifier>414285001</dcterms:identifier>
+    <sp:system>http://purl.bioontology.org/ontology/SNOMEDCT/</sp:system>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N930cb10f52a34b66a4d4ad0db194989d">
+    <dcterms:title>Allergic granulomatosis angiitis (disorder)</dcterms:title>
+    <sp:code rdf:resource="http://purl.bioontology.org/ontology/SNOMEDCT/82275008"/>
+    <rdf:type rdf:resource="http://smartplatforms.org/terms#CodedValue"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://indivo.org/records/0361e719-b396-414f-afe7-392c9f604889/allergies/c72c8d0c-da01-4630-a0f9-74830df2c94c">
+    <rdf:type rdf:resource="http://smartplatforms.org/terms#Allergy"/>
+    <sp:severity rdf:nodeID="N5dc73337d03c457bba2ef52a9d7597ec"/>
+    <sp:allergicReaction rdf:nodeID="N930cb10f52a34b66a4d4ad0db194989d"/>
+    <sp:category rdf:nodeID="Nfc9601c995264cf4b723e9363768d7da"/>
+    <sp:belongsTo rdf:resource="http://indivo.org/records/0361e719-b396-414f-afe7-392c9f604889"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.bioontology.org/ontology/SNOMEDCT/255604002">
+    <dcterms:title>Mild</dcterms:title>
+    <rdf:type rdf:resource="http://smartplatforms.org/terms#Code"/>
+    <rdf:type rdf:resource="http://smartplatforms.org/terms/codes/AllergySeverity"/>
+    <sp:system>http://purl.bioontology.org/ontology/SNOMEDCT/</sp:system>
+    <dcterms:identifier>255604002</dcterms:identifier>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N5dc73337d03c457bba2ef52a9d7597ec">
+    <rdf:type rdf:resource="http://smartplatforms.org/terms#CodedValue"/>
+    <dcterms:title>Mild</dcterms:title>
+    <sp:code rdf:resource="http://purl.bioontology.org/ontology/SNOMEDCT/255604002"/>
+  </rdf:Description>
+</rdf:RDF>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:dcterms="http://purl.org/dc/terms/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:sp="http://smartplatforms.org/terms#"
+>
+  <rdf:Description rdf:about="http://indivo.org/records/0361e719-b396-414f-afe7-392c9f604889/fullfillments/926fcf4d-9d2a-473c-be73-621e6b55d1ba">
+    <rdf:type rdf:resource="http://smartplatforms.org/terms#Fulfillment"/>
+    <sp:dispenseDaysSupply rdf:datatype="http://www.w3.org/2001/XMLSchema#double">10.0</sp:dispenseDaysSupply>
+    <sp:medication rdf:resource="http://indivo.org/records/0361e719-b396-414f-afe7-392c9f604889/medications/8c88254d-d024-4df1-8c4d-4d35ab5f60ac"/>
+    <dcterms:date rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2015-11-13T00:00:00</dcterms:date>
+    <sp:belongsTo rdf:resource="http://indivo.org/records/0361e719-b396-414f-afe7-392c9f604889"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://smartplatforms.org/terms/codes/MedicationProvenance#prescription">
+    <rdf:type rdf:resource="http://smartplatforms.org/terms#Code"/>
+    <dcterms:title>prescription</dcterms:title>
+    <dcterms:identifier>prescription</dcterms:identifier>
+    <rdf:type rdf:resource="http://smartplatforms.org/terms/codes/MedicationProvenance"/>
+    <sp:system>http://smartplatforms.org/terms/codes/MedicationProvenance#</sp:system>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://indivo.org/records/0361e719-b396-414f-afe7-392c9f604889/medications/8c88254d-d024-4df1-8c4d-4d35ab5f60ac">
+    <sp:provenance rdf:resource="http://smartplatforms.org/terms/codes/MedicationProvenance#prescription"/>
+    <sp:belongsTo rdf:resource="http://indivo.org/records/0361e719-b396-414f-afe7-392c9f604889"/>
+    <sp:endDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2015-11-09</sp:endDate>
+    <rdf:type rdf:resource="http://smartplatforms.org/terms#Medication"/>
+    <sp:fulfillment rdf:resource="http://indivo.org/records/0361e719-b396-414f-afe7-392c9f604889/fullfillments/926fcf4d-9d2a-473c-be73-621e6b55d1ba"/>
+    <sp:startDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2015-11-02</sp:startDate>
+    <sp:instructions>Comments</sp:instructions>
+    <sp:drugName rdf:nodeID="N3acb3e20371f429ca6a9d23281c385ee"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3acb3e20371f429ca6a9d23281c385ee">
+    <sp:code rdf:resource="http://purl.bioontology.org/ontology/RXNORM/999915"/>
+    <rdf:type rdf:resource="http://smartplatforms.org/terms#CodedValue"/>
+    <dcterms:title>PACNEX (Topical)</dcterms:title>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://purl.bioontology.org/ontology/RXNORM/999915">
+    <dcterms:title>PACNEX (Topical)</dcterms:title>
+    <rdf:type rdf:resource="http://smartplatforms.org/terms#Code"/>
+    <sp:system>http://purl.bioontology.org/ontology/RXNORM/</sp:system>
+    <dcterms:identifier>999915</dcterms:identifier>
+    <rdf:type rdf:resource="http://smartplatforms.org/terms/codes/RxNorm_Semantic"/>
+  </rdf:Description>
+</rdf:RDF>
+
+--------------------------------

@@ -1,0 +1,1306 @@
+{% extends 'problems/templates/base.html' %}
+{% load i18n %}
+{% block title %}problem list{% endblock %}
+{% block content %}
+{% load i18n %}
+<!doctype html>
+<head>
+   <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+   <title>Coloring events</title>
+   <script src="{{ STATIC_HOME }}/calendarColor/codebase/dhtmlxscheduler.js" type="text/javascript" charset="utf-8"></script>
+   <!--         <script src="{{ STATIC_HOME }}/calendarColor/codebase/ext/dhtmlxscheduler.js" type="text/javascript" charset="utf-8"></script>-->
+   <!--	<script src="{{ STATIC_HOME }}/calendarColor/locale/locale_{% trans "languagecalendar"%}.js" charset="utf-8"></script>-->
+   <!--	<script src="{{ STATIC_HOME }}/calendarColor/locale/recurring/locale_recurring_{% trans "languagecalendar"%}.js" ></script>-->
+   <script src='{{ STATIC_HOME }}/calendarColor/codebase/ext/dhtmlxscheduler_serialize.js'></script>
+   <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" media="screen" />
+   <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+   <script src='{{ STATIC_HOME }}/calendarColor/codebase/ext/dhtmlxscheduler_readonly.js'></script>
+   <link rel="stylesheet" href="{{ STATIC_HOME }}/calendarColor/dhtmlxscheduler.css" type="text/css" media="screen" title="no title" charset="utf-8">
+   <script src="{{ STATIC_HOME }}/dist/vis.js"></script>
+   <link href="{{ STATIC_HOME }}/dist/vis.css" rel="stylesheet" type="text/css" />
+   <script src='{{ STATIC_HOME }}/calendarColor/codebase/ext/dhtmlxscheduler_minical.js' type="text/javascript"></script>
+   <!--        <script src="http://bootboxjs.com/bootbox.js"></script>-->
+   <link rel="stylesheet" href="{{ STATIC_HOME }}/lobibox-master/dist/css/lobibox.css"/>
+   <script src="{{ STATIC_HOME }}/lobibox-master/lib/jquery.1.11.min.js"></script>
+   <script src="{{ STATIC_HOME }}/lobibox-master/dist/js/lobibox.min.js"></script>
+   <script>
+      var url = '';
+      function set_url()
+      {
+      	var elem = document.getElementById('selType');
+      	url = '/apps/' + elem.value + '/' + elem.value + '/new';
+      	//alert('1 - ' + url);
+      }
+      
+      function openUrl()
+      {
+      //alert('2 - ' + url);
+      	if (document.getElementById('selType').selectedIndex <= 0) 
+      		return false;
+      	popup(url,'-',1024, 768, 1);
+      	return false;
+      }
+      
+      function openAddForm()
+      { alert('openadd');
+      	bootbox.dialog({
+                     title: " + Add",
+                     message: '<div class="row">  ' +
+                         '<div class="col-md-12"> ' +
+      				'<select id="selType" name="selType" class="form-control" onchange="set_url();"><option value="-1">Select</option><<option  value="problems">Problem</option><option value="medications">Medication</option></select> ' +
+                         '</div> ' +
+                         
+      				'</div>' + 
+      				'<div class="row">  ' +
+                         '<div class="col-md-12"> ' +
+      				'<input type="button" id="btn" name="btn" value="Add"  class="btn btn-primary btn-lg" onclick="return openUrl();"/>' +
+                         '</div> ' +
+                         
+      				'</div>',
+      				/*
+                     buttons: {
+                         success: {
+                             label: "Save",
+                             className: "btn-success",
+                             callback: function () {
+                                 var name = $('#name').val();
+                                 var answer = $("input[name='awesomeness']:checked").val()
+                                 Example.show("Hello " + name + ". You've chosen <b>" + answer + "</b>");
+                             }
+                         }
+                     }*/
+                 }
+             );
+      	
+      	return false;
+      }
+   </script>
+   <!--filters style -->
+   <meta charset="UTF-8">
+   <style>
+      #divOverlay {
+      visibility: hidden;
+      --display:none;
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      width:100%;
+      height:100%;
+      text-align:center;
+      z-index: 1000;
+      }
+      #divOverlay div {
+      width:300px;
+      margin: 100px auto;
+      background-color: #fff;
+      border:1px solid #000;
+      padding:15px;
+      text-align:center;
+      }
+   </style>
+   <style type="text/css" media="screen">
+      html, body {
+      margin: 0px;
+      padding: 0px;
+      height: 100%;
+      overflow: hidden;
+      }
+      .filters_wrapper {
+      line-height: 12px;
+      font-size: 12px;
+      }
+      .filters_wrapper span {
+      font-weight: bold;
+      padding-right: 5px;
+      }
+      .filters_wrapper label {
+      padding-right: 3px;
+      }
+   </style>
+   <style type="text/css">
+      #dhx_cal_data {
+      overflow-y: hidden;
+      }
+      .button2 {
+      padding: 5px 10px;
+      display: inline;
+      background:  #d9d9d9 url(button.png) repeat-x bottom;
+      border: 1px;
+      border-style: solid;
+      border-color:#747473;
+      color:  #404040;
+      cursor: pointer;
+      font-weight: ;
+      border-radius: 5px;
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
+      text-shadow: 1px 1px #666;
+      }
+      .button2:hover {
+      background-position: 0 -48px;
+      }
+      .button2:active {
+      background-position: 0 top;
+      position: relative;
+      top: 1px;
+      padding: 6px 10px 4px;
+      }
+      .button {
+      padding: 5px 10px;
+      display: inline;
+      background: #B6B6B6 url(button.png) repeat-x bottom;
+      border: 1px;
+      border-style: solid;
+      border-color:#747473;
+      color: #fff;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 5px;
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
+      text-shadow: 1px 1px #666;
+      }
+      .button:hover {
+      background-position: 0 -48px;
+      }
+      .button:active {
+      background-position: 0 top;
+      position: relative;
+      top: 1px;
+      padding: 6px 10px 4px;
+      }
+      .button.red { background-color: #e50000; }
+      .button.purple { background-color: #9400bf; }
+      .button.green { background-color: #58aa00; }
+      .button.orange { background-color: #ff9c00; }
+      .button.blue { background-color: #2c6da0; }
+      .button.black { background-color: #333; }
+      .button.white { background-color: #fff; color: #000; text-shadow: 1px 1px #fff; }
+      .button.small { font-size: 75%; padding: 3px 7px; }
+      .button.small:hover { background-position: 0 -50px; }
+      .button.small:active { padding: 4px 7px 2px; background-position: 0 top; }
+      .button.large { font-size: 125%; padding: 7px 12px; }
+      .button.large:hover { background-position: 0 -35px; }
+      .button.large:active { padding: 8px 12px 6px; background-position: 0 top; }
+      .menu{
+      width:400px; 
+      margin-left:200px;
+      }
+      .input-color {
+      position: relative;
+      /*margin-left:1250px;*/
+      }
+      .input-color input {
+      padding-left: 20px;
+      }
+      .input-color .color-box {
+      width: 10px;
+      height: 10px;
+      display: inline-block;
+      background-color: #ccc;
+      position: absolute;
+      left: 5px;
+      top: 5px;
+      }
+      body, input {
+      font: 12pt verdana;
+      -- overflow-y: auto !important;
+      }
+      .aParent div {
+      float: left;
+      clear: none; 
+      }
+      /* custom styles for individual items, load this after vis.css */
+      .vis.timeline .item.green {
+      background-color: #36bd14;
+      border-color: green;
+      }
+      /* create a custom sized dot at the bottom of the red item */
+      .vis.timeline .item.red {
+      background-color: #b30000;
+      border-color: darkred;
+      color: white;
+      font-family: monospace;
+      box-shadow: 0 0 10px gray;
+      }
+      .vis.timeline .item.dot.red {
+      border-radius: 10px;
+      border-width: 10px;
+      }
+      .vis.timeline .item.line.red {
+      border-width: 5px;
+      }
+      .vis.timeline .item.box.red {
+      border-radius: 0;
+      border-width: 2px;
+      font-size: 14pt;
+      font-weight: bold;
+      }
+      .vis.timeline .item.orange {
+      background-color: #296ba0;
+      border-color: #296ba0;
+      }
+      .vis.timeline .item.orange {
+      background-color: orange;
+      border-color: #a36800;
+      }
+      .vis.timeline .item.orange.selected {
+      /* custom colors for selected orange items */
+      background-color: orange;
+      border-color: orangered;
+      }
+      .vis.timeline .item.magenta {
+      background-color: magenta;
+      border-color: purple;
+      color: white;
+      }
+      /* our custom classes overrule the styles for selected events,
+      so lets define a new style for the selected events */
+      .vis.timeline .item.selected {
+      background-color: white;
+      border-color: black;
+      color: black;
+      box-shadow: 0 0 10px gray;
+      }
+      .vis.timeline.rootpanel {
+      border: none;
+      }
+   </style>
+   <style type="text/css" media="screen">
+      html, body{
+      margin:0;
+      padding:0;
+      height:100%;
+      overflow:hidden;
+      }
+      .dhx_cal_event div.dhx_footer,
+      .dhx_cal_event.past_event div.dhx_footer,
+      .dhx_cal_event.event_problems div.dhx_footer,
+      .dhx_cal_event.event_medications div.dhx_footer,
+      .dhx_cal_event.event_appointments div.dhx_footer,
+      .dhx_cal_event.event_procedures div.dhx_footer{
+      background-color: transparent !important;
+      }
+      .dhx_cal_event .dhx_body{
+      -webkit-transition: opacity 0.1s;
+      transition: opacity 0.1s;
+      opacity: 0.7;
+      }
+      .dhx_cal_event .dhx_title{
+      line-height: 12px;
+      }
+      .dhx_cal_event_line:hover,
+      .dhx_cal_event:hover .dhx_body,
+      .dhx_cal_event.selected .dhx_body,
+      .dhx_cal_event.dhx_cal_select_menu .dhx_body{
+      opacity: 1;
+      }
+      .dhx_cal_event.event_medications div, .dhx_cal_event_line.event_medications{
+      background-color: #FFB733 !important;
+      color : #000000;
+      border-color: #a36800 !important;
+      }
+      .dhx_cal_event_clear.event_medications{
+      color:orange !important;
+      }
+      .dhx_cal_event.event_procedures div, .dhx_cal_event_line.event_procedures{
+      background-color: #36BD14 !important;
+      border-color: #698490 !important;
+      }
+      .dhx_cal_event_clear.event_procedures{
+      color:#36BD14 !important;
+      height:25px;
+      }
+      .dhx_cal_event.event_appointments div, .dhx_cal_event_line.event_appointments{
+      background-color:#296ba0!important;
+      border-color:#296ba0 !important;
+      }
+      .dhx_cal_event_clear.event_appointments{
+      color:#296ba0 !important;
+      height:25px;
+      }
+      .dhx_cal_event.event_problems div, .dhx_cal_event_line.event_problems{
+      background-color: #FEC4F0 !important;
+      color: #000000;
+      border-color: #839595 !important;
+      }
+      .dhx_cal_event_clear.event_problems{
+      color:#B82594 !important;
+      }
+      .th, td {
+      padding: 0em;
+      }
+   </style>
+   <script type="text/javascript" charset="utf-8">
+      var currentDate=null;
+      function init() {
+      	scheduler.config.xml_date="%Y-%m-%d %H:%i";
+      	scheduler.config.time_step = 30;
+      	scheduler.config.multi_day = true;
+      	scheduler.locale.labels.section_subject = "Subject";
+      	scheduler.config.first_hour = 6;
+      	scheduler.config.limit_time_select = true;
+      	scheduler.config.details_on_dblclick = true;
+      	scheduler.config.details_on_create = true;
+                            scheduler.locale.labels.section_type = "Type";
+      	scheduler.xy.margin_top = 30;
+                            // default values for filters
+      	var filters = {
+      		problems: true,
+      		medications: true,
+      		procedures: true,
+      			appointments : true
+      	};
+                            var dateData = [{'start': new Date({{year}},{{month}},{{day}}),'content': 'Current date' },];
+      
+      	var appointmentsList = [
+                                    {% for ap in appointments %}
+      
+                            {
+                                  'start': new Date({{ap.year}},{{ap.month}},{{ap.day}}),
+                                  'content': '{{ap.appointment_title}}',
+                                  'className': '#296ba0'
+                            },
+                                    {% endfor %}
+      
+                            ];
+      
+                            var proceduresList = [ 
+      		{% for pr in procedures %}
+      
+              {
+                  	              'start': new Date({{pr.year}},{{pr.month}},{{pr.day}}),
+                    'content': '{{pr.name}}',
+                    'className': 'green'
+              },
+      		{% endfor %}
+      
+      	];
+      	
+      
+      
+                            var medicationsList =  [
+      		{% for m in medications %}
+      
+      		        {
+      			      'start': new Date({{m.yearS}},{{m.monthS}},{{m.dayS}}),
+      			      'end': new Date({{m.yearE}},{{m.monthE}},{{m.dayE}}),
+      			      'content': '{{m.drugName_title}}',
+      			      'className': 'orange'
+      		        },
+      	      {% endfor %}
+                                  ];   
+      
+                            var problemsList = [
+      		  {% for p in problems %}
+      		        {
+      			      'start': new Date({{p.yearS}},{{p.monthS}},{{p.dayS}}),
+            				       'end': new Date({{p.yearE}},{{p.monthE}},{{p.dayE}}),
+      			      'content': '{{p.name_title}}',
+      			      'className': 'magenta'
+      			   },
+      		  {% endfor %}
+      
+      	];    
+      
+      	Array.prototype.extend = function (other_array) {
+      		   /* you should include a test to check whether other_array really is an array */
+      	    other_array.forEach(function(v) {this.push(v)}, this);    
+      	}
+      	var completeData = [];
+      	var filter_inputs = document.getElementById("filters_wrapper").getElementsByTagName("input");
+      	for (var i=0; i<filter_inputs.length; i++) {
+      		var filter_input = filter_inputs[i];
+      
+      		// set initial input value based on filters settings
+      		filter_input.checked = filters[filter_input.name];
+                                    
+      		// attach event handler to update filters object and refresh view (so filters will be applied)
+      		filter_input.onchange = function() {
+                                            delete completeData;
+      
+                                            completeData.length = 0; 
+      			completeData=dateData;
+      
+      
+      
+      			filters[this.name] = !!this.checked;
+      
+                                            if(filters['problems']==true)
+      			{		
+                                                        completeData.push.apply(completeData,problemsList); 
+      			}
+      
+      			if(filters['procedures']==true)
+                                            {
+                                                        completeData.push.apply(completeData,proceduresList);
+                                            }
+      			if(filters['appointments']==true)
+                                            {
+                                                        completeData.push.apply(completeData,appointmentsList);
+                                            }
+      
+      			if(filters['medications']==true)
+                                            {
+                                                        completeData.push.apply(completeData,medicationsList);
+      
+                                            }
+      			
+      			data = new vis.DataSet(completeData);
+                                            scheduler.parse(data);
+      
+      
+                                            timeline.setItems(data) //update timeline  
+      			scheduler.updateView();
+      			
+      		}
+      	}
+      //			scheduler.xy.bar_height = 50;
+      //                      scheduler.xy.scale_height =15;
+      
+      
+      	scheduler.config.drag_move = false;
+      	scheduler.deleteEvent("onDblClick");
+                            scheduler.deleteEvent("onLightbox");
+      	// here we are using single function for all filters but we can have different logic for each view
+      	scheduler.filter_month = scheduler.filter_day = scheduler.filter_week = function(id, event) {
+      		// display event only if its type is set to true in filters obj
+      		// or it was not defined yet - for newly created event
+      		if (filters[event.subject] || event.subject==scheduler.undefined) {
+           
+      			return true;
+      		}
+      
+      		// default, do not display event
+      		return false;
+      	};
+      
+      
+      
+      	scheduler.templates.event_class=function(start, end, event){
+      		var css = "";
+      
+      		if(event.subject) // if event has subject property then special class should be assigned
+      			css += "event_"+event.subject;
+      
+      
+      		if(event.id == scheduler.getState().select_id){
+      			css += " selected";
+      		}
+      		return css; // default return
+      
+      		/*
+      			Note that it is possible to create more complex checks
+      			events with the same properties could have different CSS classes depending on the current view:
+      
+      			var mode = scheduler.getState().mode;
+      			if(mode == "day"){
+      				// custom logic here
+      			}
+      			else {
+      				// custom logic here
+      			}
+      		*/
+      	};
+      
+      	var subject = [
+      		{ key: '', label: 'Select' },
+      		{ key: 'problems', label: 'Problems' },
+      		{ key: 'medications', label: 'Medications' },
+      		{ key: 'procedures', label: 'Procedures' },
+      		{ key: 'appointments', label: 'Appointments' }
+      	];
+      
+      
+      	scheduler.config.lightbox.sections=[
+                                    //{name:"description", height:43, map_to:"text", type:"textarea" , focus:true},
+      		{name:"description", height:43, type:"template"},
+      		{name:"subject", height:20, type:"select", options: subject, map_to:"subject" },
+      		//{name:"time", height:72, type:"time", map_to:"auto" }
+      	];
+                             
+      
+                            scheduler.locale.labels.icon_save = "Add";
+      // scheduler.config.icons_select = ['icon_details'];
+      /*scheduler.deleteEvent("onEmptyClick");
+      scheduler.attachEvent("onBeforeEventCreated", function (e){
+        //any custom logic here
+        return false;
+      });*/
+      
+      	scheduler.attachEvent("onEmptyClick", function (date, e){
+                                 
+      	         currentDate = date;		
+      		 var evs = scheduler.getEvents();
+      
+      		console.log(date.toSource());
+      
+      		url="/apps/problems/problems/new"
+      //				 window.open(url,'windowname1',  'width=200, height=77');
+      /*				var win = window.open(url,'windowname1',  'width=800, height=600');
+      		win.focus();
+      		var timer = setInterval(function() { 
+      	    if(win.closed) {
+      
+      	        clearInterval(timer);
+            			set_cookie('thedate',date.getFullYear()+"-"+date.getMonth(),1);
+      		window.parent['calendarFrame'].location.href = '/apps/calendar/start_auth?record_id=baba6b52-dd72-4af7-a6a3-f00a98f47b3d&amp;carenet_id=';
+      		    }
+      		}, 1000);
+      */			
+      		overlay();
+      
+      	})
+      var subj = '';
+      var theid = '';
+      	scheduler.attachEvent("onClick", function (id, e){
+           //any custom logic here
+      		
+      		 var evs = scheduler.getEvents(); 
+      		 for (var c=0; c<evs.length; c++){
+      		   if(evs[c].id==id){
+      			subj = evs[c].subject;
+      			theid = evs[c].id;
+      			if(evs[c].subject=='problems'){
+      
+      				window['iframeProblems'].location.href='/apps/problems/start_auth?record_id={{record_id}}&amp;carenet_id=';
+                                                    window.top.loader('open');
+      				el('iframeProblems').onload=function(){popup('/apps/'+subj+'/'+subj+'/'+theid,'-',1024,768,1);}
+      			}
+      			if(evs[c].subject=='medications'){
+      				window['iframeMedications'].location.href='/apps/medications/start_auth?record_id={{record_id}}&amp;carenet_id=';
+                                                    window.top.loader('open');
+                                                     el('iframeMedications').onload=function(){popup('/apps/'+subj+'/'+subj+'/'+theid,'-',1024,768,1);}
+      //                                                document.getElementById('iframeMedications').contentWindow.location.reload();
+                                            }
+      
+      			if(evs[c].subject=='procedures'){
+      				 window['iframeProcedures'].location.href='/apps/procedures/start_auth?record_id={{record_id}}&amp;carenet_id=';
+                                                     window.top.loader('open');
+                                                       el('iframeProcedures').onload=function(){popup('/apps/'+subj+'/'+subj+'/'+theid,'-',1024,768,1);}
+      //                                                document.getElementById('iframeProcedures').contentWindow.location.reload();
+                                            }
+      
+      			if(evs[c].subject=='appointments'){
+      				 window['iframeAppointments'].location.href='/apps/appointments/start_auth?record_id={{record_id}}&amp;carenet_id=';
+      //                                                document.getElementById('iframeAppointments').contentWindow.location.reload();
+                                                     window.top.loader('open');
+      				 el('iframeAppointments').onload=function(){popup('/apps/'+subj+'/'+subj+'/'+theid,'-',1024,768,1);}
+      
+                                            }
+      
+      		       //setTimeout("var subj='"+evs[c].subject+"';var theid='"+evs[c].id+"';popup('/apps/'+subj+'/'+subj+'/'+theid,'-',1024,768,1);",2000);
+      			}
+      		}
+      
+      	    return false;
+      		 });	
+      
+      //           		  scheduler.config.icons_select=["icon_save","icon_delete"];
+      /*			scheduler.attachEvent("onBeforeLightbox", function (id, mode, native_event) {
+                           /*        var evs = scheduler.getEvents();
+      			console.log(evs.toSource());
+      
+      //				scheduler.config.buttons_left = ["dhx_save_btn", "dhx_delete_btn"];
+      //				scheduler.config.buttons_right = ["dhx_cancel_btn"];
+      		for (var c=0; c<evs.length; c++){
+      			if(evs[c].id==id){
+      			        scheduler.getEvent(id).readonly = true;
+      				
+      				//alert(evs[c].subject + ' --- ' + evs[c].record_id);
+      				//return false;
+      //						window.open('/apps/problems/problems/dcc7f05d-9ade-4761-aeef-5e0f6cb399fe');
+      				if(typeof(evs[c].subject)!='undefined')
+      				popup('/apps/'+evs[c].subject+'/'+evs[c].subject+'/dcc7f05d-9ade-4761-aeef-5e0f6cb399fe','-',1024,768,1)						
+      				else
+      					openAddForm();
+      				return false;
+      			}
+      			else
+      			{
+      				scheduler.getEvent(id).readonly = true;	
+      					
+      
+      			} 
+      		}
+      		
+      	*/	
+      		
+      //			        return false;
+      //			});
+      
+      /*
+      function set_cookie(c_name, value, expiredays)
+      {
+      var exdate=new Date();
+      exdate.setDate(exdate.getDate()+expiredays);
+      document.cookie=c_name+ "=" +escape(value)+
+      ((expiredays==null) ? "" : ";expires="+exdate.toGMTString());
+      }
+      
+      function set_cookie(variable, value)
+      {
+      document.cookie = variable + '=' + value;
+      }
+      */
+      function get_cookie(Name) 
+      {
+       var search = Name + "="
+       var returnvalue = '';
+       if (document.cookie.length > 0) 
+       {
+      	  offset = document.cookie.indexOf(search);
+      // if cookie exists
+        if (offset != -1) 
+        {
+      	   offset += search.length
+      	   // set index of beginning of value
+         end = document.cookie.indexOf(';', offset);
+       
+       // set index of end of cookie value
+         if (end == -1) 
+          end = document.cookie.length;
+       
+         returnvalue=unescape(document.cookie.substring(offset, end));
+      	}
+      	}
+      return returnvalue;
+      }
+      
+      
+      	if (get_cookie('thedate') == '')
+      		scheduler.init('scheduler_here', new Date({{year}}, {{month}}, {{day}}), "month");
+      	else
+      	{
+      		var thedate = get_cookie('thedate');
+      
+      		var year = parseInt(thedate.split('-')[0]);
+      		var month = parseInt(thedate.split('-')[1]);
+      		var day = 1;
+      		set_cookie('thedate','',1)
+      		 scheduler.init('scheduler_here', new Date(year, month, day), "month");
+      
+      	}
+                            var obj = document.getElementById('dhx_cal_data');
+                            //obj.style.height = "1500px";
+      
+      	scheduler.parse([
+                                    
+      		{% for p in problems %}
+      		    {% if '3000-02-01' in p.endDate %}
+      
+      		 {% else %}
+      			{ start_date: "{{p.startDate}}", end_date: "{{p.endDate}}", text:"{{p.name_title}}", subject: 'problems', description:'<input type="button" onclick="window.open(\'http://www.google.com\');return false;" />' ,id :'{{p.id}}',record_id:'{{record_id}}'},
+      		    {% endif %}
+                    		{% endfor %}
+                                    
+      
+      		{% for m in medications %}
+                                            { start_date: "{{m.startDate}}", end_date: "{{m.endDate}}", text:"{{m.drugName_title}}",subject:'medications',id:"{{m.id}}",record_id :"{{record_id}}" },
+      
+                                    {% endfor %}
+      
+      	
+      		{% for pr in procedures %}
+                                            { start_date: "{{pr.date_performed|slice:":-9"}} 08:00", end_date: "{{pr.date_performed|slice:":-9"}} 10:00", text:"{{pr.name_type}}", subject: 'procedures' ,id:'{{pr.id}}',record_id :"{{record_id}}"},
+      
+                                    {% endfor %}
+      
+      			{% for ap in appointments %}
+      
+                                            { start_date: "{{ap.date|slice:":-10"}} {{ap.time}}", end_date: "{{ap.date|slice:":-10"}} {{ap.time}}", text:"{{ap.appointment_title}}", subject: 'appointments' ,id:'{{ap.id}}',record_id :"{{record_id}}"},
+      
+                                    {% endfor %}
+      
+       	
+      		
+      	], "json");
+                   
+      
+      
+      
+      
+      
+      //		scheduler.config.readonly_form = true;
+      //              scheduler.updateCollection("problems", []); 
+      
+      }
+      function popup(url,name,width,height,scrollbars) 
+      {
+      var sizeX = width;
+      var sizeY = height;
+      var winX=screen.availWidth;
+      var winY=screen.availHeight; 
+      var centerX=eval(winX/2-sizeX/2);
+      var centerY=eval(winY/2-sizeY/2);
+      var param ='scrollbars='+scrollbars+',status=yes,resizable=yes,top='+centerY+',left='+centerX+',width='+sizeX+',height='+sizeY;
+      var newWin = window.open(url,name,param);
+      newWin.focus();
+      
+      return false;
+      }
+      
+      function calendar() {
+      
+      
+      
+      
+                    scheduler.init('scheduler_here', new Date({{year}}, {{month}}, {{day}}), "month"); 
+      
+      
+      
+      document.getElementById('mytimeline').style.display = "none";
+      document.getElementById('scheduler_here').style.display = "block";
+                    scheduler.init('scheduler_here', new Date({{year}}, {{month}}, {{day}}), "month");
+                    scheduler.parse(data);
+      
+                    document.getElementById('mytimeline').style.display = "none";
+                    document.getElementById('scheduler_here').style.display = "block";
+      
+      
+      
+      
+      
+      }
+      
+      
+      function timel(){
+     	 var options = {
+        editable: false,
+        autoResize:false
+      };
+ 
+	var container = document.getElementById('mytimeline');      
+      timeline.destroy();		 
+	alert(data);
+       timeline = new vis.Timeline(container, data, options); 
+//       timeline.setItems(data)
+      
+                    document.getElementById('scheduler_here').style.display = "none";
+                    document.getElementById('mytimeline').style.display = "block";
+                    timeline.setItems(data)
+      
+                    document.getElementById('scheduler_here').style.display = "none";
+                    document.getElementById('mytimeline').style.display = "block";
+      
+      //                timeline = new vis.Timeline(container, data, options);
+      //                return false;
+      }
+      
+      function show_minical(){
+        var xml = scheduler.toXML();
+      
+        if (scheduler.isCalendarVisible()){
+            scheduler.destroyCalendar();
+        } else {
+            scheduler.renderCalendar({
+                position:"dhx_minical_icon",
+                date:scheduler._date,
+                navigation:true,
+                handler:function(date,calendar){
+                    scheduler.setCurrentView(date);
+                    scheduler.destroyCalendar()
+                }
+            });
+        }
+      
+      }
+      
+      function doXML(){
+        var xml = scheduler.toXML();
+        alert(xml);
+      }
+      
+      
+      
+      
+      
+      
+      
+      
+   </script>
+   <script>
+      $('week_tab').click(function(){
+           var obj = document.getElementById('dhx_cal_data');
+           obj.style.height = "400px";
+           alert('mp');
+           document.getElementById("dhx_cal_data").style["height"] = '400px';
+      });
+   </script>
+   <!--parg-->
+   <script>
+      function overlay() {
+      	var divOverlay = document.getElementById("divOverlay");
+      	divOverlay.style.visibility = (divOverlay.style.visibility == "visible") ? "hidden" : "visible";
+      	//toggle(el('divOverlay'));
+      	return false;
+      }
+      function el(id){return document.getElementById(id);}
+      function selectmode(sender)
+      {
+      	el('btnAdd').style.display = 'none';
+      	var mode = sender.value;
+      	if (mode == '-1')
+      	{
+      		return false;
+      	}
+              window.top.loader('open');
+              var stringUrl = "/apps/"+mode+"/start_auth?record_id={{record_id}}&amp;carenet_id=";
+      
+      	//window.frames['iframe_auth'].location.href = '//www.ics.forth.gr';i
+      	
+      	el('iframe_auth').src = stringUrl;
+      }
+      function iframe_auth_load(sender)
+      {
+      	//alert(sender.src);
+      	if (el('iframe_auth').src == 'about:blank' || el('iframe_auth').src == '')
+      		return false;
+      	el('btnAdd').style.display = '';
+      	//return false;
+      }
+      
+       function set_cookie(c_name, value, expiredays)
+              {
+               var exdate=new Date();
+               exdate.setDate(exdate.getDate()+expiredays);
+               document.cookie=c_name+ "=" +escape(value)+
+               ((expiredays==null) ? "" : ";expires="+exdate.toGMTString());
+              }
+      
+      
+      
+      function addButton(){
+      	overlay();
+      	var mode = el('sel').value;
+      	
+              var appsNew ="/apps/"+mode+"/"+mode+"/new";
+              var win = window.open(appsNew,'insert new',  'width=800, height=600,scrollbars=1');
+              win.focus();
+              var timer = setInterval(function() {
+                                  if(win.closed) {
+      
+                                      clearInterval(timer);
+                                      set_cookie('thedate',currentDate.getFullYear()+"-"+currentDate.getMonth(),1);
+                                      window.parent['calendarFrame'].location.href = '/apps/calendar/start_auth?record_id={{record_id}}&amp;carenet_id=';
+                                          }
+                                      }, 1000);
+      
+      //	popup(appsNew, '-', 600, 400,1);
+      return false;
+      }
+   </script>
+   <script>
+      //Overriding default options
+      Lobibox.base.DEFAULTS = $.extend({}, Lobibox.base.DEFAULTS, {
+      horizontalOffset: 5, //If the messagebox is larger (in width) than window's width. The messagebox's width is reduced to window width - 2 * horizontalOffset
+      width           : 600,
+      height          : 'auto',  // Height is automatically given calculated by width
+      closeButton     : true,  // Show close button or not
+      draggable       : false,  // Make messagebox draggable
+      customBtnClass  : 'lobibox-btn-default', // Class for custom buttons
+      modal           : true,
+      debug           : false,
+      buttonsAlign    : 'center', // Position where buttons should be aligned
+      closeOnEsc      : true,  // Close messagebox on Esc press
+      
+      });
+      
+      
+      Lobibox.alert.DEFAULTS = $.extend({}, Lobibox.alert.DEFAULTS, {
+        warning: {
+              title: 'Warning',
+              iconClass: 'glyphicon glyphicon-info-sign' // Change warning alert icon globally
+          }
+       
+      });
+      Lobibox.alert.DEFAULTS = {
+          warning: {
+              title: 'Warning',
+              iconClass: 'glyphicon glyphicon-qn-sign' // Change warning alert icon globally
+          },
+          info:{
+              title: 'Information',
+              iconClass: 'glyphicon glyphicon-info-sign'  // Change info alert icon globally
+          },
+      }
+   </script>
+</head>
+<body onload="init();">
+   <!--parg-->
+   <div id="divOverlay">
+      <div>
+         <p>
+            <select id="sel" name="sel" onchange="selectmode(this);">
+               <option value="-1">Select</option>
+               <option value="problems">Problems</option>
+               <option value="medications">Medications</option>
+               <option value="appointments">Appointments</option>
+               <option value="procedures">Procedures</option>
+            </select>
+            <iframe id="iframe_auth" name="iframe_auth" style="display:none;" onload="iframe_auth_load(this);"></iframe>
+         </p>
+         <p>
+            <input type="button" value="+ Add" id="btnAdd" style="display:none;" onclick="return addButton();"/>
+         </p>
+         <p>
+            Click here to [<a href='javascript:void(0);' onclick='return overlay();'>close</a>]
+         </p>
+      </div>
+   </div>
+   <!--<a href='javascript:void(0);' onclick='overlay()'></a>-->
+   <iframe id="iframeProblems" name="iframeProblems" style="display:none" ></iframe><!--src="http://139.91.190.38/apps/problems/start_auth?record_id=baba6b52-dd72-4af7-a6a3-f00a98f47b3d&amp;carenet_id=" ></iframe>-->
+   <iframe id="iframeCalendar" name="iframeCalendar" style="display:none;" ></iframe>
+   <iframe id="iframeProcedures" name="iframeProcedures" style="display:none;"  ></iframe><!--src="http://139.91.190.38/apps/procedures/start_auth?record_id=baba6b52-dd72-4af7-a6a3-f00a98f47b3d&amp;carenet_id=" ></iframe>-->
+   <iframe id="iframeMedications" name="iframeMedications" style="display:none;"  ></iframe><!--src="http://139.91.190.38/apps/medications/start_auth?record_id=baba6b52-dd72-4af7-a6a3-f00a98f47b3d&amp;carenet_id=" ></iframe>-->
+   <iframe id="iframeAppointments" name="iframeAppointments" style="display:none;"  ></iframe><!--src="http://139.91.190.38/apps/appointments/start_auth?record_id=baba6b52-dd72-4af7-a6a3-f00a98f47b3d&amp;carenet_id=" ></iframe>-->
+   <div style='height:20px; padding:5px;'>
+   <style>
+   .sq {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    position: relative;
+	top:0px;
+}
+</style>
+      <div class="filters_wrapper" id="filters_wrapper">
+         <span>Display:</span>
+         <label>
+		 
+         <input type="checkbox" name="problems" />
+		 <span style="background-color:#FFB733;" class="sq">&nbsp;</span>
+         Problems	
+         </label>
+         <label>
+         <input type="checkbox" name="medications" />
+         Medications
+         </label>
+         <label>
+         <input type="checkbox" name="procedures" />
+         Procedures
+         </label>
+         <label>
+         <input type="checkbox" name="appointments" />
+         Appointments
+         </label>
+         <!--                <label>
+            <input type="button" style="height:35px;" class="button2" value="XML" onclick="doXML();" />
+            </label>-->
+      </div>
+   </div>
+   <div>
+      <p> &nbsp; &nbsp; &nbsp;
+   </div>
+   <div class="aParent">
+      <div id="buttons" style="width:80%; display: inline-block;"><input type="button" name="answer" class="button" value="{% trans "Calendar" %}" onclick="calendar()" />
+         <input type="button" name="answer2" value=" {% trans "Timeline" %}"  class="button" onclick="timel()" />
+      </div>
+	<div class="row" style="float:right;min-width:700px;">
+	  
+				<div class="col-lg-3">
+					<div class="input-color">
+					<div class="color-box" style="background-color: #FFB733;"></div>
+                  &nbsp; &nbsp;{% trans "Medications" %}
+					</div>
+				</div>
+				<div class="col-lg-3">
+					<div class="input-color">
+					<div class="color-box" style="background-color:  #FEC4F0;"></div>
+                  &nbsp; &nbsp;{% trans "Problems" %}
+					</div>
+				</div>
+				<div class="col-lg-3">
+					<div class="input-color">
+					<div class="color-box" style="background-color: #36bd14;"></div>
+                  &nbsp; &nbsp;{% trans "Procedures" %}
+					</div>
+				</div>
+				<div class="col-lg-3">
+					<div class="input-color">
+                  <div class="color-box" style="background-color: #2c6da0;"></div>
+                  &nbsp; &nbsp;{% trans "Appointments" %}
+                  <!-- Replace "navy" to change the color -->
+               </div>
+				</div>
+			
+		</div>
+      <div id="listul" style=" display: none" align="left">
+	  <!--div id="listul" style=" display: none;" align="left"-->
+         <ul style="list-style:none">
+            <li style="display:block">
+               <div class="input-color">
+                  <div class="color-box" style="background-color: #FFB733;"></div>
+                  &nbsp; &nbsp;{% trans "Medications" %}
+                  <!--            <div class="color-box" style="background-color: #FF850A;"></div>  &nbsp; &nbsp;{% trans "Medications" %}-->
+                  <!-- Replace "#FF850A" to change the color -->
+               </div>
+            </li>
+            <li style="display:block">
+               <div class="input-color">
+                  <div class="color-box" style="background-color:  #FEC4F0;"></div>
+                  &nbsp; &nbsp;{% trans "Problems" %}
+                  <!--            <div class="color-box" style="background-color: magenta;"></div>  &nbsp; &nbsp;{% trans "Problems" %}-->
+                  <!-- Replace "navy" to change the color -->
+               </div>
+            </li>
+            <li style="display:block">
+               <div class="input-color">
+                  <div class="color-box" style="background-color: #36bd14;"></div>
+                  &nbsp; &nbsp;{% trans "Procedures" %}
+                  <!-- Replace "navy" to change the color -->
+               </div>
+            </li>
+            <li style="display:block">
+               <div class="input-color">
+                  <div class="color-box" style="background-color: #2c6da0;"></div>
+                  &nbsp; &nbsp;{% trans "Appointments" %}
+                  <!-- Replace "navy" to change the color -->
+               </div>
+            </li>
+         </ul>
+      </div>
+   </div>
+   <!-- Replace "#FF850A" to change the color -->
+   <br>
+   <div id="scheduler_here" class="dhx_cal_container" style='width:100%; height:800px; max-height:1500px !important;'>
+      <div class="dhx_cal_navline">
+         <div class="dhx_cal_prev_button">&nbsp;</div>
+         <div class="dhx_cal_next_button">&nbsp;</div>
+         <div class="dhx_minical_icon" id="dhx_minical_icon"   onclick="show_minical()">&nbsp;</div>
+         <div class="dhx_cal_today_button"></div>
+         <div class="dhx_cal_date"></div>
+         <div class="dhx_cal_navline"></div>
+         <div class="dhx_cal_tab" name="day_tab" style="right:204px;"></div>
+         <div class="dhx_cal_tab" name="week_tab" id="week_tab" style="right:140px;"></div>
+         <div class="dhx_cal_tab" name="month_tab" style="right:76px;"></div>
+      </div>
+      <div class="dhx_cal_header" style=''>
+      </div>
+      <div class="dhx_cal_data" name="dhx_cal_data" id="dhx_cal_data" style="height:1100px !important;">
+         <p class="para1">
+      </div>
+   </div>
+   <div id="mytimeline" style="display:none; width:99%;" >
+	 <div class="row" style="height:10px;"></div>
+      <div class="row" style="width:100%;border:0px solid black;">
+		<div class="col-lg-12" style="float:left;">		
+			<div style="left:0px;margin-left:0px;" id="visualization" name="visualization">
+			 <div class="menu" style="width:100%;margin-left:0px;float:left !important;">
+				<input type="button" id="window1" value="{% trans "Set window to last two months" %}"  class="btn btn-small btn-primary"/>
+				<input type="button" id="fit" value="{% trans "Fit all items" %}"  class="btn btn-small btn-primary"/>
+				<input type="button" id="zoomIn" value="{% trans "Zoom in" %}"  class="btn btn-small btn-primary"/>
+				<input type="button" id="zoomOut" value="{% trans "Zoom out" %}"  class="btn btn-small btn-primary"/>
+				<input type="button" id="moveLeft" value="{% trans "Move left" %}"  class="btn btn-small btn-primary"/>
+				<input type="button" id="moveRight" value="{% trans "Move right" %}"  class="btn btn-small btn-primary"/>
+			 </div>
+		  </div>
+		</div>
+		
+	  </div>
+	 <div class="row" style="height:10px;"></div>
+      
+	  <div style="display: none;">
+		<ul style="list-style:none">
+            <li style="display:block">
+               <div class="input-color">
+                  <div class="color-box" style="background-color: #FFB733;"></div>
+                  &nbsp; &nbsp;{% trans "Medications" %}
+                  <!--            <div class="color-box" style="background-color: #FF850A;"></div>  &nbsp; &nbsp;{% trans "Medications" %}-->
+                  <!-- Replace "#FF850A" to change the color -->
+               </div>
+            </li>
+            <li style="display:block">
+               <div class="input-color">
+                  <div class="color-box" style="background-color:  #FEC4F0;"></div>
+                  &nbsp; &nbsp;{% trans "Problems" %}
+                  <!--            <div class="color-box" style="background-color: magenta;"></div>  &nbsp; &nbsp;{% trans "Problems" %}-->
+                  <!-- Replace "navy" to change the color -->
+               </div>
+            </li>
+            <li style="display:block">
+               <div class="input-color">
+                  <div class="color-box" style="background-color: #36bd14;"></div>
+                  &nbsp; &nbsp;{% trans "Procedures" %}
+                  <!-- Replace "navy" to change the color -->
+               </div>
+            </li>
+            <li style="display:block">
+               <div class="input-color">
+                  <div class="color-box" style="background-color: #2c6da0;"></div>
+                  &nbsp; &nbsp;{% trans "Appointments" %}
+                  <!-- Replace "navy" to change the color -->
+               </div>
+            </li>
+         </ul>
+	  </div>
+	  
+	  </div>
+	  <div class="row" style="height:10px;"></div>
+	 
+	  </div>
+	  
+	  
+      <br>
+   </div>
+   <script type="text/javascript">
+      // create data
+      // note that months are zero-based in the JavaScript Date object
+      var data = new vis.DataSet([
+        {
+      
+      
+      
+          'start': new Date({{year}},{{month}},{{day}}),
+          'content': 'Current date',
+          'className': 'red'
+        },
+       
+         {% for pr in procedures %}
+           
+      {
+          	      'start': new Date({{pr.year}},{{pr.month}},{{pr.day}}),
+           'content': '{{pr.name_type}}',
+           'className': 'green'
+            },
+         {% endfor %}
+          {% for ap in appointments %}
+      
+            {
+                  'start': new Date({{ap.year}},{{ap.month}},{{ap.day}}),
+                  'content': '{{ap.appointment_title}}',
+                  'className': 'blue'
+            },
+         {% endfor %}
+      
+       
+       // {
+       //   'start': new Date(2012,7,29),
+       //   'content': 'red',
+       //   'className': 'red'
+       // },
+        
+      
+         {% for m in medications %}
+      
+      {
+          'start': new Date({{m.yearS}},{{m.monthS}},{{m.dayS}}),
+          'end': new Date({{m.yearE}},{{m.monthE}},{{m.dayE}}),
+          'content': '{{m.drugName_title}}',
+          'className': 'orange'
+      },
+          {% endfor %}
+       
+        
+      
+      
+          {% for p in problems %}
+      {
+          'start': new Date({{p.yearS}},{{p.monthS}},{{p.dayS}}),
+           'end': new Date({{p.yearE}},{{p.monthE}},{{p.dayE}}),
+          'content': '{{p.name_title}}',
+          'className': 'magenta'
+      },
+          {% endfor %}
+        
+      ]);
+      
+      // specify options
+      var options = {
+        editable: false,
+        autoResize:false
+      };
+      
+      
+      document.getElementById('fit').onclick = function() {
+        timeline.fit();
+      };
+      
+      
+      document.getElementById('window1').onclick = function() {
+        if('{{finalM}}' == 'true'){
+            var stringDate='{{year}}'+'-'+'{{monthTimeline}}'+'-'+'{{day}}';//PALIO MPOREI KAI NA TO VALA GIA KAPOIO LOGO var stringDate='{{year}}'+'-0'+'{{monthTimeline}}'+'-'+'{{day}}';
+      
+            var previousMonth='{{previousyear}}'+'-'+'{{nextDay}}'+'-'+'01';
+      
+      }
+        else{
+        var stringDate='{{year}}'+'-'+'{{monthTimeline}}'+'-'+'{{day}}';
+         var previousMonth='{{previousyear}}'+'-'+'{{nextDay}}'+'-'+'01';
+      
+        }
+        
+       
+        timeline.setWindow( previousMonth, stringDate);
+      };
+      
+      function move (percentage) {
+            var range = timeline.getWindow();
+            var interval = range.end - range.start;
+      
+            timeline.setWindow({
+                start: range.start.valueOf() - interval * percentage,
+                end:   range.end.valueOf()   - interval * percentage
+            });
+        }
+      
+        /**
+         * Zoom the timeline a given percentage in or out
+         * @param {Number} percentage   For example 0.1 (zoom out) or -0.1 (zoom in)
+         */
+        function zoom (percentage) {
+            var range = timeline.getWindow();
+            var interval = range.end - range.start;
+      
+            timeline.setWindow({
+                start: range.start.valueOf() - interval * percentage,
+                end:   range.end.valueOf()   + interval * percentage
+            });
+        }
+      
+        // attach events to the navigation buttons
+        document.getElementById('zoomIn').onclick    = function () { zoom(-0.2); };
+        document.getElementById('zoomOut').onclick   = function () { zoom( 0.2); };
+        document.getElementById('moveLeft').onclick  = function () { move( 0.2); };
+        document.getElementById('moveRight').onclick = function () { move(-0.2); };
+      // create the timeline
+      var container = document.getElementById('mytimeline');
+      
+      timeline = new vis.Timeline(container, data, options);
+      
+   </script>
+   <script >
+      <!--
+         $(document).ready(function(){
+         var strin="Appointments<br><br>";
+         
+         {%for i in alertList %}
+             var cutHour = "{{i.0}}".split(",");
+             strin += "Title:{{i.2}}<br>";
+             strin += "Date:"+cutHour[0]+","+cutHour[1]+"<br>";
+             strin += "Time:{{i.1}}<br><br>";
+          {% endfor %}
+         if(strin!="Appointments<br><br>"){
+         	Lobibox.notify('info', //AVAILABLE TYPES: "error", "info", "success", "warning"
+         {
+            sound: false, 
+            position: 'top left',
+            delay: false,
+             msg: strin 
+         });
+         
+         }
+         
+         
+         var obj = document.getElementById('dhx_cal_data');
+         //obj.style.height = "1500px";
+         //document.getElementById("dhx_cal_data").style["height"] = '1000px';
+         
+         
+         });
+         //--></ital>
+   </script>
+</body>
+</html>
+{% endblock %}

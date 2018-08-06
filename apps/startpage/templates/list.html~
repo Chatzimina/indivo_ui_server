@@ -1,0 +1,174 @@
+{% extends 'problems/templates/base.html' %}
+{% load i18n %}
+{% block title %}problem list{% endblock %}
+{% block content %}
+{% if jsonData %}
+{% if jsonData.5.z_score < -2 or jsonData.5.z_score > 2 %} <!--physical abilities (abnormal it should be over 2 or less -2 )-->
+<style type="text/css">
+   *
+   {
+   font-size : 12px
+   }
+   .class1 *
+   {
+   font-size : 20px;
+   }
+</style>
+{%endif%}
+{% endif %}
+<meta charset="utf-8">
+<title>Speak.js Demo</title>
+<script src="{{ STATIC_HOME }}/speakClient.js"></script>
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<script>
+   function setPageSize()
+   {   	
+   	el('divList').style.width = (el('divContainer').offsetWidth-0).toString() + 'px';   	
+	if (window.top.document.getElementById('app_container'))
+		el('divContainer').style.width = (window.top.document.getElementById('app_container').offsetWidth-0).toString() + 'px';	
+   }
+   
+   //setInterval('setPageSize();', 500);
+</script>
+<div class="container" style="border:0px solid blue;padding:0px;margin:0px;width:100%;overflow-x:hidden;overflow-y:hidden;" id="divContainer" >
+	<div class="row"  style="margin-left:5px;">
+		<div class="col-xs-12">
+		<h2>{% trans "Problems List" %} {% if in_carenet %}(Shared){% endif %}</h2>
+		</div>
+    </div>
+	
+	 {% if not in_carenet %}
+   <div class="row"  id="divButtons" style="width:300px;margin-left:5px;">
+      <div class="col-xs-5" style="text-align:left;">
+         <a href="new" class="btn btn-success btn-sm" >{% trans "add a problem" %}</a>
+      </div>
+      <div class="col-xs-5" style="text-align:left;">
+         <a href="archived" class="btn btn-danger btn-sm">{% trans "deleted problems" %}</a>
+      </div>
+	   <div class="col-xs-1" ></div>
+   </div>
+   <div class="row"  style="height:20px;"></div>
+   {% endif %}
+   
+   
+   {% ifequal num_problems 0 %}
+   {% else %}
+   <div class="row" id="divList" style="margin-left:5px;">
+      <div class="col-xs-12">
+         <div class="row" style="border:1px solid silver;">
+            <div class="col-xs-3">
+               <b>{% trans "Name" %}</b>
+            </div>
+            <div class="col-xs-3">
+               <b>{% trans "Onset" %}</b>
+            </div>
+            <div class="col-xs-3">
+               <b>{% trans "Resolution" %}</b>
+            </div>
+            <div class="col-xs-3">
+               {% if not in_carenet %}
+               <b>{% trans "Modify/Delete" %}</b>
+               {% endif %}
+            </div>
+         </div>
+         {% for p in problems %}
+         <div class="row" style="border-left:1px solid silver;border-right:1px solid silver;border-bottom:1px solid silver;">
+            <div class="col-xs-3">
+               <span id="td_id" style="display:none">{{problems}}</span>
+               <a  href="{{p.id}}"  >{{p.name_title}}</a>
+            </div>
+            <div class="col-xs-3">
+				<script>
+			   var startDate = '{{p.startDate}}';
+			   document.write(startDate.split('T')[0]);
+			   </script>
+            </div>
+            <div class="col-xs-3">
+			<script>
+			   var startDate = '{{p.endDate}}';
+			   document.write(startDate.split('T')[0]);
+			</script>
+            </div>
+            <div class="col-xs-3">
+               {% if not in_carenet %}	    			
+               <div class="row">
+                  <div class="col-md-5" >
+                     <a href="edit/{{p.id}}"><button  class="btn btn-primary btn-sm" style="width:95%;">{% trans "edit" %}</button></a>
+                  </div>
+				
+                  <div class="col-md-5" >
+                     <a href="delete/{{p.id}}"><button  class="btn btn-danger btn-sm"  style="width:95%;">{% trans "delete" %}</button></a>
+                  </div>
+				  <div class="col-md-1" ></div>
+               </div>
+               {% endif %}
+            </div>
+         </div>
+         {% endfor %}
+         <div class="row" style="border-left:1px solid silver;border-right:1px solid silver;border-bottom:1px solid silver;">
+            <div class="col-xs-12" style="text-align: right">
+               {{num_problems}} problem{% ifequal num_problems 1 %}{% else %}s{% endifequal %}
+            </div>
+         </div>
+      </div>
+   </div>
+   {% endifequal %}
+   
+   
+	
+   {% ifequal num_problems 0 %}
+   <div class="table-responsive">
+      <table class="table">
+         <thead>
+            <tr>
+               <th ><b>{% trans "Name" %}</b></th>
+               <th><b>{% trans "Onset" %}</b></th>
+               <th><b>{% trans "Resolution" %}</b></th>
+               {% if not in_carenet %}
+               <th><b>{% trans "Modify/Delete" %}</b></th>
+               {% endif %}
+            </tr>
+         </thead>
+         <tbody>
+            <span id="td_id" style="display:none">{{problems}}</span>
+            {% for p in problems %}
+            <!--tr class="{% cycle 'odd' 'even' %}"-->
+            <tr>
+               <td >
+                  <a  href="{{p.id}}"  >{{p.name_title}}</a>
+               </td>
+               <td>
+			   {{p.startDate}}
+			   
+			   </td>
+               <td>{{p.endDate}}</td>
+               {% if not in_carenet %}
+               <td>
+                  <div class="row">
+                     <div class="col-lg-6" >
+                        <a href="edit/{{p.id}}"><button  class="btn btn-primary">{% trans "edit" %}</button></a>
+                     </div>
+                     <div class="col-lg-6" >
+                        <a href="delete/{{p.id}}"><button  class="btn btn-danger btn-sm">{% trans "delete" %}</button></a>
+                     </div>
+                  </div>
+               </td>
+               {% endif %}
+            </tr>
+            {% endfor %}
+            <tr>
+               <td colspan="4" style="text-align: right">{{num_problems}} problem{% ifequal num_problems 1 %}{% else %}s{% endifequal %}</td>
+            </tr>
+         </tbody>
+      </table>
+   </div>
+   {% else %}
+   {% endifequal %}
+   
+   
+   
+  
+</div>
+{% endblock %}

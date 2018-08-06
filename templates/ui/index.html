@@ -1,0 +1,3594 @@
+{% load i18n %} 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+   <head>
+	<link rel="icon" href="/jmvc/ui/resources/images/favicon.ico" type="image/x-icon"> 
+	<link rel="shortcut icon" href="/jmvc/ui/resources/images/favicon.ico" type="image/x-icon">
+	<link rel="icon" sizes="192×192" href="https://www.iphr.care/jmvc/ui/resources/images/android2-icon-192x192.png">
+	<link rel="icon" sizes="72x72" href="https://www.iphr.care/jmvc/ui/resources/images/android2-icon-72x72.png">	
+      <style> 
+         #languages{
+         position: absolute;
+         right: 50px;
+         margin-right: 230px;
+         top:3px;
+         }
+         #languages2{
+         position: absolute;
+         right: 80px;
+         margin-right: 230px;
+         top:6px;
+         }
+         #deleteaccount { 
+         position: relative; top: 850px;left: 0; right: 10%; bottom: 0;
+         margin: 0 0 32px;
+         font-size: 1.25em;
+         text-align: center;
+         }
+         #blank_div {
+         height: 30px;
+         overflow: hidden;
+         }
+	        
+         .modal-footer{
+	  display:none;
+	} 
+	
+	.btn-danger, .btn-danger:focus, .btn-danger:active, .btn-danger.active, .open .dropdown-toggle.btn-danger {
+	    color: #fff !important;
+	    background-color: #d4d4d4 !important;
+	    border-color: #d4d4d4 !important;
+	    font-size: 100% !important;
+	    font-weight: bold !important;
+	    background-image:none;
+	    outline:0;
+	}
+
+	.btn-danger:hover {
+	    color: #fff !important;
+	    background-color: #bbbbbb !important;
+	    border-color: #bbbbbb !important;
+	    font-size: 100% !important;
+	    font-weight: bold !important;
+	    background-image:none;
+	    outline:0;
+	}
+
+	.btn-success, .btn-success:focus, .btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
+	    color: #fff !important;
+	    background-color: #7dc042 !important;
+	    border-color: #7dc042 !important;
+	    font-size: 100% !important;
+	    font-weight: bold !important;
+	    outline:0;
+	}
+
+	.btn-success:hover{
+	    color: #fff !important;
+	    background-color: #47a944 !important;
+	    border-color: #47a944 !important;
+	    font-size: 100% !important;
+	    font-weight: bold !important;
+	    outline:0;
+	}
+
+      </style>
+      <!--   <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/1.1.0/annyang.min.js"></script> 
+         <script type="text/javascript" src="/apps/problems/static/annyang-master/annyang.js"></script>
+         <script type="text/javascript">
+         $( document ).ready( function() {
+         
+         $('app_content').function() 
+         					//if(annyang)
+         					//{
+         							//var commands = {
+         							//'show tps report': function() {
+         							//console.log("You just said - Show tps report");
+         							//},
+         	//'test': function(){
+         	alert('ok');
+         			window.location.href ="allergies";
+         
+         		//	}
+         					//};
+         
+         					//annyang.debug();
+         					//annyang.init(commands);
+         					//annyang.start();}
+         //});
+         });
+         </script>-->
+      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      <!-- note we don't use the standard header here, so we don't double include stuff -->
+      <!--               
+         existingexisting_account_id
+                'existing_username_id
+         -->
+      <!--		-->
+      {% if jsonData != " " %}
+      {% if jsonData.5.z_score < -2 or jsonData.5.z_score > 2 %}
+      <!--link type="text/css" href="/jmvc/ui/resources/css/ui_large_fonts.css" rel="Stylesheet" /-->
+      <link type="text/css" href="/jmvc/ui/resources/css/ui.css" rel="Stylesheet" />
+      {% else %}
+      <link type="text/css" href="/jmvc/ui/resources/css/ui.css" rel="Stylesheet" />
+      {% endif %}
+      {% else %}
+      <link type="text/css" href="/jmvc/ui/resources/css/ui.css" rel="Stylesheet" />
+      {% endif %}
+      {% if branding %}
+      <title>{{ branding.pretty_name_prepend }} {{ branding.pretty_name }}</title>
+      {% else %}
+      <title>{% trans "iPHR" %}</title>
+      {% endif %}
+      <script type="text/javascript">
+         <!--
+            function getConfirmation(){
+               var retVal = confirm("Are you sure you want to delete your account ?");
+               if( retVal == true ){
+                  alert("Account deleted");
+                  document.myform.submit();
+                      return true;
+               }else{
+                  alert("Cancelled request");
+                      return false;
+               }
+            }
+
+
+//alert(navigator.languages);
+
+
+//alert(lang);
+            //-->
+      </script>
+      <style type="text/css">
+         body {
+         --padding-top: 51px;  
+         }
+         .text-center {
+         padding-top: 20px;
+         }
+         .col-xs-12 {
+         background-color: #fff;
+         }
+         #sidebar {
+         height: 100%;
+         padding-right: 0;
+         padding-top: 20px;
+         }
+         #sidebar .nav {
+         width: 95%;
+         }
+         #sidebar li {
+         border:0 #f2f2f2 solid;
+         border-bottom-width:1px;
+         }
+         /* collapsed sidebar styles */
+         @media screen and (max-width: 767px) {
+         .row-offcanvas {
+         position: relative;
+         -webkit-transition: all 0.25s ease-out;
+         -moz-transition: all 0.25s ease-out;
+         transition: all 0.25s ease-out;
+         }
+         .row-offcanvas-right
+         .sidebar-offcanvas {
+         right: -41.6%;
+         }
+         .row-offcanvas-left
+         .sidebar-offcanvas {
+         left: -41.6%;
+         }
+         .row-offcanvas-right.active {
+         right: 41.6%;
+         }
+         .row-offcanvas-left.active {
+         left: 41.6%;
+         }
+         .sidebar-offcanvas {
+         position: absolute;
+         top: 0;
+         width: 41.6%;
+         }
+         #sidebar {
+         padding-top:0;
+         }
+         }
+         
+         
+         .app_container
+         {
+         	margin:0px;
+         	padding:0px;
+         }
+         
+         .app_content
+         {
+         	margin:3px;
+         	padding:0px;
+         	height:1280px; 
+         }
+         
+         .app_content_iframe1{
+         	overflow-y: hidden;
+				overflow-x: hidden;
+				width:100%;
+				height:1280px;
+				z-index:89;
+         }
+         .app_content_iframe{
+         	overflow-y: hidden;
+				overflow-x: hidden;
+				width:100%;
+			height:1280px;
+         }
+         
+                     .app_content_pane11
+                     {
+                     width:100%;
+                     overflow-x:hidden;
+                     overflow-y:hidden;
+                     height:1280px;
+                     }
+.app_tab_img{margin-right:4px;}
+
+nav {background-color:white;}
+li {border-bottom:1px solid silver !important;}
+
+
+#ulAppsMenu1 > li {margin:0px 0px 0px 0px;padding:8px 0px 8px 5px;border-bottom:1px solid silver;}
+#liApps > li > a{color:gray;}
+#liApps > li > a:hover{color:gray;}
+#ulAppsMenu1 > li > a{color:gray;}
+#ulAppsMenu1 > li > a:hover{color:gray;}
+
+
+
+#ulLanguages > li >  a{color:gray;}
+#ulLanguages > li >  a:hover{color:gray;}
+
+
+#menu-apps, #menu-patients, #menu-settings, #menu-inbox, #menu-logout, #menu-ux, #menu-languages , #menu-admin_console {color:gray;}
+#menu-apps:hover{color:gray;}
+#menu-patients:hover{color:gray;}
+
+#linkSelectPatient{color:gray;}
+#linkSelectPatient:hover{color:gray;}
+
+#aSelectedPatient{color:gray;}
+#aSelectedPatient:hover{color:gray;}
+
+a{color:gray;}
+a:hover{color:gray;}
+
+.navbar-brand > span{color:gray;}
+.navbar-brand  > span:hover{color:gray;}
+
+      
+      </style>
+    <!--[if lt IE 9]>
+        <script type="text/javascript" src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script type="text/javascript" src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+       <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+       
+<!--       <link rel="stylesheet" type="text/css" href="/jmvc/ui/resources/css/tooltipster.css" />
+
+
+    <script type="text/javascript" src="/jmvc/ui/resources/js/jquery.tooltipster.min.js"></script>-->
+
+    	<script type="text/javascript" src="/jmvc/ui/resources/js/metismenu/metisMenu.min.js"></script>
+      <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+      <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" />
+      <link rel="stylesheet" href="/jmvc/ui/resources/js/metismenu/main.css" type="text/css" />
+      
+      <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+      <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+      
+		
+      <script type="text/javascript" src="/jmvc/ui/resources/js/javascript.js" ></script>
+      
+      <script src="/jmvc/ui/resources/js/bootbox.js"></script>
+      <script>  
+	  
+		
+var lang = get_cookie('current_lang');
+if (!lang || lang === '') 
+{
+	var navlang = navigator.language;
+	if (navlang === 'en' || navlang === 'en-US') lang = 'en';
+	else if (navlang === 'el-GR') lang = 'el';
+	else if (navlang === 'it') lang = 'it';
+	else if (navlang === 'de') lang = 'de';
+	else lang = 'en';
+}
+	
+         function setForm1()
+		 {
+			
+			var frmHTML = '<form id="frmAddModel" name="frmAddModel" method="post">';
+			frmHTML += '<input type="text" value="1"/>';
+			frmHTML += '</form>';
+			
+		    var dd = document.getElementsByTagName('iframe');
+			for (var i=0;i<dd.length;i++)
+			{
+				alert(dd[i].id);
+			}
+			return false;
+			
+			var iframe = document.getElementById('calendarFrame');
+			var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+			innerDoc.getElementById('divSubmitForm').innerHTML = frmHTML;
+			//innerDoc.getElementById('frmAddModel').submit();
+		 }
+      	function ppp()
+      	{
+      		alert(el('add_record_tab').click);
+      		
+
+      	}
+      	
+      	var help = [];
+      	help['alga-c'] = {% trans "'A questionnaire used to monitor psychological, cognitive, emotional and psychosocial aspects.'" %};
+      	help['import'] = {% trans "'Import medications, allergies, problems, procedures and medications providing csv source files.'" %};
+        help['importa'] = {% trans "'Import medications, allergies, problems, procedures and medications providing csv source files.'" %};
+        help['εισαγωγή'] = {% trans "'Import medications, allergies, problems, procedures and medications providing csv source files.'" %};
+
+      	help['recommender'] = {% trans "'Allow patients to search in a high-quality document repository for useful information.' " %};
+        help['empfehlungssystem'] = {% trans "'Allow patients to search in a high-quality document repository for useful information.' " %};
+        help['αναζήτηση'] = {% trans "'Allow patients to search in a high-quality document repository for useful information.' " %};
+
+      	help['allergies'] = {% trans "'View and update abnormal reactions to encountered allergens.'" %};
+        help['allergie'] = {% trans "'View and update abnormal reactions to encountered allergens.'" %};
+        help['allergien'] = {% trans "'View and update abnormal reactions to encountered allergens.'" %};
+        help['αλλεργίες'] = {% trans "'View and update abnormal reactions to encountered allergens.'" %};
+
+      	help['calendar'] = {% trans "'A timeline view of all available information showing medications, problems, appointments and procedures.'" %};
+        help['calendario'] = {% trans "'A timeline view of all available information showing medications, problems, appointments and procedures.'" %};
+        help['kalender'] = {% trans "'A timeline view of all available information showing medications, problems, appointments and procedures.'" %};
+        help['ημερολόγιο'] = {% trans "'A timeline view of all available information showing medications, problems, appointments and procedures.'" %};
+ 
+      	help['labs'] = {% trans "'View and update laboratory result values.'" %};
+        help['esami di laboratorio'] = {% trans "'View and update laboratory result values.'" %};
+        help['labore'] = {% trans "'View and update laboratory result values.'" %};
+        help['εργαστήρια'] = {% trans "'View and update laboratory result values.'" %};
+
+      	help['procedures'] = {% trans "'View and update medical treatments or operations of the patient.'" %};
+        help['interventi'] = {% trans "'View and update medical treatments or operations of the patient.'" %}
+        help['prozeduren'] = {% trans "'View and update medical treatments or operations of the patient.'" %};
+        help['επεμβάσεις'] = {% trans "'View and update medical treatments or operations of the patient.'" %};
+
+      	help['medications'] = {% trans "'View and update drugs or other substances received.'" %};
+        help['farmaci'] = {% trans "'View and update drugs or other substances received.'" %};
+        help['medikamente'] = {% trans "'View and update drugs or other substances received.'" %};
+        help['φάρμακα'] = {% trans "'View and update drugs or other substances received.'" %};
+
+      	help['problems'] = {% trans "'View and update diseases, illnesses, injuries, physiologic, mental or psychological condition or disorders.'" %};
+        help['problemi'] = {% trans "'View and update diseases, illnesses, injuries, physiologic, mental or psychological condition or disorders.'" %};
+        help['probleme'] = {% trans "'View and update diseases, illnesses, injuries, physiologic, mental or psychological condition or disorders.'" %};
+        help['προβλήματα'] = {% trans "'View and update diseases, illnesses, injuries, physiologic, mental or psychological condition or disorders.'" %};
+
+      	help['appointments'] = {% trans "'View and update appointments between the patient and doctors.'" %};
+        help['appuntamenti'] = {% trans "'View and update appointments between the patient and doctors.'" %};
+        help['termine'] = {% trans "'View and update appointments between the patient and doctors.'" %};
+        help['ραντεβού'] = {% trans "'View and update appointments between the patient and doctors.'" %};
+
+      	help['contact'] = {% trans "'A form to communicate with other users of the system.'" %};
+        help['contatto'] = {% trans "'A form to communicate with other users of the system.'" %};     	
+        help['kontakt'] = {% trans "'A form to communicate with other users of the system.'" %};
+        help['επικοινωνία'] = {% trans "'A form to communicate with other users of the system.'" %};
+ 
+        help['demographics'] = {% trans "'View and update patient information such as gender, date of birth, contact information, name and surname.'" %};
+        help['informazioni socio-demografiche'] = {% trans "'View and update patient information such as gender, date of birth, contact information, name and surname.'" %};
+        help['stammdaten'] = {% trans "'View and update patient information such as gender, date of birth, contact information, name and surname.'" %};
+        help['δημογραφικά'] = {% trans "'View and update patient information such as gender, date of birth, contact information, name and surname.'" %};
+ 
+      	help['annotator'] = {% trans "'Add or remove high-quality documents to be further indexed, annotated and become searchable by the patients.'" %};
+        help['kommentator'] = {% trans "'Add or remove high-quality documents to be further indexed, annotated and become searchable by the patients.'" %};
+
+      	help['measurements'] ={% trans " 'View and update vital signs that indicate the status of the body’s vital functions.'" %};
+        help['misurazioni'] ={% trans " 'View and update vital signs that indicate the status of the body’s vital functions.'" %};
+        help['μετρήσεις'] ={% trans " 'View and update vital signs that indicate the status of the body’s vital functions.'" %};
+
+      	help['profiler'] = {% trans "'Assess graphically the psycho-emotional patient profile.'" %};
+        help['prüfer'] = {% trans "'Assess graphically the psycho-emotional patient profile.'" %};
+
+      	help['psycho-emotional profiler'] = {% trans "'Assess graphically the psycho-emotional profile of different patients.'" %};
+        help['psycho-emotionaler Kommentator'] = {% trans "'Assess graphically the psycho-emotional profile of different patients.'" %};
+        help['profilo psico-emotivo'] = {% trans "'Assess graphically the psycho-emotional profile of different patients.'" %};
+
+	help['psycho-emotional questionnaires'] = {% trans "'A profile tool to assess the psycho-emotional status and recommend educational resources related to your condition and assist your in order to make informed decisions regarding your healthcare'" %};
+        help['psycho-emotional questionnaires'] = {% trans "'psycho-emotional questionnaires'" %};
+        help['questionari psico-emotivi'] = {% trans "'psycho-emotional questionnaires'" %};
+        help['ψυχο-συναισθηματική ενδυνάμωση']={% trans "'Ενα εργαλείο που βοηθάει στην εκτίμηση της ψυχο-συναισθηματικής κατάσταση με σκοπό να προτείνει εκπαιδευτικό υλικό βασισμένο στην καταστασή σας και να βοηθήσει στην λήψη σωστών αποφάσεων σχετικά με την περίθαλψη σας.'" %};           	
+     
+        help['forum'] = {% trans "'Forum is a mechanism within the platform to enable information exchange among participants.'" %};	
+ 
+        help['serious games'] = {% trans "'Connect to serious games platform'" %};
+   
+        help['upload documents'] = {% trans "'Upload your health data documents.'" %};
+        help['φόρτωση αρχείων'] = {% trans "'Upload your health data documents'" %};
+
+	help['decision aid'] = {% trans "'This  tool  enables  patients  to  perform  a  shared  decision  making  with  their  doctors,  to  better  understand  the  consequences  of  their  choices  and  to  select  the  therapy  most  appropriate  for  them.'" %};
+	help['psyche'] = {% trans "'Questionnaires  will  be  filled  by  patients  to  monitor  their  psych-behavioural  status.'" %};
+        help['parental distress']={% trans "'Attempts  to  measure  the  levels  of  stress  experienced  by  parents. '" %};
+        help['family resilience']={% trans "'Questionnaires  will  be  filled  by  patients/family  members  to  monitor  their  family  resilience  status. '" %};
+        help['clinical assessment']={% trans "'Clinical Assessment App: A questionnaire for identification of a more effectively care for patiens.'" %};
+	function showcustomalert(label)
+        {
+                label_code = label.toLowerCase();
+
+
+                bootbox.dialog({
+
+                     title: {% trans "' Description '" %},
+
+                     message: '<div class="row" style="width:400px;max-height:auto;">  ' +
+
+                                                '<div class="col-lg-12"> ' +
+
+                                                                                label +
+
+                                                '</div> ' +
+
+
+
+                                                                '</div>',
+
+
+
+                     buttons: {
+
+                         success: {
+
+                             label: "Close",
+
+                             className: "btn-info btn-lg",
+
+                             callback: function () {
+
+
+
+                             }
+
+                         }
+
+                     }
+
+                 }
+
+             );
+
+
+                if (!modal_visible)
+                        setInterval('setModal();', 100);
+                return false;
+        }
+
+
+
+
+
+      	
+      	function showhelp(sender, label)
+      	{
+      		label_code = label.toLowerCase();      
+
+
+      		bootbox.dialog({
+
+                     title: {% trans "' Help for '" %}+ label,
+
+                     message: '<div class="row" style="width:400px;max-height:300px;">  ' +
+
+                         			'<div class="col-lg-12"> ' +
+
+      										help[label_code] + 
+
+                         			'</div> ' +
+
+                         
+
+      								'</div>',
+
+      				
+
+                     buttons: {
+
+                         success: {
+
+                             label: "Close",
+
+                             className: "btn-info btn-lg",
+
+                             callback: function () {
+
+                                 
+
+                             }
+
+                         }
+
+                     }
+
+                 }
+
+             );
+
+      	
+      		if (!modal_visible)
+      			setInterval('setModal();', 100);
+      		return false;
+      	}
+		
+		function deleteMed(medicationid)
+		{
+			//location.href = 'delete/' + medicationid + '?score=' + el('txtScore').value + '&comments=' +  el('txtComments').value;
+			if (el('txtScore').value === '-1' ||  el('txtComments').value === '')
+			{
+				alert('Please enter Score and Comments.');
+				return false;
+			}
+			//location.href = '/apps/medications/medications/delete/' + medicationid + '?score=' + el('txtScore').value + '&comments=' +  encodeURIComponent(el('txtComments').value);
+			
+			//jQuery('.modal').modal('hide');
+			document.getElementsByClassName('bootbox-close-button')[0].click();
+			
+			var score = el('txtScore').value;
+			var comments = encodeURIComponent(el('txtComments').value);
+			setTimeout(function (){
+				el('app_content_iframe1').src = 
+					'/apps/medications/medications/delete/' + medicationid + '?score=' + score + '&comments=' +  comments;
+			}, 1000);
+					
+			
+			return false;
+		}
+		
+		function showFeedbackDialog(medicationid)
+      	{
+			var selectObj = '';
+			selectObj += '<select class="form-control" id="txtScore" name="txtScore" style="width:150px;"><option value="-1">Select</option>';
+			var k = 1;
+			for (var i=1;i<10;i++)
+			{
+				//alert(k);
+				selectObj += '<option value="'+k.toString()+'">'+k.toString()+'</option>';
+				k = k + 0.5;
+			}
+			selectObj += '</select>';
+			//alert(selectObj);
+			bootbox.dialog({
+                     title: {% trans "' Please leave some feedback for this Medication '" %},
+                     message: '<div class="row" style="width:95%;max-height:300px;">' +
+                         			'<div class="col-lg-12"> ' +
+      										'<div class="form-group"> ' +
+												'<label>Score</label>' +
+												selectObj + 
+											'</div> ' +
+											'<div class="form-group"> ' +
+												'<label>Comments</label>' +
+												'<textarea id="txtComments" name="txtComments" class="form-control"></textarea>' + 
+											'</div> ' +
+											'<div class="form-group" style="text-align:center;">' +
+												'<input type="button" class="mmm" style="color:white;background-color:#3276B1;border:1px solid #3276B1;padding:10px;"  value="Send feedback and Delete Medication" onclick="return deleteMed(\''+medicationid+'\');" />' + 
+											'</div> ' +
+                         			'</div> ' +
+      							'</div>',
+                     buttons: {
+                         success: {
+                             label: "Close",
+                             className: "btn-info btn-lg",
+                             callback: function () {     
+								
+                             }
+                         }
+                     }
+                 }
+             );
+
+      	
+      		
+      		return false;
+      	}
+		
+		function addAdminUser()
+		{
+			
+			bootbox.dialog({
+					 title: {% trans "' Add New Administrator'" %},
+					 message: '<div class="row" style="width:600px;height:700px;">  ' +
+									'<div class="col-lg-12"> ' +
+									'<iframe src="/register_admin" style="width:550px;height:680px;" frameborder="0"></iframe>' +
+									'</div> ' +
+									'</div>',
+					 buttons: {
+						 success: {
+							 label: "Close",
+							 className: "btn-info btn-lg",
+							 callback: function () {                                 
+
+							 }
+						 }
+					 }
+				 }
+			 );
+			 
+			return false;
+		}
+		
+		function sendMessageFunction()
+		{
+			alert('{% trans "Message will be sent!" %}');
+			bootbox.hideAll();
+			setTimeout("el('formSendAll').submit();", 100);
+			return false;
+			var myForm = document.getElementById('formSendAll');
+			myForm.onsubmit = function() {
+				var w = window.open('about:blank','Popup_Window','toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=400,height=300,left = 312,top = 234');
+				myForm.target = 'Popup_Window';
+			};
+			
+			return false;
+		}
+		
+		function sendMessage()
+		{
+			
+			bootbox.dialog({
+					 title: {% trans "'Send Message'" %},
+					 message: '<div class="row" style="width:400px;height:400px;">  ' +
+									'<div class="col-lg-12"> ' +
+									//'<!--iframe src="/send_all_replay" style="width:390px;height:380px;" frameborder="0"></iframe-->' +
+									'<form action="/send_all" target="_blank" id="formSendAll" name="formSendAll" method="post" style="display:;"> ' +
+									'	<div class="container" style="width:100%;text:align:center;"> ' +
+									'		<div class="row"> ' +
+									'			<div class="col-lg-12"> ' +
+									'				<input type="text" class="form-control" style="width:99%;" id="subject" name="subject" placeholder="{% trans "Subject" %}"/>' +
+									'			</div> ' +
+									'		</div> ' +
+									'		<div class="row" style="height:10px;"></div>' +
+									'		<div class="row"> ' +
+									'			<div class="col-lg-12"> ' +
+									'				<textarea class="form-control" style="width:99%;height:200px;" id="message" name="message" placeholder="{% trans "Type your message" %}"></textarea>' +
+									'			</div> ' +
+									'		</div> ' +
+									'		<div class="row" style="height:10px;"></div>' +
+									'		<div class="row"> ' +
+									'			<div class="col-lg-12"> ' +
+									'				<input type="button" style="background-color:#3276B1;padding:10px;border:0px solid black;color:white;font-size:20px;font-weight:bold;width:200px;" value="{% trans "Send Message" %}" id="btnSendAll" onclick="return sendMessageFunction();"/>' +
+									'			</div> ' +
+									'		</div> ' +
+									'	</div> ' +
+									'</form>' +
+									'</div> ' +
+									'</div>',
+					 buttons: {
+						 success: {
+							 label: "Close",
+							 className: "btn-info btn-lg",
+							 callback: function () {                                 
+
+							 }
+						 }
+					 }
+				 }
+			 );
+			 
+			return false;
+		}
+      	
+      	var modal_visible = false;
+      	function setModal()
+      	{
+      		var modal = document.getElementsByClassName('bootbox modal fade in')[0];
+      		if (modal)
+      		{
+      			modal.style.zIndex = 10000000;
+					modal_visible = true;
+      		}
+      		else 
+      		{
+      			modal_visible = false;
+      		}
+      		
+      		return false;
+      	}
+
+      	var currentDate = new Date();
+      	var calendar_refresh_url = '';
+      	var my_record_id = null;
+        var add_record='';
+      	function openApp(appurl)
+      	{
+		
+		var theDatetime = new Date(localStorage.getItem('currentDate'));
+		var dt = theDatetime.getFullYear().toString() + '-' + (theDatetime.getMonth()+1).toString() + '-' + theDatetime.getDate().toString();
+		appurl += '?dt=' + dt;
+			
+                add_record = localStorage.getItem('add_record');	
+                console.log(add_record);    
+      		my_record_id = el('selPatients1').value.split('record_')[2];
+		calendar_refresh_url = '/apps/calendar/start_auth?record_id='+my_record_id+'&amp;carenet_id=';
+		
+		if (currentDate == null) currentDate = new Date();
+         	set_cookie('thedate',currentDate.getFullYear()+"-"+currentDate.getMonth()-1,1);
+         	set_cookie('calendar_refresh_url', calendar_refresh_url);      		
+      	var iframeHeight = '750';
+			if (appurl.indexOf('appointments') >= 0) 
+				iframeHeight = '2600';
+			else if (appurl.indexOf('medications') >= 0) 
+				iframeHeight = '1000';
+			else if (appurl.indexOf('procedur') >= 0) 
+				iframeHeight = '1000';	
+      		bootbox.dialog({
+
+                     title: '',
+
+                     message: '<div class="row" style="min-width:400px;width:100%;max-height:700px;">  ' +
+
+                         			'<div class="col-lg-12" style="overflow-x:hidden;overflow-y:auto;height:600px;"> ' +
+
+      										'<iframe id="frApp" onload="setIframeHeight();" name="frApp" frameborder="no" scrolling="no" src="' + appurl + '" style="width:100%;height:'+iframeHeight+'px;min-height:500px;"></iframe>' + 
+
+                         			'</div> ' +                         
+
+      								'</div>',
+
+      				
+
+                     buttons: {
+
+                         success: {
+
+                             label: "Close",
+
+                             className: "btn-info btn-lg",
+
+                             callback: function () {
+					if ( add_record=='1'){
+                             		//alert(get_cookie('calendar_refresh_url'));
+                             			reloadIframes();
+ 						 localStorage.setItem('add_record','0');
+
+					}
+
+                             }
+
+                         }
+
+                     }
+
+                 }
+
+             );
+             
+             //alert(el('frApp').style.height);
+            // setTimeout('setIframeHeight();', 1000);
+             
+             //alert(el('frApp').style.height);
+
+      	
+      		if (!modal_visible)
+      			setInterval('setModal();', 100);
+      		return false;
+      	}
+      	
+      	function reloadIframes()
+      	{
+			
+			var str = '';
+			var ifr = document.getElementsByTagName('iframe');
+			for (var i=0;i<ifr.length;i++)
+			{
+				str += ifr[i].name + '=' + ifr[i].src +'\n';
+			}
+			
+			if (window.frames['calendarFrame']) { 
+				//alert('');
+				window.frames['calendarFrame'].location.href =  calendar_refresh_url;
+			}
+				
+				
+				
+			if (el('app_content_iframe1')) 
+				el('app_content_iframe1').src = calendar_refresh_url;
+				
+				
+			return false;
+      	
+      	}
+
+		lang = localStorage.getItem('current_lang');
+		if (lang === '') 
+			lang = 'en';
+		
+		localStorage.setItem('current_lang', lang);
+
+      	
+      	function setIframeHeight()
+      	{
+			if(el('frApp'))
+				el('frApp').style.height = (el('frApp').contentWindow.document.body.scrollHeight+100).toString() + 'px';
+				
+			setTimeout('setIframeHeight();', 1500);
+			console.log('setIframeHeight');
+      	}
+      	
+      	//setTimeout('ppp();',5000);
+         var msg1 = '';
+         var msg2 = '';
+         var theWidth = window.innerWidth;
+         var first_page_view = true;
+         function detectmob() { 
+         	 if( navigator.userAgent.match(/Android/i)
+         	 || navigator.userAgent.match(/webOS/i)
+         	 || navigator.userAgent.match(/iPhone/i)
+         	 || navigator.userAgent.match(/iPad/i)
+         	 || navigator.userAgent.match(/iPod/i)
+         	 || navigator.userAgent.match(/BlackBerry/i)
+         	 || navigator.userAgent.match(/Windows Phone/i)
+         	 ){
+         		return true;
+         	  }
+         	 else {
+         		return false;
+         	  }
+         	}
+                function setMessages()
+                {
+				
+                	var msg = '';
+                
+					msg += '<br/>footer_responsive display = ' + el('footer_responsive').style.display;
+                	el('messages').innerHTML = msg;
+                }
+                
+                setInterval('setElementsSize()', 1000);
+				
+				var setImgTopFixed = true;
+				function setElementsSize()
+                {
+                //return false;
+                        theWidth = screen.innerWidth;
+                        theWidth = window.innerWidth;
+                        if (theWidth >= 800)
+                        {
+                                //return false;
+                                        document.body.style.overflowY = 'auto';
+                                        //el('app_container').style.width = (theWidth-150).toString() + 'px';
+                        }
+                        var divAppSelector = el('app_selector');
+                        var currentWidth = 0;
+
+                        if (theWidth <= 768)// || detectmob())
+                        {
+                                divAppSelector.style.display = 'none';
+                                el('app_container').style.width = (theWidth-15).toString() + 'px';
+                                el('app_container').style.left = '5px';
+                                el('app_container').style.position = 'absolute';
+
+                                        el('tabs').style.width = (theWidth-40).toString() + 'px';
+                                el('tabs').style.left = '5px';
+                                el('tabs').style.position = 'absolute';
+
+                                        //alert('');
+                                        el('liAppsMenu').style.display = '';
+                                        el('appsMenuTop').style.display = '';
+                                        //      el('appsMenuContainer').style.display = '';
+                                        el('record_tabs').style.display = 'none';
+                                        el('selPatients').style.display = '';
+                                        //document.body.style.overflowY = 'hidden';
+                                        document.body.style.overflowX = 'hidden';
+
+
+                                        el('footer').style.display = 'none';
+                                        //el('footer_responsive').style.display = 'block';
+
+                                        currentWidth = (theWidth-40).toString();
+
+                        }
+                        else
+                        {
+                                divAppSelector.style.display = '';
+
+                                el('app_container').style.width = (el('container').offsetWidth - divAppSelector.offsetWidth - 10).toString() + 'px';
+                                //el('app_container').style.width = '800px';
+                                el('app_container').style.left = divAppSelector.offsetWidth.toString()   + 'px';
+                                el('app_container').style.position = '';
+
+                                        el('tabs').style.width = (el('container').offsetWidth - divAppSelector.offsetWidth - 10).toString() + 'px';
+                                el('tabs').style.left = divAppSelector.offsetWidth.toString()    + 'px';
+                                el('tabs').style.position = '';
+
+                                        el('liAppsMenu').style.display = 'none';
+                                        el('appsMenuTop').style.display = 'none';
+                                        //el('appsMenuContainer').style.display = 'none';
+                                        el('record_tabs').style.display = '';
+                                        el('selPatients').style.display = 'none';
+
+                                        el('footer').style.display = '';
+                                        el('footer_responsive').style.display = 'none';
+
+                                        currentWidth = (el('container').offsetWidth - divAppSelector.offsetWidth - 10).toString();
+
+                                                        el('app_container').style.height =  (window.innerHeight - 200) + 'px';
+                }
+
+                //el('footer_responsive').style.display = 'block';
+                el('footer_responsive').style.zIndex = 10000000000000000;
+
+                el('divMenuBar').style.width = theWidth + 'px';
+
+
+
+                                //if (el('wrappper').getElementsByTagName('nav')[0].style.display != 'none')
+                                //if (el('appsMenu').style.display != 'none')
+                                var sideMenu = document.getElementsByTagName('nav')[0].getElementsByTagName('ul')[0];
+                                //alert(sideMenu.style.position);
+                                if (document.body.className.toString().indexOf('nav-expanded') >= 0 && theWidth >= 800 )
+                                {
+                                        el('app_container').style.width =  (theWidth-330).toString() + 'px';
+                                }
+                                else
+                                {
+                                        el('app_container').style.width =  (theWidth-10).toString() + 'px';
+                                }
+                                el('app_container').style.width =  (window.offsetHeight-50).toString() + 'px';
+
+
+                                el('app_container').style.height =  '2800px';
+                                el('app_container').style.overflowX = 'hidden';
+                           el('app_container').style.overflowY = 'hidden';
+
+                                //el('app_content').style.width =  '100%';
+                                el('app_content').style.height =  '2800px';//(el('app_container').offsetHeight-30).toString()+ 'px';
+                                el('app_content').style.overflowX = 'hidden';
+                           //el('app_content').style.overflowY = 'hidden';
+
+                el('app_content_iframe').style.width = (theWidth.toString() - 100).toString() + 'px';
+                el('app_content_iframe').style.height = el('app_content').offsetHeight + 'px';
+
+                var iframes = document.getElementsByClassName('app_content_iframe1');
+				for (var i=0;i<iframes.length;i++)
+				{
+						iframes[i].setAttribute('scrolling','no');
+						iframes[i].onload = function(e){window.scrollTo(0,0);loader('');};
+				}
+
+				iframes = document.getElementsByClassName('app_content_iframe');
+				for (var i=0;i<iframes.length;i++)
+				{
+						iframes[i].setAttribute('scrolling','no');
+						iframes[i].onload = function(e){window.scrollTo(0,0);loader('');};
+				}
+
+				iframes = document.getElementsByTagName('iframe');
+							for (var i=0;i<iframes.length;i++)
+				{
+						iframes[i].setAttribute('scrolling','no');
+						iframes[i].onload = function(e){window.scrollTo(0,0);loader('');};
+				}
+
+                var divList = getIframeElement('divList');
+
+                if (divList)
+                {
+                    divList.style.width = '300px';
+                    msg1 = (parseInt(currentWidth) - 30).toString() + 'px';
+                }
+                else
+                {
+					msg1 =  'NULL44' + Math.random().toString();
+                }
+				//alert(document.getElementsByClassName('app_content_iframe').length);
+                var iframeElement = document.getElementsByClassName('app_content_iframe')[0];
+                if (iframeElement)
+                {
+                        resizeIframe(iframeElement);
+                }
+                else{
+                        iframeElement = document.getElementsByClassName('app_content_iframe1')[0];
+                        resizeIframe(iframeElement);
+                        do_resize = false;
+                }
+
+                        resizeIframe(iframeElement);
+                        setMessages();
+                        
+                  //el('imgTopRight').style.right = (window.innerWidth - el('imgTopRight').offsetWidth ).toString() + 'px';
+						if (true) {                 
+                  el('imgTopRight').style.float = 'right';
+                  //el('imgTopRight').style.marginRight = (el('imgTopRight').offsetWidth + 50).toString() + 'px';
+                  el('imgTopRight').style.top = '0px';
+                  el('imgTopRight').style.left = (el('app_container').offsetWidth - el('imgTopRight').offsetWidth-0).toString() + 'px';
+		  if (setImgTopFixed)
+		  {
+		  	el('imgTopRight').style.position = 'fixed';
+			setImgTopFixed = false;
+		 }
+		  else
+	          	el('imgTopRight').style.position = 'absolute';
+						}          
+                        
+						el('imgBottomLeft').style.top = (window.innerHeight - el('imgBottomLeft').offsetHeight ).toString() + 'px';
+						el('imgBottomLeft').style.position = 'fixed';
+						
+						el('imgBottomRight').style.top = (window.innerHeight - el('imgBottomRight').offsetHeight ).toString() + 'px';
+						el('imgBottomRight').style.left = (el('app_container').offsetWidth - el('imgBottomRight').offsetWidth-0).toString() + 'px';
+						el('imgBottomRight').style.position = 'fixed';                                    
+                        
+                        
+
+                        return false;
+                }
+ 
+          
+          var do_resize = true;
+          function resizeIframe(obj) {
+            try
+            {
+         	if (!obj) 
+         		return false;
+         	obj.height = obj.contentWindow.document.body.scrollHeight + 100;
+			
+			
+         	var setHeight = false;
+         	var Iframe = document.getElementById("app_content_iframe1");
+         	if (Iframe)
+         	{
+         		setHeight = true;
+         		var pos = Iframe.contentWindow.document.body.scrollTop;
+         		msg2 = pos;
+         		if (pos > 0)
+         		{
+         			setHeight = false;
+         		}
+         	}
+         	if (do_resize)
+         	{
+         		obj.height = el('app_container').offsetHeight +200;//+ 'px';
+         		do_resize = false;
+         	}
+         	
+         	if (obj.className != 'app_content_iframe1')
+         	{
+         		obj.className = 'app_content_iframe1';
+         		obj.id = 'app_content_iframe1';
+         	}
+              }
+              catch(e){}
+			  
+
+			  //console.log(el('app_content_iframe1').src);
+			  var initialIframeHeight = '1800px';
+			  //console.log(document.getElementsBy)
+			  var iframesApp = document.getElementsByClassName('app_content_iframe1');
+			  for (var i=0;i<iframesApp.length;i++)
+			  {     var iframeheight = '1800px';
+				var theIframe = iframesApp[i];
+				if (theIframe.src.indexOf('fare.php') > 0 || theIframe.src.indexOf('pdq') > 0  || theIframe.src.indexOf('psyche') > 0 || theIframe.src.indexOf('measurements') > 0)
+				  {
+					console.log('change theIframe height');
+					iframeheight = '6000px';
+					//console.log('1');
+					if (theIframe.src.indexOf('pdq') > 0)
+					{
+						console.log('1.1');
+						//alert('1.1');
+						iframeheight = '19000px';
+					}
+					else if (theIframe.src.indexOf('psyche') > 0)
+					{
+						//console.log('1.2');
+						iframeheight = '10000px';
+					}
+					else if (theIframe.src.indexOf('measurements') > 0)
+					{
+
+                                                //console.log('1.2');
+                                                iframeheight = '2600px';
+                                        }
+
+					//el('wrapper').style.height = iframeheight;
+					//theIframe.style.height = iframeheight;
+					//el('app_content').style.height = iframeheight;
+					//el('app_container').style.height = iframeheight;
+					
+					
+					$('#wrapper').css('height',iframeheight);
+					theIframe.style.height = iframeheight;
+					$('#app_content').css('height',iframeheight);
+					$('#app_container').css('height',iframeheight);
+					
+					
+				  }
+				  else{
+					//el('wrapper').style.height = initialIframeHeight;
+					//theIframe.style.height = initialIframeHeight;
+					//el('app_content').style.height = initialIframeHeight;
+					//el('app_container').style.height = initialIframeHeight;
+					
+					$('#wrapper').css('height',initialIframeHeight);
+					theIframe.style.height = initialIframeHeight;
+					$('#app_content').css('height',initialIframeHeight);
+					$('#app_container').css('height',initialIframeHeight);
+					
+					//console.log('2');
+				  }
+				  
+				  //el('wrapper').scrollTo(0,0);
+				  //theIframe.scrollTop(0,0);
+				  //el('app_content').scrollTop(0,0);
+				  //el('app_container').scrollTop(0,0);
+			  }
+           }
+          
+          function getIframeElement(id)
+          {			
+         	var ifrm = el('app_content_iframe');
+         	var win = ifrm.contentWindow;
+         	var doc = ifrm.contentDocument? ifrm.contentDocument: ifrm.contentWindow.document;
+         	var divList = doc.getElementById('divList');
+          }
+                
+                $(document).ready(function() {
+                	  setElementsSize();
+                	
+                	$('[data-toggle=offcanvas]').click(function() {				
+         		$('#divNavBar').toggle();
+                	});
+                	
+                });
+                
+                $(window).bind('resize', function() {
+         	do_resize = true;
+                	setElementsSize();
+                });
+                function strip(html)
+{
+   var tmp = document.createElement("DIV");
+   tmp.innerHTML = html;
+   return tmp.textContent || tmp.innerText || "";
+}
+
+
+
+	function getRecordLabel()
+{
+	return el('selPatients1')[el('selPatients1').selectedIndex].text;
+}
+
+function getCurrentRecordId()
+{
+	//return el('selPatients1').value;//.split('record_')[2];
+	my_record_id = el('selPatients1').value.split('record_')[2];
+	return my_record_id;
+}
+
+function getRecordLabelByRecordId(recordid)
+{
+	try{
+		var record_label = '';
+		//var records = account_records_xml.getElementsByTagName('Records')[0].getElementsByTagName('Record');
+		var records = account_records_xml.getElementsByTagName('Record');
+		for (var i=0;i<records.length;)
+		{
+			var record = records[i];
+			if (record.getAttribute('id') === recordid)
+			{
+				record_label = record.getAttribute('label');
+				break;
+			}
+			i++;
+		}
+		return record_label;
+	}
+	catch(e)
+	{
+		return '';
+	}
+}
+
+
+function getRecordIdByRecordLabel(label)
+{
+	try{
+		var the_record_id = '';
+		
+		var records = account_records_xml.getElementsByTagName('Record');
+		//alert('records: ' + records.toSource());
+		for (var i=0;i<records.length;)
+		{
+			var record = records[i];
+			if (record.getAttribute('label').replace(/ /g,'') === label.replace(/ /g,''))
+			{
+				the_record_id = record.getAttribute('id');
+				break;
+			}
+			i++;
+		}
+		return the_record_id;
+	}
+	catch(e)
+	{
+		return '';
+	}
+}
+
+function getCarenetIdByRecordLabel(label)
+{
+	try{
+		var the_record_id = '';
+		
+		var records = account_records_xml.getElementsByTagName('Record');
+		
+		for (var i=0;i<records.length;)
+		{
+			var record = records[i];
+			
+			if (record.getAttribute('label').replace(/ /g,'') === label.replace(/ /g,''))
+			{
+				the_record_id = record.getAttribute('carenet_id');
+				break;
+			}
+			i++;
+		}
+		return the_record_id;
+	}
+	catch(e)
+	{
+		return '';
+	}
+}
+
+
+
+function startApp(menuid, dataurl, appname)
+{
+	
+	if (el(menuid)) 
+	{
+		
+		if (el('imghelp_' + appname) && el('imgloading_' + appname))
+		{
+			if (el('imghelp_' + appname).style.display !== '')
+			{
+				alert('Please wait until the application is loaded...');
+				return false;
+			}
+		}
+		
+		var dataurl = el(menuid).getAttribute('data-url');
+		dataurl = dataurl.replace(/"/g,'');
+		el(menuid).setAttribute('data-url', dataurl);
+		el(menuid).click();
+		return true;
+	}
+
+	var app_content = $('#app_content');
+	$.each($(app_content).controllers(), function(i, val) {
+		val.destroy();
+	});
+	var html = '<iframe src="'+dataurl+'" class="app_content_iframe1" style="display: block;" scrolling="no" id="app_content_iframe1" height="693" frameborder="no"></iframe>';
+	app_content.html(html ? html : '').show();
+	return false;
+		
+	$("#app_content").find('#app_content_iframe').load(function() {
+			$(this).show();
+			$("#app_content").html('').hide();
+		}).attr("src", dataurl);
+	
+	return false;
+	
+	var dd = document.getElementsByTagName('iframe');
+	for (var i=0;i<dd.length;i++)
+	{
+		dd[i].src = dataurl;
+	}
+	return false;
+	
+	//if (el('iframe_app_container1'))el('iframe_app_container1').style.display = 'none';
+	//if (el('iframe_app_container1'))el('app_content_iframe').style.display = 'none';
+	//if (el('app_content_iframe1'))el('app_content_iframe1').style.display = 'none';
+	
+	//if (el('iframe_app_container1'))el('iframe_app_container1').src = dataurl;
+	//if (el('app_content_iframe'))el('app_content_iframe').src = dataurl;
+	//if (el('app_content_iframe1'))el('app_content_iframe1').src = dataurl;
+	
+	//if (el('app_content'))el('app_content').style.display = 'none';
+	return false;
+//app_content_iframe)
+}
+
+	var theMenuID = '';
+	var theDataUrl = '';
+	function startForum()
+	{
+		
+		if (el(theMenuID)) 
+		{
+			el(theMenuID).click();
+			return false;
+		}
+		return false;
+		
+		var app_content = $('#app_content');
+		$.each($(app_content).controllers(), function(i, val) {
+			val.destroy();
+		});
+		var html = '<iframe src="'+theDataUrl+'" class="app_content_iframe1" style="display: block;" scrolling="no" id="app_content_iframe1" height="693" frameborder="no"></iframe>';
+		app_content.html(html ? html : '').show();
+		return false;
+		//$('#app_content_iframe').unbind('load').attr('src', 'about:blank').hide();
+	$("#app_content").find('#app_content_iframe').load(function() {
+			$(this).show();
+			$("#app_content").html('').hide();
+		}).attr("src", theDataUrl);
+		
+		return false;
+	}
+function getCurrentLanguage()
+{
+	var thelang = get_cookie('current_lang');
+//alert(thelang);
+	if (!thelang || thelang === '') 
+	{
+		var navlang = navigator.language;
+		if (navlang === 'en' || navlang === 'en-US') thelang = 'en';
+		else if (navlang === 'el-GR' || navlang === 'el') thelang = 'el';
+		else if (navlang === 'it') thelang = 'it';
+		else if (navlang === 'de' || navlang.indexOf('de-') >= 0) thelang = 'de';
+		else thelang = 'en';
+	}
+	return thelang;
+}
+	 function setAppsMenu()
+          {
+//          	alert('selected user');
+                var appsMenu = el('appsMenu');
+                var appsMenuItems = el('active_app_tabs').getElementsByTagName('li');
+
+				var recordLabel = getRecordLabelByRecordId(getCurrentRecordId());
+				recordLabel = getRecordLabel();				
+				
+                var appsMenuHtml = '';
+                var appsMenuHtml1 = '';
+
+				if (recordLabel.toLowerCase().indexOf('carenet') < 0) {
+					appsMenuHtml1 += '<li style="list-style-type: none;display:;">';
+					appsMenuHtml1 += '<a  style="padding:0px 0px 0px 0px;" href="javascript:void(0);" onclick="return onPatientSelect(el(\'selPatients1\'));">';
+					appsMenuHtml1 += '<span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;{% trans "Demographics" %}';
+					appsMenuHtml1 += '</a> ';
+					appsMenuHtml1 += '<img onclick="return showhelp(this,\'{% trans "demographics" %}\');" style="cursor:pointer;width:15px;height:15px;" src="/jmvc/ui/resources/images/info.png"/>';
+					appsMenuHtml1 += '</li>';
+				}
+				
+			 		
+			//alert(account_role);
+			
+			//'<iframe src="http://139.91.210.63:8084/validationForm/index.jsp?record_id='+user_record_id+'"></iframe>'+ 
+				var user_record_id = getCurrentRecordId();
+				var uxmenu = el('menu-ux');
+				//uxmenu.setAttribute('target', '_blank');
+				uxmenu.setAttribute('href', 'javascript:void(0);');
+				uxmenu.onclick = function () {
+					//alert('');
+					setMenuVisibility();
+					bootbox.dialog({
+                     				title: {% trans "' iPHR Validation Questionnaire '" %},
+                     				message: '<div class="row" style="width:100%;overflow-y:auto;height:auto;">' +
+                         			'<div class="col-lg-12" style="overflow-y:auto;border:0px solid red;"> ' +
+      										'<iframe style="width:100%;height:800px;overflow-y:scroll;" frameborder="0"  src="https://www.iphr.care/validationForm/index.jsp?record_id='+user_record_id+'&language='+getCurrentLanguage()+'" ></iframe>'+ 
+                         			'</div> ' +
+      								'</div>',
+                     buttons: {
+                         success: {
+                             label: "Close",
+                             className: "btn-info btn-lg",
+                             callback: function () {
+                             }
+                         }
+                     }
+                 }
+             );
+				}
+				
+				
+				//if (account_role === 'patient' &&  appsMenuItems.length <= 1)
+				console.log ('appsMenuItems.length = ' + appsMenuItems.length.toString());
+				if (appsMenuItems.length <= 1)				{
+					//alert(loggedin_user_record_id);
+					var enableappsurl = 'https://www.iphr.care/api/records/'+loggedin_user_record_id+'/apps/appointments@apps.indivo.org/setup';
+					enableappsurl = 'https://www.iphr.care/enableapps/?record_id=' + loggedin_user_record_id + '&role=' + account_role;
+					//alert(enableappsurl);
+					apicall(enableappsurl, 
+						function(result){
+							//location.href = location.href;
+							//alert(result);
+							if (result === 'updated')
+							{
+								location.href = location.href;
+								
+								//UI.ENABLED_APPS.push('problems@apps.indivo.org');
+								
+								//setAppsMenu();
+								//return false;
+							}							
+						}, 
+						
+						onerror);
+				}
+			 
+                for (var i=0;i<appsMenuItems.length;)
+                {		
+//alert('');
+						var showMenuItem = false;
+						var appname = appsMenuItems[i].getAttribute('appname');
+						//console.log('appname = ' + appname);
+
+
+						//return;
+						if (appname && appname !== '')
+						{
+							//console.log('appname = ' + appname);
+							if (account_role === 'patient') 
+							{
+								if (appname.toLowerCase() !== 'Annotator'.toLowerCase() && 
+									appname.toLowerCase() !== 'Psycho-Emotional Profiler'.toLowerCase() && 
+									appname.toLowerCase() !== 'profiler' && appname.toLowerCase() !== 'clinical assessment' &&
+									appname.toLowerCase() !== 'Administrator Contact'.toLowerCase() && 
+									appname.toLowerCase() !== 'decision aid profiler')
+								{
+									showMenuItem = true;
+								}
+							}
+							else if (account_role === 'research')
+							{
+								if (appname.toLowerCase() === 'Administrator Contact'.toLowerCase())
+								{
+										showMenuItem = true;
+								}
+							}
+							else if (account_role === 'doctor')
+							{
+								if (recordLabel.toLowerCase().indexOf('shared') < 0 && recordLabel.toLowerCase().indexOf('carenet') < 0)
+								{
+									if (appname.toLowerCase() == 'Annotator'.toLowerCase() ||
+										appname.toLowerCase() == 'Psycho-Emotional Profiler'.toLowerCase() ||
+										appname.toLowerCase() == 'profiler' || appname.toLowerCase() == 'clinical assessment' || appname.toLowerCase() == 'decision aid profiler' || appname.toLowerCase() == 'other apps')
+									{
+										showMenuItem = true;
+									}
+								}
+								else if (recordLabel.toLowerCase().indexOf('shared') >= 0 || recordLabel.toLowerCase().indexOf('carenet') >= 0)
+								{
+								
+									if (appname.toLowerCase() !== 'Annotator'.toLowerCase() && 
+										appname.toLowerCase() !== 'Psycho-Emotional Profiler'.toLowerCase() && 
+										appname.toLowerCase() !== 'profiler' && appname.toLowerCase() !== 'clinical assessment')
+									{
+										showMenuItem = true;
+									}
+								}
+							}
+							
+						}
+						console.log(i.toString() +  ' - ' + account_role + ' - ' + appname + ' - ' + recordLabel + ' - ' +  showMenuItem);
+						if (showMenuItem)
+						{						
+							var menuItem = appsMenuItems[i];
+							var menuID = appsMenuItems[i].id;
+							var dataurl = menuItem.getAttribute('data-url');
+
+							//if (appname.toLowerCase() === 'recommender') dataurl += '' + getCurrentLanguage();
+
+							var datacontroller = '';//menuItem.getAttribute('data-controller');
+							appsMenuHtml += '<li style="list-style-type: none;">';
+							appsMenuHtml += '<a data-url="'+dataurl+'" data-controller="'+datacontroller+'" style="padding:0px 0px 0px 0px;" href="javascript:void(0);" onclick="el(\'' + menuID + '\').click();return setMenuVisibility();" >';
+							appsMenuHtml += menuItem.innerHTML;
+							appsMenuHtml += '</a>';
+							appsMenuHtml += '</li>';
+							appsMenuHtml += '<li class="divider"></li>';
+
+							appsMenuHtml1 += '<li>';
+							
+							//appsMenuHtml1 += '<a data-url="'+dataurl+'"  id="menu_'+i.toString()+'" href="javascript:void(0);" onclick="el(\'' + menuID + '\').click();return setMenuVisibility();">';
+							
+							if (dataurl.indexOf('logintest') > 0)
+							{
+								//alert(dataurl);
+								dataurl = dataurl.replace(/"/g, '');
+								//alert(dataurl);
+							}
+													
+							var appname = '';
+							try {
+								appname = dataurl.replace(/"/g, '').split('/')[4];
+							}
+							catch(e){}
+							
+							if (dataurl.indexOf('apps') < 0)
+							{
+								try {
+									appname = dataurl.replace(/"/g, '').split('/')[3];
+								}
+								catch(e){
+									appname = '__';
+								}
+							}
+							
+							//appsMenuHtml1 += '<div style="width:200px;height:30px;position:absolute;opacity: 0.1;background-color: #fff;" id="divApp_'+appname+'"></div>';
+							appsMenuHtml1 += '<a data-url="'+dataurl.replace(/"/g, '')+'" data-controller="'+datacontroller+'"  id="menu_'+i.toString()+'" href="javascript:void(0);" onclick="if (startApp(\'' + menuID + '\',\'' + dataurl.replace(/"/g, '') + '\', \''+appname+'\')){return setMenuVisibility();}" appname="'+appname+'">';
+							
+							appsMenuHtml1 += menuItem.innerHTML;
+							appsMenuHtml1 += '</a>';
+							
+							var addLoader = (dataurl.indexOf('apps') >= 0 
+								&& dataurl.indexOf('serious') < 0 
+								&& dataurl.indexOf('upload') < 0 
+								&& dataurl.indexOf('calendar') < 0
+								&& dataurl.indexOf('contact') < 0);
+							
+							//addLoader = false;
+							
+							if (apps_loaded === '1') 
+								addLoader = false;
+							var imgHelpDisplay = '';
+							if (addLoader) 
+								imgHelpDisplay = 'none';
+				
+							imgHelpDisplay = '';
+
+							
+							appsMenuHtml1 += '<img onclick="return showhelp(this,strip(el(\'' + menuID + '\').innerHTML).trim());" style="cursor:pointer;width:15px;height:15px;display:'+imgHelpDisplay+';" src="/jmvc/ui/resources/images/info.png" id="imghelp_'+appname+'"/>';
+							
+							if (addLoader) {
+								appsMenuHtml1 += '<img style="width:20px;height:20px;display:none;" src="/jmvc/ui/resources/images/2.gif?1" id="imgloading_'+appname+'"/>';
+							}
+							
+							appsMenuHtml1 += '</li>';
+						}
+                        i++;
+                }
+				
+
+				if (el('selPatients1').options[el('selPatients1').selectedIndex].text.toLowerCase().indexOf('carenet') < 0)
+				{
+					appsMenuItems = el('record_owned_options').getElementsByTagName('li');
+
+					for (var i=0;i<appsMenuItems.length;)
+					{
+						var menuItem = appsMenuItems[i];
+						var menuID = appsMenuItems[i].id;
+						var dataurl = menuItem.getAttribute('data-url');
+						appsMenuHtml += '<li style="list-style-type: none;">';
+						appsMenuHtml += '<a data-url="'+dataurl+'"  style="padding:0px 0px 0px 0px;" href="javascript:void(0);" onclick="el(\'' + menuID + '\').click();return setMenuVisibility();">';
+						appsMenuHtml += menuItem.innerHTML;
+						appsMenuHtml += '</a>';
+						appsMenuHtml += '</li>';
+						appsMenuHtml += '<li class="divider"></li>';
+
+						appsMenuHtml1 += '<li >';
+						appsMenuHtml1 += '<a data-url="'+dataurl+'"  href="javascript:void(0);" onclick="el(\'' + menuID + '\').click();return setMenuVisibility();">';
+						appsMenuHtml1 += menuItem.innerHTML;
+						appsMenuHtml1 += '</a>';
+						appsMenuHtml1 += '</li>';
+
+
+						i++;
+					}
+				}
+                appsMenu.innerHTML = appsMenuHtml;
+                el('ulAppsMenu').innerHTML = appsMenuHtml;
+                el('ulAppsMenu1').innerHTML = appsMenuHtml1;
+				
+				
+				var applicationNames = '';
+				var firstMenuItems = [];
+				var applicationNamesSorted = null;
+				var listItems = el('ulAppsMenu1').getElementsByTagName('li');
+				console.log('listItems.length = ' + listItems.length.toString());
+				for (var i=0;i<listItems.length;i++)
+				{
+					var applicationLink = listItems[i].getElementsByTagName('a')[0];
+					var applicationName = applicationLink.textContent.trim().replace(/\r/g,'').replace(/\n/g,'').trim();
+					var appcode = applicationLink.getAttribute('appname');
+					if (applicationLink.outerHTML.toString().indexOf('el(\'pha\').click()') > 0 || applicationLink.outerHTML.toString().indexOf('el(\'carenet\').click()') > 0)
+					//if (applicationLink.outerHTML.indexOf('record_id=' + my_record_id) > 0)
+					{
+						firstMenuItems[firstMenuItems.length] = listItems[i];
+					}
+					else
+					{
+						applicationNames += applicationName;
+					}					
+					
+					if (i < listItems.length-1)
+					{
+						applicationNames += ',';
+					}
+				}
+				
+				console.log('firstMenuItems.length = ' + firstMenuItems.length.toString());
+				
+				var appsMenuHtml1_new = '';
+				if (firstMenuItems.length == 2)
+				{
+					appsMenuHtml1_new += firstMenuItems[0].outerHTML + firstMenuItems[1].outerHTML;	
+				}
+				applicationNamesSorted = applicationNames.split(',').sort();
+				for (var i=0;i<applicationNamesSorted.length;i++)
+				{
+					var appNameText = applicationNamesSorted[i];
+					for (var j=0;j<listItems.length;j++)
+					{
+						var appText = listItems[j].getElementsByTagName('a')[0].textContent.trim().replace(/\r/g,'').replace(/\n/g,'').trim();
+						if (appText === appNameText)
+						{
+							appsMenuHtml1_new += listItems[j].outerHTML;
+							break;
+						}
+					}
+				}
+				el('ulAppsMenu1').innerHTML = appsMenuHtml1_new;
+				el('ulAppsMenu1').style.display = '';	
+	
+				//alert(account_role);
+				if (el('selPatients1').selectedIndex > 0)
+                {
+					if (account_role != 'admin')
+					{
+						el('liApps').style.display = '';
+					}
+					else{
+						el('liAdminConsole').style.display = '';
+					    if (my_record_id == 'c511dffc-8f28-48a7-82c2-7f09f07ec143'){
+							el('liSAF').style.display = '';
+						}
+						el('liApps').style.display = 'none';
+						el('liPatients').style.display = 'none';
+					}
+					
+					if (account_role === 'doctor' || account_role === 'research')
+					{
+						if (account_role === 'doctor')
+						{
+							el('liSAF').style.display = '';
+						}
+						else if (account_role === 'research')
+						{
+							var check_saf_resercher_url = 'https://www.iphr.care/check_saf_researcher?record_id=' + my_record_id;
+							//alert(check_saf_resercher_url);
+							$.ajax({	 
+							  url: check_saf_resercher_url,
+							  crossDomain:true,
+							  cors:true,
+							  success: function (data){
+								//alert('responseText = ' +data);	
+								if (data === 'true' || ACCOUNT_ID == 'koumakis@gmail.com')
+								{
+									el('liSAF').style.display = '';
+								}
+							  },
+							  error: function (){alert('check_saf_resercher ERROR');}
+							});
+							
+						}
+					}
+                }
+                else
+                {
+	                
+                }
+                
+				
+				try{
+					var born = document.getElementsByClassName('demographics_item_block')[0].innerHTML;
+					var patinfo = el('divPatientName').innerHTML;
+					
+					if (patinfo.indexOf('{% trans "Born" %}') < 0)
+					{
+						born = born.split('<b>')[1];
+						born = born.split('</b>')[0];
+						patinfo = patinfo;// + ', {% trans "Born" %} ' + born;
+						
+						el('divPatientName').innerHTML = patinfo;
+					}
+				}
+				catch(e)
+				{
+				//alert(e.message);
+				}
+				
+				if (el('message_unread_count')) 
+				{
+					el('spanUnreadMessages').innerHTML = el('message_unread_count').innerHTML;
+				}
+				
+				if (account_role === 'admin')
+				{
+					el('liAdminConsole').style.display = '';
+				     if (my_record_id=='c511dffc-8f28-48a7-82c2-7f09f07ec143'){
+
+						el('liSAF').style.display = '';
+					}
+					el('liApps').style.display = 'none';
+					el('liPatients').style.display = 'none';					
+				}
+
+				start_auth_apps();
+          }
+		  
+          function setMenuVisibility()
+          {
+            loader('open');
+            
+            var theWidth = window.innerWidth;
+            if (parseInt(theWidth) < 800)
+            {
+				el('nav-expander').click();
+            }
+            return false;
+          }
+
+
+          function loadPatients()
+          {
+           //return false;
+          window.frames['app_content_iframe'].className = 'in_app_container embed-responsive-item';
+          
+          var record_tabs = el('record_tabs').getElementsByTagName('a'); 
+          
+          if (record_tabs.length > 0 && el('selPatients').selectedIndex <= 0 &&  el('selPatients1').selectedIndex <= 0)
+          {
+           el('selPatients').length = 0;
+           el('selPatients1').length = 0;
+           var option1 = document.createElement("option");
+           option1.text = '{% trans "Select a Patient" %}';
+           option1.value = '-1';
+           
+           el('selPatients').add(option1);
+           el('selPatients1').add(option1);
+           
+           for (var i=0;i<record_tabs.length;)
+           {
+            var className = record_tabs[i].className;
+            var option = null;
+            if (className === 'record_tab')
+            {
+             option = document.createElement("option");
+             option.text = "+ {% trans 'Add Patient' %}";
+             option.value = className;
+             option.style.backgroundColor = 'orange';
+			 
+			 option = null;
+			 
+            }
+            else
+            {
+             var the_patient_id = className;
+             var the_patient_name = record_tabs[i].innerHTML;
+             option = document.createElement("option");
+      
+      if (the_patient_name.toLowerCase().indexOf('carenet') >= 0)
+      {
+       var the_carenet_id = the_patient_id.split('_')[4];
+       var the_carenet_name = getCarenetNameByCarenetId(the_carenet_id);
+       the_patient_name = the_patient_name.replace('carenet','carenet: ' + the_carenet_name);
+      }
+      
+             option.text = the_patient_name;
+             option.value = the_patient_id;
+            }
+            
+            if (option)
+            {
+             el('selPatients').add(option);
+             el('selPatients1').add(option);
+            }
+            
+            i++;
+           }
+           el('selPatients1').selectedIndex = 0;
+          }
+          
+          setTimeout('loadPatients();', 1000);
+          }
+
+ 
+          function onPageLoad()
+          {
+          //return false;
+                
+                loadPatients();
+                var theWidth = window.innerWidth;
+                //alert(theWidth)
+				
+				var app = urlParam('app');
+				//alert(app);
+				if (app === 'settings')
+				{	console.log('mpainei');
+					setTimeout(function () {showSettings();}, 6000);
+				}
+
+                if (first_page_view && parseInt(theWidth) >= 800)//!detectmob())
+                {
+                	el('nav-expander').click();
+                  first_page_view = false;
+                }                                        
+                //setAppsMenu();
+				setInterval('checkunreadmessages()',  15000);
+          }
+
+          AttachEvent(window, 'load', function (){onPageLoad();});
+
+		  function checkunreadmessages()
+		  {
+			
+			var url = 'https://www.iphr.care/indivoapi/accounts/'+ ACCOUNT_ID +'/inbox/';
+			apicall(url,oncheckunread, onerror);
+			
+			//el('spanUnreadMessages').innerHTML = unreadmessages;
+		  }
+		  
+		  function oncheckunread(result)
+		  {
+			try {
+				var unreadmessages = 0;
+				//alert(req);
+				var inbox_xml = ( new window.DOMParser() ).parseFromString(result, "text/xml");
+				var messages = inbox_xml.getElementsByTagName('read_at');
+				//console.log(messages);
+				for (var i=0;i<messages.length;i++)
+				{
+					//var read_at = messages[i].getElementsByTagName('read_at');
+					//console.log('read_at = ' + read_at.toSource());
+					if (messages[i] && messages[i].innerHTML === '')
+					{
+						unreadmessages += 1;
+					}
+				}
+				
+				el('spanUnreadMessages').innerHTML = unreadmessages.toString();
+			}
+			catch(e)
+			{
+				console.log('error checkunreadmessages');
+			}
+		  }
+
+	 function getCarenetNameByCarenetId(carenet_id)
+    {
+   var carenet_name = '';
+   try{
+    var records = account_records_xml.getElementsByTagName('Record');
+    for (var i=0;i<records.length;)
+    {
+     var rec = records[i];
+     if (rec.getAttribute('carenet_id') === carenet_id)
+     {
+      carenet_name = rec.getAttribute('carenet_name');
+      break;
+     }
+     i++;
+    }
+   }
+   catch(e){carenet_name='null';}
+   return carenet_name;
+    }
+
+
+function onPatientSelect(sender)
+{
+	var the_patient_id = sender.value;
+	var the_patient_name = sender[sender.selectedIndex].text;
+	
+	//alert(sender);
+
+	el('liApps').style.display = 'none';
+	var elem = document.getElementsByClassName(the_patient_id)[0];
+
+	el('record_owned_options').style.display = '';
+	
+	if (elem)
+	{
+		
+		if (the_patient_name.toLowerCase().indexOf('carenet') > 0 )
+		{
+			if (el('record_owned_options')) 
+			{
+				//el('record_owned_options').innerHTML = '';
+				//el('record_owned_options').style.display = 'none';
+			}
+		}
+	
+		elem.click();
+		loader('open'); 
+	}
+
+	
+	the_patient_name = the_patient_name.split(':')[0];
+	
+	if (the_patient_name.indexOf('(') > 0)
+	{
+		the_patient_name += ')';
+	}
+	
+	el('divPatientName').innerHTML = the_patient_name;
+	el('aSelectedPatient').innerHTML = the_patient_name;
+
+	var the_record_id = getRecordIdByRecordLabel(the_patient_name);
+	var the_carenet_id = getCarenetIdByRecordLabel(the_patient_name);
+
+	if (the_record_id === '')
+	{
+		var the_record_id_arr = the_patient_id.split('_');
+		the_record_id = the_record_id_arr[the_record_id_arr.length-1];
+	}
+
+	var theurl = apiurl + 'records/' + the_record_id + '/apps/';
+	if (the_carenet_id != null && the_patient_name.toLowerCase().indexOf('carenet') >= 0)
+	{
+		theurl = apiurl + 'carenets/' + the_carenet_id + '/apps/';
+	}
+	//alert(theurl);
+	apicall(theurl, getUserApps_success, onerror);
+	
+	return false;
+}
+
+
+		function onPatientClick(the_patient_id, patientName)
+		{
+			el('selPatients1').value = the_patient_id;
+			el('aSelectedPatient').innerHTML = patientName;
+			modal_visible = false;
+			bootbox.hideAll();
+			onPatientSelect(el('selPatients1'));
+
+			return false;
+		}
+
+          function loader(mode)
+          {
+                if (mode === 'open')
+                {
+                        loading();
+                        setTimeout("$('#overlay_loader').remove();", 2000);
+                }
+                else
+                {
+                //alert('111');
+                        $('#overlay_loader').remove();
+                }
+
+                return false;
+          }
+
+          function loading() {
+        // add the overlay with loading image to the page
+                        var over = '<div id="overlay_loader">' +
+
+            '<div id="loading">Loading...</div>' +
+            '</div>';
+                        $(over).appendTo('body');
+
+            }
+
+    // hit escape to close the overlay
+        $(document).keyup(function(e) {
+            if (e.which === 27) {
+                $('#overlay_loader').remove();
+            }
+        });
+
+
+function selectPatient()
+		{
+			el('aSelectedPatient').innerHTML = '';
+		    var patientsHTML = '';
+			for (var i=1;i<el('selPatients1').options.length;i++)
+			{
+				var patientName = el('selPatients1').options[i].text;
+				var patient = '<strong>' + patientName + '</strong>';
+				var patientValue = el('selPatients1').options[i].value;
+				if (i <= 1) patientName = '';
+				patientsHTML += '<div class="row" style="cursor:pointer;margin:5px;padding:10px;width:99%;border:1px solid silver;"><div class="col-lg-12" style="text-align:center;cursor:pointer;" onmouseup="this.style.backgroundColor=\'transparent\';this.parentNode.style.backgroundColor=\'transparent\';"  onmousedown="this.style.backgroundColor=\'silver\';this.parentNode.style.backgroundColor=\'silver\';" onclick="onPatientClick(\''+patientValue+'\',\''+patientName+'\');" ><a onclick="onPatientClick(\''+patientValue+'\',\''+patientName+'\');" href="javascript:void(0);"  style="font-size:18px;">'+ patient +'</a></div></div>';
+				//patientsHTML += '<div class="row" style="padding:5px;width:99%;border:1px solid black;"><div class="col-lg-12" style="text-align:center"><a href="" style="font-size:18px;">'+ patient +'</a></div></div>';
+				//patientsHTML += '<div class="row" style="padding:5px;width:99%;border:1px solid black;"><div class="col-lg-12" style="text-align:center"><a href="" style="font-size:18px;">'+ patient +'</a></div></div>';
+			}
+			
+			bootbox.dialog({
+                     title: {% trans "' Select a Patient '" %},
+                     message: '<div class="row" style="width:100%;overflow-y:auto;height:400px;">' +
+                         			'<div class="col-lg-12" > ' +
+      										patientsHTML + 
+                         			'</div> ' +
+      								'</div>',
+                     buttons: {
+                         success: {
+                             label: "Close",
+                             className: "btn-info btn-lg",
+                             callback: function () {
+                             }
+                         }
+                     }
+                 }
+             );
+      	
+      		if (!modal_visible)
+      			setInterval('setModal();', 100);
+			return false;
+		}
+		/*
+var access_token_json = get_cookie('access_token_json');
+
+function getAccessToken()
+{
+
+	var username = localStorage.getItem('username');
+	var password = localStorage.getItem('password');
+	
+	var url = 'https://www.iphr.care/forth/questionnaires/token.php';
+	$.ajax({
+	  url: url,
+	  type: 'POST',
+	  data: 'username='+ username +'&password=' + password,
+	  
+	  success: getAccessToken_cb,
+	  error: function(err){ 
+		console.log('getAccessToken_cb_ERROR = ' + JSON.stringify(err));
+	  }
+	});
+	
+	localStorage.setItem('username', '');
+	localStorage.setItem('password', '');
+	
+}
+
+function getAccessToken_cb(req)
+{
+	//console.log('1. access_token_json = ' + req);
+	access_token_json = req;
+	set_cookie('access_token_json', access_token_json);
+}
+
+if (access_token_json === '')
+{
+	//getAccessToken();
+}
+else {
+	//console.log('2. access_token_json = ' + access_token_json);
+	//console.log('2.1. username = ' + get_cookie('username'));
+	//console.log('2.2. password = ' + get_cookie('password'));
+}
+	*/
+function apicall(url,onsuccess, onerror)
+{
+	$.ajax({	 
+	  url: url,
+	  dataType: 'text',
+	  crossDomain:true,
+	  cors:true,
+	  success: onsuccess,
+	  error: onerror
+	});
+}
+
+
+
+function apicallpost(theurl, postdata, datatype, onsuccess, onerror)
+{
+alert(postdata);
+//postdata='';
+	$.ajax	({
+	  url: theurl ,//+ '?data=' + postdata,
+	  type: 'POST',
+	  data: postdata,
+		  
+		  
+	  //body: postdata ,
+	  //body: JSON.stringify(postdata),
+	  //contentType: 'application/xml',
+	  //contentType: '',
+	  //traditional: true,
+        //dataType: '',
+	  crossDomain:true,
+	  cors:true,
+	  
+	  success: onsuccess,
+	  error: onerror
+	});
+	
+	/*
+	$.post(url,
+    {
+        postdata
+    },
+    function(data, status){
+        alert("Data: " + data + "\nStatus: " + status);
+    });
+	*/
+	
+}
+
+
+var apiurl = '/indivoapi/';
+var account_role = null;
+var account_state = null;
+var account_records_xml = null;
+var account_records_xml_str = '';
+
+function getUserAccount_success(result){ 	
+	//console.log('theresult = ' + result);
+	//return false;
+	var xmlDoc = null;
+	
+	if ( window.DOMParser ) { // Standard
+		tmp = new DOMParser();
+		xmlDoc = tmp.parseFromString( result , "text/xml" );
+	} else { // IE
+		xmlDoc = new ActiveXObject( "Microsoft.XMLDOM" );
+		xmlDoc.async = "false";
+		xmlDoc.loadXML( result );
+	}
+	
+	//( new window.DOMParser() ).parseFromString(result, "text/xml");
+	//alert(xmlDoc.getElementsByTagName('role')[0].value);
+	
+	//alert(jQuery(xmlDoc).find('role')[0].text());
+	
+	jQuery(xmlDoc).find('role').each(function() {
+		account_role = $(this).text();
+		//break;
+	});
+	
+	jQuery(xmlDoc).find('state').each(function() {
+		account_state = $(this).text();
+		//break;
+	});
+	
+	
+	
+	//account_role = xmlDoc.getElementsByTagName('role')[0].innerHTML;
+	//account_state = xmlDoc.getElementsByTagName('state')[0].innerHTML;
+	
+	//alert(account_role + ', ' + account_state);
+}
+
+function getUserAccount_error(result){ 		  
+	console.log('getUserAccount Error: ' + result);		  
+}
+
+function getLoggedinUserRecordId()
+{
+	var records = account_records_xml.getElementsByTagName('Record');
+	for (var i=0;i<records.length;)
+	{
+		if (records[i].getAttribute('label').toLowerCase().indexOf('carenet') <= 0 &&
+			records[i].getAttribute('label').toLowerCase().indexOf('companion') <=0 &&
+			records[i].getAttribute('label').toLowerCase().indexOf('guardian') <=0)
+		{
+			return records[i].getAttribute('id');
+		}
+		i++;
+	}
+}
+
+var loggedin_user_selected = false;
+function selectLoggedInUser()
+{
+	if (el('selPatients1').options.length > 1)
+	{
+		for (var i=1;i<el('selPatients1').options.length;)
+		{
+			//if (account_role === 'admin')
+		//	{
+			//	el('menu-admin_console').click();
+			//}
+			//else 
+			//{
+				if (el('selPatients1').options[i].value.indexOf(loggedin_user_record_id) >=0)
+				{
+					el('selPatients1').selectedIndex = i;
+					onPatientSelect(el('selPatients1'));
+					el('menu-patients').click();
+					var thePatientName = el('selPatients1').options[el('selPatients1').selectedIndex].text;
+					el('aSelectedPatient').innerHTML = thePatientName;
+					loggedin_user_selected = true;
+					
+					//document.body.style.display = '';
+					setTimeout(function(){el('divFullLoading').style.display = 'none';},500);
+					
+					apicall(apiurl + 'records/' + loggedin_user_record_id + '/apps/', getUserApps_success, onerror);
+					
+				}
+			//}
+			i++;
+		}
+	}
+	if (!loggedin_user_selected)
+	{
+		setTimeout('selectLoggedInUser();', 500);
+	}
+}
+
+function getUserRecords_success(result){ 
+	//alert(result);	
+	//console.log(result);
+	account_records_xml_str = result;
+	account_records_xml = ( new window.DOMParser() ).parseFromString(result, "text/xml");
+	//alert(account_records_xml.getElementsByTagName('Record')[0].getAttribute('id'));
+	loggedin_user_record_id = getLoggedinUserRecordId();
+	//alert(loggedin_user_record_id);
+	
+	setTimeout('selectLoggedInUser();', 500);	
+	
+	//setTimeout(function(){el('divFullLoading').style.display = 'none';},1000);
+	//alert(el('selPatients1').options.length);
+	//alert(loggedin_user_record_id);
+}
+
+var diffDays;
+
+function getAccountXML_success(result){
+        //console.log(result);
+        account_xml = ( new window.DOMParser() ).parseFromString(result, "text/xml");
+
+   setTimeout(function (){
+	
+
+	var account_record = account_records_xml.getElementsByTagName('Record')[0].getAttribute('id');
+
+
+        var account_last_state = account_xml.getElementsByTagName("lastStateChange")[0].childNodes[0].nodeValue;
+
+
+		
+        var date = new Date();
+        var yyyy = date.getFullYear().toString();
+        var mm = (date.getMonth()+1).toString();
+        var dd  = date.getDate().toString();
+        var mmChars = mm.split('');
+        var ddChars = dd.split('');
+        var datee =  yyyy + '-' + (mmChars[1]?mm:"0"+mmChars[0]) + '-' + (ddChars[1]?dd:"0"+ddChars[0]); 
+
+
+	//dates difference
+   	var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+	var firstDate = new Date(datee);
+	var secondDate = new Date(account_last_state);
+	diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
+
+
+
+        apicall('https://www.iphr.care/DataManagementAPI/s1/webservice/patient/'+account_record+'/reminder',getQuestionnaire_success,getQuestionnaire_error);
+
+
+    }, 5000);
+}
+
+
+
+function getQuestionnaire_success(result){
+
+
+	var account_record = account_records_xml.getElementsByTagName('Record')[0].getAttribute('id');
+        if (result == 0 && diffDays >=7){
+		 alertstring += "<div> Would you like to fill iPHR validation questionnaire? Your opinion matters to us!<br><br><button type='button' class='btn btn-success' id='button_yes' onclick=confirmBoxQuestionnaire('yes');>yes</button><button type='button' class='btn btn-danger' onclick=confirmBoxQuestionnaire('no')>no</button><br><br></div>"
+                                        bootbox.confirm(alertstring,function(result){ console.log('This was logged in the callback: ' + result); });
+	
+	}
+}
+
+
+
+var app_auth_step = 0;
+var user_apps = null;
+function auth_app()
+{
+
+return false;
+
+	if (app_auth_step >= user_apps.length)
+	{
+		return false;
+	}
+	var user_record_id = getCurrentRecordId();
+	var the_appname = user_apps[app_auth_step].id.split('@')[0];
+
+//alert('auth_app --- ' + the_appname);
+
+
+//if (the_appname === 'problems') alert('problems');
+
+
+	if (the_appname.toLowerCase().indexOf('forum') < 0  &&
+		the_appname.toLowerCase().indexOf('calendar') < 0  &&
+		the_appname.toLowerCase().indexOf('psycho') < 0  &&
+		the_appname.toLowerCase().indexOf('semantic') < 0  &&
+		the_appname.toLowerCase().indexOf('emotional') < 0  &&
+		the_appname.toLowerCase().indexOf('profiler') < 0  &&
+		the_appname.toLowerCase().indexOf('serious') < 0  &&
+		the_appname.toLowerCase().indexOf('contact') < 0  &&
+		the_appname.toLowerCase().indexOf('upload') < 0 ){
+		var app_auth_url = '/apps/'+the_appname+'/start_auth?record_id='+user_record_id+'&amp;carenet_id=';
+		
+		el('iframe_' + the_appname).onload = function(){
+			//appframe_loaded(the_appname);
+		}
+		
+		AttachEvent(el('iframe_' + the_appname), 'load', function(){
+			//appframe_loaded(the_appname);
+		});
+		
+		el('iframe_' + the_appname).src = app_auth_url;//el('iframe_' + the_appname).src;
+		//appframe_loaded(the_appname);
+
+		setTimeout(function() {
+			//alert(the_appname);
+			appframe_loaded(the_appname);
+		}, 400);
+
+		
+	}
+	app_auth_step += 1;
+	if (app_auth_step == user_apps.length - 1)
+	{
+		var expirationMinutes = 1/48; //30 minutes
+		apps_loaded = set_cookie('apps_loaded', '1');//, expirationMinutes);
+	}
+	setTimeout('auth_app();', 3000);
+}
+
+function appframe_loaded(appname)
+{
+	//alert(appname);
+	try {
+		el('imghelp_'+ appname).style.display = '';
+		el('imgloading_'+ appname).style.display = 'none';
+	}
+	catch(e)
+	{
+		//alert(appname);
+	}
+}
+
+var apps_loaded = '0';
+function getUserApps_success(result){ 
+
+	//alert(getCurrentRecordId());
+	var apps = JSON.parse(result);	
+	user_apps = apps;
+	
+	setTimeout('setAppsMenu();', 800);
+	//setAppsMenu();
+	return false;
+
+	
+
+	//setAppsMenu();
+	
+	//return false;
+	apps_loaded = get_cookie('apps_loaded');
+	//setAppsMenu();
+	//return false;
+	
+	apps_loaded = '0';
+	
+	
+	//alert(JSON.stringify(apps));
+	
+	//alert('apps_loaded = ' + apps_loaded);
+	if (apps_loaded === '1') 
+		return false;
+	var user_record_id = getCurrentRecordId();
+	var iframesAuthHtml = '';
+	var divAppsAuth = el('divAppsAuth');
+	if (apps.length > 0)
+	{
+		for (var i=0;i<apps.length;i++)
+		{
+			var app = apps[i];
+			var appname = app.id.split('@')[0];
+			if (appname.toLowerCase().indexOf('forum') < 0 && 
+				appname.toLowerCase().indexOf('calendar') < 0  && 
+				appname.toLowerCase().indexOf('psycho') < 0  &&
+				appname.toLowerCase().indexOf('semantic') < 0  &&
+				appname.toLowerCase().indexOf('emotional') < 0  &&
+				appname.toLowerCase().indexOf('profiler') < 0  &&
+				appname.toLowerCase().indexOf('serious') < 0  &&
+				appname.toLowerCase().indexOf('contact') < 0  &&
+				appname.toLowerCase().indexOf('upload') < 0  ){
+			
+			iframesAuthHtml += '<iframe id="iframe_'+appname+'"  name="iframe_'+appname+'">'+appname+'</iframe>';
+			}
+		}
+	}
+		
+	divAppsAuth.innerHTML = iframesAuthHtml;
+	
+	auth_app();
+}
+
+function start_auth_apps()
+{
+
+	apps_loaded = get_cookie('apps_loaded');
+	//setAppsMenu();
+	//return false;
+	
+	apps_loaded = '0';
+	
+	var apps = user_apps;
+	//alert(JSON.stringify(apps));
+	
+	//alert('apps_loaded = ' + apps_loaded);
+	if (apps_loaded === '1') 
+		return false;
+	var user_record_id = getCurrentRecordId();
+	var iframesAuthHtml = '';
+	var divAppsAuth = el('divAppsAuth');
+	if (apps.length > 0)
+	{
+		for (var i=0;i<apps.length;i++)
+		{
+			var app = apps[i];
+			var appname = app.id.split('@')[0];
+			if (appname.toLowerCase().indexOf('forum') < 0 && 
+				appname.toLowerCase().indexOf('calendar') < 0  && 
+				appname.toLowerCase().indexOf('psycho') < 0  &&
+				appname.toLowerCase().indexOf('semantic') < 0  &&
+				appname.toLowerCase().indexOf('emotional') < 0  &&
+				appname.toLowerCase().indexOf('profiler') < 0  &&
+				appname.toLowerCase().indexOf('serious') < 0  &&
+				appname.toLowerCase().indexOf('contact') < 0  &&
+				appname.toLowerCase().indexOf('upload') < 0 ){
+			
+				iframesAuthHtml += '<iframe id="iframe_'+appname+'"  name="iframe_'+appname+'">'+appname+'</iframe>';
+			}
+		}
+	}
+		
+	divAppsAuth.innerHTML = iframesAuthHtml;
+	
+	auth_app();
+
+
+}
+
+function authapp_success(result){ 
+}
+
+function getUserRecords_error(result){ 		  
+	console.log('getUserRecords Error: ' + result.toSource());
+	location.href='login';
+}
+function getAccountXML_error(result){
+        console.log('getAccountXML Error: ' + result.toSource());
+        location.href='login';
+}
+function getQuestionnaire_error(result){
+        console.log('getQuestionnaire Error: ' + result.toSource());
+        location.href='login';
+}
+
+function getUserAccount_error(result){ 		  
+	console.log('getUserAccount Error: ' + result);
+	location.href='login';
+}
+
+function onerror(result){ 		  
+	console.log('Error onerror: ' + result.toSource());		  
+}
+
+AttachEvent(window,'load',function (){
+	//alert(apiurl + 'accounts/' + ACCOUNT_ID);
+	apicall(apiurl + 'accounts/' + ACCOUNT_ID, getUserAccount_success, getUserAccount_error);
+	apicall(apiurl + 'accounts/' + ACCOUNT_ID + '/records/', getUserRecords_success, getUserRecords_error);
+        apicall(apiurl + 'accounts/' + ACCOUNT_ID, getAccountXML_success, getAccountXML_error);
+});
+
+    
+      </script>
+      <!--meta name="viewport" content="width=device-width, initial-scale=1"-->
+      <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,target-densitydpi=device-dpi, user-scalable=no" />
+	  
+<!--      <link type="text/css" href="/jmvc/ui/resources/bootstrap-custom.css" rel="stylesheet"/>-->
+      <style>
+#overlay_loader {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: #000;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+    z-index:100000;
+
+}
+#loading {
+    width: 50px;
+    height: 57px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -28px 0 0 -25px;
+    color:white;
+    font-size:25px;
+    font-weight:bold;
+}
+
+
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 8px;
+	overflow-x:hidden;
+}
+ 
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(42,100,150,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(42,100,150,0.8); 
+    -webkit-box-shadow: inset 0 0 6px rgba(42,100,150,0.5); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(42,100,150,0.4); 
+}
+</style>
+<script>
+//alert(navigator.language);
+
+/*
+function showMobileAppMenu(mode)
+{
+	el('divMobileAppMenuItems').style.display = '';
+	
+	var divs = el('divMobileAppMenuItems').getElementsByClassName('col-xs-12');
+	for (var i=0;i<divs.length;i++)
+	{
+		var item = divs[i];
+		//AttachEvent(item, 'click', function () { alert('');});
+		//console.log('ITEM = ' + item.innerHTML);
+		//break;
+		if (item.getAttribute('mode') === mode)
+		{
+			item.style.display = '';
+			//item.onclick = function(){alert('');}
+		}
+		else if (item.getAttribute('mode') !== 'none')
+		{
+			item.style.display = 'none';
+		}
+	}
+	
+	
+	return false;
+}
+
+function onApplicationClick(sender)
+{
+	alert(sender.appname);
+	return false;
+}
+
+
+*/
+$(document).ready(function() {
+            //$('.tooltip').tooltipster();
+			/*
+			function getMobileMenuItems() {
+			var mobileMenuItems = ' <div class="container" id="divMobileAppMenu" style="overflow-x:hidden;overflow-y:hidden;display:none;position:absolute;left:0px;top:55px;width:99%;height:100%;background-color:transparent;border:0px solid black;">';
+			mobileMenuItems += '<div class="row" style="padding-left:20px;width:100%;height:100%;overflow-x:hidden;overflow-y:hidden;display:none;position:absolute;z-index:100000000000000000900;background-color:transparent;border:0px solid blue;" id="divMobileAppMenuItems" >';
+			mobileMenuItems += '<div class="col-xs-12" mode="none" style="border-bottom:1px solid silver;padding:10px;font-size:18px;" onclick="el(\'divMobileAppMenuItems\').style.display=\'none\';">&laquo; Back</div>';
+			mobileMenuItems += '<div class="col-xs-12" mode="medical" appname="allergies" style="padding:10px;"  onclick="onApplicationClick(el(\'divAllergies\'));"><div style="border-bottom:1px solid silver;font-size:18px;" appname="allergies" id="divAllergies" >Allergies</div>';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '<a href="javascript:void(0);" onclick="onApplicationClick(el(\'divAppointments\'));">';
+			mobileMenuItems += '<div class="col-xs-12" mode="medical" appname="appointments" style="padding:10px;" id="divAppointments" >';
+			mobileMenuItems += '<div style="border-bottom:1px solid silver;font-size:18px;">';
+			mobileMenuItems += 'Appointments';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '</a>';
+			mobileMenuItems += '<div class="col-xs-12" mode="medical" appname="calendar" style="padding:10px;"  onclick="onApplicationClick(this);">				';
+			mobileMenuItems += '<div style="border-bottom:1px solid silver;font-size:18px;">';
+			mobileMenuItems += 'Calendar';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '<div class="col-xs-12" mode="medical" appname="labs" style="padding:10px;"  onclick="onApplicationClick(this);">				';
+			mobileMenuItems += '<div style="border-bottom:1px solid silver;font-size:18px;">';
+			mobileMenuItems += 'Labs';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '<div class="col-xs-12" mode="medical" appname="measurements" style="padding:10px;">			';	
+			mobileMenuItems += '<div style="border-bottom:1px solid silver;font-size:18px;">';
+			mobileMenuItems += 'Measurements';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '<div class="col-xs-12" mode="medical" appname="medications" style="padding:10px;">		';		
+			mobileMenuItems += '<div style="border-bottom:1px solid silver;font-size:18px;">';
+			mobileMenuItems += '	Medications';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '<div class="col-xs-12" mode="medical"  appname="problems" style="padding:10px;">		';		
+			mobileMenuItems += '<div style="border-bottom:1px solid silver;font-size:18px;">';
+			mobileMenuItems += '	Problems';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '<div class="col-xs-12" mode="medical"  appname="procedures" style="padding:10px;">';
+			mobileMenuItems += '<div style="border-bottom:1px solid silver;font-size:18px;">';
+			mobileMenuItems += 'Procedures';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '<div class="col-xs-12" mode="medical"  appname="documents" style="padding:10px;">';
+			mobileMenuItems += '<div style="border-bottom:1px solid silver;font-size:18px;">';
+			mobileMenuItems += 'Upload documents';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '</div>';
+
+			mobileMenuItems += '<div class="col-xs-12" mode="questionnaires"  appname="algac" style="padding:10px;">';			
+			mobileMenuItems += '<div style="border-bottom:1px solid silver;font-size:18px;">';
+			mobileMenuItems += 'ALGA-C';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '<div class="col-xs-12" mode="questionnaires" appname="decisionaid" style="padding:10px;">';
+			mobileMenuItems += '<div style="border-bottom:1px solid silver;font-size:18px;">';
+			mobileMenuItems += 'Decision Aid';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '<div class="col-xs-12" mode="questionnaires"  appname="fare" style="padding:10px;">';
+			mobileMenuItems += '<div style="border-bottom:1px solid silver;font-size:18px;">';
+			mobileMenuItems += 'Family Resilience';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '<div class="col-xs-12" mode="questionnaires"  appname="parentaldistress" style="padding:10px;">';
+			mobileMenuItems += '<div style="border-bottom:1px solid silver;font-size:18px;">';
+			mobileMenuItems += 'Parental Distress';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '<div class="col-xs-12" mode="questionnaires"  appname="psyche" style="padding:10px;">';
+			mobileMenuItems += '<div style="border-bottom:1px solid silver;font-size:18px;">';
+			mobileMenuItems += 'Psyche';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '</div>';
+
+			mobileMenuItems += '<div class="col-xs-12" mode="settings" appname="sharing" style="padding:10px;">';
+			mobileMenuItems += '<div style="border-bottom:1px solid silver;font-size:18px;">';
+			mobileMenuItems += 'Sharing';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '<div class="col-xs-12" mode="settings" appname="appsettings" style="padding:10px;">';
+			mobileMenuItems += '<div style="border-bottom:1px solid silver;font-size:18px;">';
+			mobileMenuItems += 'App Settings';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '<div class="col-xs-12" mode="settings"  appname="settings" style="padding:10px;">';
+			mobileMenuItems += '<div style="border-bottom:1px solid silver;font-size:18px;">';
+			mobileMenuItems += 'iPHR Settings';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '<div class="col-xs-12" mode="settings" appname="demographics" style="padding:10px;">';
+			mobileMenuItems += '<div style="border-bottom:1px solid silver;font-size:18px;">';
+			mobileMenuItems += 'Demographics';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '<div class="col-xs-12" mode="settings" appname="language" style="padding:10px;">';
+			mobileMenuItems += '<div style="border-bottom:1px solid silver;font-size:18px;">';
+			mobileMenuItems += 'Language';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '<div class="col-xs-12" mode="settings" appname="validation_questionnaire" style="padding:10px;">';
+			mobileMenuItems += '<div style="border-bottom:1px solid silver;font-size:18px;">';
+			mobileMenuItems += 'iPHR Validation Questionnaire';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '</div>';
+
+			mobileMenuItems += '<div class="col-xs-12" mode="info" appname="faq" style="padding:10px;">';
+			mobileMenuItems += '<div style="border-bottom:1px solid silver;font-size:18px;">';
+			mobileMenuItems += 'FAQ';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '</div>';
+
+			mobileMenuItems += '<div class="col-xs-12" mode="info" appname="about" style="padding:10px;">';
+			mobileMenuItems += '<div style="border-bottom:1px solid silver;font-size:18px;">';
+			mobileMenuItems += 'About';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '<div class="row" style="height:50px;overflow-x:hidden;overflow-y:hidden;"></div>';
+			mobileMenuItems += '<div class="row" style="overflow-x:hidden;overflow-y:hidden;">';
+			mobileMenuItems += '<div class="col-xs-6" style="border:0px solid black;padding:10px;"  onclick="return showMobileAppMenu(\'medical\');">';
+			mobileMenuItems += '<center>';
+			mobileMenuItems += '<img src="https://i.imgur.com/vJu1rGU.png" style="width:120px;"/>';
+			mobileMenuItems += '<div style="height:4px;"></div>';
+			mobileMenuItems += '<strong>MEDICAL</strong>';
+			mobileMenuItems += '</center>';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '<div class="col-xs-6" style="border:0px solid black;padding:10px;" onclick="return showMobileAppMenu(\'questionnaires\');"> ';
+			mobileMenuItems += '<center>';
+			mobileMenuItems += '<img src="https://i.imgur.com/9et5jxa.png" style="width:120px;"/>';
+			mobileMenuItems += '<div style="height:4px;"></div>';
+			mobileMenuItems += '<strong>QUESTIONNAIRES</strong>';
+			mobileMenuItems += '</center>';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '<div class="row" style="height:40px;"></div>';
+			mobileMenuItems += '<div class="row" style="overflow-x:hidden;overflow-y:hidden;">';
+			mobileMenuItems += '<div class="col-xs-6" style="border:0px solid black;padding:10px;" onclick="return showMobileAppMenu(\'settings\');"> ';
+			mobileMenuItems += '<center>';
+			mobileMenuItems += '<img src="https://i.imgur.com/3K8tH0d.png" style="width:120px;"/>';
+			mobileMenuItems += '<div style="height:4px;"></div>';
+			mobileMenuItems += '<strong>SETTINGS</strong>';
+			mobileMenuItems += '</center>';
+			mobileMenuItems += '</div>';
+
+			mobileMenuItems += '<div class="col-xs-6" style="border:0px solid black;padding:10px;" onclick="return showMobileAppMenu(\'info\');">';
+			mobileMenuItems += '<center>';
+			mobileMenuItems += '<img src="https://i.imgur.com/wK7nOLn.png" style="width:120px;"/>';
+			mobileMenuItems += '<div style="height:4px;"></div>';
+			mobileMenuItems += '<strong>INFO</strong>';
+			mobileMenuItems += '</center>';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '</div>';
+			mobileMenuItems += '</div>';
+			
+			el('demographics_area').innerHTML = mobileMenuItems;
+			
+			}
+
+			setTimeout(function () {
+			getMobileMenuItems();
+			
+			var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+				//alert(width);
+				if (width <= 800)
+				{
+					el('divMobileAppMenu').style.display = '';
+					try {
+						document.getElementsByClassName('details')[0].style.display = 'none';
+					}
+					catch(e){}
+				}		
+			
+			
+			}, 4000);
+   
+   */
+        });
+		
+        </script>    
+   </head>
+   <!--body class="ui_alert ui_record ui_main" style="overflow-y: auto;"-->
+   <body style="overflow-y: auto;" >
+   
+   
+   
+   
+   <div id="divApps" style="display:none;">
+   <div id="divAppsAuth" style="padding-top:80px;width:80%;height:800px;overdlow-y:auto;display:;">divAppsAuth</div>
+   <div><script>document.write(document.cookie);</script></div>
+   <input type="button" value="clear cookie" onclick="set_cookie('apps_loaded','');"/>
+   </div>
+   
+   <div id="divFullLoading" style="font-weight:bold;font-size:20px;z-index:10000000000000000000;position:absolute;left:0px; top:0px;width:100%;height:100%;background-color:black;color:white;display:;">{% trans "Loading" %}...</div>
+	<input style="display:none;" type="button" value="CLICK BUTTON" id="click_help" name="click_help" onclick="return openApp(get_cookie('app_url'));"/>
+ 	   
+	   
+	   
+   <div id="wrapper" style="z-index:10000;background-color:white;">
+   
+   
+   
+   
+      <!--nav style="background-color:#faf4e6;"-->
+      <nav style="background-color:white;" >
+        <ul class="list-unstyled main-menu" style="background-color:white;border-left:1px solid silver;">
+          
+          <!--Include your navigation here-->
+          <li class="text-right" ><a href="#" id="nav-close"><span class="glyphicon glyphicon-remove" style="color:gray;"></span></a></li>
+
+           
+                        <!--li>
+                            <a id="menu-account" href="/"><span class="glyphicon glyphicon-user"></span> My Account</a>
+                        </li-->
+                         
+                         <li id="liPatients">
+                            <a  id="menu-patients" href="javascript:void(0);"><span class="glyphicon glyphicon-th-list"></span> {% trans "Patients" %}</a>
+                            <ul id="ulPatients">
+
+&nbsp;&nbsp;&nbsp;&nbsp;<a style="margin-top:25px;" href="javascript:void(0);" id="linkSelectPatient" class="" onclick="return selectPatient();">{% trans "Select a Patient" %}</a>
+								<br/>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a id="aSelectedPatient"></a>
+
+										<li class="xxx" style="display:none;">
+										<select id="selPatients1" name="selPatients1" style="display:;"  onchange="onPatientSelect(this);" class="form-control">
+										</select>
+										</li>	
+                            </ul>
+                        </li>
+                        <style>
+						.flexcroll{ 
+							--width:200px;
+							max-height:500px;
+							overflow-y:scroll;
+							overflow-x:hidden;
+						}
+						.flexcroll{
+							--scrollbar-face-color: #ffffff;
+							scrollbar-face-color: #1EB718;
+							scrollbar-shadow-color: #FFFFFF;
+							scrollbar-highlight-color: #FFFFFF;
+							scrollbar-3dlight-color: #FFFFFF;
+							scrollbar-darkshadow-color: #FFFFFF;
+							scrollbar-track-color: #FFFFFF;
+							scrollbar-arrow-color: #FFFFFF;
+						}
+
+						/* Let's get this party started */
+						.flexcroll::-webkit-scrollbar {
+							width: 8px;
+						}
+						 
+						/* Track */
+						.flexcroll::-webkit-scrollbar-track {
+							-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+							-webkit-border-radius: 10px;
+							border-radius: 10px;
+						}
+						 
+						/* Handle */
+						.flexcroll::-webkit-scrollbar-thumb {
+							-webkit-border-radius: 10px;
+							border-radius: 10px;
+							background: #36BD14;--rgba(255,0,0,0.8); 
+							-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+						}
+						</style>
+                        <li id="liApps" style="display:none;">
+                            <a  id="menu-apps" href="javascript:void(0);"><span class="glyphicon glyphicon-th"></span> {% trans "Apps" %}</a>
+                            <ul id="ulAppsMenu1" class="flexcroll"></ul>
+							<ul id="ulAppsMenu2" style="max-height:300px;overflow-x:hidden;overflow-y:auto;display:none;" class="flexcroll"></ul>
+                        </li>
+                        
+                         <li>
+                            <a id="menu-settings" href="javascript:void(0);" 
+                            onclick="return showSettings();"><img src="/jmvc/ui/resources/images/icons_24/accountset.png" style="width:32px;">{% trans "Settings" %}</a><!--<span class="glyphicon glyphicon-cog"></span>-->
+                        </li>
+
+		          <li>
+                            <a id="menu-inbox" href="javascript:void(0);"
+                            onclick="el('message').click();return setMenuVisibility();"><span class="glyphicon glyphicon-envelope"></span> {% trans "Inbox" %}
+							 <span class="badge" id="spanUnreadMessages"></span></a>							
+                        </li>
+												
+						<li id="liAdminConsole" style="display:none;">
+                            <a id="menu-admin_console" href="javascript:void(0);"
+                            onclick="return showAdminConsole();"><span class="glyphicon glyphicon-cog"></span> {% trans "Admin Console" %}</a>
+                        </li>
+			 <li id="liSAF" style="display:none;">
+                            <a id="menu-admin_console" href="javascript:void(0);"
+                            onclick="return showSAF();"><span class="glyphicon glyphicon-cog"></span> {% trans "Smart Analytical Framework" %}</a>
+                        </li>
+
+
+<!--			 <li>
+                            <a id="menu-settings" href="javascript:void(0);"
+                            onclick="return showAdminConsole();"><span class="glyphicon glyphicon-cog"></span> {% trans "Admin Console" %}</a>
+                        </li>-->
+
+                        <li>
+                            <a id="menu-languages" href="javascript:void(0);"><span class="glyphicon glyphicon-flag"></span> {% trans "Language" %}</a>
+                            <ul id="ulLanguages">
+				<li><a href="javascript:void(0);" onclick="set_cookie('current_lang','en');document.setLangEnglish.submit();return false;">English</a></li>
+                           	<li><a href="javascript:void(0);" onclick="set_cookie('current_lang','el');document.setLangGreek.submit();return false;">Ελληνικά</a></li>
+                                <li><a href="javascript:void(0);" onclick="set_cookie('current_lang','de');document.setLangDeutch.submit();return false;">Deutsch</a></li>
+                                <li><a href="javascript:void(0);" onclick="set_cookie('current_lang','it');document.setLangItaliano.submit();return false;">Italiano</a></li>
+
+                            </ul>
+                        </li>
+						<li>
+                            <a id="menu-ux" href="javascript:void(0);" id="ux" name="ux" ><span class="glyphicon glyphicon-list-alt"></span> {% trans "iPHR Validation Questionnaire" %}</a>
+                        </li>
+						<li>
+                            <a id="menu-logout" href="https://www.iphr.care/user_manual" id="help" name="help">
+								<span class="glyphicon glyphicon-book"></span> {% trans "User Manual" %}</a>
+                        </li>
+						<li>
+                            <a id="menu-logout" href="javascript:void(0);" id="faq" name="faq" onclick="return showFaq();"><span class="glyphicon glyphicon-question-sign"></span> {% trans "FAQ" %}</a>
+                        </li>
+						<li>
+                            <a id="menu-logout" href="javascript:void(0);" id="about" name="about" onclick="alert('iPHR v1.0.0');return false;"><span class="glyphicon glyphicon-copyright-mark"></span> {% trans "About iPHR" %}</a>
+                        </li>
+                        <li>
+                            <a id="menu-logout" href="/logout" id="logout" name="logout"><span class="glyphicon glyphicon-off"></span> {% trans "Logout" %}</a>
+                        </li>
+
+            <script>
+            	function showSettings()
+            	{
+            		var iframe = '<iframe id="app_content_iframe1" name="app_content_iframe1" ';
+            		iframe += ' frameborder="no" style="width:100%;height:100%" ';
+            		iframe += ' src="/change_password" scrolling="no"></iframe>';
+            		var diviframe = document.createElement('div');
+
+			console.log('!!!!!!!!!');
+            		diviframe.innerHTML = iframe;
+            		if (el('app_content_iframe1'))
+            		{
+				console.log('if');
+            			//el('app_content_iframe1').src = '/change_password';
+				el('app_content').innerHTML = iframe;
+            			//alert('exists');
+            		}
+            		else
+            		{
+				console.log('else')
+            			//el('app_content').appendChild(diviframe);
+            			el('app_content').innerHTML = iframe;
+            			//alert('!exists');
+            		}
+			return setMenuVisibility();
+            	}
+				
+	        function showFaq()
+            	{
+            		var iframe = '<iframe id="app_content_iframe1" name="app_content_iframe1" ';
+            		iframe += ' frameborder="no" style="width:100%;height:100%" ';
+            		iframe += ' src="https://www.iphr.care/forth/faq/iphrfaq.html" scrolling="no"></iframe>';
+            		var diviframe = document.createElement('div');
+            		diviframe.innerHTML = iframe;
+            		if (el('app_content_iframe1'))
+            		{
+            			el('app_content_iframe1').src = 'https://www.iphr.care/forth/faq/iphrfaq.html';
+            			//alert('exists');
+            		}
+            		else
+            		{
+            			//el('app_content').appendChild(diviframe);
+            			el('app_content').innerHTML = iframe;
+            			//alert('!exists');
+            		}
+			return setMenuVisibility();		
+			return false;
+            	}
+
+				function showAdminConsole()
+                {
+                        var iframe = '<iframe id="app_content_iframe1" name="app_content_iframe1" ';
+                        iframe += ' frameborder="no" style="width:100%;height:100%" ';
+                        iframe += ' src="/admin_console" scrolling="no"></iframe>';
+                        var diviframe = document.createElement('div');
+                        diviframe.innerHTML = iframe;
+                        if (el('app_content_iframe1'))
+                        {
+                                el('app_content_iframe1').src = '/admin_console';
+                                //alert('exists');
+                        }
+                        else
+                        {
+                                //el('app_content').appendChild(diviframe);
+                                el('app_content').innerHTML = iframe;
+                                //alert('!exists');
+                        }
+                }
+
+
+function showSAF()
+                {
+
+	//alert(my_record_id);
+                        var iframe = '<iframe id="app_content_iframe1" name="app_content_iframe1" ';
+                        iframe += ' frameborder="no" style="width:100%;height:100%" ';
+						
+                        //iframe += ' src="https://www.iphr.care/forth/saf/index.php?record_id='+my_record_id+'" scrolling="no"></iframe>';
+						
+						iframe += ' src="https://www.iphr.care/forth/saf/indexnew.php?record_id='+my_record_id+'" scrolling="no"></iframe>';
+						
+                        var diviframe = document.createElement('div');
+                        diviframe.innerHTML = iframe;
+                        if (el('app_content_iframe1'))
+                        {
+                                //el('app_content_iframe1').src = 'https://www.iphr.care/forth/saf/index.php?record_id=parg';
+								el('app_content_iframe1').src = 'https://www.iphr.care/forth/saf/indexnew.php?record_id='+my_record_id;
+                                //alert('exists');
+                        }
+                        else
+                        {
+                                //el('app_content').appendChild(diviframe);
+                                el('app_content').innerHTML = iframe;
+                                //alert('!exists');
+                        }
+                }
+
+
+
+
+                var currentPage = 'main';
+                //alert(currentPage);
+                //if (currentPage == 'main') {
+                //if (el('menu-' + currentPage))el('menu-' + currentPage).style.color = 'white';
+                //}
+            </script>
+          <!--li><a href="#">Menu One <span class="icon"></span></a></li>
+          <li><a href="#">Menu Two <span class="icon"></span></a></li>
+          <li><a href="#">Menu Three <span class="icon"></span></a></li>
+          <li><a href="#">Dropdown</a>
+            <ul class="list-unstyled">
+                <li class="sub-nav"><a href="#">Sub Menu One <span class="icon"></span></a></li>
+                <li class="sub-nav"><a href="#">Sub Menu Two <span class="icon"></span></a></li>
+                <li class="sub-nav"><a href="#">Sub Menu Three <span class="icon"></span></a></li>
+                <li class="sub-nav"><a href="#">Sub Menu Four <span class="icon"></span></a></li>
+                <li class="sub-nav"><a href="#">Sub Menu Five <span class="icon"></span></a></li>
+            </ul>
+          </li>
+          <li><a href="#">Menu Four <span class="icon"></span></a></li>
+          <li><a href="#">Menu Five <span class="icon"></span></a></li-->
+        </ul>
+      </nav>
+      
+      <div class="container" style="width:100%;height:80%;">
+      	<div class="row" style="height:20px;"></div>
+      	<div class="row">
+      		
+      		<div class="col-lg-12" style="border:0px solid black;">
+					<iframe id="iframe_app_container1" name="iframe_app_container1" style="width:100%;height:1000px;display:none;" src="about:blank"></iframe>
+					 <iframe id="app_content_iframe" class="in_app_container" name="app_content_iframe" src="" 
+                        style="margin-left: 0px; padding-left: 0px; border: 1px solid green; width: 100%;  height: 793px;display:none;" 
+                        onload="" frameborder="no"></iframe>
+					<script>
+					//window.frames['iframe_app_container'].location.href = 'http://139.91.190.144/apps/problems/problems/';					
+					</script>
+					
+					<div id="app_container" class="app_content_pane11 container row" 
+						style="min-height:500px;height:80%;margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; border: 0px solid red; float: left; 
+						 background-color: rgb(242, 246, 255);">
+                     <img src="/jmvc/ui/resources/images/topright.png" 
+                     	style="z-index:1;position:absolute;top:0px;right:0px;opacity:0.2;filter:alpha(opacity=20);" id="imgTopRight"/>  
+                     <img id="imgBottomLeft" src="/jmvc/ui/resources/images/bottomleft.png?1" 
+                     style="display:none;position:absolute;top:100px;left:0px;"/>
+                     <img id="imgBottomRight" src="/jmvc/ui/resources/images/bottomright.png?1" 
+                     style="display:none;position:absolute;top:100px;right:0px;"/>
+                     <div id="app_content" class="in_app_container" style="overflow-y: hidden; float: left; margin-left: 5px; margin-right: 0px; padding-left: 0px; padding-right: 0px;">
+								                   
+                     
+                     </div>
+                     <iframe id="app_content_iframe" class="in_app_container" name="app_content_iframe" src="" 
+                        style="margin-left: 0px; padding-left: 0px; border: 1px solid green; width: 100%; display: none; height: 793px;" 
+                        onload="" frameborder="no"></iframe>
+                  </div>
+				</div>      	
+      	</div>
+      </div>
+      
+      
+    </div>
+    
+    <script>
+	function showTheMobileMenu()
+	{
+		
+		var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+		
+		if (width <= 800)
+		{		
+			//if (el('demographics_area').style.display !== 'none')) 
+			//	return false;
+				
+				
+			if (el('divMobileAppMenuItems'))el('divMobileAppMenuItems').style.display = 'none';
+			//el('demographics_area').style.position = 'absolute';
+			//el('demographics_area').style.left = '0px';
+			//el('demographics_area').style.top = '50px';
+			//el('demographics_area').style.marginTop = '-120px';
+			if (el('demographics_area'))
+			{
+				el('demographics_area').style.display = '';
+				el('divDemographicsBg').style.display = '';
+				if (document.getElementsByClassName('ui_pha')[0])
+					document.getElementsByClassName('ui_pha')[0].style.display = 'none';
+				
+				if (document.getElementsByClassName('ui_carenet')[0])
+					document.getElementsByClassName('ui_carenet')[0].style.display = 'none';				
+			}
+			else 
+			{
+				window.top.location.href = window.top.location.href;
+				return false;
+			}		
+			
+			return false;
+		}
+		
+		window.top.location.href = window.top.location.href;
+		
+		
+		return false;
+	}
+	</script>
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:white;border-color:silver !important;">      
+		
+        <div style="position:absolute;left:90px;width:70%;text-align:center;top:12px;color:gray;font-size:17px;font-weight:bold;" id="divPatientName"></div>
+		
+        <!--Include your brand here-->
+        <!--a class="navbar-brand" href="javascript:void(0);" onclick="window.top.location.href=window.top.location.href;return false;"-->
+		<a class="navbar-brand" href="javascript:void(0);" onclick="return showTheMobileMenu();" id="linkLeftTop">
+        	<img src="/jmvc/ui/resources/images/imc_logo.png" style="width:20px;"/> <span style="margin-top:10px;">iPHR</span></a>
+        <div class="navbar-header pull-right">
+          <a id="nav-expander" class="nav-expander fixed" style="background-color:white;border-bottom:1px solid silver;">
+            <i class="fa fa-bars fa-lg black" style="color:gray;"></i>
+          </a>
+        </div>
+		
+    </div>
+	<div id="divAppsHome" style="display:none;z-index:900;position:fixed;left:0px;top:50px;width:100%;height:20px;border-bottom:1px solid #e5e6e6;background-color:white;text-align:center;" 
+		onclick="el('linkLeftTop').click();" >
+			
+          <span class="glyphicon glyphicon-home"></span> Home
+        
+	</div>
+   <script>
+	var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+	
+	if (width <= 800)
+	{
+		el('divAppsHome').style.display = '';
+	}
+   </script>
+   
+   
+   <div id="footer_responsive" class="row" style="width:105%;display:none;z-index:100000000000;bottom:0px;height:45px;background-color:#F8F8F8;border:1px solid silver;position:absolute;">
+<!--               <div class="col-xs-3">
+                  <a href="http://chip.org/laboratories/ihl/">
+                  <img style="width:45px;margin-left:10px;" src="/jmvc/ui/resources/images/badges/ihl-badge.png">
+                  </a>
+               </div>
+               <div class="col-xs-3">
+                  <a href="http://chip.org/">
+                  <img style="width:45px;" src="/jmvc/ui/resources/images/badges/chip-badge.png">
+                  </a>
+               </div>
+               <div class="col-xs-3">
+                  <a href="http://hms.harvard.edu/">
+                  <img style="width:45px;" src="/jmvc/ui/resources/images/badges/hms-alt.png">
+                  </a>
+               </div>
+               <div class="col-xs-3">
+                  <a href="http://www.ics.forth.gr/">
+                  <img style="width:45px;margin-top:8px;" src="/jmvc/ui/resources/images/badges/forth.png">
+                  </a>
+               </div>-->
+            </div>
+   
+
+{% ifequal 1 1 %}
+
+
+
+
+      <div id="messages" style="display:none;z-index:100000;padding:10px;min-width:200px;position:fixed;left:0px;top:0px;border:1px solid black;background-color:white;"><br>footer_responsive display = none</div>
+      <div id="wrapper_old" style="display:none;">
+         <div id="full_height">
+            <!-- header with logo and account settings -->
+            <div id="header" style="display:none;">
+               <div id="header_logo_and_name">
+                  <span id="header_site_name">
+                  iPHR<span id="header_trademark">™</span>
+                  </span>
+                  <span id="header_fullname"> for John Smith</span>
+               </div>
+               <div id="languages">
+                  <form name="setLangEnglish" id="setLangEnglish" action="/i18n/setlang/" method="POST">
+                     <input name="next" value="/" type="hidden">
+                     <input name="language" value="en" type="hidden">
+                     <a href="#" onclick="document.setLangEnglish.submit();return false;"><img src="/jmvc/ui/resources/images/app_icons_32/united_kingdom_flag.png" height="25" width="25"></a>
+                  </form>
+               </div>
+               <div id="languages2">
+                  <form name="setLangGreek"  id="setLangGreek" action="/i18n/setlang/" method="POST">
+                     <input name="next" value="/" type="hidden">
+                     <input name="language" value="el" type="hidden">
+                     <a href="#" onclick="document.setLangGreek.submit();return false;"><img src="/jmvc/ui/resources/images/app_icons_32/Greece-Flag-Greek1.png" height="20" width="25"></a>
+                  </form>
+               </div>
+
+               <div id="languages3">
+                  <form name="setLangDeutch" id="setLangDeutch"  action="/i18n/setlang/" method="POST">
+                     <input name="next" value="/" type="hidden">
+                     <input name="language" value="de" type="hidden">
+                     <a href="#" onclick="document.setLangDeutch.submit();return false;"><img src="/jmvc/ui/resources/images/app_icons_32/Greece-Flag-Greek1.png" height="20" width="25"></a>
+                  </form>
+               </div>
+
+                <div id="languages4">
+                  <form name="setLangItaliano" id="setLangItaliano" action="/i18n/setlang/" method="POST">
+                     <input name="next" value="/" type="hidden">
+                     <input name="language" value="it" type="hidden">
+                     <a href="#" onclick="document.setLangItaliano.submit();return false;"><img src="/jmvc/ui/resources/images/app_icons_32/Greece-Flag-Greek1.png" height="20" width="25"></a>
+                  </form>
+               </div>
+
+
+               <!-- Settings & Logout -->
+               <div id="header_controls">
+                  <form id="myform" action="/deleteaccount">
+                     <!-- <img class="header_icons" alt="settings" src="/jmvc/ui/resources/images/icons_16/delete.png" />
+                        <a href="javascript:{}" onclick="getConfirmation();" >Delete account</a>
+                        -->
+                     <a href="/change_password">
+                     <img class="header_icons" alt="settings" src="/jmvc/ui/resources/images/icons_16/package_settings.png">
+                     Settings
+                     </a>
+                     <a id="logout" href="/logout">
+                     <img class="header_icons" alt="logout" style="opacity: 0.7;" src="/jmvc/ui/resources/images/icons_16/goto.png">
+                     Logout
+                     </a>
+                  </form>
+               </div>
+            </div>
+            <!-- container for alert messages -->
+            <div id="alerts"></div>
+         </div>
+         <div id="page-wrapper">
+            <div id="container" class="container">
+               <!-- top navbar -->
+               <div style="width: 1920px;" class="navbar navbar-default navbar-fixed-top" role="navigation" id="divMenuBar">
+                  <div style="float:left;padding:8px; font-color:silver;font-size:20px;">iPHR</div>
+                  <ul class="nav nav-tabs" id="divMobileMenu" style="display:;float:right;margin-right:10px;border:0px solid black;">
+                     <li style="display:none;"><a href="javascript:void(0);">iPHR</a></li>
+                     <li style="display: none;" class="dropdown" id="liAppsMenu">
+                        <ul id="ulAppsMenu" class="dropdown-menu"></ul>
+                     </li>
+                     <li>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">My Account <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                           <li style="list-style-type: none;"><a href="/change_password">Settings</a></li>
+                           <li class="divider"></li>
+                           <li style="list-style-type: none;"><a href="javascript:void(0);" onclick="document.setLangEnglish.submit();return false;">English</a></li>
+                           <li style="list-style-type: none;"><a href="javascript:void(0);" onclick="document.setLangGreek.submit();return false;">Ελληνικά</a>
+						    
+						   </li>
+                           <li style="list-style-type: none;"><a href="javascript:void(0);" onclick="document.setLangDeutch.submit();return false;">Deutsch</a></li>
+                            <li style="list-style-type: none;"><a href="javascript:void(0);" onclick="document.setLangItaliano.submit();return false;">Italiano</a></li>
+
+                           <li class="divider"></li>
+                           <li style="list-style-type: none;"><a href="/logout">Logout</a></li>
+                        </ul>
+                     </li>
+                  </ul>
+                  <div class="container" style="display:none;">
+                     <div class="navbar-header" style="display:;">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#divNavBar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">iPHR</a>
+                     </div>
+                     <!-- Collect the nav links, forms, and other content for toggling -->
+                     <div id="appsMenuTop" class="nav-collapse" style="background-color: rgb(248, 248, 248); display: none;">
+                        <ul class="dropdown-menu" style="list-style-type: none;height:auto;" id="appsMenu">
+                        </ul>
+                     </div>
+                     <div class="nav-collapse" id="divNavBar" style="display:none;background-color:#F8F8F8;">
+                        <ul class="nav navbar-nav navbar-right navbar-user">
+                           <!--li class="dropdown languages-dropdown" id="appsMenuContainer" style="display:none;background-color:#F8F8F8;">
+                              <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Apps</a>
+                              <ul class="dropdown-menu" style="list-style-type: none;height:auto;" id="appsMenu"></ul>
+                              </li-->
+                           <li class="dropdown languages-dropdown" style="background-color:#F8F8F8;">
+                              <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Select Languange</a>
+                              <ul class="dropdown-menu" style="list-style-type: none;">
+                                 <li style="list-style-type: none;"><a href="#" onclick="document.setLangEnglish.submit();return false;">English</a>
+								 </li>
+                                 <li class="divider"></li>
+                                 <li style="list-style-type: none;"><a href="#" onclick="document.setLangGreek.submit();return false;">Ελληνικά</a></li>
+                                 <li style="list-style-type: none;"><a href="#" onclick="document.setLangDeutch.submit();return false;">Deutch</a></li>
+                                 <li style="list-style-type: none;"><a href="#" onclick="document.setLangItaliano.submit();return false;">Italiano</a></li>
+
+                              </ul>
+                           </li>
+                           <li class="dropdown user-dropdown" style="background-color:#F8F8F8;">
+                              <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+                              <ul class="dropdown-menu" style="list-style-type: none;">
+                                 <li style="list-style-type: none;"><a href="/change_password"><i class="fa fa-gear"></i> Settings</a></li>
+                                 <li class="divider"></li>
+                                 <li style="list-style-type: none;"><a href="/logout"><i class="fa fa-power-off"></i> Logout</a></li>
+                              </ul>
+                           </li>
+                        </ul>
+                     </div>
+                     <!-- /.navbar-collapse -->
+                  </div>
+               </div>
+               <!-- the tab bar -->
+               <div id="tabs" class="row" style="margin-top: 0px; margin-left: 0px; float: left; width: 980px; left: 180px;">
+                  <div class="col-xs-4">
+                     {% if not SETTINGS.HIDE_HEALTHFEED %}
+                     <a id="healthfeed" class="main_tab" href="javascript:void(0);">
+                     <img src="/jmvc/ui/resources/images/app_icons_32/healthfeed.png" alt="" />
+                     {% trans "Healthfeed" %}
+                     </a>
+                     {% endif %}
+                  </div>
+                  <div class="col-xs-4">
+                     {% if not SETTINGS.HIDE_INBOX %}
+                     <a id="message" class="main_tab" href="javascript:void(0);">
+                     <img src="/jmvc/ui/resources/images/app_icons_32/inbox.png" alt="" />
+                     {% trans "Inbox" %}
+                     </a>
+                     {% endif %}                     
+                  </div>
+                  <div class="col-xs-4">
+                     <select id="selPatients" name="selPatients" onchange="onPatientSelect(this);" style="padding:5px;font-size:10px;width:120px;display:none;">
+                     </select>
+                     <div id="record_tabs">
+                        {% if SETTINGS.ALLOW_ADDING_RECORDS %}
+                        <a id="add_record_tab" class="record_tab" href="javascript:void(0);"><img src="/jmvc/ui/resources/images/add_11.png" alt="+" /></a>
+                        {% endif %}
+                        <span id="loading_records_hint">{% trans "Loading records..." %}</span>
+                     </div>
+                  </div>
+                  <div id="record_tabs" style="border: 0px solid black;">
+                  </div>
+               </div>
+               <div class="row" style="float:left;">
+                  <div class="row row-offcanvas row-offcanvas-left" id="divSidebar" style="margin-left:10px;">
+                     <!-- sidebar -->
+                     <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+                        <!-- the app selector -->
+                        <div class="ui_app_list" id="app_selector" style="width: 180px; padding: 5px;">
+                           <ul id="active_app_tabs" style="display: none;"></ul>
+                           <ul id="background_app_tabs" style="display: none"></ul>
+                           <ul id="record_owned_options">
+                              {% if not SETTINGS.HIDE_SHARING %}
+                              <li id="carenet" data-controller="carenet" data-appType="internal">
+                                 <img class="app_tab_img" src="/jmvc/ui/resources/images/icons_24/groupevent.png" alt="" />{% trans "Sharing" %}				
+                              </li>
+                              {% endif %}
+                              {% if not SETTINGS.HIDE_APP_SETTINGS %}
+                              <li id="pha" data-controller="pha" data-appType="internal">
+                                 <img class="app_tab_img" src="/jmvc/ui/resources/images/icons_24/settings2.png" alt="" />{% trans "App Settings" %}
+                              </li>
+                              {% endif %}
+                           </ul>
+                           <!-- default behavior is to start into healthfeed, so the app selector is disabled in the beginning -->
+                           <div id="app_selector_cover"> </div>
+                        </div>
+                     </div>
+                  </div>
+                  
+                  <!-- main app content -->
+                  <!--div id="app_container" class="app_content_pane" style="max-width:200px;border:1px solid red;"-->
+                  <div id="app_container" class="app_content_pane11 container" style="margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; border: 0px solid red; float: left; width: 980px; left: 180px; background-color: rgb(242, 246, 255);">
+                     <!--div id="blank_div" class="blank_div"></div-->
+                     
+                     <div id="app_content" class="in_app_container" style="overflow-y: hidden; float: left; margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px;"></div>
+                     <iframe id="app_content_iframe2" class="in_app_container2" name="app_content_iframe2" src="" 
+                        style="margin-left: 0px; padding-left: 0px; border: 1px solid green; width: 100%; display: none; height: 793px;" 
+                        onload="" frameborder="no"></iframe>
+                                             
+                            
+                     </div>
+                  </div>
+               </div>
+               <!-- row -->
+            </div>
+            <!-- container -->
+            <!--p><p><p><p><p-->
+            <!-- footer -->
+            <div id="footer" class="row">				
+            </div>
+            <div id="footer_responsive_old" class="row" style="width:105%;display:none;z-index:100000000000;bottom:0px;height:45px;background-color:#F8F8F8;border:1px solid silver;position:absolute;">
+<!--               <div class="col-xs-3">
+                  <a href="http://chip.org/laboratories/ihl/">
+                  <img style="width:45px;margin-left:10px;" src="/jmvc/ui/resources/images/ihl-badge.png">
+                  </a>
+               </div>
+               <div class="col-xs-3">
+                  <a href="http://chip.org/">
+                  <img style="width:45px;" src="/jmvc/ui/resources/images/chip-badge.png">
+                  </a>
+               </div>
+               <div class="col-xs-3">
+                  <a href="http://hms.harvard.edu/">
+                  <img style="width:45px;" src="/jmvc/ui/resources/images/hms-alt.png">
+                  </a>
+               </div>
+               <div class="col-xs-3">
+                  <a href="http://www.ics.forth.gr/">
+                  <img style="width:45px;margin-top:8px;" src="/jmvc/ui/resources/images/forth.png">
+                  </a>
+               </div>
+            </div>-->
+         </div>
+         <!-- used for jquery tools overlay -->
+         <div class="overlay" id="overlay">
+            <div class="wrap"></div>
+         </div>
+      </div>
+      
+      <!--	<script src="//cdnjs.cloudflare.com/ajax/libs/annyang/1.1.0/annyang.min.js"></script>
+         <script type="text/javascript">
+             
+         	if (annyang) {
+         var commands = {
+         'hello': function() {
+         alert('world!');
+         window.location.href = "/apps/allergies/#app_content";
+         }
+         
+         };
+                  annyang.debug();
+                              annyang.init(commands);
+         annyang.addCommands(commands);
+                              annyang.start();
+         }
+         </script>-->
+         
+{% endifequal %}    
+
+<!-- wrapper -->
+      <script compress="true" type="text/javascript" src="/jmvc/steal/steal.js"></script>
+       <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+      <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+      <script type="text/javascript">      
+
+	 var alertsCount=0;
+         var tempCount = 0;
+         var ACCOUNT_ID = "{{ ACCOUNT_ID }}";
+         try
+         {
+         	steal('ui');
+         }
+         catch(e){}
+
+	 function confirmBox(answer,projectid,divi){
+	    if(answer=='yes'){
+
+		var request=$.ajax({
+   			 url: '/update_account_answer',
+			 type: 'POST',
+			 data: { account_id: ACCOUNT_ID, project_id : projectid,answer:'yes'} ,
+			    contentType: 'application/json;'
+			  });
+		}
+	    if(answer=='no'){
+	         var request = $.ajax({
+                         url: '/update_account_answer',
+                         type: 'POST',
+                         data: { account_id: ACCOUNT_ID, project_id : projectid,answer:'no'} ,
+                            contentType: 'application/json;'
+                          });
+
+	    }
+ 	request.done(function(data) {
+    	document.getElementById('id_'+divi).style.display = "hidden"; 
+        document.getElementById('id_'+divi).style.display = "none";
+        tempCount++;
+        if (tempCount == alertsCount){
+		bootbox.hideAll()
+	}
+	});
+        }
+
+	 function confirmBoxQuestionnaire(answer){
+            var account_record = account_records_xml.getElementsByTagName('Record')[0].getAttribute('id');
+	    bootbox.hideAll()
+            if(answer=='yes'){
+		 bootbox.dialog({
+                                                title: {% trans "' iPHR Validation Questionnaire '" %},
+                                                message: '<div class="row" style="width:100%;overflow-y:auto;height:auto;">' +
+                                                '<div class="col-lg-12" style="overflow-y:auto;border:0px solid red;"> ' +
+                                                                                '<iframe style="width:100%;height:800px;overflow-y:scroll;" frameborder="0"  src="https://www.iphr.care/validationForm/index.jsp?record_id='+account_record+'&language='+getCurrentLanguage()+'" ></iframe>'+
+                                                '</div> ' +
+                                                                '</div>',
+                     buttons: {
+                         success: {
+                             label: "Close",
+                             className: "btn-info btn-lg",
+                             callback: function () {
+                             }
+                         }
+                     }
+                 }
+             );
+
+
+                }
+            if(answer=='no'){
+		bootbox.hideAll()
+
+            }
+        }
+
+         
+        
+
+
+         var alertstring='';
+         $.ajax({
+   		 url: "/alert_index_account",
+		 context: document.body,
+		 success: function(result){
+
+			if (result != 'Error'){
+			var obj = JSON.parse(result);
+                        for (var i = 0; i < obj.length; i++){
+			    if (obj[i][1] == ACCOUNT_ID){ 
+				alertsCount ++; 
+                                alertstring += "<div id=id_"+i+">Would you like to share your personal information with the research project with<br> title:<b> "+obj[i][4]+"</b><br> description: <b> " +obj[i][3]+"</b><br>responsible researcher: <b>"+obj[i][2]+"<br><br><button type='button' class='btn btn-success' id='button_yes' onclick=confirmBox('yes','"+obj[i][0]+"','"+i+"');>yes</button><button type='button' class='btn btn-danger' onclick=confirmBox('no','"+obj[i][0]+"','"+i+"')>no</button><br><br></div>"
+//				bootbox.confirm("Would you like to share your personal information with the research project with<br> title:<b> "+obj[i][4]+"</b><br> description: <b> " +obj[i][3]+"</b><br>responsible researcher: <b>"+obj[i][2]+"<br><br><button type='button' class='btn btn-success' id='button_yes' onclick=confirmBox('yes','"+obj[i][0]+"');>yes</button><button type='button' class='btn btn-danger' onclick=confirmBox('no','"+obj[i][0]+"')>no</button>", function(result){ console.log('This was logged in the callback: ' + result); }); 
+			}
+			}
+				if (alertstring !== '')
+				{
+					bootbox.confirm(alertstring,function(result){ console.log('This was logged in the callback: ' + result); });
+				}
+			    }
+			}
+		});
+      </script>  
+
+
+
+   <!-- Javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!--script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="http://dimitra.no-ip.info/hookupweb/menu/js/jquery-1.10.2.min.js"><\/script>')</script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script-->
+    <script src="/jmvc/ui/resources/js/metismenu/jquery.navgoco.js"></script>
+    <script src="/jmvc/ui/resources/js/metismenu/main.js"></script>
+    
+    <script>
+        //$(document).ready(function () {
+        jQuery(function ($) {
+
+            //Navigation Menu Slider
+            $('#nav-expander').on('click', function (e) {
+                e.preventDefault();
+                $('body').toggleClass('nav-expanded');
+            });
+            $('#nav-close').on('click', function (e) {
+                e.preventDefault();
+                $('body').removeClass('nav-expanded');
+            });
+
+
+            // Initialize navgoco with default options
+            $(".main-menu").navgoco({
+                caret: '<span class="caret"></span>',
+                accordion: false,
+                openClass: 'open',
+                save: true,
+                cookie: {
+                    name: 'navgoco',
+                    expires: false,
+                    path: '/'
+                },
+                slide: {
+                    duration: 100,
+                    easing: 'swing'
+                }
+            });
+
+
+        });
+      </script>   
+         
+         
+   </body>
+</html>

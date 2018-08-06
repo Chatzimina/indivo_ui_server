@@ -1,0 +1,837 @@
+{% extends "ui/adminconsolebase.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Administration Console" %}{% endblock %}
+<link rel="stylesheet" type="text/css" href="/jmvc/ui/resources/css/imanagecancer.css" media="screen" />
+<style>
+
+#button1 {
+
+  font-size: 18px;
+}
+   
+
+
+</style>
+
+
+{% block readyscript %}
+	<script type="text/javascript">
+		//$(document).ready(function(){
+
+
+	//document.body.style.backgroundColor = '#fafafa';
+	//document.body.style.backgroundImage = 'url()';
+	//});
+
+	</script>
+
+
+<script type="text/javascript">
+<!--
+function getConfirmation(){
+   var retVal = confirm("Are you sure you want to delete your account ?");
+   if( retVal == true ){
+      alert("Account deleted");
+      document.myform.submit();
+          return true;
+   }else{
+      alert("Cancelled request");
+          return false;
+   }
+}
+
+
+//-->
+</script>
+   
+{%endblock%}
+
+{% block main%}
+<style>
+
+	.xxx{
+--		display:none;
+	}
+
+
+</style>
+
+<script>
+//function el(id){return document.getElementById(id);}
+/*
+jQuery(document).ready(function() {
+    // Optimalisation: Store the references outside the event handler:
+    var window = jQuery(window);
+    
+	
+	function setTables(display)
+	{
+		//document.getElementsByClassName
+	}
+	
+    function checkWidth() {
+        var windowsize = self.innerWidth;
+        if (windowsize <= 480) {
+            jQuery(".xxx").each(function(){
+			   jQuery(this).css('display', 'none');
+			});
+        }
+		else
+		{
+			jQuery(".xxx").each(function(){
+			   jQuery(this).css('display', '');
+			});
+		}
+    }
+    // Execute on load
+    checkWidth();
+    // Bind event listener
+    jQuery(window).resize(checkWidth);
+});
+*/
+
+function setTableCols()
+{
+	var elems = document.getElementsByClassName('xxx');
+	var screenWidth = window.innerWidth;
+	for (var i=0;i<elems.length;)
+	{
+		if (screenWidth <= 640)
+		{
+			elems[i].style.display = 'none';
+		}
+		else 
+		{
+			elems[i].style.display = '';
+		}
+		i++;
+	}
+}
+
+setInterval('setTableCols();', 1000);
+
+function tab(elemid)
+{
+	var element = el(elemid);
+	var elementSearch = el(elemid + 'Search');
+	el('divLists').style.display = '';
+	el('divAuditVisualization').style.display = 'none';
+	el('divListUsers').style.display = 'none';
+	el('divNewUsers').style.display = 'none';
+	el('divNewEntries').style.display = 'none';
+	el('divProblemReports').style.display = 'none';
+	
+	el('divListUsersSearch').style.display = 'none';
+	el('divNewUsersSearch').style.display = 'none';
+	el('divNewEntriesSearch').style.display = 'none';
+	
+	el('divSearchButtons').style.display = '';
+	
+	element.style.display = '';
+	if (elementSearch)elementSearch.style.display = '';
+	//alert(elemid);
+	if (elemid === 'divProblemReports' || elemid === 'divAuditVisualization')
+	{
+		el('divSearchButtons').style.display = 'none';
+		if (elemid === 'divAuditVisualization') 
+			el('divLists').style.display = 'none';
+	}
+	
+	searchmode = 'users';
+	
+	if (elemid === 'divNewUsers') 
+	{
+		searchmode = 'newusers';		
+	}
+	else if (elemid === 'divNewEntries') 
+	{
+		searchmode = 'newentries';		
+	}
+	loadLists();
+	
+	return false;
+}
+
+function setDatetimeInputs()
+{
+	$('.datetimepicker').datetimepicker({
+		onSelectDate: function(date){
+					
+		},
+		onSelectTime: function(time){
+			
+		},
+		
+		format:'d-m-Y',
+		showTimePicker: false,
+		viewMode: 'days',
+		pickTime: false,
+		dateonly:true,
+		timepicker: false,
+	});						
+}
+
+AttachEvent(window, 'load', function (){setDatetimeInputs();})
+</script>
+
+<form name="myform" action="/register_admin" style="padding:0px;margin:0px;">
+<div class="container" style="max-width:600px;float:left;">
+
+	<div class="row" style="height:20px;"></div>
+	
+	<div class="row" style="width:750px;">
+		<div class="col-lg-4">
+			<button id="conf_submit" onclick="return window.top.addAdminUser();" style="width:260px; !important;" class="btn btn-success btn-lg" type="submit" >{% trans "Add new administrator" %}</button>
+		</div>
+		<div class="col-lg-4" style="width:10px;">
+			<a href="/bugs" class="btn btn-lg btn-primary" input type="button" style="display:none;">Bugs</a>
+
+
+                </div>
+		<div class="col-lg-4">
+			<input type="button" class="btn btn-success btn-lg" style="width:260px;" value="{% trans "Send a Message" %}" id="btnSendAll" onclick="return window.top.sendMessage();"/>
+			<form action="send_all" id="formSendAll" name="formSendAll" method="post" > 
+				<input type="button" class="btn btn-lg btn-primary" style="width:230px;display:none;" value="{% trans "Send All" %}" id="btnSendAll" onclick="return sendAll();"/>
+			</form>
+		</div>
+		 
+
+	</div>	
+	
+	<div class="row" style="height:20px;"></div>
+	
+	<div id="divTabs" class="row" style="width:650px;">
+		<div class="col-lg-12">
+			<input type="button" style="width:160px;" class="btn btn-primary btn-lg" value="{% trans "Users" %}" id="btnUsers" onclick="return tab('divListUsers');"/>
+			<input type="button" style="width:160px;"  class="btn btn-lg btn-primary" value="{% trans "New Users" %}" id="btnNewUsers" onclick="return tab('divNewUsers');"/>
+			<input type="button" style="width:160px;"  class="btn btn-lg btn-primary" value="{% trans "New Entries" %}" id="btnNewEntries" onclick="return tab('divNewEntries');"/>
+			<p></p>
+                        
+			<input type="button"  style="width:160px;" class="btn btn-lg btn-primary" value="{% trans "Audit Visualization" %}" id="btnAuditVisualization" 
+						onclick="window.frames['iframe_visualization'].location.href='https://www.iphr.care/visualize/auditVisualize.jsp';return tab('divAuditVisualization');"/>
+			<input type="button"  style="width:160px;" class="btn btn-lg btn-primary" value="{% trans "Problem Reports" %}" id="btnProblemReports" onclick="return tab('divProblemReports');"/>
+			
+			
+			<input type="button"  style="width:160px;" class="btn btn-lg btn-primary" value="{% trans "Apps Usage" %}" id="btnAppsUsage" 
+						onclick="window.frames['iframe_visualization'].location.href='https://www.iphr.care/visualize/auditBarsVisualize.jsp';return tab('divAuditVisualization');"/>
+			
+			
+			
+		</div>
+	</div>
+	
+	<div class="row" style="height:20px;"></div>
+		
+	<div class="row" id="divSearch" style="padding:0px;margin:0px;">
+		<div class="row" id="divListUsersSearch" style="display:none;padding:0px;margin:0px;float:left;">
+			<div class="col-md-3"  >
+				<label>{% trans "Full name" %}</label>
+				<input type="text" class="form-control" id="txtName" />
+			</div>
+			<div class="col-md-3" >
+				<label>{% trans "E-mail" %}</label>
+				<input type="text" class="form-control" id="txtEmail"/>
+			</div>
+			<div class="col-md-3" >
+				<label>{% trans "Status" %}</label>
+				<select class="form-control" id="selState">
+					<option value="-1">Select</option>
+					<option value="active">Active</option>
+					<option value="disabled">Disabled</option>
+					<option value="uninitialized">Uninitialized</option>
+				</select>
+			</div>
+			<div class="col-md-3" >
+				<label>{% trans "Role" %}</label>
+				<select class="form-control" id="selRole">
+					<option value="-1">Select</option>
+					<option value="patient">Patient</option>
+					<option value="doctor">Doctor</option>
+					<option value="admin">Administrator</option>
+				</select>
+			</div>
+		</div>
+		<div class="row" id="divNewUsersSearch" style="display:none;padding:0px;margin:0px;float:left;">
+			<div class="col-md-5"  >
+				<label>{% trans "From" %}</label>
+				<div class='input-group date'>
+                    <input type='text' class="form-control datetimepicker" id="txtDateFrom"/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+			</div>
+			<div class="col-md-5" >
+				<label>{% trans "To" %}</label>
+				<div class='input-group date'>
+                    <input type='text' class="form-control datetimepicker" id="txtDateTo" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+			</div>
+			<div class="col-md-2" ></div>
+		</div>
+		<div class="row" id="divNewEntriesSearch" style="display:none;padding:0px;margin:0px;float:left;">
+			<div class="col-md-4"  >
+				<label>{% trans "Patient" %}</label>
+				<div class='input-group'>
+                    <input type='text' class="form-control" />
+                </div>
+			</div>
+			<div class="col-md-4"  >
+				<label>{% trans "From" %}</label>
+				<div class='input-group date'>
+                    <input type='text' class="form-control datetimepicker" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+			</div>
+			<div class="col-md-4" >
+				<label>{% trans "To" %}</label>
+				<div class='input-group date'>
+                    <input type='text' class="form-control datetimepicker" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+			</div>
+		</div>
+		
+	</div>
+	
+	<div class="row" style="height:10px;"></div>
+	
+	<div class="row" id="divSearchButtons">
+		<div class="col-lg-6" >
+			<input type="button" class="btn btn-lg btn-success" style="width:200px;" value="{% trans "Search" %}" id="btnSearch" onclick="return loadLists();"/>
+		</div>
+		<div class="col-lg-6" >
+			<input type="button" class="btn btn-lg btn-success" style="width:200px;" value="{% trans "Reset" %}" id="btnReset" onclick="return resetSearchForms();"/>
+		</div>
+	</div>
+	
+	<div class="row" style="height:10px;"></div>
+	
+	<div id="divLists" class="row" style="padding:0px;margin:0px;width:1100px;height:600px;overflow-x:hidden;overflow-y:scroll;">
+		<div id="divListUsers" class="container" style="display:none;padding:0px;">No data found.</div>
+		<div id="divNewUsers" class="container" style="display:none;padding:0px;">No data found.</div>
+		<div id="divNewEntries" class="container" style="display:none;padding:0px;">No data found.</div>
+		<div id="divProblemReports" class="container" style="display:none;padding:0px;">No data found.</div>
+		
+	</div>
+	
+	<div id="divAuditVisualization" class="container" style="display:none;padding:0px;">
+		<iframe id="iframe_visualization" name="iframe_visualization" style="width:1250px;height:1400px;overflow-x:hidden;overflow-y:auto;" frameborder="no"  src="about:blank"></iframe>
+	</div>
+	
+	<div class="row" style="height:20px;"></div>
+	
+</div> 
+<div class="row" id="dates"></div>
+</form>
+	
+
+
+<script>
+function sendAll()
+{
+	el('formSendAll').submit();
+	return false;
+}
+
+function resetSearchForms()
+{
+	var divSearch = el('divSearch');
+	var inputs = divSearch.getElementsByTagName('input');
+	for (var i=0;i<inputs.length;)
+	{
+		inputs[i].value = '';
+		i++;
+	}
+	
+	var selects = divSearch.getElementsByTagName('select');
+	for (var i=0;i<selects.length;)
+	{
+		selects[i].selectedIndex = 0;
+		i++;
+	}
+}
+
+function timestamp2date1(unix_timestamp)
+{
+	var date = new Date(unix_timestamp);
+	// Hours part from the timestamp
+	var hours = date.getHours();
+	// Minutes part from the timestamp
+	var minutes = "0" + date.getMinutes();
+	// Seconds part from the timestamp
+	var seconds = "0" + date.getSeconds();
+
+	// Will display time in 10:30:23 format
+	var formattedTime = date + ' ' + hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+
+	formattedTime = date.getFullYear() + '-' + (date.getMonth()+1).toString() + '-' + date.getDay();
+
+	return formattedTime;
+
+}
+
+function timestamp2date(timestamp) {
+  var d = new Date(timestamp ),	// Convert the passed timestamp to milliseconds
+		yyyy = d.getFullYear(),
+		mm = ('0' + (d.getMonth() + 1)).slice(-2),	// Months are zero based. Add leading 0.
+		dd = ('0' + d.getDate()).slice(-2),			// Add leading 0.
+		hh = d.getHours(),
+		h = hh,
+		min = ('0' + d.getMinutes()).slice(-2),		// Add leading 0.
+		ampm = 'AM',
+		time;
+			
+	if (hh > 12) {
+		h = hh - 12;
+		ampm = 'PM';
+	} else if (hh === 12) {
+		h = 12;
+		ampm = 'PM';
+	} else if (hh == 0) {
+		h = 12;
+	}
+	
+	// ie: 2013-02-18, 8:35 AM	
+	time = yyyy + '-' + mm + '-' + dd ;//+ ', ' + h + ':' + min + ' ' + ampm;
+		
+	return time;
+}
+
+
+function timestamp2datetime(timestamp) {
+  var d = new Date(timestamp ),	// Convert the passed timestamp to milliseconds
+		yyyy = d.getFullYear(),
+		mm = ('0' + (d.getMonth() + 1)).slice(-2),	// Months are zero based. Add leading 0.
+		dd = ('0' + d.getDate()).slice(-2),			// Add leading 0.
+		hh = d.getHours(),
+		h = hh,
+		min = ('0' + d.getMinutes()).slice(-2),		// Add leading 0.
+		ampm = 'AM',
+		time;
+			
+	if (hh > 12) {
+		h = hh - 12;
+		ampm = 'PM';
+	} else if (hh === 12) {
+		h = 12;
+		ampm = 'PM';
+	} else if (hh == 0) {
+		h = 12;
+	}
+	
+	// ie: 2013-02-18, 8:35 AM	
+	time = yyyy + '-' + mm + '-' + dd + ', ' + h + ':' + min + ' ' + ampm;
+		
+	return time;
+}
+
+function date2timestamp(dateStr)
+{
+	try {
+		if (dateStr === '') 
+			return 0;
+			
+		var ts = 0;
+		var dt = new Date(parseInt(dateStr.split('-')[2]), parseInt(dateStr.split('-')[1])-1, parseInt(dateStr.split('-')[0])+1);
+		//	alert(dateStr);
+		//var dt = new Date(parseInt(dateStr.split('-')[0]), parseInt(dateStr.split('-')[1]), parseInt(dateStr.split('-')[2]));
+		ts = dt.getTime()/1000;
+		return ts;
+	}
+	catch(e){
+		return -1;
+	}
+	
+}
+var accountsJsonString = '{{accounts}}'.replace(/&quot;/g,'"');
+var accounts = JSON.parse(accountsJsonString);
+
+
+var auditlogJsonString = '{{auditlog}}'.replace(/&quot;/g,'"');
+var auditlog = JSON.parse(auditlogJsonString);
+//alert(auditlog.length);
+//alert(auditlogJsonString);
+//alert('');
+function startLoadingAuditList()
+{
+	window.top.apicall('https://www.iphr.care/admin_audits', auditlog_cb, window.top.onerror);
+
+}
+function auditlog_cb(req)
+{
+	//alert(req);
+	auditlog = JSON.parse(req);
+	loadAuditingList();
+}
+
+//alert(accounts[0][0]);
+var searchmode = 'users';
+function loadAccountsList()
+{
+	//var thename = el('divListUsersSearch').getElementsByTagName('input')[0].value;
+	//var theemail = el('divListUsersSearch').getElementsByTagName('input')[1].value;
+	//var thestate = el('divListUsersSearch').getElementsByTagName('select')[0].value;
+	//var therole = el('divListUsersSearch').getElementsByTagName('select')[1].value;
+	
+	//var thestate_change_from = el('divNewUsersSearch').getElementsByTagName('input')[0].value;
+	//var thestate_change_to = el('divNewUsersSearch').getElementsByTagName('input')[1].value;	
+	
+	var thename = el('txtName').value;
+	var theemail = el('txtEmail').value;
+	var thestate = el('selState').value;
+	var therole = el('selRole').value;
+	
+	var thestate_change_from = el('txtDateFrom').value;
+	var thestate_change_to = el('txtDateTo').value;	
+	
+	
+	
+	var thestate_change_from_dt = new Date(parseInt(thestate_change_from.split('-')[2]), parseInt(thestate_change_from.split('-')[1])-1, parseInt(thestate_change_from.split('-')[0]));
+	var thestate_change_to_dt = new Date(parseInt(thestate_change_to.split('-')[2]), parseInt(thestate_change_to.split('-')[1]-1), parseInt(thestate_change_to.split('-')[0]));
+	thestate_change_to_dt.setDate(thestate_change_to_dt.getDate() + 1);
+		
+	var thestate_change_from_timestamp = thestate_change_from_dt.getTime();
+	var thestate_change_to_timestamp = thestate_change_to_dt.getTime();
+	
+	var list = '<div class="col-lg-12" ><table class="table" style="max-width:300px;" id="tblUsersList">';
+	list += '<tr>';
+	list += '<th style="display:none;">Account ID</th>';
+	list += '<th>Full name</th>';
+	list += '<th>Email</th>';
+	list += '<th class="xxx">Last login date</th>';
+	list += '<th class="xxx">Total logins</th>';
+	list += '<th class="xxx">Failed logins</th>';	
+	list += '<th class="xxx">Status</th>';
+	list += '<th class="xxx" style="display:;">Status change date</th>';
+	list += '<th>Role</th>';
+	list += '<th> </th>';
+	list += '</tr>';
+	
+	//alert(accounts.toSource());
+	for (var i=0;i<accounts.length;)
+	{
+		var account_id = accounts[i][0];
+		var full_name = accounts[i][3];
+		var contact_email = accounts[i][4];
+		var last_login_at = accounts[i][5];
+		if (last_login_at) 
+		{
+			last_login_at = last_login_at['$date'];
+			last_login_at = timestamp2date(last_login_at);
+		}
+		var total_login_count = accounts[i][7];
+		var failed_login_count = accounts[i][8];
+		//var state = accounts[i][9];
+		var state = accounts[i][16];
+		//var last_state_change = accounts[i][10];
+		var last_state_change = accounts[i][17];
+		var last_state_change_timestamp = 0;
+		if (last_state_change) {
+			last_state_change = last_state_change['$date'];
+			last_state_change_timestamp = last_state_change;
+			last_state_change = timestamp2date(last_state_change);
+		}
+		//var role = accounts[i][14];
+		var role = accounts[i][12];
+		
+		var showbyname = true;
+		if (thename !== '') 
+			showbyname = (full_name.toLowerCase().indexOf(thename.toLowerCase()) >= 0)
+		
+		var showbyemail = true;
+		if (theemail !== '') 
+			showbyemail = (contact_email.toLowerCase().indexOf(theemail.toLowerCase()) >= 0)
+			
+		var showbystate = true;
+		if (thestate !== '-1') 
+			showbystate = state.toLowerCase() === thestate.toLowerCase();
+			//alert(thestate);
+		var showbyrole = true;
+		if (therole !== '-1') 
+			showbyrole = role.toLowerCase() === therole.toLowerCase();			
+		
+		var showrecord = (showbyname && showbyemail && showbystate && showbyrole);
+		
+		if (searchmode === 'newusers')
+		{
+			showrecord = true;
+			if (thestate_change_from != '' && thestate_change_to != '')
+			{
+				showrecord = (last_state_change_timestamp >= thestate_change_from_timestamp && last_state_change_timestamp <=  thestate_change_to_timestamp);
+			}
+			else if (thestate_change_from != '' && thestate_change_to == '')
+			{
+				showrecord = (last_state_change_timestamp >= thestate_change_from_timestamp);
+			}
+			else if (thestate_change_from == '' && thestate_change_to != '')
+			{
+				showrecord = (last_state_change_timestamp <= thestate_change_to_timestamp);
+			}
+			if (thestate_change_from_timestamp == 0 && thestate_change_to_timestamp == 0)
+			{
+				showrecord = true;
+				//list = '<tr><td colspan="10">No data found.</td></tr>'
+			}
+		}
+		//showrecord = true;
+		if (showrecord)
+		{
+			list += '<tr>';
+			list += '<td style="display:none;">'+ account_id +'</td>';
+			list += '<td>'+ full_name +'</td>';
+			list += '<td>'+ contact_email +'</td>';
+			if (last_login_at == null) last_login_at = '-';
+			list += '<td class="xxx">'+ last_login_at +'</td>';
+			list += '<td class="xxx">'+ total_login_count +'</td>';
+			list += '<td class="xxx">'+ failed_login_count +'</td>';	
+			list += '<td class="xxx">'+ state +'</td>';
+			if (last_state_change == null) last_state_change = '-';
+			list += '<td style="display:;" class="xxx">'+ last_state_change +'</td>';
+			//list += '<td style="display:;">'+ last_state_change +'</td>';
+			list += '<td>'+ role +'</td>';
+			
+			list += '<td><input type="button" class="btn btn-sm btn-warning" onclick="if (!confirm(\'Are you sure?\')){return false;}else{location.href=\'deleteaccountadmin/'+contact_email+'\';}" value="Delete"/></td>';
+			
+			list += '</tr>';
+		}
+		
+		i++;
+	}
+	
+	list += '</table></div>';
+	el('divListUsers').innerHTML = list;
+	if (searchmode === 'newusers')
+	{
+		
+		el('divNewUsers').innerHTML = list;
+	}
+	return false;
+}
+
+function loadAuditingList()
+{
+	
+	var thepatient = el('divNewEntriesSearch').getElementsByTagName('input')[0].value;
+	var theentries_from = el('divNewEntriesSearch').getElementsByTagName('input')[1].value;
+	var theentries_to = el('divNewEntriesSearch').getElementsByTagName('input')[2].value;	
+	
+	
+	var theentries_from_dt = new Date(parseInt(theentries_from.split('-')[2]), parseInt(theentries_from.split('-')[1])-1, parseInt(theentries_from.split('-')[0]));
+	var theentries_to_dt = new Date(parseInt(theentries_to.split('-')[2]), parseInt(theentries_to.split('-')[1]-1), parseInt(theentries_to.split('-')[0]));
+	theentries_to_dt.setDate(theentries_to_dt.getDate() + 1);
+		
+	var theentries_from_timestamp = theentries_from_dt.getTime();
+	var theentries_to_timestamp = theentries_to_dt.getTime();
+	
+	var list = '<div class="col-lg-12"><table class="table" style="max-width:300px;">';
+	list += '<tr>';
+	
+	list += '<th>Patient</th>';
+	list += '<th>App Name</th>';
+	list += '<th>App Module</th>';	
+	list += '<th style="max-width:150px;">Event Name</th>';
+	list += '<th>Event Parameters</th>';
+	list += '<th class="xxx">Country</th>';	
+	list += '<th>Datetime</th>';
+	list += '</tr>';
+	//[138417, "PHR", "Problem", "generic_list", "1d7d4bc2-7cd7-4423-9217-62ab42d96892", "katerinapap86@outlook.com.gr", "", {"$date": 1499077387000}, "0"]
+	for (var i=0;i<auditlog.length;)
+	{
+		var patient = auditlog[i][6];
+		var app_name = auditlog[i][0];
+		var event_name = auditlog[i][1];
+		var country = auditlog[i][5];
+		var event_parameters = auditlog[i][2];
+		var app_module = auditlog[i][4];
+		var event_datetime = auditlog[i][3];
+		
+		
+		patient = auditlog[i][5];
+		app_name = auditlog[i][1];
+		event_name = auditlog[i][3];
+		country = auditlog[i][6];
+		event_parameters = auditlog[i][8];
+		app_module = auditlog[i][2];
+		event_datetime = auditlog[i][7];
+		
+		
+		var event_datetime_timestamp = 0;
+		
+		if (event_datetime) {
+			event_datetime = event_datetime['$date'];
+			event_datetime_timestamp = parseInt(event_datetime);
+			event_datetime = timestamp2datetime(event_datetime);
+		}	
+		
+		var showrecord = true;		
+		
+		showrecord = true;
+		if (theentries_from != '' && theentries_to != '')
+		{
+			showrecord = (event_datetime_timestamp >= theentries_from_timestamp && event_datetime_timestamp <=  theentries_to_timestamp);
+			//alert()
+		}
+		else if (theentries_from != '' && theentries_to == '')
+		{
+			showrecord = (event_datetime_timestamp >= theentries_from_timestamp);
+		}
+		else if (theentries_from == '' && theentries_to != '')
+		{
+			showrecord = (event_datetime_timestamp <= theentries_to_timestamp);
+		}
+		
+		if (theentries_from_timestamp == 0 && theentries_to_timestamp == 0)
+		{
+			showrecord = true;
+		}
+		
+		if (patient !== '')
+		{
+			showrecord = showrecord && (patient.indexOf(thepatient) >=0);
+		}
+		
+		if (showrecord)
+		{		
+		//alert(i);
+		//break;
+			list += '<tr>';
+			list += '<td>'+ patient +'</td>';
+			list += '<td>'+ app_name +'</td>';
+			list += '<td>'+ app_module +'</td>';
+			list += '<td style="max-width:150px;">'+ event_name +'</td>';
+			list += '<td>'+ event_parameters +'</td>';
+			list += '<td class="xxx">'+ country +'</td>';
+			
+			if (event_datetime == null) event_datetime = '-';
+			//list += '<td>' + theentries_from_timestamp + ' - ' +theentries_to_timestamp  +' - ' + event_datetime +' - ' + event_datetime_timestamp  +'</td>';		
+			list += '<td>' + event_datetime +'</td>';		
+			
+			list += '</tr>';
+		}
+		
+		i++;
+	}
+	
+	list += '</table></div>';
+	
+	el('divNewEntries').innerHTML = list;
+	
+	return false;
+}
+
+function onerror(result){ 		  
+	//alert('Error: ' + result.toSource());		   
+	console.log('Error: ' + result.toSource());		  
+}
+
+function loadProblemReportsList()
+{
+	jQuery.ajax({
+	 
+	  url: '/bugs',
+	  dataType: 'text',
+	  crossDomain:true,
+	  cors:true,
+	  success: loadProblemReportsList_cb,
+	  error: onerror
+	});
+	
+	
+	
+	
+	return false;
+}
+
+function loadProblemReportsList_cb(req)
+{
+	
+	
+	var list = '<div class="col-lg-12"><table class="table" style="max-width:300px;">';
+	list += '<tr>';
+	
+	list += '<th>E-mail</th>';
+	list += '<th>Fullname</th>';	
+	list += '<th>Description</th>';
+	list += '<th>Screenshot</th>';
+	list += '<th>Application</th>';
+	
+	
+	list += '</tr>';
+	
+	var problemslist = JSON.parse(req);
+	var problemslist = eval(req);
+	//alert(problemslist.length);
+	//[{txtEmail:"est", txtFullname:"tt", txtDescription:"test", txtAtt:"tes", selApp:"te"}
+	for (var i=0;i<problemslist.length;)
+	{
+		
+		//var email = problemslist[i]['txtEmail'];
+		//var fullname = problemslist[i]['txtFullname'];
+		//var description = problemslist[i]['txtDescription'];
+		//var attachment = problemslist[i]['txtAtt'];
+		//var application = problemslist[i]['selApp'];
+		
+		var email = problemslist[i][1];
+		var fullname = problemslist[i][0];
+		var description = problemslist[i][3];
+		var attachment = problemslist[i][4];
+		var application = problemslist[i][2];
+		
+		showrecord = true;
+				
+		
+		if (showrecord)
+		{		
+			list += '<tr>';
+			list += '<td>'+ email +'</td>';
+			list += '<td>'+ fullname +'</td>';
+			list += '<td>'+ description +'</td>';
+			list += '<td><img src="https://www.iphr.care/indivo_files/reportbugs_app/'+ attachment +'" style="cursor:pointer;width:100px;height:100px;" onclick="window.open(\'https://www.iphr.care/indivo_files/reportbugs_app/'+attachment+'\');"/></td>';
+			list += '<td>'+ application +'</td>';
+			
+			list += '</tr>';
+		}
+		
+		i++;
+	}
+	
+	list += '</table></div>';
+	//el('divListUsers').innerHTML = '';
+	//el('divNewUsers').innerHTML = '';
+	 
+	el('divProblemReports').innerHTML = list;
+	
+	return false;
+}
+ 
+function loadLists()
+{
+	loadAccountsList();
+	//loadAuditingList();
+	startLoadingAuditList();
+	loadProblemReportsList();
+}
+
+
+
+el('btnUsers').click();
+
+
+</script>
+
+<link rel="stylesheet" type="text/css" href="/jmvc/ui/resources/css/imanagecancer.css" media="screen" />
+
+
+
+
+{% endblock %}
+ 

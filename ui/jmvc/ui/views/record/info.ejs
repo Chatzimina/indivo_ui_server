@@ -1,0 +1,383 @@
+{% load i18n %}
+<!--<h2 id="record_name">{% trans "Hello" %} <%= record.label %></h2>
+<hr />-->
+<div id="divDemographicsBg" style="z-index:99;background-color:#fafafa;position:absolute;width:100%;height:60px;display:none;left:0px;top:8px;"></div>
+<div id="demographics_area" name="demographics_area" style="z-index:100000000;background-color:#fafafa">
+	<p class="details">{% trans "Loading personal information..." %}</p>
+	
+	
+	
+	<script>
+	function getAppElement(appname)
+	{
+		var elem = null;
+		var menuContainer = el('ulAppsMenu1');
+		var links = menuContainer.getElementsByTagName('a');
+		for (var i=0;i<links.length;i++)
+		{
+			if (links[i].getAttribute('appname') === appname)
+			{
+				return links[i];
+			}
+		}
+		return elem;
+	}
+	
+	function getQuestionnaireElement(qname)
+	{
+		var elem = null;
+		var menuContainer = el('ulAppsMenu1');
+		var links = menuContainer.getElementsByTagName('a');
+		for (var i=0;i<links.length;i++)
+		{
+			if (qname !== 'logintest' && links[i].getAttribute('appname') === 'forth' && links[i].getAttribute('data-url').indexOf(qname) >= 0)
+			{
+				return links[i];
+			}
+			else if (qname === 'logintest' && links[i].getAttribute('data-url') != null && links[i].getAttribute('appname') != null &&  links[i].getAttribute('appname').indexOf(qname) >= 0)
+			{
+				console.log('pppp = ' + links[i].outerHTML);
+				return links[i];
+			}
+		}
+		return elem;
+	}
+	
+	function showAbout()
+	{
+		//alert('iPHR v1.0.0');
+		
+		
+		bootbox.dialog({
+			title: {% trans "' About '" %},
+			message: 'iPHR v1.0.0',
+			buttons: {
+				success: {
+					label: "Close",
+					className: "btn-info btn-lg",
+					callback: function () {}
+				}
+			}
+		});		
+	}
+	
+	function logout()
+	{
+		location.href = 'https://www.iphr.care/logout';
+	}
+	
+	function showDisclaimer()
+	{
+		window.open('https://www.iphr.care/apps/procedures/static/disclaimer.pdf');
+	}
+	
+	function showTutorial()
+	{
+		window.open('https://www.iphr.care/apps/procedures/static/Tutorial.pdf');
+	}
+	
+	function selectTheLanguage()
+	{
+		var selectLanguageHtml = '<div class="row">';
+		
+		selectLanguageHtml += '<div class="col-xs-12" style="border-bottom:1px solid silver;padding:10px;"><a style="font-weight:bold;font-size:20px;" href="javascript:void(0);" onclick="set_cookie(\'current_lang\',\'en\');document.setLangEnglish.submit();return false;">English</a></div>';
+        
+		selectLanguageHtml += '<div class="col-xs-12" style="border-bottom:1px solid silver;padding:10px;"><a style="font-weight:bold;font-size:20px;" href="javascript:void(0);" onclick="set_cookie(\'current_lang\',\'el\');document.setLangGreek.submit();return false;">Ελληνικά</a></div>';
+        
+		selectLanguageHtml += '<div class="col-xs-12" style="border-bottom:1px solid silver;padding:10px;"><a style="font-weight:bold;font-size:20px;" href="javascript:void(0);" onclick="set_cookie(\'current_lang\',\'de\');document.setLangDeutch.submit();return false;">Deutsch</a></div>';
+        
+		selectLanguageHtml += '<div class="col-xs-12" style="border-bottom:1px solid silver;padding:10px;"><a style="font-weight:bold;font-size:20px;" href="javascript:void(0);" onclick="set_cookie(\'current_lang\',\'it\');document.setLangItaliano.submit();return false;">Italiano</a></div>';
+		
+		selectLanguageHtml += '</div>';
+		
+		bootbox.dialog({
+			title: {% trans "' Select Language '" %},
+			message: selectLanguageHtml,
+			buttons: {
+				success: {
+					label: "{% trans "' Close '" %}",
+					className: "btn-info btn-lg",
+					callback: function () {}
+				}
+			}
+		});		
+	}
+	
+	function showIPHRValidation()
+	{
+		el('menu-ux').click();
+		setMenuVisibility();
+	}
+	</script>
+	
+	 <div class="container" id="divMobileAppMenu" style="overflow-x:hidden;overflow-y:hidden;display:none;position:absolute;left:0px;top:55px;width:99%;height:100%;background-color:#FAFAFA;border:0px solid black;">
+		<div class="row" style="padding-left:10px;width:100%;overflow-x:hidden;overflow-y:hidden;display:none;position:absolute;z-index:900;background-color:#FAFAFA;border:0px solid blue;min-height:500px;" id="divMobileAppMenuItems">
+			<div class="col-xs-12" mode="none" style="border-bottom:1px solid silver;padding:10px;font-size:18px;" onclick="el('divMobileAppMenuItems').style.display='none';">&laquo; {% trans "Back" %}</div>
+			<div class="col-xs-12" mode="medical" app_name="allergies" style="padding:10px;">
+				<div style="border-bottom:1px solid silver;font-size:18px;padding-bottom:3px;" app_name="allergies" id="divAllergies" onclick="var elem=getAppElement('allergies');if (elem) {elem.click();setMenuVisibility();}">
+					<img src="https://www.iphr.care/jmvc/ui/resources/images/app_icons_32/allergy2.png" style="width:32px;">
+					{% trans "Allergies" %}
+				</div>
+			</div>
+			<div class="col-xs-12" mode="medical" app_name="appointments" style="padding:10px;" >
+				<div style="border-bottom:1px solid silver;font-size:18px;padding-bottom:3px;"  onclick="var elem=getAppElement('appointments');if (elem) {elem.click();setMenuVisibility();}">
+					<img src="https://www.iphr.care/jmvc/ui/resources/images/app_icons_32/appointment2.png" style="width:32px;">
+					{% trans "Appointments" %}
+				</div>
+			</div>
+			<div class="col-xs-12" mode="medical" app_name="calendar" style="padding:10px;">			
+				<div style="border-bottom:1px solid silver;font-size:18px;padding-bottom:3px;" onclick="var elem=getAppElement('calendar');if (elem) {elem.click();setMenuVisibility();}">
+					<img src="https://www.iphr.care/jmvc/ui/resources/images/app_icons_32/calendar2.png" style="width:32px;">
+					{% trans "Calendar" %}
+				</div>
+			</div>
+			<div class="col-xs-12" mode="medical" app_name="forum" style="padding:10px;">			
+				<div style="border-bottom:1px solid silver;font-size:18px;padding-bottom:3px;" onclick="var elem=getQuestionnaireElement('logintest');if (elem) {elem.click();setMenuVisibility();}">
+					<img src="https://www.iphr.care/jmvc/ui/resources/images/app_icons_32/forum2.png" style="width:32px;">
+					{% trans "Forum" %}
+				</div>
+			</div>
+			<div class="col-xs-12" mode="medical" app_name="labs" style="padding:10px;">
+				<div style="border-bottom:1px solid silver;font-size:18px;padding-bottom:3px;" onclick="var elem=getAppElement('labs');if (elem) {elem.click();setMenuVisibility();}">
+					<img src="https://www.iphr.care/jmvc/ui/resources/images/app_icons_32/labs2.png" style="width:32px;">
+					{% trans "Labs" %}
+				</div>
+			</div>
+			<div class="col-xs-12" mode="medical" app_name="measurements" style="padding:10px;">				
+				<div style="border-bottom:1px solid silver;font-size:18px;padding-bottom:3px;" onclick="var elem=getAppElement('measurements');if (elem) {elem.click();setMenuVisibility();}">
+					<img src="https://www.iphr.care/jmvc/ui/resources/images/app_icons_32/measurements2.png" style="width:32px;">
+					{% trans "Measurements" %}
+				</div>
+			</div>
+			<div class="col-xs-12" mode="medical" app_name="mystatistics" style="padding:10px;">				
+				<div style="border-bottom:1px solid silver;font-size:18px;padding-bottom:3px;" onclick="var elem=getAppElement('mystatistics');if (elem) {elem.click();setMenuVisibility();}">
+					<img src="https://www.iphr.care/jmvc/ui/resources/images/app_icons_32/statistics2.png" style="width:32px;">
+					{% trans "My Statistics" %}
+				</div>
+			</div>
+			<div class="col-xs-12" mode="medical" app_name="medications" style="padding:10px;">				
+				<div style="border-bottom:1px solid silver;font-size:18px;padding-bottom:3px;" onclick="var elem=getAppElement('medications');if (elem) {elem.click();setMenuVisibility();}">
+					<img src="https://www.iphr.care/jmvc/ui/resources/images/app_icons_32/pharmacy.png" style="width:32px;">
+					{% trans "Medications" %}
+				</div>
+			</div>
+			<div class="col-xs-12" mode="medical"  app_name="problems" style="padding:10px;">				
+				<div style="border-bottom:1px solid silver;font-size:18px;padding-bottom:3px;" onclick="var elem=getAppElement('problems');if (elem) {elem.click();setMenuVisibility();}">
+					<img src="https://www.iphr.care/jmvc/ui/resources/images/app_icons_32/problems2.png" style="width:32px;">
+					{% trans "Problems" %}
+				</div>
+			</div>
+			<div class="col-xs-12" mode="medical"  app_name="procedures" style="padding:10px;">				
+				<div style="border-bottom:1px solid silver;font-size:18px;padding-bottom:3px;" onclick="var elem=getAppElement('procedures');if (elem) {elem.click();setMenuVisibility();}">
+					<img src="https://www.iphr.care/jmvc/ui/resources/images/app_icons_32/procedures2.png" style="width:32px;">
+					{% trans "Procedures" %}
+				</div>
+			</div>
+			<div class="col-xs-12" mode="medical"  app_name="documentsupload" style="padding:10px;">				
+				<div style="border-bottom:1px solid silver;font-size:18px;padding-bottom:3px;" onclick="var elem=getAppElement('documentsupload');if (elem) {elem.click();setMenuVisibility();}">
+					<img src="https://www.iphr.care/jmvc/ui/resources/images/app_icons_32/upload2.png" style="width:32px;">
+					{% trans "Upload documents" %}
+				</div>
+			</div>
+
+			 <div class="col-xs-12" mode="medical"  app_name="PHIR" style="padding:10px;">
+                                <div style="border-bottom:1px solid silver;font-size:18px;padding-bottom:3px;" onclick="var elem=getAppElement('PHIR');if (elem) {elem.click();setMenuVisibility();}">
+                                        <img src="https://www.iphr.care/jmvc/ui/resources/images/app_icons_32/recommender.png" style="width:32px;">
+                                        {% trans "Recommender" %}
+                                </div>
+                        </div>
+
+			
+			<div class="col-xs-12" mode="questionnaires"  app_name="algac" style="padding:10px;">				
+				<div style="border-bottom:1px solid silver;font-size:18px;padding-bottom:3px;"  onclick="var elem=getQuestionnaireElement('algac');if (elem) {elem.click();setMenuVisibility();}">
+					<img src="https://www.iphr.care/jmvc/ui/resources/images/app_icons_32/Questionnaire2.png" style="width:32px;">
+					{% trans "ALGA-C" %} (English / Italian)
+				</div>
+			</div>
+			<div class="col-xs-12" mode="questionnaires" app_name="decisionaid" style="padding:10px;" >
+				<div style="border-bottom:1px solid silver;font-size:18px;padding-bottom:3px;" onclick="var elem=getQuestionnaireElement('decisionaid');if (elem) {elem.click();setMenuVisibility();}">
+					<img src="https://www.iphr.care/jmvc/ui/resources/images/app_icons_32/Questionnaire2.png" style="width:32px;">
+					{% trans "Decision Aid" %} (English / Italian)
+				</div>
+			</div>
+			<div class="col-xs-12" mode="questionnaires"  app_name="fare" style="padding:10px;">				
+				<div style="border-bottom:1px solid silver;font-size:18px;padding-bottom:3px;" onclick="var elem=getQuestionnaireElement('fare');if (elem) {elem.click();setMenuVisibility();}">
+					<img src="https://www.iphr.care/jmvc/ui/resources/images/app_icons_32/Questionnaire2.png" style="width:32px;">
+					{% trans "Family Resilience" %} (Italian)
+				</div>
+			</div>
+			<div class="col-xs-12" mode="questionnaires"  app_name="parentaldistress" style="padding:10px;">				
+				<div style="border-bottom:1px solid silver;font-size:18px;padding-bottom:3px;" onclick="var elem=getQuestionnaireElement('pdq');if (elem) {elem.click();setMenuVisibility();}">
+					<img src="https://www.iphr.care/jmvc/ui/resources/images/app_icons_32/Questionnaire2.png" style="width:32px;">
+					{% trans "Parental Distress" %} (German)
+				</div>
+			</div>
+			<div class="col-xs-12" mode="questionnaires"  app_name="psyche" style="padding:10px;">				
+				<div style="border-bottom:1px solid silver;font-size:18px;padding-bottom:3px;" onclick="var elem=getQuestionnaireElement('psyche');if (elem) {elem.click();setMenuVisibility();}">
+					<img src="https://www.iphr.care/jmvc/ui/resources/images/app_icons_32/Questionnaire2.png" style="width:32px;">
+					{% trans "Psyche" %} (Italian)
+				</div>
+			</div>
+						
+			<div class="col-xs-12" mode="settings" app_name="sharing" style="padding:10px;">				
+				<div style="border-bottom:1px solid silver;font-size:18px;padding-bottom:3px;" onclick="el('carenet').click();">
+					<img src="/jmvc/ui/resources/images/icons_24/groupevent.png" style="width:32px;">
+					{% trans "Sharing" %}
+				</div>
+			</div>
+			<div class="col-xs-12" mode="settings" app_name="appsettings" style="padding:10px;">				
+				<div style="border-bottom:1px solid silver;font-size:18px;padding-bottom:3px;" onclick="el('pha').click();">
+					<img src="/jmvc/ui/resources/images/icons_24/settings2.png" style="width:32px;">
+					{% trans "App Settings" %}
+				</div>
+			</div>
+			<div class="col-xs-12" mode="settings"  app_name="settings" style="padding:10px;">				
+				<div style="border-bottom:1px solid silver;font-size:18px;padding-bottom:3px;" onclick="showSettings();setMenuVisibility();">
+					<!--<span class="glyphicon glyphicon-cog"></span>-->
+					<img src="/jmvc/ui/resources/images/icons_24/accountset.png" style="width:32px;">
+					{% trans "Settings" %}
+				</div>
+			</div>
+			<div class="col-xs-12" mode="settings" app_name="demographics" style="padding:10px;">				
+				<div style="border-bottom:1px solid silver;font-size:18px;padding-bottom:3px;" onclick="return onPatientSelect(el('selPatients1'));">
+					<span class="glyphicon glyphicon-user"></span>
+					{% trans "Demographics" %}
+				</div>
+			</div>
+			<div class="col-xs-12" mode="settings" app_name="demographics" style="padding:10px;">				
+				<div style="border-bottom:1px solid silver;font-size:18px;padding-bottom:3px;" onclick="el('message').click();">
+					<span class="glyphicon glyphicon-envelope"></span>
+					{% trans "Inbox" %}
+				</div>
+			</div>
+			<div class="col-xs-12" mode="settings" app_name="language" style="padding:10px;">				
+				<div style="border-bottom:1px solid silver;font-size:18px;padding-bottom:3px;" onclick="selectTheLanguage();">
+					<span class="glyphicon glyphicon-flag"></span>
+					{% trans "Language" %}
+				</div>
+			</div>
+			<div class="col-xs-12" mode="settings" app_name="validation_questionnaire" style="padding:10px;">				
+				<div style="border-bottom:1px solid silver;font-size:18px;padding-bottom:3px;" onclick="showIPHRValidation();">
+					<span class="glyphicon glyphicon-list-alt"></span>
+					{% trans "iPHR Validation Questionnaire" %}
+				</div>
+			</div>
+			<div class="col-xs-12" mode="settings" app_name="validation_questionnaire" style="padding:10px;">				
+				<div style="border-bottom:1px solid silver;font-size:18px;padding-bottom:3px;" onclick="logout();">
+					<span class="glyphicon glyphicon-off"></span>
+					{% trans "Logout" %}
+				</div>
+			</div>
+			
+			<div class="col-xs-12" mode="info" app_name="faq" style="padding:10px;">
+				<div style="border-bottom:1px solid silver;font-size:18px;padding-bottom:3px;" onclick="showFaq();setMenuVisibility();">
+					<span class="glyphicon glyphicon-info-sign"></span>
+					{% trans "FAQ" %}
+				</div>
+			</div>
+			
+			<div class="col-xs-12" mode="info" app_name="faq" style="padding:10px;">
+				<div style="border-bottom:1px solid silver;font-size:18px;padding-bottom:3px;" onclick="window.location.href='https://www.iphr.care/user_manual';">
+					<span class="glyphicon glyphicon-question-sign"></span>
+					{% trans "User Manual" %}
+				</div>
+			</div>
+			
+			<div class="col-xs-12" mode="info" app_name="faq" style="padding:10px;">
+				<div style="border-bottom:1px solid silver;font-size:18px;padding-bottom:3px;" onclick="window.location.href='https://www.iphr.care/terms_settings';">
+					<span class="glyphicon glyphicon-lock"></span>
+					{% trans "Disclaimer" %}
+				</div>
+			</div>
+			
+			<div class="col-xs-12" mode="info" app_name="about" style="padding:10px;">
+				<div style="border-bottom:1px solid silver;font-size:18px;padding-bottom:3px;" onclick="showAbout();" >
+					<span class="glyphicon glyphicon-copyright-mark"></span>
+					{% trans "About" %}
+				</div>
+			</div>
+		</div>
+		<div class="row" style="height:50px;overflow-x:hidden;overflow-y:hidden;"></div>
+		<div class="row" style="overflow-x:hidden;overflow-y:hidden;">
+			<div class="col-xs-6" style="border:0px solid black;padding:10px;"  onclick="return showMobileAppMenu('medical');">
+				<center>
+					<img src="https://i.imgur.com/KztgnPS.png" style="width:120px;border:2px solid #e5e6e6;"/>
+					<div style="height:4px;"></div>
+					<strong>{% trans "MEDICAL" %}</strong>
+				</center>
+			</div>
+			<div class="col-xs-6" style="border:0px solid black;padding:10px;" onclick="return showMobileAppMenu('questionnaires');"> 
+				<center>
+					<img src="https://i.imgur.com/bZq88wH.png" style="width:120px;border:2px solid #e5e6e6;"/>
+					<div style="height:4px;"></div>
+					<strong>{% trans "QUESTIONNAIRES" %}</strong>
+				</center>				
+			</div>
+		</div>
+		<div class="row" style="height:40px;"></div>
+		<div class="row" style="overflow-x:hidden;overflow-y:hidden;">
+			<div class="col-xs-6" style="border:0px solid black;padding:10px;" onclick="return showMobileAppMenu('settings');"> 
+				<center>
+					<img src="https://i.imgur.com/LLR6HRv.png" style="width:120px;border:2px solid #e5e6e6;"/>
+					<div style="height:4px;"></div>
+					<strong>{% trans "SETTINGS" %}</strong>
+				</center>				
+			</div>
+			
+			<div class="col-xs-6" style="border:0px solid black;padding:10px;" onclick="return showMobileAppMenu('info');"> 		
+				<center>
+					<img src="https://i.imgur.com/kIYw1bZ.png" style="width:120px;border:2px solid #e5e6e6;"/>
+					<div style="height:4px;"></div>
+					<strong>{% trans "INFO" %}</strong>
+				</center>
+			</div>			
+		</div>   
+   </div>
+</div>
+
+
+<script>
+
+
+function showMobileAppMenu(mode)
+{
+	el('divMobileAppMenuItems').style.display = '';
+	
+	var divs = el('divMobileAppMenuItems').getElementsByClassName('col-xs-12');
+	for (var i=0;i<divs.length;i++)
+	{
+		var item = divs[i];
+		if (item.getAttribute('mode') === mode)
+		{
+			item.style.display = '';
+		}
+		else if (item.getAttribute('mode') !== 'none')
+		{
+			item.style.display = 'none';
+		}
+	}
+	
+	
+	return false;
+}
+
+function onApplicationClick(sender)
+{
+	
+	return false;
+}
+
+var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+//alert(width);
+if (width <= 800)
+{
+	el('divMobileAppMenu').style.display = '';
+	try {
+		document.getElementsByClassName('details')[0].style.display = 'none';
+	}
+	catch(e){}
+	
+	//eval(el('demographics_area').innerHTML + "");
+	//alert("");
+}		
+</script>
